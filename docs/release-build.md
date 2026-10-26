@@ -1,11 +1,13 @@
 # Rebuilding the standalone release
 
 Release 0.6.6 uses versionCode 14, package `org.llamur.app`, ARM64/API28+.
-Compilation uses the pinned Linux toolchain below and signing uses apksigner 34
-with the same public certificate as 0.6.5. The 0.6.6 verification report is added
-on the public main branch after its clean Linux builds finish; the source freeze
-does not predeclare that result. F-Droid submission remains separate.
-
+Its two clean Linux builds used different project/SDK/NDK paths and Git presence;
+unsigned APKs matched exactly and the existing certificate verified against both.
+Source commit: `2313c2b39552595568934a3038069c0f7d860210`. See
+[the complete verification report](releases/0.6.6-verification.json).
+Compilation uses 36.1.0, signing uses apksigner 34.0.0. No F-Droid submission or
+official build-server acceptance is claimed. Earlier 0.1/0.6.5 sections below
+retain their historical artifact scopes.
 
 The first public preview is0.6.5, versionCode13, application ID
 `org.llamur.app`, ARM64/API28+. GitHub release assets contain a dedicated-key

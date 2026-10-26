@@ -34,7 +34,7 @@ to a different key. [Official workflow](https://f-droid.org/docs/Reproducible_Bu
 Published 0.6.5 cannot pass that comparison because it contains an earlier local
 Git revision in APK metadata. The historical build is disabled in the recipe.
 The 0.6.6 source fixes remove checkout-dependent APK metadata and pin native
-upstream build identity, and normalize source/NDK paths. VersionCode14 and tag v0.6.6 separate this release
+upstream build identity, and normalize source/NDK paths. VersionCode 14 and tag v0.6.6 separate this release
 from 0.6.5. Activation requires matching clean Linux build and signature checks. Existing
 0.6.5 users can update normally to a newer APK signed with this same key.
 See [F-Droid preparation](fdroid.md) for the actual local checks and remaining
@@ -70,5 +70,6 @@ The private key/password paths are owner-local inputs. Do not put their
 contents in environment variables, shell history, sources or release assets.
 Verify the resulting signature and use apksigcopier against the **actual Gradle
 unsigned APK**; a strip/copy round trip of one signed APK alone is insufficient.
-The local proof APK under build/ is not a new release and retains versionCode 13.
-Bump the versionCode and publish exact source before using it as an update.
+The earlier versionCode13 proof is historical and was not published. Release
+0.6.6 uses versionCode 14 and the existing certificate; its two-build/signature
+and in-place upgrade results are in [the verification report](releases/0.6.6-verification.json).

@@ -1,0 +1,205 @@
+{
+  "passed": true,
+  "versionName": "0.6.6",
+  "versionCode": 14,
+  "applicationId": "org.llamur.app",
+  "source_commit": "2313c2b39552595568934a3038069c0f7d860210",
+  "source_tree": "7bcd37f12ba255b3de6dca5c1e8e1781263af80c",
+  "checked_utc": "2026-10-26T23:52:06.257500+00:00",
+  "scope": "Two independent fresh offline Linux release+lint builds from the immutable public source commit, different project/SDK/NDK paths and Git presence, exact unsigned APK equality. Release APK signatures copied onto each unsigned APK and cryptographically verified. Local container validation, not official F-Droid server acceptance.",
+  "builder_image": "sha256:aca8e32761619c66f030d3092b42bf9a91fcb0ba212561ef83fce3825bd6c8f8",
+  "builder_platform": "linux/amd64",
+  "network": "none",
+  "cpus": 4,
+  "memory_gib": 6,
+  "project_native_outputs_reused": false,
+  "shared_tools_and_dependency_cache_only": true,
+  "builds": [
+    {
+      "label": "a",
+      "source_directory": "build/llamur-0.6.6-linux-a",
+      "container_project_root": "/work",
+      "container_tools_root": "/opt/motoai",
+      "public_commit": "2313c2b39552595568934a3038069c0f7d860210",
+      "recipe_prebuild_passed": true,
+      "sdk_installation": "Pre-provisioned hash-locked Linux tools; android.jar SHA verified, no network in build",
+      "source_scanner_fatal_count": 0,
+      "source_scanner_messages": {
+        "infos": [
+          [
+            "Removing gradlew at gradlew",
+            "gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at gradle/wrapper/gradle-wrapper.jar",
+            "gradle/wrapper/gradle-wrapper.jar"
+          ],
+          [
+            "Removing gradlew at third_party/llama.cpp/examples/llama.android/gradlew",
+            "third_party/llama.cpp/examples/llama.android/gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+            "third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+          ],
+          [
+            "Removing gradlew at .tools/llama-long-attention-v2/examples/llama.android/gradlew",
+            ".tools/llama-long-attention-v2/examples/llama.android/gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at .tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+            ".tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+          ]
+        ],
+        "warnings": [],
+        "errors": []
+      },
+      "unsigned_sha256": "23789983b44121aeb4005a1baef525bc01f72cc9a48a981c5f32a23d8828399d",
+      "git_metadata_mounted_read_only": true
+    },
+    {
+      "label": "b",
+      "source_directory": "build/llamur-0.6.6-linux-b",
+      "container_project_root": "/builds/fdroid/fdroiddata/build/org.llamur.app",
+      "container_tools_root": "/opt/fdroid-tools",
+      "public_commit": "2313c2b39552595568934a3038069c0f7d860210",
+      "recipe_prebuild_passed": true,
+      "sdk_installation": "Pre-provisioned hash-locked Linux tools; android.jar SHA verified, no network in build",
+      "source_scanner_fatal_count": 0,
+      "source_scanner_messages": {
+        "infos": [
+          [
+            "Removing gradlew at gradlew",
+            "gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at gradle/wrapper/gradle-wrapper.jar",
+            "gradle/wrapper/gradle-wrapper.jar"
+          ],
+          [
+            "Removing gradlew at third_party/llama.cpp/examples/llama.android/gradlew",
+            "third_party/llama.cpp/examples/llama.android/gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+            "third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+          ],
+          [
+            "Removing gradlew at .tools/llama-long-attention-v2/examples/llama.android/gradlew",
+            ".tools/llama-long-attention-v2/examples/llama.android/gradlew"
+          ],
+          [
+            "Removing gradle-wrapper.jar at .tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+            ".tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+          ]
+        ],
+        "warnings": [],
+        "errors": []
+      },
+      "unsigned_sha256": "23789983b44121aeb4005a1baef525bc01f72cc9a48a981c5f32a23d8828399d",
+      "git_metadata_mounted_read_only": false
+    }
+  ],
+  "unsigned_apks_byte_identical": true,
+  "signed_apk": "llamur-0.6.6-arm64-v8a.apk",
+  "signed_apk_bytes": 10232019,
+  "signed_apk_sha256": "bfe568ba6308638da338c2e92529396e4173f5280957794810358d84a663d8f2",
+  "signing_certificate_sha256": "ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85",
+  "signer_build_tools": "34.0.0",
+  "signer_jar_sha256": "eefdd6aed9db9fb849e4c98a50d8741e19d1b674ba6547220bcb9c3ed152123a",
+  "signature_copy_verified_against_both_independent_unsigned_apks": true,
+  "native_libraries_sha256": {
+    "lib/arm64-v8a/libggml-base.so": "e14d6d61a45a5ad7627bbb9a72e001648e56e2e280486fae1fa127d1df1507e4",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so": "3641108f38f08907ded8e73fc5e6c0d288a1612f3c515177028e46e1f0a90958",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so": "abdcd80c8b6832273943010f759b4d5ce98abaead11bd21d06a4dbddac91b5ea",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so": "d5d05c81bebcb68c800cf0a60d5878dc58636c404b7f3ffaa55cc800fe8221ff",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so": "6fb6f80a777135a7a4eee09caff64a77e3df7afeb72d01f8824d8ef5bf274daa",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so": "f36f7238fcc4fee03d4ad97463ceb69edcb06db0742bb7da3a2588a74e69a48f",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so": "f290bc585d782ffcce05147b9f224417df9f312caac02c89f38b7a44fcf79886",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so": "ac1599b13cc9250f9c3c3f33bf26d8b84a9a8e9a5817803a514a3f1dbfde8f06",
+    "lib/arm64-v8a/libggml.so": "8ea7e8adda022a4cb7ec34b6fc3d541b7b10d0f92f16368f3237a651e8dc82bb",
+    "lib/arm64-v8a/libllama-common.so": "ad39f9a540d71c865b63cc928ff7d9a751c1f4f01274829fccd930a7df900e8a",
+    "lib/arm64-v8a/libllama.so": "4a5835ae0bc3a2549632acce6b105448290cfb3b4829294b469cd20a89edc858",
+    "lib/arm64-v8a/libmotoai-checks.so": "ed87545c481513b08fb3291b940a24351f411b1e4783a286505d4aa529c1ebd4",
+    "lib/arm64-v8a/libmotoai-probe.so": "dfa7db506d49d77cce40da93ae0f5ed576b8ec24d55152fc2f6a412cf127dc95",
+    "lib/arm64-v8a/libmotoai-runtime.so": "3f8991ce70f432d5eafff83f1457ec6abbbb5e527a3f0ac914f228d1775bebeb"
+  },
+  "no_checkout_metadata_or_absolute_native_build_paths": true,
+  "runtime_code_and_numeric_patches_unchanged_from0.6.5": true,
+  "changed_production_source_files": [
+    "app/src/main/cpp/CMakeLists.txt",
+    "native-runtime/CMakeLists.txt"
+  ],
+  "models_bundled": false,
+  "official_fdroid_server_tested": false,
+  "fdroid_submission_sent": false,
+  "checks": {
+    "python_tests_passed": 80,
+    "shell_syntax_passed": true,
+    "apk_elf16k_alignment_permissions_notices_passed": true,
+    "fdroid_binary_scanner": {
+      "passed": true,
+      "scope": "Official F-Droid2.4.5 APK scan with existing validated cached SUSS, offline. Not source/build/metadata/inclusion certification.",
+      "apk_sha256": "bfe568ba6308638da338c2e92529396e4173f5280957794810358d84a663d8f2",
+      "signature_sha256": "285e6464967fa55c471957193afd2f5d7b5040b9576a394661cacc43948d1620",
+      "error_code_signature_count": 444,
+      "fatal_count": 0
+    },
+    "operator_checks": {
+      "baseline_passed": true,
+      "all_supported_paths_passed": true,
+      "counts": {
+        "pass": 81,
+        "unsupported": 27
+      },
+      "scope": "Actual release APK-A libraries, extracted byte-for-byte, native operator/scalar-reference gates on API36 ARM64 16KiB public emulator. Not main-model quality or physical-phone performance qualification.",
+      "gates_sha256": "8245117604c16e61dd8aac2890b0a697ab67632efa92c7133bdb47f25dfb41b0"
+    },
+    "emulator_upgrade": {
+      "same_uid": true,
+      "installed_final_apk_sha256": "bfe568ba6308638da338c2e92529396e4173f5280957794810358d84a663d8f2",
+      "permanent_encrypted_history_preserved": true,
+      "original_user_message_and_answer_preserved": true,
+      "non_debug_release": true,
+      "emulator_page_size": 16384,
+      "scope": "Actual public0.6.5 to final signed0.6.6 update on API36 ARM64/16KiB emulator via install-r. Same UID, encrypted permanent history, profile and no-copy SAF access preserved; real local tiny-GGUF reply afterward. No uninstall, data reset, run-as, cloud requests, main-model accuracy or phone performance claim.",
+      "passed": true,
+      "versionName": "0.6.6",
+      "versionCode": 14,
+      "per_model_profile_preserved": true,
+      "linked_saf_model_access_preserved": true,
+      "fixture_sha256_unchanged": "270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d",
+      "native_local_reply_after_update": true,
+      "restored_history_used": true,
+      "second_request_input_tokens": 174,
+      "response_tokens": 16
+    },
+    "native_libraries_identical_to_previous_fixed_linux_proof": true
+  },
+  "retained_build_wrapper_retry": "The first attempt to start buildB stopped before Docker because macOS Bash3 rejected an empty array under set-u. The corrected wrapper started a fresh buildB; app source and build flags were unchanged.",
+  "fdroid_recipe": {
+    "path": "fdroid/org.llamur.app.yml",
+    "sha256": "295ec771135d0c6878e86dae7ea01f0afdbcc46edf5a5310104090cc9224cb85",
+    "source_commit": "2313c2b39552595568934a3038069c0f7d860210",
+    "binary_url": "https://github.com/gordeev/llamur/releases/download/v0.6.6/llamur-0.6.6-arm64-v8a.apk",
+    "versionCode": 14,
+    "active": true,
+    "official_metadata_lint_including_format_passed": true,
+    "same_prebuild_and_build_flags_as_tested_source": true,
+    "store_ingestion_passed": true,
+    "locales": {
+      "en-US": {
+        "screenshots": 8,
+        "summary_characters": 64,
+        "description_characters": 2202,
+        "changelog_characters": 304
+      },
+      "ru-RU": {
+        "screenshots": 8,
+        "summary_characters": 54,
+        "description_characters": 2166,
+        "changelog_characters": 265
+      }
+    }
+  }
+}

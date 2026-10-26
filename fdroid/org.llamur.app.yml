@@ -43,7 +43,7 @@ Builds:
 
   - versionName: 0.6.6
     versionCode: 14
-    commit: v0.6.6
+    commit: 2313c2b39552595568934a3038069c0f7d860210
     subdir: app
     sudo:
       - apt-get update
@@ -71,12 +71,14 @@ AllowedAPKSigningKeys: ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1
 
 MaintainerNotes: |
   Upstream-signature-only workflow: never fall back to another signing key.
-  The0.6.5 build stays disabled because its checkout metadata and native paths
-  differ from public-source Linux builds. Compile with build-tools36.1.0, but
-  sign the GitHub APK using apksigner34.0.0 and the existing release key.
-  The immutable v0.6.6 source tag is replaced by its full commit in the final
-  packaging update after local cross-path Linux reproduction passes.
-  No F-Droid submission has been made. See docs/fdroid.md for scope.
+  The0.6.5 build stays disabled because its checkout metadata/native paths
+  differ from public-source Linux builds. Version0.6.6 passed two clean local
+  Linux builds with different project/SDK/NDK paths and Git presence; both
+  unsigned APKs are byte-identical and verify with the GitHub APK signature.
+  Compile with build-tools36.1.0; sign upstream APKs with apksigner34.0.0.
+  The existing release certificate is preserved. No private key is uploaded.
+  This is local container validation, not official F-Droid server acceptance.
+  No submission has been made. See docs/releases/0.6.6-verification.json.
 
 AutoUpdateMode: None
 UpdateCheckMode: None
