@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "service": {
+    "passed": true,
+    "isolated_pid": 29140,
+    "recovered_pid": 29384,
+    "import_ui": "SAF imported SHA-256 file loaded\/generated through normal UI",
+    "notification_stop": "passed via notification PendingIntent",
+    "load_cancellation": "passed on Gemma",
+    "prefill_cancellation": "passed on Gemma; stop-to-ready 48ms",
+    "checks": "Messenger load\/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+  },
+  "cycles": 30,
+  "memory_samples": [
+    {
+      "cycle": 0,
+      "pss_kib": 36376,
+      "native_heap_bytes": 6834224
+    },
+    {
+      "cycle": 5,
+      "pss_kib": 36620,
+      "native_heap_bytes": 6829776
+    },
+    {
+      "cycle": 10,
+      "pss_kib": 36699,
+      "native_heap_bytes": 6829776
+    },
+    {
+      "cycle": 15,
+      "pss_kib": 36747,
+      "native_heap_bytes": 6829776
+    },
+    {
+      "cycle": 20,
+      "pss_kib": 36795,
+      "native_heap_bytes": 6829776
+    },
+    {
+      "cycle": 25,
+      "pss_kib": 36839,
+      "native_heap_bytes": 6829776
+    },
+    {
+      "cycle": 29,
+      "pss_kib": 36879,
+      "native_heap_bytes": 6829776
+    }
+  ],
+  "reference": ", there was a little girl named Lily. She loved to play",
+  "checks": "repeat load\/generate\/unload; double unload; queued\/decode cancellation; explicit overflow; invalid JSON type; recovery; callback exception; Unicode JNI"
+}

@@ -1,0 +1,2341 @@
+{
+  "passed": true,
+  "scope": "Bounded loading control only; long quality-pair timings are descriptive and individually screened, not five-pair/endurance speed acceptance. CPU time includes barriers/spin; swap counters alone do not establish stall time or causality.",
+  "long_only": false,
+  "controller_passed": true,
+  "controller": "bench/m3-native-demand-screening-20261025.json",
+  "controller_sha256": "7d46fb7a4e3dda1d9332f8e2203ec78e72c0e71d93f9d3771f97699e05688496",
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "models": {
+    "ornith": {
+      "long_report": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T094245Z/report.json",
+      "long_report_sha256": "849d659b97142b644032952384bd25518be09002a26b5d1cb981d84c8b6d859a",
+      "pairs": [
+        {
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "quality_comparison": {
+            "generated_ids_match": true,
+            "first_top8_set_matches": true,
+            "first_top8_max_shared_logit_absolute_error": 0.0,
+            "numeric_passed": true
+          },
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T094245Z-bf15cd98",
+              "load_s": 1.40982,
+              "prefill_s": 1373.470808,
+              "prompt_tokens": 7680,
+              "generated_tokens": 39,
+              "finish_reason": "eog",
+              "loaded_pss_kib": 5623433,
+              "completed_pss_kib": 5598500,
+              "load_memory_watch": {
+                "minimum_available_bytes": 7055761408,
+                "peak_sampled_rss_bytes": 5837500416,
+                "peak_sampled_anonymous_bytes": 441544704,
+                "peak_sampled_mapped_bytes": 5662142464,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5734727680,
+                "VmSwap": 85307392
+              },
+              "sampled_peak_swap_bytes": 95313920,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7168,
+                "observed_wall_s": 1270.730344,
+                "observed_process_cpu_s": 5050.86,
+                "process_cpu_seconds_per_wall_second": 3.9747693315490698,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 80.866273,
+                    "process_cpu_s": 320.72,
+                    "process_cpu_seconds_per_wall_second": 3.9660539320267674,
+                    "minor_faults": 13287,
+                    "major_faults": 2487,
+                    "read_bytes": 288440320,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160408576,
+                      "VmRSS": 6160384000,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 7019147264,
+                      "Cached": 7283118080,
+                      "SwapFree": 6594662400,
+                      "Dirty": 2473984
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 82.223606,
+                    "process_cpu_s": 326.919,
+                    "process_cpu_seconds_per_wall_second": 3.9759749773076116,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160535552,
+                      "VmRSS": 6160510976,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6978498560,
+                      "Cached": 7302713344,
+                      "SwapFree": 6585323520,
+                      "Dirty": 2166784
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 83.464468,
+                    "process_cpu_s": 331.932,
+                    "process_cpu_seconds_per_wall_second": 3.976925845858144,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 49152,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 6129434624,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 7007768576,
+                      "Cached": 7258013696,
+                      "SwapFree": 6585638912,
+                      "Dirty": 2387968
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 85.278714,
+                    "process_cpu_s": 338.968,
+                    "process_cpu_seconds_per_wall_second": 3.9748254177472706,
+                    "minor_faults": 116,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 6009176064,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6958084096,
+                      "Cached": 7190794240,
+                      "SwapFree": 6532788224,
+                      "Dirty": 7208960
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 86.830393,
+                    "process_cpu_s": 345.312,
+                    "process_cpu_seconds_per_wall_second": 3.976856352590734,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5988999168,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6954876928,
+                      "Cached": 7175430144,
+                      "SwapFree": 6539943936,
+                      "Dirty": 3682304
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 88.690262,
+                    "process_cpu_s": 351.806,
+                    "process_cpu_seconds_per_wall_second": 3.9666812575206962,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 49152,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5814300672,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6887514112,
+                      "Cached": 7017730048,
+                      "SwapFree": 6633914368,
+                      "Dirty": 7643136
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 90.108036,
+                    "process_cpu_s": 357.995,
+                    "process_cpu_seconds_per_wall_second": 3.972953089333786,
+                    "minor_faults": 116,
+                    "major_faults": 60,
+                    "read_bytes": 610304,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5810130944,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6857228288,
+                      "Cached": 7049281536,
+                      "SwapFree": 6728024064,
+                      "Dirty": 6930432
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 91.485713,
+                    "process_cpu_s": 363.793,
+                    "process_cpu_seconds_per_wall_second": 3.9765006804942318,
+                    "minor_faults": 117,
+                    "major_faults": 3,
+                    "read_bytes": 28672,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5810425856,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6838222848,
+                      "Cached": 7064903680,
+                      "SwapFree": 6719897600,
+                      "Dirty": 2281472
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 93.201435,
+                    "process_cpu_s": 370.668,
+                    "process_cpu_seconds_per_wall_second": 3.97706322869385,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5808918528,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6803329024,
+                      "Cached": 7017701376,
+                      "SwapFree": 6695780352,
+                      "Dirty": 2142208
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 94.73122,
+                    "process_cpu_s": 376.711,
+                    "process_cpu_seconds_per_wall_second": 3.976629879779866,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5809197056,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6798823424,
+                      "Cached": 7066386432,
+                      "SwapFree": 6627549184,
+                      "Dirty": 9048064
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 96.274432,
+                    "process_cpu_s": 382.874,
+                    "process_cpu_seconds_per_wall_second": 3.976902195590206,
+                    "minor_faults": 116,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5809369088,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6819016704,
+                      "Cached": 7084597248,
+                      "SwapFree": 6635147264,
+                      "Dirty": 507904
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 97.798918,
+                    "process_cpu_s": 388.861,
+                    "process_cpu_seconds_per_wall_second": 3.976127834052315,
+                    "minor_faults": 121,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5809532928,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6903455744,
+                      "Cached": 7130513408,
+                      "SwapFree": 6622892032,
+                      "Dirty": 5758976
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 99.20961,
+                    "process_cpu_s": 394.258,
+                    "process_cpu_seconds_per_wall_second": 3.97399001971684,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 32768,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5715775488,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6827900928,
+                      "Cached": 6983954432,
+                      "SwapFree": 6301106176,
+                      "Dirty": 15118336
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 100.567264,
+                    "process_cpu_s": 400.043,
+                    "process_cpu_seconds_per_wall_second": 3.977865003864478,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6160666624,
+                      "VmRSS": 5716062208,
+                      "VmSwap": 17600512
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6800363520,
+                      "Cached": 7007776768,
+                      "SwapFree": 6300889088,
+                      "Dirty": 2224128
+                    }
+                  }
+                ],
+                "minor_faults": 14801,
+                "major_faults": 2550,
+                "read_bytes": 289210368,
+                "sampled_peak_process_swap_bytes": 95313920
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7168,
+                "prompt_tokens": 7680,
+                "includes_generated_tokens": 1,
+                "wall_s": 102.748994,
+                "process_cpu_s": 408.22,
+                "read_bytes": 94322688,
+                "major_faults": 1345
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T100603Z-aec43a66",
+              "load_s": 0.923095,
+              "prefill_s": 1375.689888,
+              "prompt_tokens": 7680,
+              "generated_tokens": 39,
+              "finish_reason": "eog",
+              "loaded_pss_kib": 426019,
+              "completed_pss_kib": 5391207,
+              "load_memory_watch": {
+                "minimum_available_bytes": 6631690240,
+                "peak_sampled_rss_bytes": 497303552,
+                "peak_sampled_anonymous_bytes": 423755776,
+                "peak_sampled_mapped_bytes": 65716224,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 5610909696,
+                "VmRSS": 5599354880,
+                "VmSwap": 17616896
+              },
+              "sampled_peak_swap_bytes": 17801216,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7168,
+                "observed_wall_s": 1272.400174,
+                "observed_process_cpu_s": 5056.864,
+                "process_cpu_seconds_per_wall_second": 3.9742716979540424,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 80.834132,
+                    "process_cpu_s": 321.245,
+                    "process_cpu_seconds_per_wall_second": 3.974125682453051,
+                    "minor_faults": 81237,
+                    "major_faults": 100,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666650624,
+                      "VmRSS": 4666626048,
+                      "VmSwap": 17596416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6650847232,
+                      "Cached": 6747512832,
+                      "SwapFree": 6118494208,
+                      "Dirty": 3469312
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 82.466734,
+                    "process_cpu_s": 327.669,
+                    "process_cpu_seconds_per_wall_second": 3.973347604623217,
+                    "minor_faults": 114,
+                    "major_faults": 0,
+                    "read_bytes": 57344,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665200640,
+                      "VmSwap": 17596416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6611435520,
+                      "Cached": 6750441472,
+                      "SwapFree": 5913804800,
+                      "Dirty": 1568768
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 83.661863,
+                    "process_cpu_s": 332.723,
+                    "process_cpu_seconds_per_wall_second": 3.9769972609861677,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665327616,
+                      "VmSwap": 17596416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6581669888,
+                      "Cached": 6758998016,
+                      "SwapFree": 5916164096,
+                      "Dirty": 2797568
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 85.462621,
+                    "process_cpu_s": 339.906,
+                    "process_cpu_seconds_per_wall_second": 3.977247550130717,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665602048,
+                      "VmSwap": 17596416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6636441600,
+                      "Cached": 6775451648,
+                      "SwapFree": 5913804800,
+                      "Dirty": 5410816
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 86.866349,
+                    "process_cpu_s": 345.32,
+                    "process_cpu_seconds_per_wall_second": 3.975302334854663,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665872384,
+                      "VmSwap": 17596416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6582042624,
+                      "Cached": 6795182080,
+                      "SwapFree": 5994545152,
+                      "Dirty": 7667712
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 89.06943,
+                    "process_cpu_s": 353.053,
+                    "process_cpu_seconds_per_wall_second": 3.9637954346401454,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665180160,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6455545856,
+                      "Cached": 6657937408,
+                      "SwapFree": 5976690688,
+                      "Dirty": 24051712
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 90.272478,
+                    "process_cpu_s": 358.076,
+                    "process_cpu_seconds_per_wall_second": 3.9666131686337445,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4664999936,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6414295040,
+                      "Cached": 6555631616,
+                      "SwapFree": 5974622208,
+                      "Dirty": 14258176
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 91.483047,
+                    "process_cpu_s": 363.798,
+                    "process_cpu_seconds_per_wall_second": 3.9766712186575948,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665286656,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6478872576,
+                      "Cached": 6594076672,
+                      "SwapFree": 5978214400,
+                      "Dirty": 10391552
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 93.034655,
+                    "process_cpu_s": 369.931,
+                    "process_cpu_seconds_per_wall_second": 3.9762709927822057,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665565184,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6508371968,
+                      "Cached": 6626918400,
+                      "SwapFree": 5909737472,
+                      "Dirty": 4374528
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 94.807399,
+                    "process_cpu_s": 376.951,
+                    "process_cpu_seconds_per_wall_second": 3.975966053029258,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665835520,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6479101952,
+                      "Cached": 6678781952,
+                      "SwapFree": 5907042304,
+                      "Dirty": 20447232
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 96.211134,
+                    "process_cpu_s": 382.563,
+                    "process_cpu_seconds_per_wall_second": 3.9762861541575845,
+                    "minor_faults": 119,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4665995264,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6464372736,
+                      "Cached": 6728474624,
+                      "SwapFree": 5841301504,
+                      "Dirty": 7012352
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 97.962881,
+                    "process_cpu_s": 389.556,
+                    "process_cpu_seconds_per_wall_second": 3.9765674102622603,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4666269696,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6480048128,
+                      "Cached": 6747439104,
+                      "SwapFree": 5873504256,
+                      "Dirty": 15179776
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 99.254902,
+                    "process_cpu_s": 394.363,
+                    "process_cpu_seconds_per_wall_second": 3.9732344907257073,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 57344,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666744832,
+                      "VmRSS": 4666531840,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6530998272,
+                      "Cached": 6732615680,
+                      "SwapFree": 5891448832,
+                      "Dirty": 1966080
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 101.012549,
+                    "process_cpu_s": 401.71,
+                    "process_cpu_seconds_per_wall_second": 3.9768326210637452,
+                    "minor_faults": 116,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666839040,
+                      "VmRSS": 4666814464,
+                      "VmSwap": 17604608
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6491541504,
+                      "Cached": 6767878144,
+                      "SwapFree": 5913731072,
+                      "Dirty": 1343488
+                    }
+                  }
+                ],
+                "minor_faults": 82744,
+                "major_faults": 100,
+                "read_bytes": 114688,
+                "sampled_peak_process_swap_bytes": 17801216
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7168,
+                "prompt_tokens": 7680,
+                "includes_generated_tokens": 1,
+                "wall_s": 103.30614,
+                "process_cpu_s": 409.297,
+                "read_bytes": 842059776,
+                "major_faults": 9688
+              }
+            }
+          },
+          "starting_temperatures_c": [
+            40.0,
+            40.0
+          ],
+          "timing_comparable": true,
+          "timing_exclusions": [],
+          "native_allocation_plans_identical": true,
+          "descriptive_prefill_ratio_native_over_demand": 0.9983869329713355
+        },
+        {
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "quality_comparison": {
+            "generated_ids_match": true,
+            "first_top8_set_matches": true,
+            "first_top8_max_shared_logit_absolute_error": 0.0,
+            "numeric_passed": true
+          },
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T102922Z-55dee2bd",
+              "load_s": 0.843845,
+              "prefill_s": 1373.499383,
+              "prompt_tokens": 7680,
+              "generated_tokens": 39,
+              "finish_reason": "eog",
+              "loaded_pss_kib": 425850,
+              "completed_pss_kib": 5391870,
+              "load_memory_watch": {
+                "minimum_available_bytes": 6750015488,
+                "peak_sampled_rss_bytes": 408936448,
+                "peak_sampled_anonymous_bytes": 336130048,
+                "peak_sampled_mapped_bytes": 64921600,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 5613113344,
+                "VmRSS": 5601390592,
+                "VmSwap": 17547264
+              },
+              "sampled_peak_swap_bytes": 17752064,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7168,
+                "observed_wall_s": 1270.867677,
+                "observed_process_cpu_s": 5053.207,
+                "process_cpu_seconds_per_wall_second": 3.9761865782349273,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 80.852247,
+                    "process_cpu_s": 321.557,
+                    "process_cpu_seconds_per_wall_second": 3.9770941678343212,
+                    "minor_faults": 81762,
+                    "major_faults": 113,
+                    "read_bytes": 12288,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4665589760,
+                      "VmRSS": 4665565184,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6630191104,
+                      "Cached": 6862643200,
+                      "SwapFree": 5961945088,
+                      "Dirty": 16900096
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 82.373698,
+                    "process_cpu_s": 327.456,
+                    "process_cpu_seconds_per_wall_second": 3.975249478298279,
+                    "minor_faults": 114,
+                    "major_faults": 0,
+                    "read_bytes": 4096,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4665765888,
+                      "VmRSS": 4665724928,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6575534080,
+                      "Cached": 6786756608,
+                      "SwapFree": 5984485376,
+                      "Dirty": 14794752
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 83.69565,
+                    "process_cpu_s": 332.783,
+                    "process_cpu_seconds_per_wall_second": 3.9761086747041214,
+                    "minor_faults": 118,
+                    "major_faults": 0,
+                    "read_bytes": 32768,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666032128,
+                      "VmRSS": 4665966592,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6573277184,
+                      "Cached": 6806548480,
+                      "SwapFree": 6049726464,
+                      "Dirty": 5595136
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 85.194008,
+                    "process_cpu_s": 338.356,
+                    "process_cpu_seconds_per_wall_second": 3.971593870780208,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 49152,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666204160,
+                      "VmRSS": 4666114048,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6523650048,
+                      "Cached": 6790582272,
+                      "SwapFree": 6032547840,
+                      "Dirty": 3272704
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 86.583474,
+                    "process_cpu_s": 344.108,
+                    "process_cpu_seconds_per_wall_second": 3.9742919070214255,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666339328,
+                      "VmRSS": 4666306560,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6517567488,
+                      "Cached": 6734176256,
+                      "SwapFree": 6038179840,
+                      "Dirty": 3751936
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 88.524889,
+                    "process_cpu_s": 352.017,
+                    "process_cpu_seconds_per_wall_second": 3.976474909784976,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666552320,
+                      "VmRSS": 4666527744,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6632521728,
+                      "Cached": 6720155648,
+                      "SwapFree": 5998915584,
+                      "Dirty": 12750848
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 89.992532,
+                    "process_cpu_s": 357.771,
+                    "process_cpu_seconds_per_wall_second": 3.975563216734473,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666765312,
+                      "VmRSS": 4666118144,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6587359232,
+                      "Cached": 6803501056,
+                      "SwapFree": 5949853696,
+                      "Dirty": 5955584
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 91.651411,
+                    "process_cpu_s": 364.446,
+                    "process_cpu_seconds_per_wall_second": 3.9764363256775175,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666765312,
+                      "VmRSS": 4666404864,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6651658240,
+                      "Cached": 6829219840,
+                      "SwapFree": 6091411456,
+                      "Dirty": 8007680
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 93.05749,
+                    "process_cpu_s": 370.058,
+                    "process_cpu_seconds_per_wall_second": 3.976660019521266,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666765312,
+                      "VmRSS": 4666683392,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6643810304,
+                      "Cached": 6863380480,
+                      "SwapFree": 6089326592,
+                      "Dirty": 21585920
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 94.73647,
+                    "process_cpu_s": 376.828,
+                    "process_cpu_seconds_per_wall_second": 3.9776445121926116,
+                    "minor_faults": 116,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4666986496,
+                      "VmRSS": 4666961920,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6629322752,
+                      "Cached": 6896107520,
+                      "SwapFree": 6096404480,
+                      "Dirty": 9015296
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 96.119809,
+                    "process_cpu_s": 382.265,
+                    "process_cpu_seconds_per_wall_second": 3.9769637910953404,
+                    "minor_faults": 118,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4667142144,
+                      "VmRSS": 4667113472,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6681567232,
+                      "Cached": 6849843200,
+                      "SwapFree": 6087987200,
+                      "Dirty": 286720
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 97.66856,
+                    "process_cpu_s": 388.525,
+                    "process_cpu_seconds_per_wall_second": 3.9779945562830044,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4667416576,
+                      "VmRSS": 4667392000,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6675734528,
+                      "Cached": 6883147776,
+                      "SwapFree": 6087987200,
+                      "Dirty": 13565952
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 99.406638,
+                    "process_cpu_s": 395.406,
+                    "process_cpu_seconds_per_wall_second": 3.9776619344072373,
+                    "minor_faults": 116,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4667695104,
+                      "VmRSS": 4667670528,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6674722816,
+                      "Cached": 6907731968,
+                      "SwapFree": 6087987200,
+                      "Dirty": 1183744
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 101.010801,
+                    "process_cpu_s": 401.631,
+                    "process_cpu_seconds_per_wall_second": 3.976119345890545,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 4667985920,
+                      "VmRSS": 4667961344,
+                      "VmSwap": 17555456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6659522560,
+                      "Cached": 6949715968,
+                      "SwapFree": 6094254080,
+                      "Dirty": 3108864
+                    }
+                  }
+                ],
+                "minor_faults": 83270,
+                "major_faults": 113,
+                "read_bytes": 98304,
+                "sampled_peak_process_swap_bytes": 17752064
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7168,
+                "prompt_tokens": 7680,
+                "includes_generated_tokens": 1,
+                "wall_s": 102.641555,
+                "process_cpu_s": 407.834,
+                "read_bytes": 90013696,
+                "major_faults": 1289
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T105240Z-1b9f2075",
+              "load_s": 2.60659,
+              "prefill_s": 1378.298941,
+              "prompt_tokens": 7680,
+              "generated_tokens": 39,
+              "finish_reason": "eog",
+              "loaded_pss_kib": 5145661,
+              "completed_pss_kib": 5443518,
+              "load_memory_watch": {
+                "minimum_available_bytes": 6520078336,
+                "peak_sampled_rss_bytes": 5572329472,
+                "peak_sampled_anonymous_bytes": 439914496,
+                "peak_sampled_mapped_bytes": 5450166272,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 6104825856,
+                "VmRSS": 5562834944,
+                "VmSwap": 92536832
+              },
+              "sampled_peak_swap_bytes": 108658688,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7168,
+                "observed_wall_s": 1274.784541,
+                "observed_process_cpu_s": 5061.095,
+                "process_cpu_seconds_per_wall_second": 3.9701571812518552,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 82.220409,
+                    "process_cpu_s": 322.424,
+                    "process_cpu_seconds_per_wall_second": 3.921459451752423,
+                    "minor_faults": 19817,
+                    "major_faults": 13474,
+                    "read_bytes": 786857984,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5945696256,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6620348416,
+                      "Cached": 6831177728,
+                      "SwapFree": 5983285248,
+                      "Dirty": 860160
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 82.399558,
+                    "process_cpu_s": 327.709,
+                    "process_cpu_seconds_per_wall_second": 3.9770723041985248,
+                    "minor_faults": 120,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5938327552,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6607446016,
+                      "Cached": 6830149632,
+                      "SwapFree": 5967818752,
+                      "Dirty": 7737344
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 84.468808,
+                    "process_cpu_s": 334.929,
+                    "process_cpu_seconds_per_wall_second": 3.965120473820348,
+                    "minor_faults": 112,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5660422144,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6541131776,
+                      "Cached": 6845136896,
+                      "SwapFree": 5977341952,
+                      "Dirty": 20606976
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 85.493483,
+                    "process_cpu_s": 339.793,
+                    "process_cpu_seconds_per_wall_second": 3.9744900789689432,
+                    "minor_faults": 114,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5515476992,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6463623168,
+                      "Cached": 6796218368,
+                      "SwapFree": 6154080256,
+                      "Dirty": 11767808
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 87.029064,
+                    "process_cpu_s": 346.008,
+                    "process_cpu_seconds_per_wall_second": 3.9757752651459057,
+                    "minor_faults": 112,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5491523584,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6609661952,
+                      "Cached": 6823051264,
+                      "SwapFree": 5971021824,
+                      "Dirty": 23855104
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 88.582117,
+                    "process_cpu_s": 351.913,
+                    "process_cpu_seconds_per_wall_second": 3.9727318776994234,
+                    "minor_faults": 112,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5405773824,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6555746304,
+                      "Cached": 6828945408,
+                      "SwapFree": 6006935552,
+                      "Dirty": 2990080
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 90.04591,
+                    "process_cpu_s": 357.826,
+                    "process_cpu_seconds_per_wall_second": 3.973817356057593,
+                    "minor_faults": 117,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5376401408,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6505099264,
+                      "Cached": 6771048448,
+                      "SwapFree": 6062653440,
+                      "Dirty": 24911872
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 91.602136,
+                    "process_cpu_s": 364.294,
+                    "process_cpu_seconds_per_wall_second": 3.9769159968060133,
+                    "minor_faults": 113,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5376696320,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6550122496,
+                      "Cached": 6803857408,
+                      "SwapFree": 6050963456,
+                      "Dirty": 8495104
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 93.085373,
+                    "process_cpu_s": 370.261,
+                    "process_cpu_seconds_per_wall_second": 3.977649635673695,
+                    "minor_faults": 112,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5376983040,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6563770368,
+                      "Cached": 6825365504,
+                      "SwapFree": 6019706880,
+                      "Dirty": 1335296
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 94.586622,
+                    "process_cpu_s": 376.196,
+                    "process_cpu_seconds_per_wall_second": 3.9772643535150247,
+                    "minor_faults": 115,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5377142784,
+                      "VmSwap": 50298880
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6575579136,
+                      "Cached": 6795563008,
+                      "SwapFree": 6063235072,
+                      "Dirty": 10612736
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 96.517908,
+                    "process_cpu_s": 383.324,
+                    "process_cpu_seconds_per_wall_second": 3.971532412409933,
+                    "minor_faults": 112,
+                    "major_faults": 0,
+                    "read_bytes": 28672,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5049094144,
+                      "VmSwap": 104554496
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6579687424,
+                      "Cached": 6594756608,
+                      "SwapFree": 5722505216,
+                      "Dirty": 22073344
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 97.762065,
+                    "process_cpu_s": 388.754,
+                    "process_cpu_seconds_per_wall_second": 3.9765322060249035,
+                    "minor_faults": 110,
+                    "major_faults": 12,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5049430016,
+                      "VmSwap": 104505344
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6569922560,
+                      "Cached": 6618451968,
+                      "SwapFree": 5715206144,
+                      "Dirty": 6287360
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 99.651789,
+                    "process_cpu_s": 396.16,
+                    "process_cpu_seconds_per_wall_second": 3.975442929579518,
+                    "minor_faults": 115,
+                    "major_faults": 13,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 5047259136,
+                      "VmSwap": 104452096
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6599573504,
+                      "Cached": 6652059648,
+                      "SwapFree": 5755006976,
+                      "Dirty": 21270528
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 101.339299,
+                    "process_cpu_s": 401.504,
+                    "process_cpu_seconds_per_wall_second": 3.961977277936371,
+                    "minor_faults": 116,
+                    "major_faults": 14,
+                    "read_bytes": 8192,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 6104825856,
+                      "VmRSS": 4682072064,
+                      "VmSwap": 104394752
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6519906304,
+                      "Cached": 6749163520,
+                      "SwapFree": 5935079424,
+                      "Dirty": 9519104
+                    }
+                  }
+                ],
+                "minor_faults": 21297,
+                "major_faults": 13513,
+                "read_bytes": 786894848,
+                "sampled_peak_process_swap_bytes": 108658688
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7168,
+                "prompt_tokens": 7680,
+                "includes_generated_tokens": 1,
+                "wall_s": 103.542681,
+                "process_cpu_s": 410.358,
+                "read_bytes": 880795648,
+                "major_faults": 11642
+              }
+            }
+          },
+          "starting_temperatures_c": [
+            40.0,
+            40.0
+          ],
+          "timing_comparable": true,
+          "timing_exclusions": [],
+          "native_allocation_plans_identical": true,
+          "descriptive_prefill_ratio_native_over_demand": 1.0034944012785187
+        }
+      ],
+      "short_speed_report": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json",
+      "short_speed_sha256": "c0462acfe6fafe7bab149fd9aa4c18c72af02c63b4989397966ac67ca0e31f12",
+      "short_profiles": {
+        "native": {
+          "load_us": 2123487,
+          "ttft_us": 8393309,
+          "client_to_first_piece_us": 8418249,
+          "service_request_us": 52603865,
+          "prefill_us": 8336285,
+          "backend_decode_tok_s": 2.897862221939281,
+          "emission_tok_s": 2.8912258239737487,
+          "native_load_plus_ttft_us": 10493768,
+          "completed_pss_kib": 5717148
+        },
+        "cpu_repack": {
+          "load_us": 1004078,
+          "ttft_us": 8226293,
+          "client_to_first_piece_us": 8239097,
+          "service_request_us": 51901530,
+          "prefill_us": 8189509,
+          "backend_decode_tok_s": 2.9076248500913335,
+          "emission_tok_s": 2.9009327138250662,
+          "native_load_plus_ttft_us": 9167121,
+          "completed_pss_kib": 5372072
+        }
+      },
+      "short_paired_ratios": {
+        "emission_speed_ratio": {
+          "values": [
+            1.0428114778505662,
+            0.9738014605545919,
+            1.00335736135546,
+            0.8592116189378606,
+            0.9798436599491249
+          ],
+          "median": 0.9798436599491249,
+          "minimum": 0.8592116189378606,
+          "maximum": 1.0428114778505662,
+          "bootstrap_median_ci95": [
+            0.8592116189378606,
+            1.0428114778505662
+          ]
+        },
+        "client_first_piece_speed_ratio": {
+          "values": [
+            1.0253390632492856,
+            1.109239856408092,
+            1.06835294120545,
+            0.6051074850447503,
+            1.0079916115738154
+          ],
+          "median": 1.0253390632492856,
+          "minimum": 0.6051074850447503,
+          "maximum": 1.109239856408092,
+          "bootstrap_median_ci95": [
+            0.6051074850447503,
+            1.109239856408092
+          ]
+        },
+        "native_load_plus_ttft_speed_ratio": {
+          "values": [
+            1.144717954524654,
+            1.286460611249246,
+            1.1794545971801065,
+            0.714642346067934,
+            1.1752258480158673
+          ],
+          "median": 1.1752258480158673,
+          "minimum": 0.714642346067934,
+          "maximum": 1.286460611249246,
+          "bootstrap_median_ci95": [
+            0.714642346067934,
+            1.286460611249246
+          ]
+        }
+      }
+    },
+    "gemma": {
+      "long_report": "bench/results/weight-buffers-gemma-pp8064-full-mmap-v1-20261025T165054Z/report.json",
+      "long_report_sha256": "6b1e81f1f640a97fcc55c133b4c88ea3ec802ded466a0226df7da9b352b67780",
+      "pairs": [
+        {
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "quality_comparison": {
+            "generated_ids_match": true,
+            "first_top8_set_matches": true,
+            "first_top8_max_shared_logit_absolute_error": 0.0,
+            "numeric_passed": true
+          },
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T165054Z-c54ba6bf",
+              "load_s": 3.73411,
+              "prefill_s": 1201.281079,
+              "prompt_tokens": 8064,
+              "generated_tokens": 128,
+              "finish_reason": "length",
+              "loaded_pss_kib": 4975985,
+              "completed_pss_kib": 3587276,
+              "load_memory_watch": {
+                "minimum_available_bytes": 6323625984,
+                "peak_sampled_rss_bytes": 5385334784,
+                "peak_sampled_anonymous_bytes": 550506496,
+                "peak_sampled_mapped_bytes": 5020581888,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 5646053376,
+                "VmRSS": 3591880704,
+                "VmSwap": 168976384
+              },
+              "sampled_peak_swap_bytes": 189595648,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7680,
+                "observed_wall_s": 1135.308441,
+                "observed_process_cpu_s": 4492.057,
+                "process_cpu_seconds_per_wall_second": 3.9566842258684485,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 64.702625,
+                    "process_cpu_s": 250.913,
+                    "process_cpu_seconds_per_wall_second": 3.87794158274104,
+                    "minor_faults": 22888,
+                    "major_faults": 14833,
+                    "read_bytes": 680914944,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 5643419648,
+                      "VmSwap": 19185664
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6151442432,
+                      "Cached": 6319427584,
+                      "SwapFree": 5473214464,
+                      "Dirty": 24006656
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 66.342255,
+                    "process_cpu_s": 263.484,
+                    "process_cpu_seconds_per_wall_second": 3.9715864346184797,
+                    "minor_faults": 132,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 5643771904,
+                      "VmSwap": 19185664
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6226862080,
+                      "Cached": 6330773504,
+                      "SwapFree": 5320650752,
+                      "Dirty": 729088
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 67.994668,
+                    "process_cpu_s": 269.85,
+                    "process_cpu_seconds_per_wall_second": 3.9686935452056327,
+                    "minor_faults": 132,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 5644083200,
+                      "VmSwap": 19185664
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6239326208,
+                      "Cached": 6354616320,
+                      "SwapFree": 5347680256,
+                      "Dirty": 1544192
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 70.730591,
+                    "process_cpu_s": 278.082,
+                    "process_cpu_seconds_per_wall_second": 3.931566187535461,
+                    "minor_faults": 131,
+                    "major_faults": 29,
+                    "read_bytes": 94208,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3450204160,
+                      "VmSwap": 143863808
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6086979584,
+                      "Cached": 5334409216,
+                      "SwapFree": 4780359680,
+                      "Dirty": 11194368
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 71.032492,
+                    "process_cpu_s": 281.582,
+                    "process_cpu_seconds_per_wall_second": 3.9641295422945317,
+                    "minor_faults": 134,
+                    "major_faults": 150,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3444133888,
+                      "VmSwap": 143257600
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6147637248,
+                      "Cached": 5368590336,
+                      "SwapFree": 4675780608,
+                      "Dirty": 3129344
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 72.434109,
+                    "process_cpu_s": 287.488,
+                    "process_cpu_seconds_per_wall_second": 3.9689588781992198,
+                    "minor_faults": 138,
+                    "major_faults": 147,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3438440448,
+                      "VmSwap": 142647296
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6164471808,
+                      "Cached": 5382410240,
+                      "SwapFree": 4668678144,
+                      "Dirty": 987136
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 74.010358,
+                    "process_cpu_s": 293.725,
+                    "process_cpu_seconds_per_wall_second": 3.9687012458445343,
+                    "minor_faults": 133,
+                    "major_faults": 42,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3433029632,
+                      "VmSwap": 142483456
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6109687808,
+                      "Cached": 5458628608,
+                      "SwapFree": 4703973376,
+                      "Dirty": 3022848
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 75.664907,
+                    "process_cpu_s": 299.84,
+                    "process_cpu_seconds_per_wall_second": 3.962735327223755,
+                    "minor_faults": 138,
+                    "major_faults": 46,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3423625216,
+                      "VmSwap": 142286848
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6070493184,
+                      "Cached": 6015512576,
+                      "SwapFree": 4896194560,
+                      "Dirty": 6725632
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 77.126843,
+                    "process_cpu_s": 305.828,
+                    "process_cpu_seconds_per_wall_second": 3.9652601883367637,
+                    "minor_faults": 142,
+                    "major_faults": 64,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3390730240,
+                      "VmSwap": 142024704
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6182969344,
+                      "Cached": 6159110144,
+                      "SwapFree": 4711833600,
+                      "Dirty": 1236992
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 78.617063,
+                    "process_cpu_s": 312.051,
+                    "process_cpu_seconds_per_wall_second": 3.9692528325562098,
+                    "minor_faults": 140,
+                    "major_faults": 63,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3381485568,
+                      "VmSwap": 141770752
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6180597760,
+                      "Cached": 6163959808,
+                      "SwapFree": 4752801792,
+                      "Dirty": 1921024
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 79.951792,
+                    "process_cpu_s": 317.325,
+                    "process_cpu_seconds_per_wall_second": 3.968954191795976,
+                    "minor_faults": 142,
+                    "major_faults": 65,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3372269568,
+                      "VmSwap": 141500416
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6167715840,
+                      "Cached": 6219649024,
+                      "SwapFree": 4766060544,
+                      "Dirty": 548864
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 82.700031,
+                    "process_cpu_s": 324.667,
+                    "process_cpu_seconds_per_wall_second": 3.925838915344542,
+                    "minor_faults": 187,
+                    "major_faults": 94,
+                    "read_bytes": 385024,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3235749888,
+                      "VmSwap": 141930496
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6056988672,
+                      "Cached": 6104543232,
+                      "SwapFree": 5156593664,
+                      "Dirty": 2609152
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 83.404148,
+                    "process_cpu_s": 330.068,
+                    "process_cpu_seconds_per_wall_second": 3.957453051375814,
+                    "minor_faults": 187,
+                    "major_faults": 142,
+                    "read_bytes": 8192,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3232870400,
+                      "VmSwap": 145047552
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6098907136,
+                      "Cached": 6113009664,
+                      "SwapFree": 4877389824,
+                      "Dirty": 8814592
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 84.499695,
+                    "process_cpu_s": 335.508,
+                    "process_cpu_seconds_per_wall_second": 3.9705232072139434,
+                    "minor_faults": 183,
+                    "major_faults": 227,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3233935360,
+                      "VmSwap": 144510976
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6055964672,
+                      "Cached": 6120013824,
+                      "SwapFree": 4893470720,
+                      "Dirty": 7282688
+                    }
+                  },
+                  {
+                    "from_token": 7168,
+                    "to_token": 7680,
+                    "wall_s": 86.096864,
+                    "process_cpu_s": 341.646,
+                    "process_cpu_seconds_per_wall_second": 3.968158468582549,
+                    "minor_faults": 187,
+                    "major_faults": 317,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 5646053376,
+                      "VmRSS": 3235069952,
+                      "VmSwap": 143663104
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6121721856,
+                      "Cached": 6132002816,
+                      "SwapFree": 4892618752,
+                      "Dirty": 1634304
+                    }
+                  }
+                ],
+                "minor_faults": 24994,
+                "major_faults": 16219,
+                "read_bytes": 681402368,
+                "sampled_peak_process_swap_bytes": 189595648
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7680,
+                "prompt_tokens": 8064,
+                "includes_generated_tokens": 1,
+                "wall_s": 65.987727,
+                "process_cpu_s": 260.819,
+                "read_bytes": 408535040,
+                "major_faults": 9264
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T171206Z-d1e0a5c0",
+              "load_s": 1.399925,
+              "prefill_s": 1198.74552,
+              "prompt_tokens": 8064,
+              "generated_tokens": 128,
+              "finish_reason": "length",
+              "loaded_pss_kib": 603237,
+              "completed_pss_kib": 3554012,
+              "load_memory_watch": {
+                "minimum_available_bytes": 5675524096,
+                "peak_sampled_rss_bytes": 694685696,
+                "peak_sampled_anonymous_bytes": 617304064,
+                "peak_sampled_mapped_bytes": 69525504,
+                "threshold_bytes": 536870912,
+                "poll_interval_ms": 100,
+                "pressure_abort": false
+              },
+              "end_process_memory_bytes": {
+                "VmHWM": 3737067520,
+                "VmRSS": 3718008832,
+                "VmSwap": 19214336
+              },
+              "sampled_peak_swap_bytes": 19509248,
+              "prefill_observations": {
+                "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+                "observed_from_token": 0,
+                "observed_to_token": 7680,
+                "observed_wall_s": 1132.761492,
+                "observed_process_cpu_s": 4493.138,
+                "process_cpu_seconds_per_wall_second": 3.9665349075972998,
+                "intervals": [
+                  {
+                    "from_token": 0,
+                    "to_token": 512,
+                    "wall_s": 63.459413,
+                    "process_cpu_s": 249.919,
+                    "process_cpu_seconds_per_wall_second": 3.9382494760863924,
+                    "minor_faults": 56918,
+                    "major_faults": 286,
+                    "read_bytes": 507904,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3288784896,
+                      "VmRSS": 3288760320,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5867286528,
+                      "Cached": 5831598080,
+                      "SwapFree": 5065256960,
+                      "Dirty": 237568
+                    }
+                  },
+                  {
+                    "from_token": 512,
+                    "to_token": 1024,
+                    "wall_s": 66.434458,
+                    "process_cpu_s": 263.75,
+                    "process_cpu_seconds_per_wall_second": 3.970078298824986,
+                    "minor_faults": 134,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3289141248,
+                      "VmRSS": 3289120768,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5857042432,
+                      "Cached": 5850624000,
+                      "SwapFree": 5059072000,
+                      "Dirty": 323584
+                    }
+                  },
+                  {
+                    "from_token": 1024,
+                    "to_token": 1536,
+                    "wall_s": 67.926509,
+                    "process_cpu_s": 269.667,
+                    "process_cpu_seconds_per_wall_second": 3.969981734229857,
+                    "minor_faults": 132,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3289489408,
+                      "VmRSS": 3289464832,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5839536128,
+                      "Cached": 5868843008,
+                      "SwapFree": 5059334144,
+                      "Dirty": 315392
+                    }
+                  },
+                  {
+                    "from_token": 1536,
+                    "to_token": 2048,
+                    "wall_s": 69.535406,
+                    "process_cpu_s": 275.904,
+                    "process_cpu_seconds_per_wall_second": 3.9678203647793473,
+                    "minor_faults": 131,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3289796608,
+                      "VmRSS": 3289772032,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5878026240,
+                      "Cached": 5876637696,
+                      "SwapFree": 5032632320,
+                      "Dirty": 503808
+                    }
+                  },
+                  {
+                    "from_token": 2048,
+                    "to_token": 2560,
+                    "wall_s": 70.963834,
+                    "process_cpu_s": 281.718,
+                    "process_cpu_seconds_per_wall_second": 3.9698813342018697,
+                    "minor_faults": 131,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3290148864,
+                      "VmRSS": 3290124288,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5871099904,
+                      "Cached": 5903429632,
+                      "SwapFree": 5003358208,
+                      "Dirty": 462848
+                    }
+                  },
+                  {
+                    "from_token": 2560,
+                    "to_token": 3072,
+                    "wall_s": 72.566427,
+                    "process_cpu_s": 287.986,
+                    "process_cpu_seconds_per_wall_second": 3.968584535655862,
+                    "minor_faults": 133,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3290492928,
+                      "VmRSS": 3290468352,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5923520512,
+                      "Cached": 5962424320,
+                      "SwapFree": 4994363392,
+                      "Dirty": 720896
+                    }
+                  },
+                  {
+                    "from_token": 3072,
+                    "to_token": 3584,
+                    "wall_s": 74.033422,
+                    "process_cpu_s": 293.941,
+                    "process_cpu_seconds_per_wall_second": 3.97038245780399,
+                    "minor_faults": 131,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3290816512,
+                      "VmRSS": 3290791936,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5915615232,
+                      "Cached": 5972029440,
+                      "SwapFree": 5001977856,
+                      "Dirty": 729088
+                    }
+                  },
+                  {
+                    "from_token": 3584,
+                    "to_token": 4096,
+                    "wall_s": 75.556083,
+                    "process_cpu_s": 299.972,
+                    "process_cpu_seconds_per_wall_second": 3.970189931629992,
+                    "minor_faults": 131,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3291078656,
+                      "VmRSS": 3291054080,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5916848128,
+                      "Cached": 5990039552,
+                      "SwapFree": 4996521984,
+                      "Dirty": 196608
+                    }
+                  },
+                  {
+                    "from_token": 4096,
+                    "to_token": 4608,
+                    "wall_s": 77.456716,
+                    "process_cpu_s": 306.648,
+                    "process_cpu_seconds_per_wall_second": 3.9589594787364857,
+                    "minor_faults": 135,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3291324416,
+                      "VmRSS": 3291238400,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5804146688,
+                      "Cached": 5948215296,
+                      "SwapFree": 5158039552,
+                      "Dirty": 2666496
+                    }
+                  },
+                  {
+                    "from_token": 4608,
+                    "to_token": 5120,
+                    "wall_s": 78.571708,
+                    "process_cpu_s": 311.997,
+                    "process_cpu_seconds_per_wall_second": 3.9708567872802254,
+                    "minor_faults": 130,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3291602944,
+                      "VmRSS": 3291578368,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5930999808,
+                      "Cached": 5961830400,
+                      "SwapFree": 5022900224,
+                      "Dirty": 2052096
+                    }
+                  },
+                  {
+                    "from_token": 5120,
+                    "to_token": 5632,
+                    "wall_s": 80.174734,
+                    "process_cpu_s": 318.197,
+                    "process_cpu_seconds_per_wall_second": 3.9687939594536106,
+                    "minor_faults": 135,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3291971584,
+                      "VmRSS": 3291947008,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5921296384,
+                      "Cached": 5991088128,
+                      "SwapFree": 5099708416,
+                      "Dirty": 577536
+                    }
+                  },
+                  {
+                    "from_token": 5632,
+                    "to_token": 6144,
+                    "wall_s": 81.650124,
+                    "process_cpu_s": 324.059,
+                    "process_cpu_seconds_per_wall_second": 3.9688733356975674,
+                    "minor_faults": 180,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3292499968,
+                      "VmRSS": 3292475392,
+                      "VmSwap": 19218432
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5891350528,
+                      "Cached": 6053429248,
+                      "SwapFree": 5153972224,
+                      "Dirty": 9830400
+                    }
+                  },
+                  {
+                    "from_token": 6144,
+                    "to_token": 6656,
+                    "wall_s": 83.257718,
+                    "process_cpu_s": 330.43,
+                    "process_cpu_seconds_per_wall_second": 3.9687611904039937,
+                    "minor_faults": 177,
+                    "major_faults": 0,
+                    "read_bytes": 40960,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3292844032,
+                      "VmRSS": 3291643904,
+                      "VmSwap": 19230720
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5938700288,
+                      "Cached": 5672382464,
+                      "SwapFree": 5060943872,
+                      "Dirty": 17297408
+                    }
+                  },
+                  {
+                    "from_token": 6656,
+                    "to_token": 7168,
+                    "wall_s": 84.681075,
+                    "process_cpu_s": 336.17,
+                    "process_cpu_seconds_per_wall_second": 3.969836235546136,
+                    "minor_faults": 174,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3292844032,
+                      "VmRSS": 3292168192,
+                      "VmSwap": 19230720
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 5919744000,
+                      "Cached": 5692825600,
+                      "SwapFree": 5060939776,
+                      "Dirty": 86016
+                    }
+                  },
+                  {
+                    "from_token": 7168,
+                    "to_token": 7680,
+                    "wall_s": 86.493865,
+                    "process_cpu_s": 342.78,
+                    "process_cpu_seconds_per_wall_second": 3.9630556456229584,
+                    "minor_faults": 177,
+                    "major_faults": 0,
+                    "read_bytes": 0,
+                    "end_process_memory_bytes": {
+                      "VmHWM": 3292844032,
+                      "VmRSS": 3292684288,
+                      "VmSwap": 19230720
+                    },
+                    "end_system_memory_bytes": {
+                      "MemAvailable": 6046015488,
+                      "Cached": 5837471744,
+                      "SwapFree": 5091442688,
+                      "Dirty": 10100736
+                    }
+                  }
+                ],
+                "minor_faults": 58949,
+                "major_faults": 286,
+                "read_bytes": 548864,
+                "sampled_peak_process_swap_bytes": 19509248
+              },
+              "final_prefill_decode_bridge": {
+                "scope": "Missing final prefill boundary bridged to first observed decode snapshot; includes indicated generated tokens, not pure prefill timing.",
+                "from_prompt_token": 7680,
+                "prompt_tokens": 8064,
+                "includes_generated_tokens": 1,
+                "wall_s": 65.997812,
+                "process_cpu_s": 261.315,
+                "read_bytes": 76107776,
+                "major_faults": 5697
+              }
+            }
+          },
+          "starting_temperatures_c": [
+            43.0,
+            41.0
+          ],
+          "timing_comparable": true,
+          "timing_exclusions": [],
+          "native_allocation_plans_identical": true,
+          "descriptive_prefill_ratio_native_over_demand": 1.0021151770394103
+        }
+      ],
+      "short_speed_report": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T173326Z/report.json",
+      "short_speed_sha256": "a10ff37f1e2df35fd34d9ca427145679d1a6e3e1d834388bd95dd839ee6853d0",
+      "short_profiles": {
+        "native": {
+          "load_us": 2156626,
+          "ttft_us": 4701784,
+          "client_to_first_piece_us": 4722753,
+          "service_request_us": 32384635,
+          "prefill_us": 4643644,
+          "backend_decode_tok_s": 4.610702922717322,
+          "emission_tok_s": 4.590275613159619,
+          "native_load_plus_ttft_us": 6843629,
+          "completed_pss_kib": 5317484
+        },
+        "cpu_repack": {
+          "load_us": 1297414,
+          "ttft_us": 4844290,
+          "client_to_first_piece_us": 4862858,
+          "service_request_us": 32387136,
+          "prefill_us": 4796031,
+          "backend_decode_tok_s": 4.634979658643602,
+          "emission_tok_s": 4.617348680576254,
+          "native_load_plus_ttft_us": 6153751,
+          "completed_pss_kib": 3526242
+        }
+      },
+      "short_paired_ratios": {
+        "emission_speed_ratio": {
+          "values": [
+            1.0084816384579045,
+            1.0009895459474623,
+            0.997527173460556,
+            0.9790178496194066,
+            1.0070323637527978
+          ],
+          "median": 1.0009895459474623,
+          "minimum": 0.9790178496194066,
+          "maximum": 1.0084816384579045,
+          "bootstrap_median_ci95": [
+            0.9790178496194066,
+            1.0084816384579045
+          ]
+        },
+        "client_first_piece_speed_ratio": {
+          "values": [
+            0.9711887536095029,
+            0.9594778090675925,
+            0.9725406139701067,
+            0.9776651255824376,
+            0.9719381596411898
+          ],
+          "median": 0.9719381596411898,
+          "minimum": 0.9594778090675925,
+          "maximum": 0.9776651255824376,
+          "bootstrap_median_ci95": [
+            0.9594778090675925,
+            0.9776651255824376
+          ]
+        },
+        "native_load_plus_ttft_speed_ratio": {
+          "values": [
+            1.089387082168091,
+            1.1065947502782807,
+            1.1377680413106266,
+            1.067286927924123,
+            1.1557465895301418
+          ],
+          "median": 1.1065947502782807,
+          "minimum": 1.067286927924123,
+          "maximum": 1.1557465895301418,
+          "bootstrap_median_ci95": [
+            1.067286927924123,
+            1.1557465895301418
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "passed": true,
+  "scope": "Post-hoc boundary frequency-cap audit, not a newly preregistered speed test. No trials removed or ratios recomputed after filtering. Equal boundary caps do not prove equal clocks or unchanged caps inside a request.",
+  "topology": "bench/cpu-policy-topology-20261025.json",
+  "topology_sha256": "6b1219acf619ae9d713ed98fe58811dddab816e851ef5b9c13535d5c9dbe61ab",
+  "reports": [
+    {
+      "path": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T173326Z/report.json",
+      "sha256": "a10ff37f1e2df35fd34d9ca427145679d1a6e3e1d834388bd95dd839ee6853d0",
+      "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T173326Z-6b4d6fc3",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "2fc80563b9c77e54bfa4d10d49f85b6fab6b129c3e12477764feff05137b63ba",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "bcf0453b977656fc44fe34722e8ecc87dc6e9444df3b2e97eaa324cc8b0eb451"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173408Z-a74aae16",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "111f224c346fd93b8befa9dc8e5bd50fb0d83fc6291eb11e28511f743aecfe99",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "8fdc2bde317df112f08cdeeb6b357828ffeb9a5f63674a8ae8e7ca9b1369ba7b"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173446Z-4055adc0",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "3c9d07a51c2dfdf05c937f2d3e12d9f8a87e8dc145b4e66d6386719712c377a7",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "c601b6043deb6607d808fc881a75b26f805e4e18fe2de9c6ea55402fd4c47a2e"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T173524Z-8f33248f",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "51ec7aed65ba9ff084ba0936b16e54c894cfa832b80736803bac854494d7457e",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "aef47ad169cc62607a344ddc4477c47ea066754a19010d429083a22891481168"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T173603Z-ece6a48a",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "ef18ef258314da905c89575302fa41c20edbc6fac990189f986df44a7a218d52",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "8a460ab7c16c773e99f6d67353b1daf6f66ecd65e7bb3c9a14aba0aab5b66209"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173641Z-1fa73980",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "ec55ec1a606e12091ed72b2130dd953597fc2dece1e03b5b9cf6b61e13cd460e",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "690c83d8001e00c7c9f0eff9b085acdca67b9d87cf9a957aba2f95714fccab7d"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173719Z-3ce6f50f",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "29fa07fe14a1a4855e36d696cde56a83e056da8561b0022e169c9c40e01f101b",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "cd85096a7c1925d4f1139ba446c0f4b5d3a325aae37ebe3f76475afe9c478a6f"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T173756Z-dae6b50e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "b35ee35577e3bf439cac32f720e020901fa9bb3e469aa77ea95e9452c47786b6",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "3c54669da3d7ded5e610039ff5d5d44dd8ac9a19bba23cc5c1048f2620b5aef1"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T173835Z-7c0b5093",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "6bf980dd04dac7030ec3d92a7f28f7798c06b67d643258629fac10a2fa687b6c",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "3b1b0e15a8de135a074dc31c60ec82ab97725ca4e78644fc8d773cecfbb37aeb"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173914Z-33727dc5",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "4ba88e5dccd5edd1681fe92ba6cdd03abab65756c63f53976ab6b4945c554aab",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "eb86faf231d7b736201201a01b9d01c7c331a69620c7d1e7e2f02bbe80adf9ba"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T173953Z-21f63b21",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "031a8266f870323461eebdab579d9f0d488411c899ec04383168de8b8e80859b",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "218892ea07aa95df23ccf87239ebb47531de12a0f4c702f6b1e6e5f7960268ad"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T174030Z-2201d592",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "7ace1065207f20d645904c02d4e37e1c38c19efe08100a53e43bdfb0e9945f0d",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "c432df92ff3b6fb5a316c3471b5a112961346f9f31ad62b65535c802a30bc977"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 5,
+      "all_measured_boundary_caps_comparable": true
+    }
+  ]
+}

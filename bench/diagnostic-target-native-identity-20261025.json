@@ -1,0 +1,59 @@
+{
+  "apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "scope": "Compare packaged stripped APK libraries with freshly stripped existing CMake objects; raw unstripped object hashes are expected to differ. Installed APK unchanged.",
+  "libraries": [
+    {
+      "name": "lib/arm64-v8a/libggml-base.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libggml.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libllama-common.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libllama.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libmotoai-probe.so",
+      "matches_after_agp_style_strip": true
+    },
+    {
+      "name": "lib/arm64-v8a/libmotoai-runtime.so",
+      "matches_after_agp_style_strip": true
+    }
+  ],
+  "passed": true
+}

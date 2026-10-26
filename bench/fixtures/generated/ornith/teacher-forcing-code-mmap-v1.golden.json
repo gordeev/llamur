@@ -1,0 +1,16 @@
+{
+  "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "50a93be975c5de05fd058bf51e3b90f6819711b13f7ed670a847203452aad40d",
+  "kind": "teacher_forcing",
+  "expected_identifier": null,
+  "expected": {
+    "rendered_prompt": "Python code:\n\n",
+    "prompt_ids": [
+      29292,
+      1970,
+      25,
+      271
+    ]
+  }
+}

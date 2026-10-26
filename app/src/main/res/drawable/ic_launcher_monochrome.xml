@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Purpose-built alpha mark; Android supplies the user's theme colors.
+         Key details lie inside the central 66dp safe circle. -->
+    <group android:translateX="24" android:translateY="24" android:scaleX="0.6" android:scaleY="0.6">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M26,82 C20,76 16,70 13,64 L24,58 C26,63 30,68 34,71 Z M10,55 C6,47 5,41 6,33 L18,34 C18,41 19,47 21,50 Z M8,24 C10,17 15,12 22,10 L26,22 C22,24 20,27 19,29 Z M31,10 C42,10 49,19 48,29 L36,28 C36,24 34,23 31,22 Z M46,36 C45,39 44,41 42,43 L33,36 C35,33 36,31 36,30 Z" />
+        <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"
+            android:pathData="M30,51 C23,40 22,23 29,15 C39,19 46,25 50,33 C60,29 70,29 78,32 C83,25 88,22 94,22 C99,32 98,47 93,55 C98,67 91,80 80,85 C64,93 45,88 35,78 C28,71 26,60 30,51 Z M31,29 C28,36 31,43 35,47 L41,39 Z M86,35 L82,43 L91,48 C93,42 92,36 91,33 Z M37,56 C40,46 51,44 61,50 C67,54 71,64 70,72 C57,76 41,70 37,56 Z M79,55 C84,49 89,50 91,56 C94,64 89,72 82,74 Z M66,77 C71,74 77,74 81,77 C78,84 72,85 66,77 Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M49,54 A6,8 0,1 1,49,70 A6,8 0,1 1,49,54 M85,56 A3,5 0,1 1,85,66 A3,5 0,1 1,85,56" />
+    </group>
+</vector>

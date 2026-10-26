@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scope": "Collection of completed current-APK operator and cancellation prerequisites only; not speed/M3 acceptance",
+  "apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "candidate_policy": "native_transient_repack",
+  "stages": [
+    {
+      "label": "operator-guards",
+      "passed": true,
+      "report": "bench/results/prefill-pack-20261025T200655Z/report.json",
+      "sha256": "ac24420e9905f490b75ab2bd6228a8b5d5717ce144272cbf2217c6de2133854e"
+    },
+    {
+      "label": "cancellation-recovery",
+      "passed": true,
+      "report": "bench/results/transient-service-20261025T200309Z/report.json",
+      "sha256": "6537c25af80cf3b8d35dc13361a576636593713ac6739e56b4c9339655016a91"
+    }
+  ]
+}

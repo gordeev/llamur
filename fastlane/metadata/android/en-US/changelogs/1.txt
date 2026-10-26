@@ -1,0 +1,1 @@
+Initial release candidate: local CPU inference, temporary dialogs, background completion notifications, GGUF/HF model management and optional OpenAI-compatible API. Experimental large contexts; see measured limits. No public release or F-Droid submission yet.

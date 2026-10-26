@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "host": "darwin-arm64",
+  "archives": [
+    {
+      "id": "ndk-r28c",
+      "url": "https://dl.google.com/android/repository/android-ndk-r28c-darwin.zip",
+      "filename": "android-ndk-r28c-darwin.zip",
+      "bytes": 952495160,
+      "checksum_type": "sha1",
+      "checksum": "fc20a6bf15a30fb3428c9b60a7308793a362dc6d"
+    },
+    {
+      "id": "ndk-r29-beta1",
+      "url": "https://dl.google.com/android/repository/android-ndk-r29-beta1-darwin.zip",
+      "filename": "android-ndk-r29-beta1-darwin.zip",
+      "bytes": 1027792565,
+      "checksum_type": "sha1",
+      "checksum": "485c42ff6a04ef0ec9612420b3226de443f46e7a"
+    },
+    {
+      "id": "sdk-tools-mac-arm64",
+      "url": "https://dl.google.com/android/repository/commandlinetools-mac_arm64-16111833_latest.zip",
+      "filename": "commandlinetools.zip",
+      "bytes": 155384151,
+      "checksum_type": "sha1",
+      "checksum": "ad03dc49bfacfd52c110b14104ea548b8a07e830"
+    },
+    {
+      "id": "jdk21-mac-arm64",
+      "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.13_9.tar.gz",
+      "filename": "jdk21.tar.gz",
+      "bytes": 199754598,
+      "checksum_type": "sha256",
+      "checksum": "bf036b35b071bfb2f54f2c0af8ee8d88afa95ee6eb3dce02c0f94cfc2524d04a"
+    },
+    {
+      "id": "cmake-3.31.6-mac",
+      "url": "https://dl.google.com/android/repository/cmake-3.31.6-darwin.zip",
+      "filename": "cmake-3.31.6-darwin.zip",
+      "bytes": 42861179,
+      "checksum_type": "sha1",
+      "checksum": "78c3bf819d7bf6144783aeef06c5f9cbd3f8f5a9"
+    },
+    {
+      "id": "jdk17-mac-arm64",
+      "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.21_9.tar.gz",
+      "filename": "jdk17.tar.gz",
+      "bytes": 186192554,
+      "checksum_type": "sha256",
+      "checksum": "78b08c7f5a0598242d5719c022e19479cb4a3aa45c37c19726a757a469ed1c15"
+    }
+  ]
+}

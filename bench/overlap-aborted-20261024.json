@@ -1,0 +1,26 @@
+{
+  "scope": "Accidental overlapping diagnostic controllers; interrupted and excluded, not a valid test result.",
+  "stopped_controllers": [
+    {
+      "pid": 70836,
+      "ppid": 46462,
+      "script": "/Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python scripts/compare-score.py gemma teacher-forcing-bos-probe-v1 --host-runner build/reference-host/runtime-run"
+    },
+    {
+      "pid": 70844,
+      "ppid": 70836,
+      "script": "/Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python scripts/run-app-smoke.py gemma --service --request bench/fixtures/generated/gemma/teacher-forcing-bos-probe-v1.json --record-device --timeout 300"
+    },
+    {
+      "pid": 71167,
+      "ppid": 46462,
+      "script": "/Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python scripts/check-score-repeat.py ornith teacher-forcing-code-v1"
+    },
+    {
+      "pid": 71199,
+      "ppid": 71167,
+      "script": "/Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python scripts/run-app-smoke.py ornith --service --request bench/fixtures/generated/ornith/teacher-forcing-code-v1.json --record-device --timeout 300"
+    }
+  ],
+  "at_utc": "2026-10-24T19:47:22.888771+00:00"
+}

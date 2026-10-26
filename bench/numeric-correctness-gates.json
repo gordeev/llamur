@@ -1,0 +1,60 @@
+{
+  "schema_version": 3,
+  "scope": "Operator correctness vs scalar double accumulation of dequantized weights and native CPU represented activations (F16/BF16/Q8_K). Original F32-activation error remains separately reported; this gate does not certify whole-model accuracy or experimental KleidiAI conversions.",
+  "fixed_before_optimization": "2026-10-24",
+  "dimensions": {
+    "k": 256,
+    "output_rows": 32,
+    "token_batches": [
+      1,
+      16,
+      128
+    ],
+    "seeds": [
+      1,
+      17,
+      91
+    ]
+  },
+  "types": {
+    "f32": {
+      "nmse": 1e-10,
+      "max_relative_to_peak": 5e-05
+    },
+    "f16": {
+      "nmse": 0.0005,
+      "max_relative_to_peak": 0.01
+    },
+    "bf16": {
+      "nmse": 0.0001,
+      "max_relative_to_peak": 0.03
+    },
+    "q4_K": {
+      "nmse": 0.0005,
+      "max_relative_to_peak": 0.05
+    },
+    "q5_K": {
+      "nmse": 0.0005,
+      "max_relative_to_peak": 0.05
+    },
+    "q6_K": {
+      "nmse": 0.0005,
+      "max_relative_to_peak": 0.05
+    }
+  },
+  "requirements": [
+    "All outputs finite",
+    "Report unsupported extra buffer paths as skipped, never passed",
+    "At least default CPU passes every selected type",
+    "No tolerance relaxation after inspecting an optimization result"
+  ],
+  "reference_change": "Initial v1 compared original F32 activations against operators that quantize inputs. V1 failed results retained. Numeric thresholds unchanged; corrected reference semantics before any optimization candidate is accepted. F16 bound calibrated to pinned upstream test_mul_mat::max_nmse_err (5e-4): ARM native FP16 vector accumulation has intermediate rounding. This is baseline harness calibration before accepting any optimization; v1/v2 failures remain recorded.",
+  "activation_reference": {
+    "f32": "f32",
+    "f16": "f16",
+    "bf16": "bf16",
+    "q4_K": "q8_K",
+    "q5_K": "q8_K",
+    "q6_K": "q8_K"
+  }
+}

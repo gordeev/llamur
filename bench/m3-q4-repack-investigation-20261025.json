@@ -1,0 +1,27 @@
+{
+  "milestone": "M3",
+  "milestone_accepted": false,
+  "status": "q4_persistent_repack_rejected_low_memory",
+  "apk_sha256": "e60e332ca30f1f6cd89d5dccbfbfcf94e4d9a147da1e716542e28cda6b93b4cd",
+  "variant": "f32-recurrent-repack-q4",
+  "plan": "bench/m3-q4-repack-plans-20261025.json",
+  "framework": "bench/results/runtime-tests-20261025T175735Z/report.json",
+  "preflight": "bench/results/repack-apk-preflight-20261025T175819Z/report.json",
+  "failed_comparison": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T175948Z/report.json",
+  "failed_trial": "bench/results/app-service-ornith-20261025T180008Z-24416b87",
+  "process_exit": "bench/results/app-service-ornith-20261025T180008Z-24416b87/exit-info-delayed-analysis.json",
+  "reason": "Android ApplicationExitInfo PID11421 reason3 LOW_MEMORY, RSS4.8GB; first scored request did not complete",
+  "quality_accepted": false,
+  "speed_accepted": false,
+  "retry_authorized_by_evidence": false,
+  "guard_apk_sha256": "98610220e50815ad62731963ec4b135af9992034f912ceca2b2e78d9caf9e9d8",
+  "guard_framework": "bench/results/runtime-tests-20261025T180605Z/report.json",
+  "default_policy": "native",
+  "unchanged": [
+    "GGUF bytes",
+    "quantization",
+    "F16 KV",
+    "numeric gates"
+  ],
+  "next": "Bounded transient per-op workspace prototype; operator qualification before model integration. No full or Q4-only Ornith retry."
+}

@@ -1,0 +1,7 @@
+{
+  "superseded_analysis": "bench/m3-frequency-cap-audit-20261025.json",
+  "old_sha256": "df5be59b583a9282538d23560a6190ca582d4fb7a2c71bb8e20b05e6338fb61a",
+  "replacement": "bench/m3-frequency-cap-audit-20261025-v2.json",
+  "new_sha256": "2736e8ab0e3ee25daeb665b764dcc0afdc9ec2e7fbb85aec35ffe85456d26453",
+  "reason": "v1 did not fall back to preserved result.json for allowed CPUs omitted by older comparison collectors. Its Gemma0/5 meant missing allowed-set data, not five frequency mismatches. V2 reads the existing raw field; original speed/quality trials and ratios unchanged."
+}

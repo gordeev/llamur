@@ -1,0 +1,62 @@
+{
+  "scope": "Prospective bounded CPU decode screen; native mapped weights, F16 KV, batch threads4; no product promotion",
+  "baseline": {
+    "id": "t4-auto",
+    "threads": 4
+  },
+  "candidates": [
+    {
+      "id": "t1-auto",
+      "threads": 1,
+      "threads_batch": 4
+    },
+    {
+      "id": "t2-auto",
+      "threads": 2,
+      "threads_batch": 4
+    },
+    {
+      "id": "t3-auto",
+      "threads": 3,
+      "threads_batch": 4
+    },
+    {
+      "id": "t6-auto",
+      "threads": 6,
+      "threads_batch": 4
+    },
+    {
+      "id": "t4-big",
+      "threads": 4,
+      "threads_batch": 4,
+      "cpu_affinity": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "t2-big",
+      "threads": 2,
+      "threads_batch": 4,
+      "cpu_affinity": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "t3-big",
+      "threads": 3,
+      "threads_batch": 4,
+      "cpu_affinity": [
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ]
+}

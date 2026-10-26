@@ -1,0 +1,150 @@
+{
+  "apk_sha256": "1cd6ec210d4f3e5168446ff3d57def9c5cce85280102bb8a56ec6701d1ff21ac",
+  "passed": true,
+  "scope": "Static ELF alignment and strip-normalized compiled-library identity; actual16KiB execution remains unverified",
+  "libraries": [
+    {
+      "name": "libggml-base.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "be162570fe0f721574b5aeaa6f0155e284e97fa8318856d0f774de7fcbac8480",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "6e60d4d2ae06808018da841501fd312fc253c17b99080a9ad2c2b6ab71f1ab2c",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "8744438064337e085ec5d7bc03cce885ca3d1875e52c28eaeaa70ce618b5ed05",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "7cf34ddd78633b57ea4f6d8e5573d7e20df35f7146abb1dba8337e7783613e9a",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.6_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "90f8739043a27006c90b2b37e59d3c79f1e13d3749c4338770c4833376ea9614",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "75dca52bcff9ff9155bf6f865b833d44a97badaf4995f44ba9fab3e78a18e6c1",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "71e58bd30762ed7f96dc328364b225a0514a02c394fef505ccb48c6c60722a9c",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "3cee281271092fd87d6f4e4ce64ed1b5cd4d17f6c3766f37745244701e78023a",
+      "passed": true
+    },
+    {
+      "name": "libggml.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "d7cb8bce8d5776744184dea61dc180c605b6e40564dce095d7d0e990c8669034",
+      "passed": true
+    },
+    {
+      "name": "libllama-common.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "0c77de8523253b8f061a41af28f7b36405904367d455b95bca257dcd9985dd54",
+      "passed": true
+    },
+    {
+      "name": "libllama.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "5c8822c29ac96a9acdc56ebf68eadfefbf8502eb99251ac452e1bb6f4da5171a",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-probe.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "c2137201b8b13c6d6146dbf8abbb6c26802cda09cdb276b6187049f6c2f58528",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-runtime.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "54cb18932875c7fa4249781c2a98869b2f1fa715145d6508dcf7ddcd92048c74",
+      "passed": true
+    }
+  ]
+}

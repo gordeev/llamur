@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "scope": "Metadata-only selective Q6_K plan; no model load, speed or stability acceptance",
+  "models": {
+    "gemma": {
+      "packed_model_bytes": 475238400,
+      "context_bytes": 469762048,
+      "compute_bytes": 150478848,
+      "largest_native_tensor_bytes": 1937768448,
+      "largest_packed_source_tensor_bytes": 21504000,
+      "artifact": "bench/results/repack-selective-host-plan-20261025T082933Z/gemma.json"
+    },
+    "ornith": {
+      "packed_model_bytes": 1839022080,
+      "context_bytes": 321126400,
+      "compute_bytes": 141826592,
+      "largest_native_tensor_bytes": 572129280,
+      "largest_packed_source_tensor_bytes": 834355200,
+      "artifact": "bench/results/repack-selective-host-plan-20261025T082933Z/ornith.json"
+    }
+  }
+}

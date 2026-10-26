@@ -1,0 +1,1 @@
+Локальный GGUF-чат и OpenAI-совместимый API на Android

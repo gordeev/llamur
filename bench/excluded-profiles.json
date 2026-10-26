@@ -1,0 +1,12 @@
+{
+  "profiles": [
+    {
+      "apk_sha256": "99959560e4df5fea47c9875c736e28f03851c597a6c9f9c0695336ba17848ebc",
+      "reason": "Unrestricted upstream CPU_KLEIDIAI can requantize Q6_K/Q8_0 weights into per-row int8; excluded from weight-preserving baseline. Mechanical M1 passes remain valid within their stated scope."
+    },
+    {
+      "apk_sha256": "331a1c486b294521184be90200d066ac584c5343979c30f6806c8ae8b03b61b6",
+      "reason": "Attempted native-CPU tensor overrides are not strict: pinned loader reconsiders extra CPU buffer types. Never accepted as a weight-preserving baseline."
+    }
+  ]
+}

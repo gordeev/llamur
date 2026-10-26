@@ -1,0 +1,22 @@
+{
+  "accepted": false,
+  "artifact": "bench/results/app-service-ornith-20261024T212603Z-5812bf80",
+  "last_decode_tokens": 229,
+  "battery_before": 4,
+  "charging_status_before": 4,
+  "connected_ac_before": true,
+  "observed": [
+    "Inference PID15664 disappeared at about76s",
+    "Android battery, thermalservice and SurfaceFlinger missing immediately after",
+    "Large drop in OS anonymous memory and unavailable settings service",
+    "Subsequent ADB query: no devices found; logcat unavailable"
+  ],
+  "interpretation": "System shutdown/restart or power loss suspected; isolated app crash/LMKD is not established. Boot identity was not captured before this historical run. Do not assign an exact cause without recovery evidence.",
+  "actions": [
+    "Heavy phone workloads stopped",
+    "No request replay",
+    "Partial output and raw evidence retained",
+    "Read-only preflight and running power/boot checks added",
+    "Awaiting owner charging/recovery"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "8bd2fbbdb2ed437034313e198a6fdd01dd66efced51b27fd67303896687a08f1",
+  "kind": "teacher_forcing",
+  "expected_identifier": null,
+  "expected": {
+    "rendered_prompt": "The following continuation is a fixed public example for checking numerical stability of local inference. Preserve the supplied context and programming syntax.\n\nPython code:\n\n",
+    "prompt_ids": [
+      760,
+      2614,
+      39811,
+      369,
+      264,
+      8097,
+      569,
+      3010,
+      364,
+      12910,
+      33625,
+      19150,
+      314,
+      2136,
+      42903,
+      13,
+      78503,
+      279,
+      16713,
+      2193,
+      321,
+      15019,
+      18890,
+      13,
+      271,
+      29292,
+      1970,
+      25,
+      271
+    ]
+  }
+}

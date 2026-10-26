@@ -1,0 +1,71 @@
+--- a/src/llama-context.cpp
++++ b/src/llama-context.cpp
+@@ -3450,11 +3450,18 @@
+ }
+ 
+ static constexpr uint32_t io_magic = 0xaf143cd8;
++// Exact-layout snapshots are intentionally incompatible with compact states.
++// Reject a flag mismatch before any cache metadata/data is interpreted.
++static constexpr uint32_t io_magic_keep_layout = 0xaf143cd9;
+ 
+ size_t llama_context::state_seq_get_size(llama_seq_id seq_id, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     llama_io_write_dummy io(flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE);
+     try {
+-        io.write(&io_magic, sizeof(io_magic));
++        io.write(&expected_magic, sizeof(expected_magic));
+         io.write(&seq_id, sizeof(seq_id));
+ 
+         return state_seq_write_data(io, seq_id, flags);
+@@ -3465,6 +3472,10 @@
+ }
+ 
+ size_t llama_context::state_seq_get_data(llama_seq_id seq_id, uint8_t * dst, size_t size, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     std::unique_ptr<llama_io_write_i> io;
+     if (flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE) {
+         io = std::make_unique<llama_io_write_device>(dst, size, mem_storage[seq_id]);
+@@ -3473,7 +3484,7 @@
+     }
+ 
+     try {
+-        io->write(&io_magic, sizeof(io_magic));
++        io->write(&expected_magic, sizeof(expected_magic));
+         io->write(&seq_id, sizeof(seq_id));
+ 
+         return state_seq_write_data(*io, seq_id, flags);
+@@ -3484,6 +3495,10 @@
+ }
+ 
+ size_t llama_context::state_seq_set_data(llama_seq_id seq_id, const uint8_t * src, size_t size, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     std::unique_ptr<llama_io_read_i> io;
+     if (flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE) {
+         // create a temporary io to read the magic and the src seq_id
+@@ -3491,7 +3506,7 @@
+ 
+         uint32_t magic_read;
+         io->read(&magic_read, sizeof(magic_read));
+-        if (io_magic != magic_read) {
++        if (expected_magic != magic_read) {
+             throw std::runtime_error("wrong sequence state magic");
+         }
+ 
+@@ -3508,7 +3523,7 @@
+     try {
+         uint32_t magic_read;
+         io->read(&magic_read, sizeof(magic_read));
+-        if (io_magic != magic_read) {
++        if (expected_magic != magic_read) {
+             throw std::runtime_error("wrong sequence state magic");
+         }
+ 

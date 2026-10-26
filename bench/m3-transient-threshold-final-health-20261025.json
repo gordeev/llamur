@@ -1,0 +1,19 @@
+{
+  "health": {
+    "ready": true,
+    "boot_completed": true,
+    "battery": {
+      "percent": 81.0,
+      "status": 4,
+      "charging": false,
+      "temperature_c": 40.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 82347.12
+  },
+  "inference_process_running": false,
+  "workload_lease_acquired": true,
+  "no_global_phone_settings_changed": true
+}

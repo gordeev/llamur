@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "scope": "Completed bounded native mmap prefault control across explicit source controllers; not M3/endurance/default profile acceptance. Original stopped controller preserved.",
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "candidate_policy": "native_no_prefault",
+  "models": {
+    "ornith": {
+      "evidence": {
+        "code_nll": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T093549Z/report.json",
+        "russian_nll": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T093624Z/report.json",
+        "completed_task": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T093657Z/report.json",
+        "filled_context": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T094245Z/report.json"
+      },
+      "quality_lock": "bench/results/m3-native-demand-20261025T093522Z/ornith-quality-gate.json",
+      "bounded_screen_completed": true,
+      "speed": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json"
+    },
+    "gemma": {
+      "evidence": {
+        "code_nll": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T164045Z/report.json",
+        "russian_nll": "bench/results/weight-buffers-gemma-teacher-forcing-ru-v1-20261025T164115Z/report.json",
+        "completed_task": "bench/results/weight-buffers-gemma-binary-search-quality-4096-mmap-v1-20261025T164145Z/report.json",
+        "filled_context": "bench/results/weight-buffers-gemma-pp8064-full-mmap-v1-20261025T165054Z/report.json"
+      },
+      "quality_lock": "bench/results/m3-native-demand-20261025T164021Z/gemma-quality-gate.json",
+      "speed": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T173326Z/report.json",
+      "bounded_screen_completed": true
+    }
+  },
+  "sources": [
+    {
+      "path": "bench/m3-native-demand-ornith-screening-20261025.json",
+      "sha256": "d9894e69c61531ca44cc6bbb312ba4db4f19aac4a1c96711cfbd8b413bc78c52"
+    },
+    {
+      "path": "bench/results/m3-native-demand-20261025T164021Z/report.json",
+      "sha256": "21fef0f491cb86950c7bf64112c4aa49a5f0c165ae45752b631aaddca6d3b335"
+    }
+  ]
+}

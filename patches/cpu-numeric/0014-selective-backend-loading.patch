@@ -1,0 +1,28 @@
+--- a/ggml/include/ggml-backend.h
++++ b/ggml/include/ggml-backend.h
+@@ -258,6 +258,9 @@
+     // Unload a backend if loaded dynamically and unregister it
+     GGML_API void               ggml_backend_unload(ggml_backend_reg_t reg);
+     // Load all known backends from dynamic libraries
++    // Load only the requested backend (including CPU ISA scoring), not every GPU driver.
++    GGML_API ggml_backend_reg_t ggml_backend_load_by_name(const char * name, const char * dir_path);
++#define GGML_MOTOAI_SELECTIVE_BACKEND_LOAD 1
+     GGML_API void               ggml_backend_load_all(void);
+     GGML_API void               ggml_backend_load_all_from_path(const char * dir_path);
+ 
+--- a/ggml/src/ggml-backend-reg.cpp
++++ b/ggml/src/ggml-backend-reg.cpp
+@@ -562,6 +562,13 @@
+     }
+ 
+     return get_reg().load_backend(best_path, silent);
++}
++
++ggml_backend_reg_t ggml_backend_load_by_name(const char * name, const char * dir_path) {
++    if (!name || (strcmp(name, "cpu") != 0 && strcmp(name, "vulkan") != 0 && strcmp(name, "opencl") != 0)) {
++        return nullptr;
++    }
++    return ggml_backend_load_best(name, true, dir_path);
+ }
+ 
+ void ggml_backend_load_all() {

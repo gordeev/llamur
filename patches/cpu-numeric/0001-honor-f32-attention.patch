@@ -1,0 +1,63 @@
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -8943,6 +8943,7 @@
+         float * partials, int64_t partial_stride) {
+ 
+     const bool write_partials = (partials != nullptr);
++    const bool f32_acc = ggml_prec_get_acc(dst) == GGML_PREC_F32;
+     const ggml_tensor * q     = dst->src[0];
+     const ggml_tensor * k     = dst->src[1];
+     const ggml_tensor * v     = dst->src[2];
+@@ -9036,7 +9037,7 @@
+         ggml_fp16_t * VKQ16 = (ggml_fp16_t *) (VKQ32 + 1*DV); // (temporary) FP16 VKQ accumulator
+         ggml_fp16_t * Q_q   = (ggml_fp16_t *) (VKQ32 + 2*DV); // (temporary) buffer for Q converted to quantized/FP16
+ 
+-        if (v->type == GGML_TYPE_F16) {
++        if (v->type == GGML_TYPE_F16 && !f32_acc) {
+             memset(VKQ16, 0, DV*sizeof(ggml_fp16_t));
+         } else {
+             memset(VKQ32, 0, DV*sizeof(float));
+@@ -9053,7 +9054,7 @@
+         const int iv2 = iq2 / rv2;
+ 
+         const float * pq = (const float *) ((char *) q->data + (iq1*nbq1 + iq2*nbq2 + iq3*nbq3));
+-        q_to_vec_dot(pq, Q_q, DK);
++        if (!(f32_acc && k->type == GGML_TYPE_F16)) q_to_vec_dot(pq, Q_q, DK);
+ 
+         // online softmax / attention
+         // loop over n_kv and n_head_kv
+@@ -9068,7 +9069,15 @@
+             float s; // KQ value
+ 
+             const char * k_data = (const char *) k->data + ( ic*nbk1 + ik2*nbk2 + ik3*nbk3);
+-            kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
++            if (f32_acc && k->type == GGML_TYPE_F16) {
++                // Retain F32 Q and accumulation as requested. KV stays F16;
++                // reuse the already reserved DK-float conversion scratch.
++                float * K32 = reinterpret_cast<float *>(Q_q);
++                ggml_cpu_fp16_to_fp32(reinterpret_cast<const ggml_fp16_t *>(k_data), K32, DK);
++                ggml_vec_dot_f32(DK, &s, 0, K32, 0, pq, 0, 1);
++            } else {
++                kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
++            }
+ 
+             s = s*scale; // scale KQ value
+ 
+@@ -9085,7 +9094,7 @@
+ 
+             const char * v_data = ((const char *) v->data + (ic*nbv1 + iv2*nbv2 + iv3*nbv3));
+ 
+-            if (v->type == GGML_TYPE_F16) {
++            if (v->type == GGML_TYPE_F16 && !f32_acc) {
+                 if (s > M) {
+                     // s is new maximum, ms < 1.0f, vs == expf(s - s) == 1.0f
+                     M = s;
+@@ -9126,7 +9135,7 @@
+             S = S*ms + vs; // scale and increment sum with partial sum
+         }
+ 
+-        if (v->type == GGML_TYPE_F16) {
++        if (v->type == GGML_TYPE_F16 && !f32_acc) {
+             for (int64_t d = 0; d < DV; ++d) {
+                 VKQ32[d] = GGML_CPU_FP16_TO_FP32(VKQ16[d]);
+             }

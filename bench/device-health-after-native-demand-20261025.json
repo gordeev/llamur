@@ -1,0 +1,25 @@
+{
+  "captured_utc": "2026-10-25T11:16:34.189048+00:00",
+  "health": {
+    "ready": true,
+    "boot_completed": true,
+    "battery": {
+      "percent": 81.0,
+      "status": 4,
+      "charging": false,
+      "temperature_c": 40.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 49114.9
+  },
+  "scope": "Read-only post-trial cleanup verification; no new inference workload",
+  "inference_pid_query": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "inference_stopped": true,
+  "workload_lease_acquired": true
+}

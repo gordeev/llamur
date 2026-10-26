@@ -1,0 +1,73 @@
+{
+  "apk_sha256": "3a853c98225fca30f966c6b8aabd3cb54edecdd1305399f2539dd7deb25a8f09",
+  "prior_apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "scope": "Scheduling-only JNI/core update; numerics/backend shared libraries must match the prior quality-tested APK byte for byte. Not a transfer of timing or whole-APK acceptance.",
+  "libraries": [
+    {
+      "path": "lib/arm64-v8a/libggml-base.so",
+      "unchanged": true,
+      "sha256": "c407f3d80ebb573d9f36b114b418c710f14f088484bb07201eeec71ec09d8a19"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+      "unchanged": true,
+      "sha256": "7cf4400ab22099efaf482a6e9ab24ebfc9348da2dd4d2a58d756adc2fe40b83d"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+      "unchanged": true,
+      "sha256": "d3e82186245f23111cc027cbe6383533da214785f47ece7948427abe65754db4"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+      "unchanged": true,
+      "sha256": "dd298c6a8af9221af53b06172b788011e6cf855da43711f6ae760834cb6efe0f"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+      "unchanged": true,
+      "sha256": "709ad1145f5d921bbeb7bc68ab0ec2e3e1f9a9b8fbc753dcf2bdfc4282bf7da0"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+      "unchanged": true,
+      "sha256": "5088eb061477e0915eadd6a9a7a4909ea774b0728e73a2a940eb01e7d8f6305c"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+      "unchanged": true,
+      "sha256": "ed91d87b5f8532e5cb31501aff6bd3add4942cc1c3f5964b04cef22088b64a0e"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+      "unchanged": true,
+      "sha256": "eb97133229764352e6c665029089455d021f871b76f70930118f036823f67785"
+    },
+    {
+      "path": "lib/arm64-v8a/libggml.so",
+      "unchanged": true,
+      "sha256": "f62dd585520863c7b51bca5d6b949aec3a3703f73911243b7a7aed4b88141e52"
+    },
+    {
+      "path": "lib/arm64-v8a/libllama-common.so",
+      "unchanged": true,
+      "sha256": "156de357d40b3221b36dd120c5df7ca1e3c7fe6e8953af6f3a350319a50b2322"
+    },
+    {
+      "path": "lib/arm64-v8a/libllama.so",
+      "unchanged": true,
+      "sha256": "996425902523b7ca8f490e93addb4dbe510529966c581a9589ac0d84d0149ad5"
+    },
+    {
+      "path": "lib/arm64-v8a/libmotoai-probe.so",
+      "unchanged": true,
+      "sha256": "6f31a222c1b08a0fc76e8cd561fa4c7ebb0364daf42dff899477315d8efc3690"
+    },
+    {
+      "path": "lib/arm64-v8a/libmotoai-runtime.so",
+      "unchanged": false,
+      "sha256": "330b0b8933b5a9a962ecb0cb2763938acee41ee2a7ce57466b23122c520e5499"
+    }
+  ],
+  "kernel_libraries_unchanged": true
+}

@@ -1,0 +1,13 @@
+{
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "3f9ea650577328941e42703d0084531c0b98ae0c6ea14973b25c831795c0ee11",
+  "kind": "teacher_forcing",
+  "expected_identifier": null,
+  "expected": {
+    "rendered_prompt": "",
+    "prompt_ids": [
+      2
+    ]
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "milestone": "M3",
+  "milestone_accepted": false,
+  "scope": "M3 CPU_REPACK bounded screening complete: Gemma full repack measured short-speed gain on a02b4206 APK with slower loading; full Ornith repack rejected; current selective Ornith quality passed but no demonstrated speed gain. M3/endurance/product acceptance remains open.",
+  "weights_unchanged": true,
+  "kv_type": "f16",
+  "default_weight_buffers": "native",
+  "experimental_weight_buffers": [
+    "cpu_repack",
+    "cpu_repack_q6"
+  ],
+  "current_apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+  "current_variant": "f32-recurrent-repack-selective",
+  "build_kleidiai": false,
+  "patch_series": "patches/cpu-numeric/series.json",
+  "new_patches": [
+    "0004-stream-repack-mapped-sources.patch",
+    "0005-repack-native-gemv-order.patch",
+    "0007-selective-lossless-repack-types.patch"
+  ],
+  "initial_failures": [
+    {
+      "report": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T071939Z/report.json",
+      "kind": "collector_schema_bug",
+      "note": "Service uses passed, not top-level ok. Raw native score itself completed. Fixed collector; original failure retained."
+    },
+    {
+      "report": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T072038Z/report.json",
+      "kind": "numeric_gate_failed",
+      "mean_nll_error": 0.05943485357490209,
+      "max_nll_error": 0.3080941559225465,
+      "top8_max_error": 0.23793601989746094
+    },
+    {
+      "report": "bench/results/weight-buffers-gemma-teacher-forcing-ru-v1-20261025T072122Z/report.json",
+      "kind": "numeric_gate_failed",
+      "mean_nll_error": 0.0889357657847756,
+      "max_nll_error": 0.44610380696692076,
+      "top8_max_error": 0.3040809631347656
+    },
+    {
+      "report": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T072157Z/report.json",
+      "kind": "process_died",
+      "exit_info": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T072233Z/exit-info-after.txt",
+      "note": "PID31778 LOW_MEMORY, reported RSS7.2GB; initial immediate exit-info was stale. Later package-scoped snapshot identifies it."
+    },
+    {
+      "report": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T072233Z/report.json",
+      "kind": "failed_trial",
+      "note": "Failure retained; do not classify every missing PID as a confirmed native crash."
+    },
+    {
+      "report": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T072639Z/report.json",
+      "kind": "streaming_load_passed_numeric_failed",
+      "max_sampled_load_rss_bytes": 5560868864,
+      "mean_nll_error": 0.033669571942351394
+    }
+  ],
+  "component_controls": {
+    "preflight_before_stream": "bench/results/repack-apk-preflight-20261025T072006Z/report.json",
+    "extended_before_order": "bench/results/numeric-extended-repack-20261025T072521Z/report.json",
+    "model_probe": "bench/results/weight-buffers-gemma-teacher-forcing-code-probe-v1-20261025T072408Z/report.json",
+    "extended_after_order": "bench/results/numeric-20261025T073036Z/report.json",
+    "extended_operator_cases_passed": 240,
+    "repack_native_bitwise_compared": 120,
+    "repack_nonidentical_cases": 0,
+    "initial_bitwise_method": "Initial FNV1a64 output fingerprints superseded by separate direct byte comparison; original results retained.",
+    "direct_byte_operator_comparison": "bench/results/numeric-20261025T074752Z/report.json",
+    "direct_byte_method": "Actual byte-vector equality, not hash equality; all120 repack outputs equal native,240 scalar-reference cases passed.",
+    "selective_native_libraries_direct_bytes": "bench/results/numeric-20261025T083330Z/report.json"
+  },
+  "quality_corpora": {
+    "gemma": {
+      "code": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T073051Z/report.json",
+      "ru": "bench/results/weight-buffers-gemma-teacher-forcing-ru-v1-20261025T073125Z/report.json"
+    },
+    "ornith": {
+      "code": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T073157Z/report.json",
+      "ru": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T073240Z/report.json"
+    }
+  },
+  "corpus_result": "Full-order checkpoint: all4 same-APK pairs zero NLL/top8 error. Current selective APK: Gemma native/full regression exact; Ornith native/Q6-only code3pairs+Russian exact. Forced corpus IDs do not replace generated-task coverage.",
+  "host_tests_passed": 44,
+  "native_lifecycle_test_passed": true,
+  "framework_first_experimental_apk": "bench/results/runtime-tests-20261025T071859Z/report.json",
+  "framework_current_apk": "bench/results/runtime-tests-20261025T083832Z/report.json",
+  "completed_tasks": "Full-order APK: Gemma1861/Ornith1096+EOS,134 cases each, exact original IDs/first top8. Current selective APK: Ornith1096+EOS/134 cases exact. Gemma full-task evidence remains tied to the earlier full-order APK.",
+  "long_context": "Gemma full-order8064+128 passed exact. Full Ornith fresh long load failed LOW_MEMORY and is excluded. Current Q6-only Ornith7680+512-reserve retrieval passed39+EOS exact, with sampled peak process swap1.04GiB; no interactive/sustained acceptance.",
+  "paired_speed": "Gemma full:5 measured same-APK pairs+warmup, paired emission ratio1.08245. Ornith Q6-only:5 measured same-APK pairs+warmup, ratio0.98891 with CI spanning1; no demonstrated gain. Full Ornith excluded. Neither is a product/sustained profile.",
+  "prior_order_apk_sha256": "1cd6ec210d4f3e5168446ff3d57def9c5cce85280102bb8a56ec6701d1ff21ac",
+  "native_libraries_unchanged": "bench/m3-phase-budget-native-identity-20261025.json",
+  "phase_budget": {
+    "version": 2,
+    "compiled_streaming_flag_only": true,
+    "headroom_unchanged_bytes": 805306368,
+    "ornith_before_headroom_bytes": 6076848672,
+    "gemma_before_headroom_bytes": 5304070144,
+    "rationale": "Runtime allocates context after model load; patch0004 removes whole-file prefault and releases source PTEs per synchronous tensor. Budget packed+max(source,native/context/compute), retaining original full source/native windows. Still experimental, not a whole-process RSS guarantee.",
+    "framework_assertions_passed": true
+  },
+  "prior_completed_gemma": "bench/results/weight-buffers-gemma-binary-search-quality-4096-mmap-v1-20261025T073347Z/report.json",
+  "phase_budget_initial_refusal": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T074006Z/report.json",
+  "final_qualification_controller": "bench/results/m3-repack-qualification-final-20261025T074751Z/report.json",
+  "speed_attribution_limit": "Profile comparison combines CPU_REPACK layout/kernels and streamed mmap sources. A separate native-no-prefault control remains planned; do not attribute RAM/load differences to packing alone.",
+  "ornith_second_low_memory": {
+    "artifact": "bench/results/app-service-ornith-20261025T081125Z-9ca666c1",
+    "pid": 11629,
+    "reason": "LOW_MEMORY",
+    "recovered_load_progress": "load-progress-recovered.txt",
+    "last_sampled_available_bytes": 4191797248,
+    "last_peak_sampled_rss_bytes": 3408760832,
+    "pressure_abort": false,
+    "note": "MemAvailable screening alone did not prevent an OEM/system low-memory kill. Cause beyond recorded memory termination is not established. No current Ornith repack stability or speed acceptance."
+  },
+  "gemma_screening_lock": "bench/m3-gemma-repack-screening-20261025.json",
+  "cache_drop_control": {
+    "variant": "f32-recurrent-repack-cache",
+    "apk_sha256": "4c850cf7c30f4455850e2179f23a7476c284dd284801796c4b4313390e233f9a",
+    "report": "bench/results/m3-cache-load-screen-20261025T082430Z/report.json",
+    "accepted": false,
+    "note": "First native/repack NLL pair exact; next fresh repack process exited during loading. Immediate exit-info did not identify that PID; do not assert an unrecorded cause. Patch0006 excluded from selective variant."
+  },
+  "gemma_speed": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T081520Z/report.json",
+  "gemma_speed_summary": {
+    "profiles": {
+      "native": {
+        "load_us": 2153524,
+        "ttft_us": 3340994,
+        "client_to_first_piece_us": 3351504,
+        "service_request_us": 25052721,
+        "prefill_us": 3310765,
+        "backend_decode_tok_s": 5.874641080245654,
+        "emission_tok_s": 5.853497826762183,
+        "native_load_plus_ttft_us": 5469502,
+        "completed_pss_kib": 5440843
+      },
+      "cpu_repack": {
+        "load_us": 5584146,
+        "ttft_us": 2078068,
+        "client_to_first_piece_us": 2116230,
+        "service_request_us": 22656403,
+        "prefill_us": 2036842,
+        "backend_decode_tok_s": 6.2071550511652855,
+        "emission_tok_s": 6.183768251063328,
+        "native_load_plus_ttft_us": 7475606,
+        "completed_pss_kib": 3562063
+      }
+    },
+    "emission_speed_ratio": {
+      "values": [
+        1.0907257695660764,
+        1.0360392935137286,
+        1.0824518889899906,
+        1.0555846578357586,
+        1.1752686171923765
+      ],
+      "median": 1.0824518889899906,
+      "minimum": 1.0360392935137286,
+      "maximum": 1.1752686171923765,
+      "bootstrap_median_ci95": [
+        1.0360392935137286,
+        1.1752686171923765
+      ]
+    },
+    "client_first_piece_speed_ratio": {
+      "values": [
+        1.9569728231580568,
+        1.5106869291145102,
+        1.616366738053543,
+        1.2095510934126732,
+        1.9932289719733334
+      ],
+      "median": 1.616366738053543,
+      "minimum": 1.2095510934126732,
+      "maximum": 1.9932289719733334,
+      "bootstrap_median_ci95": [
+        1.2095510934126732,
+        1.9932289719733334
+      ]
+    },
+    "native_load_plus_ttft_speed_ratio": {
+      "values": [
+        0.857879549018556,
+        0.6156501433297202,
+        0.7200370507154621,
+        0.5653501479990514,
+        0.8792146081535063
+      ],
+      "median": 0.7200370507154621,
+      "minimum": 0.5653501479990514,
+      "maximum": 0.8792146081535063,
+      "bootstrap_median_ci95": [
+        0.5653501479990514,
+        0.8792146081535063
+      ]
+    }
+  },
+  "previous_full_variant_apk_sha256": "a02b4206b5e7f53bbdf16768f45066ed5151c3ccba3108c7685cbbaa223adede",
+  "current_candidate_policy": "cpu_repack_q6 for Ornith; full Gemma speed evidence remains tied to APK a02b4206",
+  "selective_type_plan": "bench/m3-selective-repack-plans-20261025.json",
+  "selective_initial_screen": "bench/results/m3-selective-screen-20261025T083309Z/report.json",
+  "selective_initial_result": "3 fresh native/Q6-only pairs plus Russian passed, zero NLL/top8 differences. Actual packed1839022080B, anonymous load peaks about2.1–2.3GB; not whole-model/endurance acceptance.",
+  "selective_guard_native_identity": "bench/m3-selective-guard-native-identity-20261025.json",
+  "selective_guard_test": "bench/results/app-service-ornith-20261025T083848Z-6d0daa4a/result.json",
+  "selective_final_controller": "bench/results/m3-selective-qualification-final-20261025T083830Z/report.json",
+  "unmodified_upstream_api_regression": "build/repack-baseline-host-regression/runtime-test passed (separate build, frozen CPU reference untouched)",
+  "full_repack_checkpoint_completed_tasks": {
+    "ornith": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T074807Z/report.json",
+    "gemma": "bench/results/weight-buffers-gemma-binary-search-quality-4096-mmap-v1-20261025T075319Z/report.json"
+  },
+  "full_repack_checkpoint_corpora": {
+    "gemma": {
+      "code": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T074420Z/report.json",
+      "ru": "bench/results/weight-buffers-gemma-teacher-forcing-ru-v1-20261025T074451Z/report.json"
+    },
+    "ornith": {
+      "code": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T074525Z/report.json",
+      "ru": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T074606Z/report.json"
+    }
+  },
+  "full_repack_checkpoint_long_context": {
+    "gemma": "bench/results/weight-buffers-gemma-pp8064-full-mmap-v1-20261025T080038Z/report.json",
+    "ornith_failed": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T081125Z/report.json"
+  },
+  "selective_completed_task_final_apk": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T084213Z/report.json",
+  "selective_final_corpora": {
+    "code": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T084000Z/report.json",
+    "ru": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T084136Z/report.json"
+  },
+  "current_long_context": "Selective Ornith7680+512 retrieval passed39+EOS,40finite scans, correct exact fact, all IDs and first top8 exactly match preserved native reference. One bounded context scenario, not full context matrix/speed acceptance.",
+  "selective_long_context_observation": {
+    "artifact": "bench/results/app-service-ornith-20261025T084819Z-abc866c0",
+    "status": "completed; intermediate observation retained below; final memory audit supersedes it",
+    "prompt_completed_at_observation": 3584,
+    "vm_swap_kib_at_observation": 910424,
+    "note": "OS swapping during long prefill is real memory/performance evidence, not leak/quality failure by itself. No sustained/8K interactive acceptance. End and sampled-peak swap added to future comparison reports.",
+    "sampled_peak_swap_bytes_final": 1119436800,
+    "end_swap_kib_final": 110708
+  },
+  "selective_long_context_final_apk": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T084819Z/report.json",
+  "long_context_memory_audit": "bench/m3-long-context-memory-20261025.json",
+  "selective_final_quality_lock": "bench/results/m3-selective-qualification-final-20261025T083830Z/quality-gate.json",
+  "current_speed": "Completed5 alternating native/Q6-only measured pairs plus warmup, exact repeated work, comparable power/thermal and screen/process state; no demonstrated Ornith speed gain.",
+  "preflight_full_order_checkpoint": "bench/results/repack-apk-preflight-20261025T074412Z/report.json",
+  "preflight_selective_native_libraries": "bench/results/repack-apk-preflight-20261025T083327Z/report.json",
+  "current_native_library_identity": "bench/m3-selective-apk-native-identity-20261025.json",
+  "next_controls": [
+    "Native mmap without whole-file prefault: isolate loading/residency effect from repack layout/kernels, same quality gates.",
+    "Broader quality/context/state and M5 endurance before selecting any product profile.",
+    "Continue M3 CPU tuning and GPU/backend feasibility; UI/API remain M6/M7."
+  ],
+  "selective_speed": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T090958Z/report.json",
+  "selective_speed_screen_completed": true,
+  "selective_speed_win_demonstrated": false,
+  "selective_speed_summary": {
+    "profiles": {
+      "native": {
+        "load_us": 2431072,
+        "ttft_us": 7397662,
+        "client_to_first_piece_us": 7434959,
+        "service_request_us": 52233708,
+        "prefill_us": 7358702,
+        "backend_decode_tok_s": 2.8435897136209602,
+        "emission_tok_s": 2.8371921305851857,
+        "native_load_plus_ttft_us": 9787916,
+        "completed_pss_kib": 5924564
+      },
+      "cpu_repack": {
+        "load_us": 5363003,
+        "ttft_us": 8114237,
+        "client_to_first_piece_us": 8162293,
+        "service_request_us": 53338643,
+        "prefill_us": 8067635,
+        "backend_decode_tok_s": 2.8182877047006127,
+        "emission_tok_s": 2.812129427216178,
+        "native_load_plus_ttft_us": 13439754,
+        "completed_pss_kib": 5369422
+      }
+    },
+    "emission_speed_ratio": {
+      "values": [
+        1.1163291402468802,
+        0.9829579156111357,
+        0.9889141208001345,
+        0.89467954819434,
+        0.9901262354340213
+      ],
+      "median": 0.9889141208001345,
+      "minimum": 0.89467954819434,
+      "maximum": 1.1163291402468802,
+      "bootstrap_median_ci95": [
+        0.89467954819434,
+        1.1163291402468802
+      ]
+    },
+    "client_first_piece_speed_ratio": {
+      "values": [
+        1.3272179401759852,
+        0.8681980511386068,
+        1.1765295077080904,
+        0.9151222579243358,
+        0.9058537562968589
+      ],
+      "median": 0.9151222579243358,
+      "minimum": 0.8681980511386068,
+      "maximum": 1.3272179401759852,
+      "bootstrap_median_ci95": [
+        0.8681980511386068,
+        1.3272179401759852
+      ]
+    },
+    "native_load_plus_ttft_speed_ratio": {
+      "values": [
+        0.9827509068535315,
+        0.6621524471355651,
+        0.8355717099158555,
+        0.6613605604708382,
+        0.7179156216528054
+      ],
+      "median": 0.7179156216528054,
+      "minimum": 0.6613605604708382,
+      "maximum": 0.9827509068535315,
+      "bootstrap_median_ci95": [
+        0.6613605604708382,
+        0.9827509068535315
+      ]
+    }
+  },
+  "selective_speed_audit": {
+    "measured_pairs": 5,
+    "warmup_pairs": 1,
+    "collector_source_sha256": [
+      "f8a276a42b4a7d5a27c1eb8b2c3567040e779dbecb34c3ab9568059fe6ec6abc"
+    ],
+    "screen_importance_states": [
+      [
+        true,
+        100
+      ]
+    ],
+    "starting_battery_temperature_range_c": [
+      41.0,
+      43.0
+    ],
+    "sampled_peak_process_swap_range_bytes": {
+      "native": [
+        17702912,
+        17817600
+      ],
+      "cpu_repack": [
+        17514496,
+        85258240
+      ]
+    },
+    "note": "Storage cache state unknown; no cold-storage/sustained claim. Small5pair bootstrap interval is descriptive, not whole-workload uncertainty."
+  },
+  "phone_after": "bench/device-health-after-m3-20261025.json",
+  "current_quality_scope": "Current selective APK passed bounded corpora, complete code task and long retrieval; quality lock exact APK/policy/config. No whole-corpus, all-context-position or endurance acceptance.",
+  "upstream_pristine_checked": true,
+  "selective_guard_assessment": {
+    "passed": true,
+    "expected_error_kind": "unsupported_profile",
+    "actual_error_kind": "unsupported_profile",
+    "state": "unloaded",
+    "note": "Raw trial passed=false is the expected refusal, not a failed guard test; wrapper/controller exit0."
+  }
+}

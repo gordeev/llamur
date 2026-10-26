@@ -1,0 +1,53 @@
+{
+  "config": {
+    "context": 8192,
+    "threads": 4,
+    "batch": 512,
+    "micro_batch": 128,
+    "load_mode": "read"
+  },
+  "request": {
+    "chat": false,
+    "temperature": 0.0,
+    "seed": 42,
+    "thinking": true,
+    "max_tokens": 29,
+    "trace": true,
+    "template_time_unix": 1792800000,
+    "messages": [],
+    "diagnostics": true,
+    "check_logits": true,
+    "raw_prompt": "Русский текст:\n\n",
+    "score_continuation_ids": [
+      148195,
+      1173,
+      25520,
+      69838,
+      64179,
+      1333,
+      93864,
+      1337,
+      236761,
+      4840,
+      185464,
+      18747,
+      85066,
+      1333,
+      42513,
+      20424,
+      236764,
+      1943,
+      3760,
+      193303,
+      110320,
+      11386,
+      15272,
+      16460,
+      28996,
+      76713,
+      3971,
+      236761,
+      107
+    ]
+  }
+}

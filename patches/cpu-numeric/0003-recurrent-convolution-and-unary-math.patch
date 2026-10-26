@@ -1,0 +1,72 @@
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -10087,7 +10087,7 @@
+ 
+                 // d_conv
+                 for (int i0 = 0; i0 < nc; ++i0) {
+-                    sumf += s[i0 + i1*ncs] * c[i0 + i1*nc];
++                    sumf = fmaf(s[i0 + i1*ncs], c[i0 + i1*nc], sumf);
+                 }
+                 x[i1] = sumf;
+             }
+--- a/ggml/src/ggml-cpu/unary-ops.cpp
++++ b/ggml/src/ggml-cpu/unary-ops.cpp
+@@ -1,4 +1,11 @@
+ #include "unary-ops.h"
++
++// Experimental scalar libm control for hybrid-model gates.
++#include <math.h>
++static inline float motoai_expf(float x) { return (float) exp((double) x); }
++static inline float motoai_sinf(float x) { return (float) sin((double) x); }
++static inline float motoai_cosf(float x) { return (float) cos((double) x); }
++static inline float motoai_logf(float x) { return (float) log((double) x); }
+ 
+ static inline float op_abs(float x) {
+     return fabsf(x);
+@@ -29,7 +36,7 @@
+ }
+ 
+ static inline float op_sigmoid(float x) {
+-    return 1.f / (1.f + expf(-x));
++    return 1.f / (1.f + motoai_expf(-x));
+ }
+ 
+ static inline float op_hardsigmoid(float x) {
+@@ -37,7 +44,7 @@
+ }
+ 
+ static inline float op_exp(float x) {
+-    return expf(x);
++    return motoai_expf(x);
+ }
+ 
+ static inline float op_hardswish(float x) {
+@@ -62,23 +69,23 @@
+ }
+ 
+ static inline float op_sin(float x) {
+-    return sinf(x);
++    return motoai_sinf(x);
+ }
+ 
+ static inline float op_cos(float x) {
+-    return cosf(x);
++    return motoai_cosf(x);
+ }
+ 
+ static inline float op_log(float x) {
+-    return logf(x);
++    return motoai_logf(x);
+ }
+ 
+ static inline float op_expm1(float x) {
+-    return expf(x) - 1.0f;
++    return motoai_expf(x) - 1.0f;
+ }
+ 
+ static inline float op_softplus(float x) {
+-    return (x > 20.0f) ? x : logf(1.0f + expf(x));
++    return (x > 20.0f) ? x : motoai_logf(1.0f + motoai_expf(x));
+ }
+ 
+ static inline float op_floor(float x) {

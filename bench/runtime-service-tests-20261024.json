@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "service": {
+    "passed": true,
+    "isolated_pid": 9221,
+    "recovered_pid": 10087,
+    "import_ui": "SAF imported SHA-256 file loaded\/generated through normal UI",
+    "notification_stop": "passed via notification PendingIntent",
+    "load_cancellation": "passed on Gemma",
+    "prefill_cancellation": "passed on Gemma; stop-to-ready 915ms",
+    "checks": "Messenger load\/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+  }
+}

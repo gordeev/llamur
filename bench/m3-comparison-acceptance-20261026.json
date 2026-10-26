@@ -1,0 +1,43 @@
+{
+  "milestone": "M3",
+  "comparison_complete": true,
+  "scope": "Bounded backend/scheduling comparison on Motorola Edge40Pro and the two locked GGUFs. M4 corrections/M5 final profiles remain open; no product or general-device acceptance.",
+  "selected_finalist": {
+    "backend": "cpu",
+    "threads": 4,
+    "threads_batch": 0,
+    "cpu_affinity": [],
+    "batch": 512,
+    "micro_batch": 128,
+    "weight_buffers": "native",
+    "kv_type": "f16"
+  },
+  "default_retuned": false,
+  "decode_speedup_accepted": false,
+  "evidence": {
+    "cpu_threads_affinity": "bench/m3-decode-investigation-20261025.json",
+    "strict_decode": "bench/m3-decode-screening-20261025.json",
+    "sustained_four_arms": "bench/results/sustained-decode-20261025T225449Z/report.json",
+    "backend_feasibility": "bench/m3-backend-feasibility-20261026.json",
+    "vulkan": "bench/results/gpu-numeric-vulkan-20261026T004249Z/report.json",
+    "opencl_full": "bench/results/gpu-model-screen-20261026T012157Z/report.json",
+    "opencl_matmul_only": "bench/results/gpu-model-screen-20261026T013729Z/report.json"
+  },
+  "decisions": {
+    "cpu": "1/2/3/4/5/6/7 threads and big-core affinity screened. Tiny affinity gain did not warrant promotion;7-worker sustained tail gain below3% and start caps differed. Retain4-auto.",
+    "vulkan": "OEM shader compiler crashes on tested matvec pipeline; CPU recovery passed. No GPU profile shipped.",
+    "opencl": "45 required dtype micro cases pass; BF16 storage conversion forbidden. Both tested real Ornith8-layer profiles fail unchanged NLL/logit gates; no larger offload tried after failure.",
+    "hexagon_alternatives": "Locked source/license/import feasibility filter retained; no demonstrated free exact-weight path for these artifacts. No alternate weights/conversion downloaded."
+  },
+  "weights_unchanged": true,
+  "gates_unchanged": true,
+  "evidence_sha256": {
+    "cpu_threads_affinity": "757291662cc825252b028bb4db27cecbca67331e4bd6c9ff06d09759a664e7b9",
+    "strict_decode": "f5f69e02488a4a0c6af70c780ddaa7daad16c2de67b1d6b4cae642bdda522b43",
+    "sustained_four_arms": "42c46ff0437a55918c17df5c74100cdc70e042d48a6a38ce82ba43cd31c7e37b",
+    "backend_feasibility": "725b98d8ce946391be1e8ad50762e077f96761cdc7ab56e1b8e85eaf93868244",
+    "vulkan": "5bb55200dd2d75fcbd1f3f44284c22c01bab042f799eeea4e845184e1c386793",
+    "opencl_full": "d69a8d030fe219e4cc1c8c9f8fd78232d634f88a021d41b3c90f7776aa2cbcbe",
+    "opencl_matmul_only": "623844f36212df16a37e7ceb11153148ddb6bcc294b4ba4e71dfb805f2102240"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "16dfcca8a8b89b38a044f6bb56afa1499d43408aa68b8ca9f90973a0b46be2a2",
+  "kind": "teacher_forcing",
+  "expected_identifier": null,
+  "expected": {
+    "rendered_prompt": "Python code:\n\n",
+    "prompt_ids": [
+      2,
+      32651,
+      3393,
+      236787,
+      108
+    ]
+  },
+  "scope": "First target only; exact layer-6 attention boundary capture; not a generated answer"
+}

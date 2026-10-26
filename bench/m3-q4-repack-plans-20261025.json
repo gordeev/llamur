@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "scope": "No_alloc metadata planning only, not quality, RSS, stability or speed. Host DOTPROD layout byte counts require phone I8MM preflight. App Q4 admission supports pinned Ornith only.",
+  "variant": "f32-recurrent-repack-q4",
+  "candidate_policy": "cpu_repack_q4",
+  "models": {
+    "ornith": {
+      "packed_model_bytes": 3202744320,
+      "raw": "bench/results/repack-q4-host-plan-20261025/ornith.json",
+      "sha256": "eb995971118c9de9122fa4c7ee0037016f54bf75b31047120b2bdf5d73898636"
+    },
+    "gemma": {
+      "packed_model_bytes": 2270822400,
+      "raw": "bench/results/repack-q4-host-plan-20261025/gemma.json",
+      "sha256": "77e6f9da95ec58112263abe47e3a1528a3a8c9f9630d065ece31125959ecf3e4"
+    }
+  }
+}

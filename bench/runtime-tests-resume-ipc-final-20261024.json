@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "apk_sha256": "008b0c1f616fa1ce3771c36d990579ab1b4ec0729e2911eb361b7ea77952fed8",
+  "test_apk_sha256": "529f5f8fea0a56d51190a36f8d20684cf5b60177022741e2c528c0e175e8fcc9",
+  "runtime": {
+    "passed": true,
+    "long_answer_ipc": "Full diagnostic >1MiB retained; UI status parcel 208 bytes",
+    "arm64_fpcr": 0,
+    "service": {
+      "passed": true,
+      "isolated_pid": 17766,
+      "recovered_pid": 19557,
+      "recovery_ui": "Visible enabled Load button after disconnect; explicit recovery; no prompt replay",
+      "above_1024_budget": "1536 accepted; prompt+2048 correctly rejected in2048 context",
+      "import_ui": "SAF imported SHA-256 file loaded/generated through normal UI",
+      "notification_stop": "passed via notification PendingIntent",
+      "load_cancellation": "passed on Gemma",
+      "prefill_cancellation": "passed on Gemma; stop-to-ready 79ms",
+      "checks": "Messenger load/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+    },
+    "cycles": 30,
+    "memory_samples": [
+      {
+        "cycle": 0,
+        "pss_kib": 75117,
+        "native_heap_bytes": 6840544
+      },
+      {
+        "cycle": 5,
+        "pss_kib": 75605,
+        "native_heap_bytes": 6840576
+      },
+      {
+        "cycle": 10,
+        "pss_kib": 75689,
+        "native_heap_bytes": 6840576
+      },
+      {
+        "cycle": 15,
+        "pss_kib": 75749,
+        "native_heap_bytes": 6840576
+      },
+      {
+        "cycle": 20,
+        "pss_kib": 75721,
+        "native_heap_bytes": 6841664
+      },
+      {
+        "cycle": 25,
+        "pss_kib": 75857,
+        "native_heap_bytes": 6841664
+      },
+      {
+        "cycle": 29,
+        "pss_kib": 74565,
+        "native_heap_bytes": 6841664
+      }
+    ],
+    "reference": ", there was a little girl named Lily. She loved to play",
+    "checks": "repeat load/generate/unload; double unload; queued/decode cancellation; explicit overflow; invalid JSON type; recovery; callback exception; Unicode JNI"
+  },
+  "artifact": "bench/results/runtime-tests-20261024T201452Z"
+}

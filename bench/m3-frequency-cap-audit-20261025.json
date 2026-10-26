@@ -1,0 +1,954 @@
+{
+  "passed": true,
+  "scope": "Post-hoc boundary frequency-cap audit, not a newly preregistered speed test. No trials removed or ratios recomputed after filtering. Equal boundary caps do not prove equal clocks or unchanged caps inside a request.",
+  "topology": "bench/cpu-policy-topology-20261025.json",
+  "topology_sha256": "6b1219acf619ae9d713ed98fe58811dddab816e851ef5b9c13535d5c9dbe61ab",
+  "reports": [
+    {
+      "path": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T081520Z/report.json",
+      "sha256": "302a61a43cde14a9883f8e9896498421c5d2ec1bf5aaf6fd38c6a81246d15488",
+      "apk_sha256": "a02b4206b5e7f53bbdf16768f45066ed5151c3ccba3108c7685cbbaa223adede",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081520Z-ee57e0d3",
+              "allowed_cpus": [],
+              "before": {
+                "0": 2016000,
+                "3": 2188800,
+                "7": 2092800
+              },
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081553Z-b043b13e",
+              "allowed_cpus": [],
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081623Z-69a121d4",
+              "allowed_cpus": [],
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081653Z-9b59ffed",
+              "allowed_cpus": [],
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081724Z-f9aa97a3",
+              "allowed_cpus": [],
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081755Z-808c06b0",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081828Z-0b60a61d",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081901Z-c18872a7",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081933Z-4d0c9e3b",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T082004Z-f959c581",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T082036Z-cb049f2e",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T082109Z-02bcb453",
+              "allowed_cpus": [],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Missing allowed CPU set"
+          ]
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 0,
+      "all_measured_boundary_caps_comparable": false
+    },
+    {
+      "path": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T090958Z/report.json",
+      "sha256": "496c6a37c545e501a3acd442b55eb041eb13b579d2f8103ade7fbf464cc53ac2",
+      "apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T090958Z-83552588",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091052Z-0f9d62b4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091147Z-a3dd65db",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091242Z-c76d8a6f",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091342Z-323182f7",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091442Z-d8018d44",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091547Z-34c48110",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091649Z-dbb740c8",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091748Z-4c443d73",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091847Z-319eb694",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091956Z-1e40d6dc",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T092100Z-9b53cb91",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 4,
+      "all_measured_boundary_caps_comparable": false
+    },
+    {
+      "path": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json",
+      "sha256": "c0462acfe6fafe7bab149fd9aa4c18c72af02c63b4989397966ac67ca0e31f12",
+      "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T161940Z-e03dd6dc",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 2016000,
+                "3": 2803200,
+                "7": 3187200
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162043Z-2f63fb8c",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0",
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162138Z-56b3dc0e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162228Z-25f469e8",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1248000
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162322Z-e6963999",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162414Z-932d3789",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0",
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162505Z-759e8c5e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162602Z-3f9e24d4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162701Z-8f159e50",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162813Z-41c2cea4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162936Z-b098661d",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              }
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T163036Z-a24b3507",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "before": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              }
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 3,
+      "all_measured_boundary_caps_comparable": false
+    }
+  ]
+}

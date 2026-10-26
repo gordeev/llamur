@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scope": "Ornith bounded native-prefault control only; not M3/product/endurance acceptance; original stopped controller remains incomplete",
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "candidate_policy": "native_no_prefault",
+  "models": {
+    "ornith": {
+      "evidence": {
+        "code_nll": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T093549Z/report.json",
+        "russian_nll": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T093624Z/report.json",
+        "completed_task": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T093657Z/report.json",
+        "filled_context": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T094245Z/report.json"
+      },
+      "quality_lock": "bench/results/m3-native-demand-20261025T093522Z/ornith-quality-gate.json",
+      "bounded_screen_completed": true,
+      "speed": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json"
+    }
+  },
+  "original_pause_checkpoint": "bench/results/m3-native-demand-20261025T093522Z/pause-checkpoint.json"
+}

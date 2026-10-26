@@ -1,0 +1,883 @@
+{
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "scope": "Explicit CPU correctness and M3 repack experiments; native remains the default weight-buffer policy. B0 stays pristine. Original weight bytes/quantization and F16 KV preserved. No speed/product profile promotion without quality/context/performance acceptance.",
+  "variants": {
+    "f32-attention": {
+      "directory": ".tools/llama-cpu-f32-attention",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        }
+      ]
+    },
+    "f32-attention-scalar-math": {
+      "directory": ".tools/llama-cpu-f32-math-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        }
+      ]
+    },
+    "f32-recurrent-scalar-math": {
+      "directory": ".tools/llama-cpu-f32-recurrent",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        }
+      ]
+    },
+    "f32-recurrent-repack-stream": {
+      "directory": ".tools/llama-cpu-repack-stream",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        }
+      ]
+    },
+    "f32-recurrent-repack-order": {
+      "directory": ".tools/llama-cpu-repack-order",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        }
+      ]
+    },
+    "f32-recurrent-repack-cache": {
+      "directory": ".tools/llama-cpu-repack-cache",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0006-release-repack-source-file-cache.patch",
+          "sha256": "06efa70e8a590291be69052016e16d57e66e39a6d6501183fe9f0c3e9fdf7491"
+        }
+      ]
+    },
+    "f32-recurrent-repack-selective": {
+      "directory": ".tools/llama-cpu-repack-selective",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        }
+      ]
+    },
+    "f32-recurrent-native-demand": {
+      "directory": ".tools/llama-cpu-native-demand",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        }
+      ]
+    },
+    "f32-recurrent-repack-q4": {
+      "directory": ".tools/llama-cpu-repack-q4",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        }
+      ]
+    },
+    "f32-recurrent-transient-pack": {
+      "directory": ".tools/llama-cpu-transient-pack-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        }
+      ]
+    },
+    "f32-recurrent-transient-model": {
+      "directory": ".tools/llama-cpu-transient-model",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        }
+      ]
+    },
+    "f32-recurrent-transient-threshold": {
+      "directory": ".tools/llama-cpu-transient-threshold",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        }
+      ]
+    },
+    "f32-recurrent-stable-attention-chunks": {
+      "directory": ".tools/llama-cpu-stable-attention-chunks",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0012-thread-independent-f32-attention-chunks.patch",
+          "sha256": "d6a35e29983f4a358e7610b9fbf3eae9832f9428084b9f3defab638c921601b4"
+        }
+      ]
+    },
+    "f32-recurrent-stable-attention-v2": {
+      "directory": ".tools/llama-cpu-stable-attention-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        }
+      ],
+      "patched_tree": "00f048ae7b99805a4de8601483ef36cf89ea4225"
+    },
+    "f32-recurrent-selective-backends": {
+      "directory": ".tools/llama-gpu-selective",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        }
+      ],
+      "patched_tree": "78efee0a56d91ac511c2592e9fdf62f93f2ea2d9"
+    },
+    "f32-recurrent-literal-chat": {
+      "directory": ".tools/llama-literal-chat",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        }
+      ],
+      "patched_tree": "990a04b18b67779b631bde36c6597c9bad877481"
+    },
+    "f32-recurrent-state-layout": {
+      "directory": ".tools/llama-state-layout",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        },
+        {
+          "path": "patches/cpu-numeric/0016-preserve-kv-snapshot-layout.patch",
+          "sha256": "90ccdcb9d1e6d2e4495bba37c7731b1376fd5b3c37b371f70fe1f1a5ba614d57"
+        }
+      ],
+      "patched_tree": "30baead022a741b22df6956b718a7359026887e0"
+    },
+    "f32-recurrent-opencl-matmul-only": {
+      "directory": ".tools/llama-opencl-matmul-only",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        },
+        {
+          "path": "patches/cpu-numeric/0017-opencl-matmul-only-profile.patch",
+          "sha256": "f367293dae26deb9bc85712a8f80266cccb22fb2a5241a307a7c654a6ff6de01"
+        }
+      ],
+      "patched_tree": "f20256777e81e8e3ea0b44c998de670e06a9efc1"
+    },
+    "f32-recurrent-state-layout-v2": {
+      "directory": ".tools/llama-state-layout-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        },
+        {
+          "path": "patches/cpu-numeric/0016-preserve-kv-snapshot-layout.patch",
+          "sha256": "90ccdcb9d1e6d2e4495bba37c7731b1376fd5b3c37b371f70fe1f1a5ba614d57"
+        },
+        {
+          "path": "patches/cpu-numeric/0018-version-exact-layout-snapshot-header.patch",
+          "sha256": "d95acdc59f86f55cdb33dc90eb5e7fc3a41017a2091c11648f30d4cb2d625717"
+        }
+      ],
+      "patched_tree": "ee0e92c86bc8ad5090df73e3a1163610bdbcde2b"
+    },
+    "f32-recurrent-long-attention": {
+      "directory": ".tools/llama-long-attention",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        },
+        {
+          "path": "patches/cpu-numeric/0016-preserve-kv-snapshot-layout.patch",
+          "sha256": "90ccdcb9d1e6d2e4495bba37c7731b1376fd5b3c37b371f70fe1f1a5ba614d57"
+        },
+        {
+          "path": "patches/cpu-numeric/0018-version-exact-layout-snapshot-header.patch",
+          "sha256": "d95acdc59f86f55cdb33dc90eb5e7fc3a41017a2091c11648f30d4cb2d625717"
+        },
+        {
+          "path": "patches/cpu-numeric/0019-long-f32-attention-accumulation.patch",
+          "sha256": "4c53f931976ab3a6f088c7f33383d48ea4bc312162f4d2ba6fdeaef2aed3f8d0"
+        }
+      ],
+      "patched_tree": "dc762fb5a39817c94f985e2ec94c2c6416daae08"
+    },
+    "f32-recurrent-long-attention-v2": {
+      "directory": ".tools/llama-long-attention-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        },
+        {
+          "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+          "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+        },
+        {
+          "path": "patches/cpu-numeric/0004-stream-repack-mapped-sources.patch",
+          "sha256": "6ac341d4bba81882e0ba8f7225af3de1ad664e74fe244a11c233b5f2a51fdd21"
+        },
+        {
+          "path": "patches/cpu-numeric/0005-repack-native-gemv-order.patch",
+          "sha256": "c17676c102409b5486b68100ac8ef4cbb9046df721b0d313965fe91884acaef9"
+        },
+        {
+          "path": "patches/cpu-numeric/0007-selective-lossless-repack-types.patch",
+          "sha256": "3123453a4e08f40e9fbebda1d7fda5bd4cfb1d362dd38f7418b069245ebf131f"
+        },
+        {
+          "path": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+          "sha256": "f84e8abfa0ae692cf56cdcd382305dbd9f5337889de9c4e3e598473bb743f17a"
+        },
+        {
+          "path": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+          "sha256": "d666a47e1a54e8d262e65e964ffffd875187052f2a4d584347b283b722191f9d"
+        },
+        {
+          "path": "patches/cpu-numeric/0010-explicit-context-transient-repack.patch",
+          "sha256": "b093843f54031fff93abdf0c7bacdc8ce910adbaeaecb9e4836cfb6cd4fbb4e5"
+        },
+        {
+          "path": "patches/cpu-numeric/0011-amortize-model-transient-repack.patch",
+          "sha256": "fe56698743603f7e5acb51319eaabc63e1bfc10b67b91ee358b766c9d33f33ec"
+        },
+        {
+          "path": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+          "sha256": "a96a4fcd89be545f39282861adc253df615442b999fa88b4a823572bc5c5f083"
+        },
+        {
+          "path": "patches/cpu-numeric/0014-selective-backend-loading.patch",
+          "sha256": "9985901a7462f6387936047ae3b06d3d38873e485a322acb8a14ff12d200ab33"
+        },
+        {
+          "path": "patches/cpu-numeric/0015-literal-chat-control-tokens.patch",
+          "sha256": "ce0d2be1a1c55db369d1624df19ec2b7c35c1ccbfc4047615509d59c62e70833"
+        },
+        {
+          "path": "patches/cpu-numeric/0016-preserve-kv-snapshot-layout.patch",
+          "sha256": "90ccdcb9d1e6d2e4495bba37c7731b1376fd5b3c37b371f70fe1f1a5ba614d57"
+        },
+        {
+          "path": "patches/cpu-numeric/0018-version-exact-layout-snapshot-header.patch",
+          "sha256": "d95acdc59f86f55cdb33dc90eb5e7fc3a41017a2091c11648f30d4cb2d625717"
+        },
+        {
+          "path": "patches/cpu-numeric/0019-long-f32-attention-accumulation.patch",
+          "sha256": "4c53f931976ab3a6f088c7f33383d48ea4bc312162f4d2ba6fdeaef2aed3f8d0"
+        },
+        {
+          "path": "patches/cpu-numeric/0020-long-tiled-attention-accumulation.patch",
+          "sha256": "f9d1539bc2f907cf9ede30bd0089f043926c0313955d59a00031869119869bad"
+        }
+      ],
+      "patched_tree": "258a8bbecd1af3bc84fd8806cf6fc6641c3e552d"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "scope": "Upstream CPU-vs-CPU layout/sentinel smoke; not independent numeric proof. Independent scalar matmul is separate.",
+  "apk_sha256": "aaf8573ead4a54efe26af1fdff2f371e467f28a3532b1570e605823bc38d911d",
+  "executable_sha256": "eca3420d1984eb627bceaa6902bc684f05881b3f15f3d81cce945b7f46a8320e",
+  "passed": true,
+  "cases": [
+    {
+      "op": "RMS_NORM",
+      "params": "type=f32,ne=\\[64,5,4,3\\],v=0,eps=.*inplace=1",
+      "passed": true,
+      "counts": [
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "op": "SSM_SCAN",
+      "params": "type=f32,d_state=128,head_dim=64,n_head=16,n_group=2,n_seq_tokens=32,n_seqs=4,",
+      "passed": true,
+      "counts": [
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "op": "GATED_DELTA_NET",
+      "params": "type=f32,head_count=32,head_size=16,n_seq_tokens=1,n_seqs=1,v_repeat=1,permuted=0,kda=0,K=1",
+      "passed": true,
+      "counts": [
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "op": "FLASH_ATTN_EXT",
+      "params": "hsk=64,hsv=64,nh=8,nr23=\\[4,1\\],kv=1024,nb=32,mask=1,sinks=0.*type_K=f16,type_V=f16",
+      "passed": true,
+      "counts": [
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "op": "SOFT_MAX",
+      "params": "type=f32,ne=\\[1024,16,1,1\\],mask=0",
+      "passed": true,
+      "counts": [
+        [
+          "4",
+          "4"
+        ]
+      ],
+      "exit_code": 0
+    }
+  ]
+}

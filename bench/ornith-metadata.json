@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "tensor_count": 442,
+  "tensor_type_counts": {
+    "0": 184,
+    "12": 223,
+    "14": 35
+  },
+  "metadata": {
+    "general.architecture": "qwen35",
+    "general.type": "model",
+    "general.name": "Ornith-1.5-9B",
+    "general.basename": "ornith-1.5",
+    "general.size_label": "9B",
+    "general.license": "mit",
+    "general.license.link": "https://huggingface.co/ornith-ai/Ornith-1.5-9B/blob/main/LICENSE",
+    "qwen35.block_count": 33,
+    "qwen35.context_length": 262144,
+    "qwen35.embedding_length": 4096,
+    "qwen35.feed_forward_length": 12288,
+    "qwen35.attention.head_count": 16,
+    "qwen35.attention.head_count_kv": 4,
+    "qwen35.rope.freq_base": 10000000.0,
+    "qwen35.attention.layer_norm_rms_epsilon": 9.999999974752427e-07,
+    "qwen35.attention.key_length": 256,
+    "qwen35.attention.value_length": 256,
+    "qwen35.nextn_predict_layers": 1,
+    "qwen35.ssm.conv_kernel": 4,
+    "qwen35.ssm.state_size": 128,
+    "qwen35.ssm.group_count": 16,
+    "qwen35.ssm.time_step_rank": 32,
+    "qwen35.ssm.inner_size": 4096,
+    "qwen35.full_attention_interval": 4,
+    "qwen35.rope.dimension_count": 64,
+    "general.quantization_version": 2,
+    "general.file_type": 15
+  },
+  "tokenizer_hashes": {
+    "tokenizer.chat_template": "f55f52930aa8bf44ab5cb85f99370fcc3c56e9a85640b812086d5330bce5d86b",
+    "tokenizer.ggml.tokens": "5ee0f927bcaa4b9fe85c244776ae9487468e427f83e053fc81f2a186f14936a3",
+    "tokenizer.ggml.merges": "7e299304d9ad9dc312acdbcb1f6ccf0dce1256bf1aa986d651f13814dfd27e7b"
+  },
+  "special_tokens": {
+    "tokenizer.ggml.eos_token_id": 248046,
+    "tokenizer.ggml.padding_token_id": 248044,
+    "tokenizer.ggml.add_bos_token": false
+  },
+  "descriptor_end": 10968997,
+  "tensor_data_verified": false
+}

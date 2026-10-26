@@ -1,0 +1,30 @@
+{
+  "milestone": "M2",
+  "milestone_accepted": true,
+  "scope": "Benchmark/correctness harness and bounded pinned CPU reference, not product profile, whole-model/coding/long-context quality, maximum context or sustained speed acceptance. B0/B1 and failed trials preserved.",
+  "candidate_apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "evidence": {
+    "corrected_reference_baseline": "bench/m2-cpu-reference-baseline-20261025.json",
+    "numeric_corrections": "bench/m2-numeric-fix-20261024.json",
+    "reference_semantics": "bench/cpu-reference.lock.json",
+    "runtime_framework": "bench/results/runtime-tests-20261024T220801Z/report.json",
+    "attention_8192": "bench/results/attention-variant-matrix-20261024T230939Z/report.json",
+    "storage": "bench/results/storage-tests-20261024T211942Z/report.json",
+    "ornith_repeat_load": "bench/results/load-matrix-ornith-code-20261024T212144Z/report.json"
+  },
+  "acceptance": [
+    "EOS/length, input-token/overflow, finite logits and process loss are detected without silent retries/truncation.",
+    "Fixed code/Russian NLL and independent F64 attention gates pass; Gemma platform GELU-table difference causally explained, exact reference semantics frozen and current APK table verified.",
+    "Both coding tasks completed; Gemma8064+128 boundary and Ornith7680+512 single-fact retrieval completed on corrected APK.",
+    "Five fresh-process short reference measurements plus separate warm-up per model completed with original weight representations.",
+    "Lifecycle30 cycles, cancellation/recovery/admission, canonical public storage and repeated Ornith mmap loading passed within recorded bounds."
+  ],
+  "limitations": [
+    "Only bounded owned coding/corpus and one beginning-fact retrieval point; broad datasets, seeds, positions and full context matrix still required per finalist.",
+    "Unmodified-platform Gemma long raw-logit comparison failed0.409; explicit same-GELU control passed1.91e-6. Do not erase or relabel the original failure.",
+    "Ornith read mode under real changing memory pressure remains unqualified; mmap admission is not a residency/endurance guarantee.",
+    "16K/32K, actual16KiB-page device, battery/endurance and usable interactive8K speed unverified.",
+    "No speed candidate accepted, no runtime-patch promotion/default change, no UI/API product work."
+  ],
+  "next_milestone": "M3: controlled CPU_REPACK screening, then backend/threads/batch/affinity/GPU candidates with per-profile correctness and paired performance gates."
+}

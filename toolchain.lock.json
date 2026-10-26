@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "cli": {
+    "ndk": "28.2.13676358",
+    "android_platform": 28,
+    "abi": "arm64-v8a",
+    "cmake": "4.2.1",
+    "ninja": "1.13.2",
+    "kleidiai": false,
+    "openmp": false
+  },
+  "official_android": {
+    "ndk": "29.0.13113456",
+    "ndk_release": "r29-beta1 (experimental baseline only)",
+    "gradle": "8.14.3",
+    "agp": "8.13.2",
+    "kotlin": "2.3.0",
+    "java_toolchain": 17,
+    "cmake": "3.31.6",
+    "compile_sdk": 36,
+    "min_sdk": 33,
+    "target_sdk": 36
+  },
+  "distribution": {
+    "experimental_ndk_allowed": false,
+    "hexagon_bundled": false,
+    "qnn_bundled": false
+  },
+  "product_android": {
+    "ndk": "28.2.13676358",
+    "gradle": "8.14.3",
+    "agp": "8.13.2",
+    "kotlin": "2.3.0",
+    "java_toolchain": 17,
+    "cmake": "3.31.6",
+    "compile_sdk": 36,
+    "min_sdk": 28,
+    "target_sdk": 36,
+    "abi": "arm64-v8a",
+    "native_build_type": "Release",
+    "cpu_all_variants": true,
+    "kleidiai": false,
+    "openmp": false,
+    "gpu_layers": 0,
+    "kv": "F16",
+    "default_load_mode": "native mmap without full prefault",
+    "build_tools": "36.1.0",
+    "default_cpu_variant": "f32-recurrent-long-attention-v2",
+    "default_cpu_threads": 4
+  }
+}

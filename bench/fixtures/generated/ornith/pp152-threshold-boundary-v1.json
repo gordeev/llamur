@@ -1,0 +1,30 @@
+{
+  "config": {
+    "context": 8192,
+    "threads": 4,
+    "batch": 512,
+    "micro_batch": 128,
+    "load_mode": "mmap"
+  },
+  "request": {
+    "chat": true,
+    "temperature": 0.0,
+    "seed": 42,
+    "thinking": true,
+    "max_tokens": 1,
+    "trace": true,
+    "template_time_unix": 1792800000,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Context for a coding task:\na a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a \nTask: Write a Python function that adds two integers."
+      }
+    ],
+    "diagnostics": true,
+    "check_logits": true
+  }
+}

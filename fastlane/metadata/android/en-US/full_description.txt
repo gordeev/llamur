@@ -1,0 +1,14 @@
+<p>Run text language models locally on your Android phone. Import your own compatible single-file GGUF or download one from Hugging Face. Models are not bundled.</p>
+<ul>
+<li>A messenger home with search and folders, Dialogs / Local API / Settings tabs, model selection for new chats, message search and pins, and Send/Stop.</li>
+<li>Optional OpenRouter/OpenAI/Claude/custom HTTPS connections, streaming, model catalogs and optional encrypted key storage.</li>
+<li>Temporary RAM-only or opt-in encrypted permanent dialogs, with separate reasoning and answer display.</li>
+<li>Background generation and a private completion notification that opens the live dialog.</li>
+<li>Model profiles, fixed context choices, separate answer budget, explicit overflow errors, and light/dark themes.</li>
+<li>Verified imports, optional no-copy file references, resumable HF downloads, and optional encrypted token storage.</li>
+<li>An optional OpenAI-compatible HTTP/SSE API shares the same loaded model. LAN connections require TLS and a bearer token; loopback also requires a token.</li>
+</ul>
+<p>History defaults to Never save. Explicit permanent chats use encrypted storage with AndroidKeyStore, optional auto-delete and deletion controls. Android may delay background cleanup. Android power management can pause background execution. CPU inference preserves the selected model weights; GPU experiments are not enabled in this build.</p>
+<p>Requires Android9 or later and a64-bit ARM64 OS. Tested physically on Motorola Edge40Pro with12GB RAM using two pinned models. Other devices and arbitrary GGUFs are not guaranteed. Large-context processing can take many minutes;16K is experimental and32K qualification must be checked in the release notes.</p>
+<p>No telemetry, mandatory account, Play Services, root or computer is needed for offline chat. Internet is used for user-requested downloads, explicitly selected remote providers and the enabled local API. Remote dialogs follow the selected provider's terms and storage policy. Model licenses and access rights remain separate from the application.</p>
+<p>The current application interface is in Russian. Model conversation languages depend on the selected model.</p>

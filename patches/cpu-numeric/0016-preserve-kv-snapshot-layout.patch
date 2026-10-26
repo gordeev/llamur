@@ -1,0 +1,132 @@
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -947,6 +947,11 @@
+ // Getting the state for a seq_id with this flag invalidates all prior states gotten for that seq_id with this flag.
+ #define LLAMA_STATE_SEQ_FLAGS_ON_DEVICE 2
+ 
++// Experimental exact physical KV slots/head for one CPU sequence. RAM snapshots
++// must use the same flag on get/set; incompatible with PARTIAL_ONLY/ON_DEVICE.
++#define LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT 4
++#define LLAMA_MOTOAI_KEEP_KV_LAYOUT 1
++
+     typedef uint32_t llama_state_seq_flags;
+ 
+     LLAMA_API size_t llama_state_seq_get_size_ext(
+--- a/src/llama-kv-cache.cpp
++++ b/src/llama-kv-cache.cpp
+@@ -2079,6 +2079,11 @@
+         return;
+     }
+ 
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && (flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT || seq_id != 0 || n_stream != 1 || n_seq_max != 1)) {
++        throw std::runtime_error("exact-layout snapshots require one full host sequence0 and no other flags");
++    }
++
+     if ((flags & LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY) && swa_type == LLAMA_SWA_TYPE_NONE) {
+         return;
+     }
+@@ -2103,7 +2108,7 @@
+             add_cell = add_cell && (seq_id == -1 || cells.seq_has(i, seq_id));
+ 
+             // check the cell is not SWA-masked
+-            if (add_cell && seq_id != -1) {
++            if (add_cell && seq_id != -1 && !keep_layout) {
+                 const bool is_masked = llama_hparams::is_masked_swa(n_swa, swa_type, cells.pos_get(i), cells.seq_pos_max(seq_id));
+ 
+                 add_cell = !is_masked;
+@@ -2134,6 +2139,17 @@
+         GGML_ASSERT(cell_count == cell_count_check);
+ 
+         io.write(&cell_count, sizeof(cell_count));
++
++        if (keep_layout) {
++            const uint32_t capacity = cells.size();
++            io.write(&capacity, sizeof(capacity));
++            io.write(&v_heads[s], sizeof(v_heads[s]));
++            for (const auto & range : cr.data) {
++                for (uint32_t i = range.first; i < range.second; ++i) {
++                    io.write(&i, sizeof(i));
++                }
++            }
++        }
+ 
+         // skip empty streams
+         if (cell_count == 0) {
+@@ -2160,6 +2176,11 @@
+         return;
+     }
+ 
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && (flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT || seq_id != 0 || n_stream != 1 || n_seq_max != 1)) {
++        throw std::runtime_error("exact-layout snapshots require one full host sequence0 and no other flags");
++    }
++
+     if ((flags & LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY) && swa_type == LLAMA_SWA_TYPE_NONE) {
+         return;
+     }
+@@ -2173,6 +2194,10 @@
+ 
+     if (sinfos_in && sinfos_in->size() != n_stream) {
+         throw std::runtime_error("failed to restore kv cache: mirrored slot layout has the wrong stream count");
++    }
++
++    if (keep_layout && sinfos_in) {
++        throw std::runtime_error("exact-layout restore does not support mirrored external caches");
+     }
+ 
+     uint32_t n_stream_cur;
+@@ -2191,6 +2216,33 @@
+         uint32_t cell_count;
+         io.read(&cell_count, sizeof(cell_count));
+ 
++        uint32_t saved_head = 0;
++        slot_info saved_layout;
++        if (keep_layout) {
++            uint32_t capacity;
++            io.read(&capacity, sizeof(capacity));
++            io.read(&saved_head, sizeof(saved_head));
++            if (capacity != v_cells[s].size() || saved_head > capacity || cell_count > capacity) {
++                throw std::runtime_error("exact-layout cache capacity/head/count mismatch");
++            }
++            saved_layout.s0 = s;
++            saved_layout.s1 = s;
++            saved_layout.resize(1);
++            saved_layout.strm[0] = s;
++            saved_layout.idxs[0].resize(cell_count);
++            for (uint32_t i = 0; i < cell_count; ++i) {
++                uint32_t index;
++                io.read(&index, sizeof(index));
++                if (index >= capacity || (i && index <= saved_layout.idxs[0][i - 1])) {
++                    throw std::runtime_error("invalid exact-layout cell indices");
++                }
++                saved_layout.idxs[0][i] = index;
++            }
++            if (!cell_count) {
++                v_heads[s] = saved_head;
++            }
++        }
++
+         if (cell_count == 0) {
+             // a mirrored cache must be empty here as well, or the two no longer agree cell for cell
+             if (sinfos_in && !(*sinfos_in)[s].empty()) {
+@@ -2204,7 +2256,7 @@
+         slot_info sinfo;
+ 
+         bool res = true;
+-        res = res && state_read_meta(io, strm, cell_count, sinfo, seq_id, sinfos_in ? &(*sinfos_in)[s] : nullptr);
++        res = res && state_read_meta(io, strm, cell_count, sinfo, seq_id, keep_layout ? &saved_layout : (sinfos_in ? &(*sinfos_in)[s] : nullptr));
+ 
+         try {
+             res = res && state_read_data(io, strm, cell_count, sinfo);
+@@ -2215,6 +2267,10 @@
+         if (!res) {
+             state_clear(seq_id, strm, sinfo);
+             throw std::runtime_error("failed to restore kv cache");
++        }
++
++        if (keep_layout) {
++            v_heads[strm] = saved_head;
+         }
+ 
+         if (sinfos_out) {

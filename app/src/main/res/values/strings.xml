@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ui_completed_responses" formatted="false">"Completed responses"</string>
+    <string name="ui_response_ready" formatted="false">"Response ready"</string>
+    <string name="ui_tap_to_return_to_llamur" formatted="false">"Tap to return to llamur"</string>
+    <string name="ui_wait_for_the_operation_to_finish" formatted="false">"Wait for the operation to finish"</string>
+    <string name="ui_load_model">"Load model · %1$s"</string>
+    <string name="ui_api">"API · %1$s · %2$s"</string>
+    <string name="ui_on_device">"On device · %1$s"</string>
+    <string name="ui_choose_model" formatted="false">"Choose model  ▾"</string>
+    <string name="ui_a_request_is_running_in_another_chat" formatted="false">"A request is running in another chat"</string>
+    <string name="ui_no_model_selected_yet" formatted="false">"No model selected yet"</string>
+    <string name="ui_compacting_context" formatted="false">"Compacting context…"</string>
+    <string name="ui_api_request" formatted="false">"API request…"</string>
+    <string name="ui_api_31d58b" formatted="false">"API · "</string>
+    <string name="ui_permanent_chat" formatted="false">"permanent chat"</string>
+    <string name="ui_temporary_chat" formatted="false">"temporary chat"</string>
+    <string name="ui_load_this_chat_s_local_model_to" formatted="false">"Load this chat\'s local model to continue"</string>
+    <string name="ui_load_chat_model" formatted="false">"Load chat model"</string>
+    <string name="ui_choose_chat_model" formatted="false">"Choose chat model"</string>
+    <string name="ui_stop" formatted="false">"Stop"</string>
+    <string name="ui_send" formatted="false">"Send"</string>
+    <string name="ui_choose_a_different_model" formatted="false">"Choose a different model?"</string>
+    <string name="ui_a_new_empty_chat_will_open_this" formatted="false">"A new empty chat will open. This conversation stays in memory and will not be sent to another provider."</string>
+    <string name="ui_new_chat" formatted="false">"New chat"</string>
+    <string name="ui_keep" formatted="false">"Keep"</string>
+    <string name="ui_no_active_models" formatted="false">"No active models"</string>
+    <string name="ui_add_a_gguf_model_or_an_api" formatted="false">"Add a GGUF model or an API connection in Settings and enable the models you want."</string>
+    <string name="ui_settings" formatted="false">"Settings"</string>
+    <string name="ui_back" formatted="false">"Back"</string>
+    <string name="ui_active_models" formatted="false">"Active models"</string>
+    <string name="ui_active_models_appear_when_you_create_a" formatted="false">"Active models appear when you create a chat. Disabling a model does not delete its files."</string>
+    <string name="ui_add_gguf_hf" formatted="false">"Add GGUF / HF"</string>
+    <string name="ui_active_local_models" formatted="false">"Active local models"</string>
+    <string name="ui_could_not_retrieve_chat" formatted="false">"Could not retrieve chat"</string>
+    <string name="ui_processing_input_tokens">"Processing input: %1$s / %2$s tokens"</string>
+    <string name="ui_response_reserved_tokens">"Response: %1$s / %2$s reserved tokens"</string>
+    <string name="ui_connection_to_the_model_process_lost_the" formatted="false">"Connection to the model process lost. The request will not be retried"</string>
+    <string name="ui_start_a_conversation" formatted="false">"Start a conversation"</string>
+    <string name="ui_choose_a_model" formatted="false">"Choose a model"</string>
+    <string name="ui_write_a_message_below" formatted="false">"Write a message below"</string>
+    <string name="ui_on_device_or_via_api_your_choice" formatted="false">"On device or via API — your choice"</string>
+    <string name="ui_choose_model_4c36d5" formatted="false">"Choose model"</string>
+    <string name="ui_load_model_28b19c" formatted="false">"Load model"</string>
+    <string name="ui_permanent_encrypted_storage" formatted="false">"Permanent · encrypted storage"</string>
+    <string name="ui_temporary_no_saved_history" formatted="false">"Temporary · no saved history"</string>
+    <string name="ui_error" formatted="false">"Error"</string>
+    <string name="ui_ok" formatted="false">"OK"</string>
+    <string name="ui_back_to_chats" formatted="false">"Back to chats"</string>
+    <string name="ui_about_the_model" formatted="false">"About the model"</string>
+    <string name="ui_ai" formatted="false">"AI"</string>
+    <string name="ui_search_in_chat" formatted="false">"Search in chat"</string>
+    <string name="ui_chat_actions" formatted="false">"Chat actions"</string>
+    <string name="ui_go_to_pinned_message" formatted="false">"Go to pinned message"</string>
+    <string name="ui_unpin_message" formatted="false">"Unpin message"</string>
+    <string name="ui_previous_match" formatted="false">"Previous match"</string>
+    <string name="ui_next_match" formatted="false">"Next match"</string>
+    <string name="ui_close_chat_search" formatted="false">"Close chat search"</string>
+    <string name="ui_message" formatted="false">"Message"</string>
+    <string name="ui_attach_file" formatted="false">"Attach file"</string>
+    <string name="ui_message_exceeds_512_kib_all_text_is" formatted="false">"Message exceeds 512 KiB. All text is retained; sending is unavailable."</string>
+    <string name="ui_response_limit_provider_counts_tokens_context_history">"Response limit %1$s · provider counts tokens/context · history is not truncated"</string>
+    <string name="ui_input_response_tokens">"Input %1$s + response %2$s / %3$s tokens"</string>
+    <string name="ui_fits" formatted="false">" · fits"</string>
+    <string name="ui_overflow_full_history_retained" formatted="false">" · overflow, full history retained"</string>
+    <string name="ui_no_connection_to_the_model_reopen_the" formatted="false">"No connection to the model. Reopen the app."</string>
+    <string name="ui_no_connection_to_the_model_process" formatted="false">"No connection to the model process"</string>
+    <string name="ui_request_exceeds_8_mib_nothing_was_truncated" formatted="false">"Request exceeds 8 MiB. Nothing was truncated; start a new chat."</string>
+    <string name="ui_attachments_removed_after_changing_the_model_original" formatted="false">"Attachments removed after changing the model. Original files are kept"</string>
+    <string name="ui_this_response_is_no_longer_available_the" formatted="false">"This response is no longer available: the chat was closed or its process ended. The request will not be retried."</string>
+    <string name="ui_input_response_context">"%1$s input · %2$s response · context %3$s"</string>
+    <string name="ui_api_limit">"API · limit %1$s · "</string>
+    <string name="ui_permanent" formatted="false">"permanent"</string>
+    <string name="ui_temporary" formatted="false">"temporary"</string>
+    <string name="ui_connecting_to_model_process" formatted="false">"Connecting to model process…"</string>
+    <string name="ui_on_device_a8395a" formatted="false">"On device"</string>
+    <string name="ui_responding" formatted="false">"responding…"</string>
+    <string name="ui_on_device_50a404">"%1$s · on device"</string>
+    <string name="ui_wait_for_the_model_process_to_connect" formatted="false">"Wait for the model process to connect"</string>
+    <string name="ui_add_a_model" formatted="false">"Add a model"</string>
+    <string name="ui_connect_a_gguf_file_on_your_phone" formatted="false">"Connect a GGUF file on your phone or an API provider and enable the models you want."</string>
+    <string name="ui_cancel" formatted="false">"Cancel"</string>
+    <string name="ui_who_shall_we_talk_to" formatted="false">"Who shall we talk to?"</string>
+    <string name="ui_model_for_new_chat" formatted="false">"Model for new chat"</string>
+    <string name="ui_permanent_save_on_device" formatted="false">"Permanent · save on device"</string>
+    <string name="ui_temporary_conversations_disappear_when_the_process_ends" formatted="false">"Temporary conversations disappear when the process ends. Permanent chats are encrypted; retention is configured in Settings."</string>
+    <string name="ui_allow_permanent_chat_storage" formatted="false">"Allow permanent chat storage"</string>
+    <string name="ui_no_folder" formatted="false">"No folder"</string>
+    <string name="ui_folder" formatted="false">"Folder"</string>
+    <string name="ui_folder_for_new_chat" formatted="false">"Folder for new chat"</string>
+    <string name="ui_create" formatted="false">"Create"</string>
+    <string name="ui_enable_and_create" formatted="false">"Enable and create"</string>
+    <string name="ui_pinned">"Pinned%1$s\n"</string>
+    <string name="ui_unpin" formatted="false">"Unpin"</string>
+    <string name="ui_pin" formatted="false">"Pin"</string>
+    <string name="ui_copy" formatted="false">"Copy"</string>
+    <string name="ui_save_text_to_file" formatted="false">"Save text to file"</string>
+    <string name="ui_llamur_message" formatted="false">"llamur message"</string>
+    <string name="ui_text_file_utf_8" formatted="false">"Text file · UTF-8"</string>
+    <string name="ui_image_png_jpeg_webp_gif" formatted="false">"Image · PNG, JPEG, WebP, GIF"</string>
+    <string name="ui_pdf_document" formatted="false">"PDF document"</string>
+    <string name="ui_attachments">"Attachments → %1$s"</string>
+    <string name="ui_attachments_for_local_model" formatted="false">"Attachments for local model"</string>
+    <string name="ui_finish_the_previous_file_save_first" formatted="false">"Finish the previous file save first"</string>
+    <string name="ui_no_app_found_for_saving_files" formatted="false">"No app found for saving files"</string>
+    <string name="ui_copied" formatted="false">"Copied"</string>
+    <string name="ui_open" formatted="false">"Open"</string>
+    <string name="ui_rename" formatted="false">"Rename"</string>
+    <string name="ui_move_to_folder" formatted="false">"Move to folder"</string>
+    <string name="ui_make_temporary" formatted="false">"Make temporary"</string>
+    <string name="ui_make_permanent" formatted="false">"Make permanent"</string>
+    <string name="ui_delete_chat" formatted="false">"Delete chat"</string>
+    <string name="ui_context_and_compaction" formatted="false">"Context and compaction"</string>
+    <string name="ui_chat" formatted="false">"Chat"</string>
+    <string name="ui_chat_name" formatted="false">"Chat name"</string>
+    <string name="ui_name" formatted="false">"Name"</string>
+    <string name="ui_save" formatted="false">"Save"</string>
+    <string name="ui_delete_chat_525ef8" formatted="false">"Delete chat?"</string>
+    <string name="ui_stop_the_response_in_this_chat_first" formatted="false">"Stop the response in this chat first."</string>
+    <string name="ui_this_conversation_will_be_removed_from_the" formatted="false">"This conversation will be removed from the device. The model and other chats will remain."</string>
+    <string name="ui_this_temporary_conversation_will_be_closed" formatted="false">"This temporary conversation will be closed."</string>
+    <string name="ui_delete" formatted="false">"Delete"</string>
+    <string name="ui_chat_folder" formatted="false">"Chat folder"</string>
+    <string name="ui_allow_storage" formatted="false">"Allow storage?"</string>
+    <string name="ui_permanent_chat_storage_will_be_enabled_only" formatted="false">"Permanent chat storage will be enabled. Only this chat becomes permanent; other temporary chats will not be saved."</string>
+    <string name="ui_enable_and_save" formatted="false">"Enable and save"</string>
+    <string name="ui_make_temporary_7ccb87" formatted="false">"Make temporary?"</string>
+    <string name="ui_the_saved_copy_will_be_deleted_the" formatted="false">"The saved copy will be deleted. The current conversation remains in RAM until the process ends."</string>
+    <string name="ui_folder_name" formatted="false">"Folder name"</string>
+    <string name="ui_new_folder" formatted="false">"New folder"</string>
+    <string name="ui_rename_folder" formatted="false">"Rename folder"</string>
+    <string name="ui_delete_folder" formatted="false">"Delete folder"</string>
+    <string name="ui_delete_folder_445e61" formatted="false">"Delete folder?"</string>
+    <string name="ui_chats_stay_in_the_main_list_their" formatted="false">"Chats stay in the main list. Their conversations will not be deleted."</string>
+    <string name="ui_folders" formatted="false">"Folders"</string>
+    <string name="ui_create_folder" formatted="false">"Create folder"</string>
+    <string name="ui_models_and_connections" formatted="false">"MODELS AND CONNECTIONS"</string>
+    <string name="ui_models_on_device" formatted="false">"Models on device"</string>
+    <string name="ui_gguf_import_hugging_face_profiles_and_storage" formatted="false">"GGUF import, Hugging Face, profiles and storage"</string>
+    <string name="ui_api_connections" formatted="false">"API connections"</string>
+    <string name="ui_openrouter_openai_claude_and_custom_servers" formatted="false">"OpenRouter, OpenAI, Claude and custom servers"</string>
+    <string name="ui_models_available_when_creating_a_chat" formatted="false">"Models available when creating a chat"</string>
+    <string name="ui_chats" formatted="false">"CHATS"</string>
+    <string name="ui_keep_permanent_chats" formatted="false">"Keep permanent chats"</string>
+    <string name="ui_auto_delete_permanent_chats" formatted="false">"Auto-delete permanent chats"</string>
+    <string name="ui_never_save" formatted="false">"Never save"</string>
+    <string name="ui_chat_storage" formatted="false">"Chat storage"</string>
+    <string name="ui_temporary_chats_are_not_saved" formatted="false">" · temporary chats are not saved"</string>
+    <string name="ui_create_rename_and_organize_chat_folders" formatted="false">"Create, rename and organize chat folders"</string>
+    <string name="ui_automatically_compact_context" formatted="false">"Automatically compact context"</string>
+    <string name="ui_off_by_default_before_sending_when_the" formatted="false">"Off by default. At about 80% context, the model creates a summary that may miss details and uses extra API requests. Originals stay in the chat."</string>
+    <string name="ui_storage_unavailable" formatted="false">"Storage unavailable"</string>
+    <string name="ui_appearance_and_behavior" formatted="false">"APPEARANCE AND BEHAVIOR"</string>
+    <string name="ui_theme" formatted="false">"Theme"</string>
+    <string name="ui_system" formatted="false">"System"</string>
+    <string name="ui_light" formatted="false">"Light"</string>
+    <string name="ui_dark" formatted="false">"Dark"</string>
+    <string name="ui_app_language" formatted="false">"App language"</string>
+    <string name="ui_russian" formatted="false">"Русский"</string>
+    <string name="ui_follow_system" formatted="false">"Follow system"</string>
+    <string name="ui_notifications" formatted="false">"Notifications"</string>
+    <string name="ui_response_ready_no_conversation_text" formatted="false">"Response ready — no conversation text"</string>
+    <string name="ui_local_model_reasoning" formatted="false">"Local model reasoning"</string>
+    <string name="ui_for_local_models_with_switchable_thinking_configure" formatted="false">"For local models with switchable thinking. Configure API reasoning in the provider connection."</string>
+    <string name="ui_local_model_temperature" formatted="false">"Local model temperature"</string>
+    <string name="ui_temperature_0_5" formatted="false">"Temperature 0–5"</string>
+    <string name="ui_temperature" formatted="false">"Temperature"</string>
+    <string name="ui_work_with_screen_off" formatted="false">"Work with screen off"</string>
+    <string name="ui_android_limits_and_battery_settings" formatted="false">"Android limits and battery settings"</string>
+    <string name="ui_background_operation" formatted="false">"Background operation"</string>
+    <string name="ui_a_foreground_service_supports_a_response_you" formatted="false">"A foreground service supports a response you explicitly started. Deep Doze can delay CPU/network work. You can manually allow unrestricted background use; the app never changes system settings itself."</string>
+    <string name="ui_battery_settings" formatted="false">"Battery settings"</string>
+    <string name="ui_application" formatted="false">"APPLICATION"</string>
+    <string name="ui_diagnostics" formatted="false">"Diagnostics"</string>
+    <string name="ui_device_capabilities_and_runtime_checks" formatted="false">"Device capabilities and runtime checks"</string>
+    <string name="ui_licenses" formatted="false">"Licenses"</string>
+    <string name="ui_you_can_continue_temporary_chats_resetting_deletes" formatted="false">"\n\nYou can continue temporary chats. Resetting deletes inaccessible saved chats and folders; this cannot be undone."</string>
+    <string name="ui_delete_saved_data" formatted="false">"Delete saved data"</string>
+    <string name="ui_confirm_reset" formatted="false">"Confirm reset"</string>
+    <string name="ui_delete_all_saved_chats_and_the_history" formatted="false">"Delete all saved chats and the history key? Model settings and provider keys will remain."</string>
+    <string name="ui_continue_without_saving" formatted="false">"Continue without saving"</string>
+    <string name="ui_all_chats_stay_in_memory_only_history" formatted="false">"All chats stay in memory only. History disappears when the process ends."</string>
+    <string name="ui_permanent_chats_are_encrypted_on_your_device" formatted="false">"Permanent chats are encrypted on your device. Temporary chats are not saved."</string>
+    <string name="ui_encrypted_history_is_deleted_after_a_selected" formatted="false">"Encrypted history is deleted after a selected period of inactivity."</string>
+    <string name="ui_choose_what_stays_on_your_device_temporary" formatted="false">"Choose what stays on your device. Temporary chats are never saved to disk."</string>
+    <string name="ui_delete_saved_chats" formatted="false">"Delete saved chats?"</string>
+    <string name="ui_all_saved_copies_will_be_deleted_conversations" formatted="false">"All saved copies will be deleted. Conversations already in RAM stay temporary until the process ends. Folder settings will remain."</string>
+    <string name="ui_delete_and_stop_saving" formatted="false">"Delete and stop saving"</string>
+    <string name="ui_after_1_hour" formatted="false">"After 1 hour"</string>
+    <string name="ui_after_24_hours" formatted="false">"After 24 hours"</string>
+    <string name="ui_after_7_days" formatted="false">"After 7 days"</string>
+    <string name="ui_after_30_days" formatted="false">"After 30 days"</string>
+    <string name="ui_auto_delete" formatted="false">"Auto-delete"</string>
+    <string name="ui_retention_starts_from_the_last_activity_android" formatted="false">"Retention starts from the last activity. Android may delay background cleanup; expired chats are hidden when opened. An active response finishes first."</string>
+    <string name="ui_apply_this_retention_period_to_all_permanent" formatted="false">"Apply this retention period to all permanent chats? History older than this period will be deleted."</string>
+    <string name="ui_apply" formatted="false">"Apply"</string>
+    <string name="ui_follow_the_android_theme" formatted="false">"Follow the Android theme"</string>
+    <string name="ui_light_background_and_subtle_dividers" formatted="false">"Light background and subtle dividers"</string>
+    <string name="ui_dark_surfaces_and_soft_accents" formatted="false">"Dark surfaces and soft accents"</string>
+    <string name="ui_choose_the_app_s_appearance" formatted="false">"Choose the app\'s appearance."</string>
+    <string name="ui_interface_language_does_not_change_your_messages" formatted="false">"Interface language does not change your messages or the model\'s response language."</string>
+    <string name="ui_russian_or_english_english_for_other_languages" formatted="false">"Russian or English; English for other languages"</string>
+    <string name="ui_russian_interface" formatted="false">"Russian interface"</string>
+    <string name="ui_compacting_context_stop_with" formatted="false">"Compacting context… · stop with ■"</string>
+    <string name="ui_summary_ready_view_and_apply" formatted="false">"Summary ready · view and apply"</string>
+    <string name="ui_compaction_incomplete_details" formatted="false">"Compaction incomplete · details"</string>
+    <string name="ui_context_compacted_view_summary_undo" formatted="false">"Context compacted · view summary / undo"</string>
+    <string name="ui_original_messages">"Original messages: %1$s · "</string>
+    <string name="ui_encrypted_storage_with_chat_retention" formatted="false">"encrypted storage with chat retention"</string>
+    <string name="ui_temporary_chat_ram_only" formatted="false">"temporary chat, RAM only"</string>
+    <string name="ui_the_summary_replaces_earlier_messages_only_in" formatted="false">"The summary replaces earlier messages only in the model\'s input and may miss details. Originals stay in the chat. Undo restores the full original context, which may exceed the model\'s window again."</string>
+    <string name="ui_auto_compaction_is_paused_for_this_chat" formatted="false">"Auto-compaction is paused for this chat after an undo or error."</string>
+    <string name="ui_auto_compaction_is_on_runs_before_sending" formatted="false">"Auto-compaction is on: runs before sending at about 80% of the window including response reserve."</string>
+    <string name="ui_auto_compaction_is_off_enable_it_in" formatted="false">"Auto-compaction is off. Enable it in Settings → Chats."</string>
+    <string name="ui_steps_messages_summarized">"%1$s: %2$s → %3$s · steps: %4$s · messages summarized: %5$s"</string>
+    <string name="ui_tokens" formatted="false">"Tokens"</string>
+    <string name="ui_estimated_api_tokens" formatted="false">"Estimated API tokens"</string>
+    <string name="ui_preview_not_applied_yet" formatted="false">"Preview · not applied yet"</string>
+    <string name="ui_apply_summary" formatted="false">"Apply summary"</string>
+    <string name="ui_discard_preview" formatted="false">"Discard preview"</string>
+    <string name="ui_active_summary" formatted="false">"Active summary"</string>
+    <string name="ui_undo_compaction" formatted="false">"Undo compaction"</string>
+    <string name="ui_resume_auto_compaction" formatted="false">"Resume auto-compaction"</string>
+    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Catalogue window: %1$s. API usage is estimated from reported usage and text size; images and PDFs may use more. Enter the model\'s actual window if the catalogue did not provide it."</string>
+    <string name="ui_unknown" formatted="false">"unknown"</string>
+    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"API window in tokens · 0 = catalogue"</string>
+    <string name="ui_save_api_window" formatted="false">"Save API window"</string>
+    <string name="ui_enter_0_or_1024_2097152" formatted="false">"Enter 0 or 1024–2097152"</string>
+    <string name="ui_operation_in_progress" formatted="false">"Operation in progress…"</string>
+    <string name="ui_compact_context" formatted="false">"Compact context"</string>
+    <string name="ui_create_summary" formatted="false">"Create summary?"</string>
+    <string name="ui_the_same_model_will_process_earlier_conversation" formatted="false">"The same model will process earlier conversation and create a summary. "</string>
+    <string name="ui_this_uses_up_to_16_additional_requests" formatted="false">"This uses up to 16 additional requests to this provider at its rates. You can then review and apply the result."</string>
+    <string name="ui_this_takes_time_on_your_phone_you" formatted="false">"This takes time on your phone. You can then review and apply the result."</string>
+    <string name="ui_create_summary_72b9b5" formatted="false">"Create summary"</string>
+    <string name="ui_compaction_started_the_completed_summary_will_appear" formatted="false">"Compaction started. The completed summary will appear above the conversation; you can review it before applying."</string>
+    <string name="ui_refresh" formatted="false">"Refresh"</string>
+    <string name="ui_on_device_original_gguf" formatted="false">"On device · original GGUF"</string>
+    <string name="ui_api_256236">"API · %1$s"</string>
+    <string name="ui_response_reserve_context_and_usage_are_determined">"Response reserve: %1$s\nContext and usage are determined by the provider"</string>
+    <string name="ui_api_units" formatted="false">"API units"</string>
+    <string name="ui_reported_cost_responses">"Reported cost: %1$s %2$s · %3$s responses"</string>
+    <string name="ui_api_did_not_report_comparable_cost" formatted="false">"API did not report comparable cost"</string>
+    <string name="ui_context_response_cpu_f16_kv_weights_unchanged">"Context: %1$s · response: %2$s\nCPU · F16 KV · weights unchanged"</string>
+    <string name="ui_model_profile" formatted="false">"Model profile"</string>
+    <string name="ui_load_model_profile" formatted="false">"Load model / profile"</string>
+    <string name="ui_permanent_chat_encrypted_storage" formatted="false">"Permanent chat · encrypted storage"</string>
+    <string name="ui_temporary_chat_ram_only_be9cea" formatted="false">"Temporary chat · RAM only"</string>
+    <string name="ui_retry_saving" formatted="false">"Retry saving"</string>
+    <string name="ui_choose_another_model" formatted="false">"Choose another model"</string>
+    <string name="ui_about_model_and_chat" formatted="false">"About model and chat"</string>
+    <string name="ui_done" formatted="false">"Done"</string>
+    <string name="ui_server_running" formatted="false">"Server running"</string>
+    <string name="ui_server_stopped" formatted="false">"Server stopped"</string>
+    <string name="ui_only_a_local_model_is_served_client" formatted="false">"Only a local model is served. Client requests are not saved as your chats."</string>
+    <string name="ui_add_gguf_hugging_face" formatted="false">"Add GGUF / Hugging Face"</string>
+    <string name="ui_local_api_model" formatted="false">"Local API model"</string>
+    <string name="ui_public_model_id" formatted="false">"Public model ID"</string>
+    <string name="ui_model_name" formatted="false">"Model name"</string>
+    <string name="ui_port" formatted="false">"Port"</string>
+    <string name="ui_wi_fi_access_https_bearer" formatted="false">"Wi-Fi access · HTTPS + Bearer"</string>
+    <string name="ui_model_id_name">"Model ID: %1$s\nName: %2$s\n%3$s"</string>
+    <string name="ui_copy_base_url" formatted="false">"Copy base URL"</string>
+    <string name="ui_copy_bearer_token" formatted="false">"Copy Bearer token"</string>
+    <string name="ui_export_certificate" formatted="false">"Export certificate"</string>
+    <string name="ui_stop_api" formatted="false">"Stop API"</string>
+    <string name="ui_loaded_model_profile" formatted="false">"Loaded model profile"</string>
+    <string name="ui_load_selected_model" formatted="false">"Load selected model"</string>
+    <string name="ui_start_api" formatted="false">"Start API"</string>
+    <string name="ui_load_the_selected_model_and_wait_until" formatted="false">"Load the selected model and wait until it is ready"</string>
+    <string name="ui_enter_a_name_up_to_100_characters" formatted="false">"Enter a name up to 100 characters"</string>
+    <string name="ui_loopback_http_bearer_wi_fi_tls_and" formatted="false">"Loopback: HTTP + Bearer. Wi-Fi: TLS and Bearer are required; the client must trust the certificate. Server stops if the address or process is lost; do not expose it to the internet."</string>
+    <string name="ui_connect_an_existing_gguf_or_download_a" formatted="false">"Connect an existing GGUF or download a model from Hugging Face."</string>
+    <string name="ui_import_gguf" formatted="false">"Import GGUF"</string>
+    <string name="ui_choose_a_file_on_device" formatted="false">"Choose a file on device"</string>
+    <string name="ui_download_gguf_from_a_repository" formatted="false">"Download GGUF from a repository"</string>
+    <string name="ui_storage_manager" formatted="false">"Storage manager"</string>
+    <string name="ui_files_and_incomplete_downloads" formatted="false">"Files and incomplete downloads"</string>
+    <string name="ui_no_connected_models_yet" formatted="false">"No connected models yet"</string>
+    <string name="ui_external_gguf_model_profile" formatted="false">"External GGUF · model profile"</string>
+    <string name="ui_on_device_model_profile" formatted="false">"On device · model profile"</string>
+    <string name="ui_a_model_operation_is_in_progress_cancel" formatted="false">"A model operation is in progress. Cancel it from the notification."</string>
+    <string name="ui_import_sources_are_kept_disconnecting_an_external" formatted="false">"Import sources are kept. Disconnecting an external file only removes its registration."</string>
+    <string name="ui_external_file_disconnect" formatted="false">"External file · disconnect"</string>
+    <string name="ui_managed_model_delete" formatted="false">"Managed model · delete"</string>
+    <string name="ui_disconnect_external_file" formatted="false">"Disconnect external file?"</string>
+    <string name="ui_delete_model" formatted="false">"Delete model?"</string>
+    <string name="ui_the_source_file_will_remain" formatted="false">"\nThe source file will remain."</string>
+    <string name="ui_the_managed_copy_will_be_deleted_the" formatted="false">"\nThe managed copy will be deleted. The import source is not affected."</string>
+    <string name="ui_disconnect" formatted="false">"Disconnect"</string>
+    <string name="ui_incomplete_download" formatted="false">"Incomplete download"</string>
+    <string name="ui_delete_incomplete_download" formatted="false">"Delete incomplete download?"</string>
+    <string name="ui_you_will_not_be_able_to_resume" formatted="false">"You will not be able to resume it after deletion."</string>
+    <string name="ui_no_model_files_or_incomplete_downloads" formatted="false">"No model files or incomplete downloads"</string>
+    <string name="ui_device_storage" formatted="false">"Device storage"</string>
+    <string name="ui_context_tokens_history_response">"Context: %1$s tokens (history + response).\n"</string>
+    <string name="ui_experimental_the_first_response_can_take_tens" formatted="false">"Experimental. The first response can take tens of minutes; a full 32K window has only been checked on isolated retrieval tasks. Free RAM is required."</string>
+    <string name="ui_long_input_takes_several_minutes_to_process" formatted="false">"Long input takes several minutes to process."</string>
+    <string name="ui_cpu_f16_kv_original_weights_no_history" formatted="false">"CPU · F16 KV · original weights · no history truncation."</string>
+    <string name="ui_context_size" formatted="false">"Context size"</string>
+    <string name="ui_response_reserve_tokens" formatted="false">"Response reserve, tokens"</string>
+    <string name="ui_experimental_prefill_acceleration_two_verified_models" formatted="false">"Experimental prefill acceleration (two verified models)"</string>
+    <string name="ui_chat_prefix_cache_in_ram_128_mib" formatted="false">"Chat prefix cache in RAM: 128 MiB (up to 8K)"</string>
+    <string name="ui_load" formatted="false">"Load"</string>
+    <string name="ui_response_reserve_must_be_smaller_than_context" formatted="false">"Response reserve must be smaller than context"</string>
+    <string name="ui_verified_cache_works_only_up_to_8k" formatted="false">"Verified cache works only up to 8K"</string>
+    <string name="ui_wait_for_the_current_operation_to_finish" formatted="false">"Wait for the current operation to finish"</string>
+    <string name="ui_unload" formatted="false">"Unload"</string>
+    <string name="ui_notify_when_a_response_is_ready" formatted="false">"Notify when a response is ready?"</string>
+    <string name="ui_you_can_minimize_the_app_or_turn" formatted="false">"You can minimize the app or turn the screen off: the model keeps working. Permission allows a ‘Response ready’ notification without conversation text. If you decline, chat still works, but no completion notification is shown."</string>
+    <string name="ui_allow" formatted="false">"Allow"</string>
+    <string name="ui_not_now" formatted="false">"Not now"</string>
+    <string name="ui_https_server_is_already_off_turn_it" formatted="false">"HTTPS server is already off. Turn it on and export again."</string>
+    <string name="ui_certificate_saved_configure_the_client_to_trust" formatted="false">"Certificate saved. Configure the client to trust it; do not disable TLS verification."</string>
+    <string name="ui_could_not_save_certificate" formatted="false">"Could not save certificate"</string>
+    <string name="ui_api_address_copied" formatted="false">"API address copied"</string>
+    <string name="ui_bearer_token_access_to_your_model" formatted="false">"Bearer token · access to your model"</string>
+    <string name="ui_copy_token" formatted="false">"Copy token"</string>
+    <string name="ui_export_certificate_for_client" formatted="false">"Export certificate for client"</string>
+    <string name="ui_chats_share_one_engine_request_text_is" formatted="false">"Chats share one engine. Request text is not saved. Server stops after Wi-Fi or process changes. LAN requires trust in the exported certificate and a Bearer token."</string>
+    <string name="ui_api_enabled" formatted="false">"API enabled"</string>
+    <string name="ui_api_disabled" formatted="false">"API disabled"</string>
+    <string name="ui_computer_access_via_wi_fi_https_token" formatted="false">"Computer access via Wi-Fi (HTTPS + token)"</string>
+    <string name="ui_default_127_0_0_1_8080_http" formatted="false">"Default: 127.0.0.1:8080, HTTP + token. Accessible only from this phone or explicit ADB port forwarding. Enable Wi-Fi for computer access without ADB. Do not expose the port to the internet."</string>
+    <string name="ui_local_api" formatted="false">"Local API"</string>
+    <string name="ui_enable" formatted="false">"Enable"</string>
+    <string name="ui_model_or_chat_changed_choose_the_attachment" formatted="false">"Model or chat changed. Choose the attachment again"</string>
+    <string name="ui_attachment_drafts_use_6_mib_send_or" formatted="false">"Attachment drafts use 6 MiB. Send or remove extra files"</string>
+    <string name="ui_could_not_read_file" formatted="false">"Could not read file"</string>
+    <string name="ui_file_unavailable" formatted="false">"File unavailable"</string>
+    <string name="ui_file_saved" formatted="false">"File saved"</string>
+    <string name="ui_could_not_save_file" formatted="false">"Could not save file"</string>
+    <string name="ui_selected_document" formatted="false">"Selected document"</string>
+    <string name="ui_size_unknown" formatted="false">"Size unknown"</string>
+    <string name="ui_import_model" formatted="false">"Import model?"</string>
+    <string name="ui_an_independent_copy_will_be_created_in">"%1$s\n%2$s\n\nAn independent copy will be created in %3$s. Requires the file size plus 256 MiB of free space. The source remains until you decide separately after SHA-256 verification."</string>
+    <string name="ui_app_storage" formatted="false">"app storage"</string>
+    <string name="ui_without_copying" formatted="false">"Without copying"</string>
+    <string name="ui_use_in_place" formatted="false">"Use in place?"</string>
+    <string name="ui_permanent_access_to_a_seekable_gguf_is" formatted="false">"Permanent access to a seekable GGUF is required. Moving, deleting or changing the source or revoking access prevents the model from loading. Source deletion is not offered for linked files."</string>
+    <string name="ui_connect" formatted="false">"Connect"</string>
+    <string name="ui_could_not_read_document" formatted="false">"Could not read document"</string>
+    <string name="ui_model_copy_verified_the_source_document_provider" formatted="false">"Model copy verified. The source document provider does not support safe deletion from the app. Delete the original manually in a file manager if needed; the verified copy is kept."</string>
+    <string name="ui_copy_verified" formatted="false">"Copy verified"</string>
+    <string name="ui_stop_the_current_operation_and_unload_the" formatted="false">"Stop the current operation and unload the model before deleting the source. Chats remain in RAM."</string>
+    <string name="ui_import_verified" formatted="false">"Import verified"</string>
+    <string name="ui_the_model_copy_passed_another_sha_256">"%1$s\n\nThe model copy passed another SHA-256 check. Delete this source document? If it belongs to a cloud provider, deletion may affect the cloud original and may not free phone storage. The imported copy will remain."</string>
+    <string name="ui_delete_source" formatted="false">"Delete source"</string>
+    <string name="ui_checking_source_integrity_before_deletion" formatted="false">"Checking source integrity before deletion…"</string>
+    <string name="ui_source_deleted_verified_copy_kept" formatted="false">"Source deleted; verified copy kept"</string>
+    <string name="ui_choose_a_file_using_the_system_file" formatted="false">"Choose a file using the system file picker"</string>
+    <string name="ui_file_exceeds_3_mib_choose_a_smaller" formatted="false">"File exceeds 3 MiB. Choose a smaller file; the app does not compress it"</string>
+    <string name="ui_file_exceeds_3_mib" formatted="false">"File exceeds 3 MiB"</string>
+    <string name="ui_file_is_empty" formatted="false">"File is empty"</string>
+    <string name="ui_text_file_up_to_256_kib" formatted="false">"Text file: up to 256 KiB"</string>
+    <string name="ui_utf_8_text_required" formatted="false">"UTF-8 text required"</string>
+    <string name="ui_png_jpeg_webp_gif_and_pdf_are" formatted="false">"PNG, JPEG, WebP, GIF and PDF are supported"</string>
+    <string name="ui_selected_file_type_does_not_match" formatted="false">"Selected file type does not match"</string>
+    <string name="ui_up_to_four_attachments" formatted="false">"Up to four attachments"</string>
+    <string name="ui_attachments_exceed_6_mib_in_total" formatted="false">"Attachments exceed 6 MiB in total"</string>
+    <string name="ui_model_support_for_this_attachment_is_not" formatted="false">"Model support for this attachment is not confirmed. Refresh the catalogue or explicitly set model capabilities"</string>
+    <string name="ui_response_image_exceeds_3_mib" formatted="false">"Response image exceeds 3 MiB"</string>
+    <string name="ui_api_returned_an_unsupported_image_link_automatic" formatted="false">"API returned an unsupported image link; automatic download is disabled"</string>
+    <string name="ui_saved_chats_are_unavailable_data_was_not" formatted="false">"Saved chats are unavailable. Data was not deleted. Temporary chats are available; check storage in Settings"</string>
+    <string name="ui_storage_not_connected" formatted="false">"Storage not connected"</string>
+    <string name="ui_changes_are_only_in_ram_saving_failed" formatted="false">"Changes are only in RAM: saving failed. Free some storage and retry"</string>
+    <string name="ui_temporary_active_chat_memory_is_full_close" formatted="false">"Temporary/active chat memory is full. Close an unused chat; history was not truncated"</string>
+    <string name="ui_chat_unavailable_temporary_history_ended_or_saved" formatted="false">"Chat unavailable: temporary history ended or saved chat was deleted"</string>
+    <string name="ui_chat_deleted_under_its_retention_policy" formatted="false">"Chat deleted under its retention policy"</string>
+    <string name="ui_saved_chat_unavailable_data_was_not_deleted" formatted="false">"Saved chat unavailable; data was not deleted"</string>
+    <string name="ui_compaction_interrupted_by_restart_original_history_kept" formatted="false">"Compaction interrupted by restart. Original history kept"</string>
+    <string name="ui_limit_of_1000_saved_and_32_temporary" formatted="false">"Limit of 1000 saved and 32 temporary chats"</string>
+    <string name="ui_32_temporary_chats_already_in_memory_close" formatted="false">"32 temporary chats already in memory. Close an unused chat"</string>
+    <string name="ui_explicitly_allow_permanent_chat_storage_in_settings" formatted="false">"Explicitly allow permanent chat storage in Settings first"</string>
+    <string name="ui_start_a_new_chat_to_change_the" formatted="false">"Start a new chat to change the model"</string>
+    <string name="ui_chat_already_deleted" formatted="false">"Chat already deleted"</string>
+    <string name="ui_stop_the_response_first" formatted="false">"Stop the response first"</string>
+    <string name="ui_draft_exceeds_512_kib" formatted="false">"Draft exceeds 512 KiB"</string>
+    <string name="ui_chat_memory_full_text_was_not_truncated" formatted="false">"Chat memory full. Text was not truncated"</string>
+    <string name="ui_message_exceeds_512_kib" formatted="false">"Message exceeds 512 KiB"</string>
+    <string name="ui_request_already_accepted" formatted="false">"Request already accepted"</string>
+    <string name="ui_session_request_limit_reached_close_unused_chats" formatted="false">"Session request limit reached; close unused chats"</string>
+    <string name="ui_enter_a_message_up_to_512_kib" formatted="false">"Enter a message up to 512 KiB or add a file"</string>
+    <string name="ui_too_many_messages_start_a_new_chat" formatted="false">"Too many messages; start a new chat"</string>
+    <string name="ui_full_history_exceeds_the_8_mib_request" formatted="false">"Full history exceeds the 8 MiB request limit. Start a new chat; history was not truncated"</string>
+    <string name="ui_this_chat_s_memory_is_full_start" formatted="false">"This chat\'s memory is full. Start a new chat; history was not truncated"</string>
+    <string name="ui_response_exceeds_chat_memory_budget_partial_response" formatted="false">"Response exceeds chat memory budget; partial response kept"</string>
+    <string name="ui_at_least_one_model_response_is_required" formatted="false">"At least one model response is required first"</string>
+    <string name="ui_not_enough_memory_for_summary_original_history" formatted="false">"Not enough memory for summary; original history kept"</string>
+    <string name="ui_history_changed_create_the_summary_again" formatted="false">"History changed. Create the summary again"</string>
+    <string name="ui_chat_deleted" formatted="false">"Chat deleted"</string>
+    <string name="ui_up_to_50_pinned_messages" formatted="false">"Up to 50 pinned messages"</string>
+    <string name="ui_folder_name_1_40_characters_no_duplicates" formatted="false">"Folder name: 1–40 characters, no duplicates"</string>
+    <string name="ui_up_to_24_folders" formatted="false">"Up to 24 folders"</string>
+    <string name="ui_wait_until_the_response_finishes_before_changing" formatted="false">"Wait until the response finishes before changing storage"</string>
+    <string name="ui_finish_the_response_first" formatted="false">"Finish the response first"</string>
+    <string name="ui_allow_permanent_chat_storage_first" formatted="false">"Allow permanent chat storage first"</string>
+    <string name="ui_could_not_clean_up_expired_chats_they" formatted="false">"Could not clean up expired chats. They are hidden; Android will retry at the next activity"</string>
+    <string name="ui_reasoning" formatted="false">"Reasoning  ▾"</string>
+    <string name="ui_you" formatted="false">"You"</string>
+    <string name="ui_model_is_reasoning" formatted="false">"Model is reasoning…"</string>
+    <string name="ui_preparing_response" formatted="false">"Preparing response…"</string>
+    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"Output limit reached before any response text"</string>
+    <string name="ui_model_completed_without_response_text" formatted="false">"Model completed without response text"</string>
+    <string name="ui_response_interrupted" formatted="false">"Response interrupted"</string>
+    <string name="ui_save_file">"Save file %1$s"</string>
+    <string name="ui_reasoning_9cade5" formatted="false">"Reasoning  ▴"</string>
+    <string name="ui_limit" formatted="false">" · limit"</string>
+    <string name="ui_interrupted" formatted="false">" · interrupted"</string>
+    <string name="ui_pinned_f3758c" formatted="false">"Pinned · "</string>
+    <string name="ui_compaction_requires_more_than_16_requests_history" formatted="false">"Compaction requires more than 16 requests. History unchanged"</string>
+    <string name="ui_previous_summary_does_not_fit_the_compaction" formatted="false">"Previous summary does not fit the compaction window"</string>
+    <string name="ui_fragment_does_not_fit_the_compaction_window" formatted="false">"Fragment does not fit the compaction window. Original history kept"</string>
+    <string name="ui_summary_is_incomplete_partial_results_are_not" formatted="false">"Summary is incomplete. Partial results are not applied"</string>
+    <string name="ui_model_did_not_return_a_substantive_summary" formatted="false">"Model did not return a substantive summary"</string>
+    <string name="ui_this_debug_run_was_already_used_or" formatted="false">"This debug run was already used or has no runId. Retry explicitly with a new runId."</string>
+    <string name="ui_download_one_gguf_to_downloads_llamur_models" formatted="false">"Download one GGUF to Downloads/llamur/Models. The app pins its commit, size and SHA-256 from HF LFS. Choose and accept the model author\'s license on their page. A token is needed only for private/gated files. By default it stays in RAM; saving it on device is a separate choice."</string>
+    <string name="ui_repository_author_model" formatted="false">"Repository: author/model"</string>
+    <string name="ui_path_to_a_single_gguf_file" formatted="false">"Path to a single .gguf file"</string>
+    <string name="ui_hf_token_optional" formatted="false">"HF token (optional)"</string>
+    <string name="ui_save_token_with_android_keystore" formatted="false">"Save token with Android Keystore"</string>
+    <string name="ui_delete_saved_token" formatted="false">"Delete saved token"</string>
+    <string name="ui_check_file" formatted="false">"Check file"</string>
+    <string name="ui_cancel_download" formatted="false">"Cancel download"</string>
+    <string name="ui_hf_checking_size_revision_sha_256_and" formatted="false">"HF: checking size, revision, SHA-256 and license…"</string>
+    <string name="ui_download">"Download %1$s?"</string>
+    <string name="ui_commit_author_s_license_gated_requires_the">"%1$s / %2$s\nCommit: %3$s\nAuthor\'s license: %4$s\nGated: %5$s\n\nRequires the file size plus 256 MiB of free space. Canonical file: Downloads/llamur/Models (Android 10+) or private storage (Android 9). No temporary second private copy is created. For gated models, accept the terms and obtain access on HF first."</string>
+    <string name="ui_download_79f29d" formatted="false">"Download"</string>
+    <string name="ui_hf_page" formatted="false">"HF page"</string>
+    <string name="ui_response_exceeds_in_memory_transport_budget_bytes">"Response exceeds in-memory transport budget (%1$s bytes)"</string>
+    <string name="ui_invalid_response_range" formatted="false">"Invalid response range"</string>
+    <string name="ui_invalid_gguf_size" formatted="false">"Invalid GGUF size"</string>
+    <string name="ui_gguf_metadata_exceeds_the_safe_64_mib" formatted="false">"GGUF metadata exceeds the safe 64 MiB budget"</string>
+    <string name="ui_gguf_v2_v3_supported" formatted="false">"GGUF v2/v3 supported"</string>
+    <string name="ui_repository_must_be_author_model" formatted="false">"Repository must be author/model"</string>
+    <string name="ui_invalid_gguf_path" formatted="false">"Invalid GGUF path"</string>
+    <string name="ui_a_single_gguf_is_required_split_files" formatted="false">"A single GGUF is required; split files are not supported yet"</string>
+    <string name="ui_invalid_revision" formatted="false">"Invalid revision"</string>
+    <string name="ui_invalid_token" formatted="false">"Invalid token"</string>
+    <string name="ui_downloads_require_https" formatted="false">"Downloads require HTTPS"</string>
+    <string name="ui_unknown_hf_cdn_host_download_stopped" formatted="false">"Unknown HF CDN host; download stopped"</string>
+    <string name="ui_too_many_hf_redirects" formatted="false">"Too many HF redirects"</string>
+    <string name="ui_hf_metadata_http_for_a_gated_model">"HF metadata: HTTP %1$s. For a gated model, accept the author\'s terms and provide a token."</string>
+    <string name="ui_hf_metadata_too_large" formatted="false">"HF metadata too large"</string>
+    <string name="ui_file_is_absent_from_the_pinned_revision" formatted="false">"File is absent from the pinned revision"</string>
+    <string name="ui_hf_did_not_provide_lfs_sha_256" formatted="false">"HF did not provide LFS SHA-256; use manual import"</string>
+    <string name="ui_not_specified_by_author" formatted="false">"Not specified by author"</string>
+    <string name="ui_unknown_4f1ecc" formatted="false">"Unknown"</string>
+    <string name="ui_hf_checking_existing_file" formatted="false">"HF: checking existing file…"</string>
+    <string name="ui_invalid_partial_download_size_remove_it_in" formatted="false">"Invalid partial download size; remove it in Storage manager"</string>
+    <string name="ui_not_enough_space_to_download_the_model" formatted="false">"Not enough space to download the model"</string>
+    <string name="ui_download_cancelled" formatted="false">"Download cancelled"</string>
+    <string name="ui_hf_download_http_for_401_403_check">"HF download: HTTP %1$s. For 401/403, check your token and model access."</string>
+    <string name="ui_missing_content_range" formatted="false">"Missing Content-Range"</string>
+    <string name="ui_hf_returned_an_invalid_file_range" formatted="false">"HF returned an invalid file range"</string>
+    <string name="ui_download_cancelled_resume_or_remove_the_partial" formatted="false">"Download cancelled. Resume or remove the partial file in Storage manager."</string>
+    <string name="ui_hf_file_exceeds_its_declared_size" formatted="false">"HF file exceeds its declared size"</string>
+    <string name="ui_not_enough_space_download_stopped" formatted="false">"Not enough space; download stopped"</string>
+    <string name="ui_hf_mib">"HF: %1$s / %2$s MiB · %3$s%%"</string>
+    <string name="ui_file_truncated_repeat_the_same_download_to" formatted="false">"File truncated. Repeat the same download to resume."</string>
+    <string name="ui_re_reading_gguf_and_verifying_sha_256" formatted="false">"Re-reading GGUF and verifying SHA-256…"</string>
+    <string name="ui_unsupported_storage_version_data_was_not_deleted" formatted="false">"Unsupported storage version. Data was not deleted"</string>
+    <string name="ui_saved_chat_key_unavailable_data_was_not" formatted="false">"Saved chat key unavailable. Data was not deleted"</string>
+    <string name="ui_chat_data_key_unavailable_data_was_not" formatted="false">"Chat data key unavailable. Data was not deleted"</string>
+    <string name="ui_saved_chat_already_deleted" formatted="false">"Saved chat already deleted"</string>
+    <string name="ui_chat_exceeds_storage_budget" formatted="false">"Chat exceeds storage budget"</string>
+    <string name="ui_storage_full_limit_of_1000_chats_256" formatted="false">"Storage full: limit of 1000 chats / 256 MiB. Delete unused chats or use a temporary chat"</string>
+    <string name="ui_storage_full_draft_is_only_in_ram" formatted="false">"Storage full; draft is only in RAM"</string>
+    <string name="ui_storage_full" formatted="false">"Storage full"</string>
+    <string name="ui_connect_to_wi_fi_for_lan_api" formatted="false">"Connect to Wi-Fi for LAN API"</string>
+    <string name="ui_wi_fi_has_no_ipv4_address" formatted="false">"Wi-Fi has no IPv4 address"</string>
+    <string name="ui_api_stopped_wi_fi_or_address_changed" formatted="false">"API stopped: Wi-Fi or address changed"</string>
+    <string name="ui_could_not_delete_saved_token" formatted="false">"Could not delete saved token"</string>
+    <string name="ui_state_error">"State error: %1$s"</string>
+    <string name="ui_model_process_ended_by_android_or_the" formatted="false">"Model process ended by Android or the native backend. You can load the model again."</string>
+    <string name="ui_llamur_local_cpu_runtime" formatted="false">"llamur — local CPU runtime"</string>
+    <string name="ui_m1_test_interface_one_request_thinking_enabled" formatted="false">"M1 test interface. One request; thinking enabled. Weights and F16 KV are not requantized."</string>
+    <string name="ui_import_gguf_single_file" formatted="false">"Import GGUF (single file)"</string>
+    <string name="ui_cancel_import" formatted="false">"Cancel import"</string>
+    <string name="ui_move_selected_model_to_downloads_llamur" formatted="false">"Move selected model to Downloads/llamur"</string>
+    <string name="ui_context_prompt_template_tokens_response_reserve" formatted="false">"Context: prompt + template tokens + response reserve"</string>
+    <string name="ui_response_reserve_tokens_within_context" formatted="false">"Response reserve, tokens (within context)"</string>
+    <string name="ui_cpu_weights_read_without_mmap_batch_512" formatted="false">"CPU, weights read without mmap; batch 512 / micro-batch 128; temperature 0 / seed 42."</string>
+    <string name="ui_load_into_memory" formatted="false">"Load into memory"</string>
+    <string name="ui_prompt" formatted="false">"Prompt"</string>
+    <string name="ui_run" formatted="false">"Run"</string>
+    <string name="ui_stop_response" formatted="false">"Stop response"</string>
+    <string name="ui_unload_model" formatted="false">"Unload model"</string>
+    <string name="ui_cpu_gpu_diagnostics" formatted="false">"CPU / GPU diagnostics"</string>
+    <string name="ui_active_model_none" formatted="false">"Active model: none"</string>
+    <string name="ui_old_debug_run_will_not_be_repeated" formatted="false">"Old debug run will not be repeated. A new test requires a new runId."</string>
+    <string name="ui_connecting_to_runtime" formatted="false">"Connecting to runtime…"</string>
+    <string name="ui_runtime_connection_lost" formatted="false">"Runtime connection lost"</string>
+    <string name="ui_import_a_model_first" formatted="false">"Import a model first"</string>
+    <string name="ui_check_context_and_cpu_threads" formatted="false">"Check context and CPU threads"</string>
+    <string name="ui_background_responses" formatted="false">"Background responses"</string>
+    <string name="ui_computation_continues_when_you_minimize_the_app" formatted="false">"Computation continues when you minimize the app. Allow notifications to know when the response is ready. Chat also works without permission."</string>
+    <string name="ui_later" formatted="false">"Later"</string>
+    <string name="ui_response_reserve_must_fit_the_loaded_context" formatted="false">"Response reserve must fit the loaded context"</string>
+    <string name="ui_old_debug_run_will_not_be_repeated_44d3a4" formatted="false">"\nOld debug run will not be repeated. A new test requires a new runId."</string>
+    <string name="ui_context_cpu_threads_f16_kv">"%1$s\nContext %2$s; CPU threads %3$s; F16 KV"</string>
+    <string name="ui_tokens_prefill_ms_decode_ms">"\n%1$s tokens; prefill %2$s ms; decode %3$s ms"</string>
+    <string name="ui_this_temporary_response_is_no_longer_available" formatted="false">"\nThis temporary response is no longer available. No new request was sent."</string>
+    <string name="ui_could_not_read_response" formatted="false">"Could not read response"</string>
+    <string name="ui_chats_8f3146" formatted="false">"Chats"</string>
+    <string name="ui_search_chats" formatted="false">"Search chats"</string>
+    <string name="ui_no_chats_yet" formatted="false">"No chats yet"</string>
+    <string name="ui_start_a_conversation_with_a_model_on" formatted="false">"Start a conversation with a model on your phone or via API"</string>
+    <string name="ui_responding_7ec809" formatted="false">"Responding…"</string>
+    <string name="ui_not_saved" formatted="false">"Not saved"</string>
+    <string name="ui_permanent_a3d227" formatted="false">"Permanent"</string>
+    <string name="ui_temporary_b48314" formatted="false">"Temporary"</string>
+    <string name="ui_chat_folders" formatted="false">"Chat folders"</string>
+    <string name="ui_create_new_chat" formatted="false">"Create new chat"</string>
+    <string name="ui_close_search" formatted="false">"Close search"</string>
+    <string name="ui_all" formatted="false">"All"</string>
+    <string name="ui_nothing_found" formatted="false">"Nothing found"</string>
+    <string name="ui_this_folder_is_empty" formatted="false">"This folder is empty"</string>
+    <string name="ui_try_another_name_or_start_a_new" formatted="false">"Try another name or start a new conversation"</string>
+    <string name="ui_choose_a_model_and_start_a_conversation" formatted="false">"Choose a model and start a conversation. Temporary or permanent — your choice"</string>
+    <string name="ui_ai_80d4ea">"AI · %1$s"</string>
+    <string name="ui_source_no_longer_available" formatted="false">"Source no longer available"</string>
+    <string name="ui_source_changed_after_import_it_was_kept" formatted="false">"Source changed after import. It was kept; the verified copy remains in the app."</string>
+    <string name="ui_document_provider_did_not_allow_deletion" formatted="false">"Document provider did not allow deletion"</string>
+    <string name="ui_models_can_be_moved_to_downloads_llamur" formatted="false">"Models can be moved to Downloads/llamur. Loading into memory does not download a file."</string>
+    <string name="ui_a_model_operation_is_already_running" formatted="false">"A model operation is already running"</string>
+    <string name="ui_preparing_download" formatted="false">"Preparing download…"</string>
+    <string name="ui_saf_no_copy" formatted="false">"SAF (no copy)"</string>
+    <string name="ui_internal_storage" formatted="false">"Internal storage"</string>
+    <string name="ui_test_model" formatted="false">"Test model: "</string>
+    <string name="ui_invalid_model_file" formatted="false">"Invalid model file"</string>
+    <string name="ui_could_not_open_model_in_downloads_llamur" formatted="false">"Could not open model in Downloads/llamur"</string>
+    <string name="ui_model_must_be_a_regular_file" formatted="false">"Model must be a regular file"</string>
+    <string name="ui_model_size_changed_check_the_file" formatted="false">"Model size changed: check the file"</string>
+    <string name="ui_file_verification_cancelled" formatted="false">"File verification cancelled"</string>
+    <string name="ui_model_changed_during_verification" formatted="false">"Model changed during verification"</string>
+    <string name="ui_model_sha_256_changed_file_kept_import" formatted="false">"Model SHA-256 changed. File kept; import it again to explicitly choose the new model."</string>
+    <string name="ui_verification_cancelled" formatted="false">"Verification cancelled"</string>
+    <string name="ui_downloads_llamur_requires_android_10_use_import" formatted="false">"Downloads/llamur requires Android 10; use import on Android 9"</string>
+    <string name="ui_could_not_remove_incomplete_transfer_entry" formatted="false">"Could not remove incomplete transfer entry"</string>
+    <string name="ui_file_connected_without_copying_choose_import_for" formatted="false">"File connected without copying. Choose import for an independent copy."</string>
+    <string name="ui_downloads_file_sha_256_changed" formatted="false">"Downloads file SHA-256 changed"</string>
+    <string name="ui_internal_copy_changed_it_was_kept" formatted="false">"Internal copy changed; it was kept"</string>
+    <string name="ui_could_not_delete_internal_copy" formatted="false">"Could not delete internal copy"</string>
+    <string name="ui_internal_model_copy_not_found" formatted="false">"Internal model copy not found"</string>
+    <string name="ui_safe_transfer_temporarily_requires_mib_free_plus">"Safe transfer temporarily requires %1$s MiB free plus 256 MiB reserve"</string>
+    <string name="ui_could_not_create_file_in_downloads_llamur" formatted="false">"Could not create file in Downloads/llamur"</string>
+    <string name="ui_could_not_open_new_file" formatted="false">"Could not open new file"</string>
+    <string name="ui_transfer_cancelled" formatted="false">"Transfer cancelled"</string>
+    <string name="ui_source_model_changed_during_transfer" formatted="false">"Source model changed during transfer"</string>
+    <string name="ui_sha_256_does_not_match_pinned_model" formatted="false">"SHA-256 does not match pinned model"</string>
+    <string name="ui_internal_copy_sha_256_changed" formatted="false">"Internal copy SHA-256 changed"</string>
+    <string name="ui_could_not_verify_new_file" formatted="false">"Could not verify new file"</string>
+    <string name="ui_new_copy_failed_sha_256_verification" formatted="false">"New copy failed SHA-256 verification"</string>
+    <string name="ui_file_is_available_in_downloads_could_not" formatted="false">"File is available in Downloads; could not delete internal copy"</string>
+    <string name="ui_moving_to_downloads_llamur_and_checking_sha" formatted="false">"Moving to Downloads/llamur and checking SHA-256…"</string>
+    <string name="ui_done_downloads_llamur_models_internal_copy_deleted" formatted="false">"Done: Downloads/llamur/Models. Internal copy deleted."</string>
+    <string name="ui_could_not_move_model" formatted="false">"Could not move model"</string>
+    <string name="ui_model_not_found" formatted="false">"Model not found"</string>
+    <string name="ui_external_files_can_be_disconnected_source_deletion" formatted="false">"External files can be disconnected; source deletion is prohibited here"</string>
+    <string name="ui_could_not_delete_model_in_downloads" formatted="false">"Could not delete model in Downloads"</string>
+    <string name="ui_could_not_delete_model" formatted="false">"Could not delete model"</string>
+    <string name="ui_cancel_the_download_and_wait_for_it" formatted="false">"Cancel the download and wait for it to finish first"</string>
+    <string name="ui_existing_model_failed_sha_256_verification" formatted="false">"Existing model failed SHA-256 verification"</string>
+    <string name="ui_this_is_not_an_external_connection" formatted="false">"This is not an external connection"</string>
+    <string name="ui_delete_managed_models_using_storage_manager" formatted="false">"Delete managed models using Storage manager"</string>
+    <string name="ui_checking_external_gguf_without_copying" formatted="false">"Checking external GGUF without copying…"</string>
+    <string name="ui_provider_did_not_grant_persistent_access_use" formatted="false">"Provider did not grant persistent access. Use independent import."</string>
+    <string name="ui_document_unavailable" formatted="false">"Document unavailable"</string>
+    <string name="ui_a_regular_seekable_gguf_is_required" formatted="false">"A regular seekable GGUF is required"</string>
+    <string name="ui_gguf_without_copying" formatted="false">"GGUF without copying"</string>
+    <string name="ui_file_connected_without_copying_do_not_delete" formatted="false">"File connected without copying. Do not delete or change the source; access is checked on every load."</string>
+    <string name="ui_could_not_connect_gguf" formatted="false">"Could not connect GGUF"</string>
+    <string name="ui_preparing_import" formatted="false">"Preparing import…"</string>
+    <string name="ui_split_gguf_is_not_supported_yet_choose" formatted="false">"Split GGUF is not supported yet: choose a single file"</string>
+    <string name="ui_not_enough_space_for_an_independent_model" formatted="false">"Not enough space for an independent model copy"</string>
+    <string name="ui_import_cancelled" formatted="false">"Import cancelled"</string>
+    <string name="ui_model_exceeds_64_gib" formatted="false">"Model exceeds 64 GiB"</string>
+    <string name="ui_not_enough_free_space" formatted="false">"Not enough free space"</string>
+    <string name="ui_import_mib">"Import: %1$s MiB"</string>
+    <string name="ui_mib">" / %1$s MiB"</string>
+    <string name="ui_could_not_open_document" formatted="false">"Could not open document"</string>
+    <string name="ui_source_size_changed_during_import" formatted="false">"Source size changed during import"</string>
+    <string name="ui_re_reading_and_verifying_gguf_copy_sha" formatted="false">"Re-reading and verifying GGUF copy / SHA-256…"</string>
+    <string name="ui_model_already_exists_no_duplicate_copy_created">"Model already exists: %1$s. No duplicate copy created."</string>
+    <string name="ui_import_verified_sha_256">"Import verified. %1$s. SHA-256: %2$s"</string>
+    <string name="ui_import_error" formatted="false">"Import error"</string>
+    <string name="ui_an_import_or_download_is_already_running" formatted="false">"An import or download is already running"</string>
+    <string name="ui_preparing" formatted="false">"Preparing…"</string>
+    <string name="ui_llamur_model" formatted="false">"llamur · model"</string>
+    <string name="ui_cancel_d1c0c3" formatted="false">"Cancel"</string>
+    <string name="ui_model_downloads" formatted="false">"Model downloads"</string>
+    <string name="ui_operation_busy" formatted="false">"Operation busy"</string>
+    <string name="ui_model_ready">"Model ready: %1$s"</string>
+    <string name="ui_internal_storage_9591ff" formatted="false">"internal storage"</string>
+    <string name="ui_download_failed" formatted="false">"Download failed"</string>
+    <string name="ui_incomplete_model_is_inaccessible" formatted="false">"Incomplete model is inaccessible"</string>
+    <string name="ui_gguf_truncated" formatted="false">"GGUF truncated"</string>
+    <string name="ui_single_gguf_v2_v3_supported" formatted="false">"Single GGUF v2/v3 supported"</string>
+    <string name="ui_file_size_does_not_match" formatted="false">"File size does not match"</string>
+    <string name="ui_sha_256_mismatch" formatted="false">"SHA-256 mismatch"</string>
+    <string name="ui_could_not_finish_import" formatted="false">"Could not finish import"</string>
+    <string name="ui_model_ready_could_not_remove_operation_journal" formatted="false">"Model ready; could not remove operation journal"</string>
+    <string name="ui_operation_already_exists" formatted="false">"Operation already exists"</string>
+    <string name="ui_could_not_create_model_in_downloads_llamur" formatted="false">"Could not create model in Downloads/llamur/Models"</string>
+    <string name="ui_message_exceeds_transport_budget" formatted="false">"Message exceeds transport budget"</string>
+    <string name="ui_transport_message_truncated_or_damaged" formatted="false">"Transport message truncated or damaged"</string>
+    <string name="ui_openrouter_rejected_the_model_due_to_account">"OpenRouter rejected the model due to account data policy (HTTP %1$s). Check https://openrouter.ai/settings/privacy: a free endpoint may require permission for training. The app does not change account settings."</string>
+    <string name="ui_key_hidden" formatted="false">"[key hidden]"</string>
+    <string name="ui_hidden" formatted="false">"[hidden]"</string>
+    <string name="ui_bearer_hidden" formatted="false">"Bearer [hidden]"</string>
+    <string name="ui_check_key_permissions_and_account" formatted="false">"Check key, permissions and account"</string>
+    <string name="ui_check_model_id_availability_and_base_url" formatted="false">"Check model ID, availability and base URL"</string>
+    <string name="ui_provider_rate_limit_reached" formatted="false">"Provider rate limit reached"</string>
+    <string name="ui_check_model_parameters" formatted="false">"Check model parameters"</string>
+    <string name="ui_provider_rejected_request_http">"Provider rejected request (HTTP %1$s). %2$s"</string>
+    <string name="ui_no_automatic_retry" formatted="false">". No automatic retry"</string>
+    <string name="ui_api_requests" formatted="false">"API requests"</string>
+    <string name="ui_an_api_request_is_already_running" formatted="false">"An API request is already running"</string>
+    <string name="ui_llamur_api_request" formatted="false">"llamur · API request"</string>
+    <string name="ui_waiting_for_provider_response" formatted="false">"Waiting for provider response"</string>
+    <string name="ui_could_not_start_background_api_request" formatted="false">"Could not start background API request"</string>
+    <string name="ui_android_stopped_a_long_network_request" formatted="false">"Android stopped a long network request"</string>
+    <string name="ui_android_stopped_the_background_request" formatted="false">"Android stopped the background request"</string>
+    <string name="ui_saved_connection_key_unavailable_enter_it_again" formatted="false">"Saved connection key unavailable. Enter it again."</string>
+    <string name="ui_connection_deleted" formatted="false">"Connection deleted"</string>
+    <string name="ui_enter_api_key_in_connection_settings" formatted="false">"Enter API key in connection settings"</string>
+    <string name="ui_up_to_32_connections" formatted="false">"Up to 32 connections"</string>
+    <string name="ui_response_reserve_1_131072_tokens" formatted="false">"Response reserve: 1–131072 tokens"</string>
+    <string name="ui_model_history_stream_limit_tools_are_set" formatted="false">"Model/history/stream/limit/tools are set by the app"</string>
+    <string name="ui_invalid_api_key" formatted="false">"Invalid API key"</string>
+    <string name="ui_invalid_additional_header" formatted="false">"Invalid additional header"</string>
+    <string name="ui_headers_printable_ascii_only" formatted="false">"Headers: printable ASCII only"</string>
+    <string name="ui_could_not_save_connection" formatted="false">"Could not save connection"</string>
+    <string name="ui_up_to_64_active_models_per_connection" formatted="false">"Up to 64 active models per connection"</string>
+    <string name="ui_enter_a_model_id_up_to_256" formatted="false">"Enter a model ID up to 256 characters"</string>
+    <string name="ui_invalid_base_url" formatted="false">"Invalid base URL"</string>
+    <string name="ui_base_url_address_without_key_query_or" formatted="false">"Base URL: address without key, query or fragment"</string>
+    <string name="ui_https_required_http_can_be_explicitly_allowed" formatted="false">"HTTPS required. HTTP can be explicitly allowed only for this phone\'s loopback"</string>
+    <string name="ui_could_not_perform_action" formatted="false">"Could not perform action"</string>
+    <string name="ui_history_is_sent_only_to_the_provider" formatted="false">"History is sent only to the provider chosen for this chat."</string>
+    <string name="ui_add_connection" formatted="false">"＋ Add connection"</string>
+    <string name="ui_loading_connections" formatted="false">"Loading connections…"</string>
+    <string name="ui_other_compatible_server" formatted="false">"Other compatible server"</string>
+    <string name="ui_add_provider" formatted="false">"Add provider"</string>
+    <string name="ui_model_catalogue" formatted="false">"Model catalogue"</string>
+    <string name="ui_find_and_enable_models" formatted="false">"Find and enable models"</string>
+    <string name="ui_enable_model_by_id" formatted="false">"Enable model by ID"</string>
+    <string name="ui_if_the_catalogue_is_unavailable" formatted="false">"If the catalogue is unavailable"</string>
+    <string name="ui_available_in_new_chats" formatted="false">"Available in new chats"</string>
+    <string name="ui_edit_connection" formatted="false">"Edit connection"</string>
+    <string name="ui_key_address_response_limit_and_reasoning" formatted="false">"Key, address, response limit and reasoning"</string>
+    <string name="ui_delete_connection" formatted="false">"Delete connection"</string>
+    <string name="ui_delete_connection_30e2a1" formatted="false">"Delete connection?"</string>
+    <string name="ui_key_and_settings_will_be_deleted_chats" formatted="false">"Key and settings will be deleted. Chats will not switch to another server."</string>
+    <string name="ui_no_active_models_yet" formatted="false">"No active models yet"</string>
+    <string name="ui_add_model" formatted="false">"＋ Add model"</string>
+    <string name="ui_new_chats_will_use_this_server">"%1$s · new chats will use this server."</string>
+    <string name="ui_if_capabilities_are_missing_from_the_catalogue" formatted="false">"If capabilities are missing from the catalogue, specify them manually only for a model that supports them."</string>
+    <string name="ui_understands_images" formatted="false">"Understands images"</string>
+    <string name="ui_accepts_pdf" formatted="false">"Accepts PDF"</string>
+    <string name="ui_returns_images_in_chat_api" formatted="false">"Returns images in Chat API"</string>
+    <string name="ui_enable_3a3d7a" formatted="false">"Enable"</string>
+    <string name="ui_enter_model_id" formatted="false">"Enter model ID"</string>
+    <string name="ui_model_enabled_choose_it_when_creating_a" formatted="false">"Model enabled. Choose it when creating a new chat"</string>
+    <string name="ui_load_catalogue" formatted="false">"Load catalogue"</string>
+    <string name="ui_add_model_2350fb" formatted="false">"Add model"</string>
+    <string name="ui_loading_catalogue" formatted="false">"Loading catalogue…"</string>
+    <string name="ui_search_model_by_name_or_id" formatted="false">"Search model by name or ID"</string>
+    <string name="ui_retry_loading" formatted="false">"Retry loading"</string>
+    <string name="ui_catalogue">"Catalogue · %1$s"</string>
+    <string name="ui_models_found">"Models: %1$s · found %2$s"</string>
+    <string name="ui_catalogue_unavailable" formatted="false">"Catalogue unavailable"</string>
+    <string name="ui_key_is_used_only_for_this_server" formatted="false">"Key is used only for this server. An empty field keeps the saved key."</string>
+    <string name="ui_base_url_with_v1_or_api_v1" formatted="false">"Base URL with /v1 or /api/v1"</string>
+    <string name="ui_protocol" formatted="false">"Protocol"</string>
+    <string name="ui_save_key_protected_by_androidkeystore" formatted="false">"Save key protected by AndroidKeyStore"</string>
+    <string name="ui_forget_previous_key_and_headers" formatted="false">"Forget previous key and headers"</string>
+    <string name="ui_server_requires_api_key" formatted="false">"Server requires API key"</string>
+    <string name="ui_default_model_id_can_be_added_later" formatted="false">"Default model ID (can be added later)"</string>
+    <string name="ui_openrouter_reasoning_other_apis_use_json_below" formatted="false">"OpenRouter reasoning (other APIs: use JSON below)"</string>
+    <string name="ui_provider_default" formatted="false">"Provider default"</string>
+    <string name="ui_on" formatted="false">"On"</string>
+    <string name="ui_off" formatted="false">"Off"</string>
+    <string name="ui_chat_completions_limit_field" formatted="false">"Chat Completions limit field"</string>
+    <string name="ui_allow_http_only_to_phone_loopback" formatted="false">"Allow HTTP only to phone loopback"</string>
+    <string name="ui_extra_parameters_depend_on_the_model_an" formatted="false">"Extra parameters depend on the model. An empty JSON keeps provider defaults. Changing protocol/parameters requires a new chat."</string>
+    <string name="ui_request_parameters_json" formatted="false">"Request parameters JSON"</string>
+    <string name="ui_extra_headers_json_empty_keeps_existing" formatted="false">"Extra headers JSON · empty keeps existing"</string>
+    <string name="ui_connection" formatted="false">"Connection"</string>
+    <string name="ui_request_stopped_partial_response_kept" formatted="false">"Request stopped. Partial response kept"</string>
+    <string name="ui_request_exceeded_1_hour" formatted="false">"Request exceeded 1 hour"</string>
+    <string name="ui_redirect_rejected_key_is_not_forwarded_to" formatted="false">"Redirect rejected: key is not forwarded to another address"</string>
+    <string name="ui_unsupported_response_encoding" formatted="false">"Unsupported response encoding"</string>
+    <string name="ui_network_response_exceeded_32_mib" formatted="false">"Network response exceeded 32 MiB"</string>
+    <string name="ui_sse_line_too_large" formatted="false">"SSE line too large"</string>
+    <string name="ui_json_response_too_large" formatted="false">"JSON response too large"</string>
+    <string name="ui_catalogue_too_large_enter_model_id_manually" formatted="false">"Catalogue too large; enter model ID manually"</string>
+    <string name="ui_capabilities_catalogue_too_large" formatted="false">"Capabilities catalogue too large"</string>
+    <string name="ui_expected_sse_or_json_response" formatted="false">"Expected SSE or JSON response"</string>
+    <string name="ui_unsupported_provider_response" formatted="false">"Unsupported provider response"</string>
+    <string name="ui_network_protocol_error_partial_response_kept_no">"Network/protocol error (%1$s). Partial response kept; no retry"</string>
+    <string name="ui_sse_line_exceeded_8_mib" formatted="false">"SSE line exceeded 8 MiB"</string>
+    <string name="ui_sse_event_exceeded_8_mib" formatted="false">"SSE event exceeded 8 MiB"</string>
+    <string name="ui_this_model_requires_reasoning_it_cannot_be" formatted="false">"This model requires reasoning; it cannot be disabled"</string>
+    <string name="ui_unknown_protocol" formatted="false">"Unknown protocol"</string>
+    <string name="ui_request_exceeds_8_mib_history_was_not" formatted="false">"Request exceeds 8 MiB. History was not truncated; start a new chat"</string>
+    <string name="ui_provider_reported_a_stream_error_partial_response" formatted="false">"Provider reported a stream error. Partial response kept; no automatic retry"</string>
+    <string name="ui_unsupported_api_image" formatted="false">"Unsupported API image"</string>
+    <string name="ui_too_many_response_files" formatted="false">"Too many response files"</string>
+    <string name="ui_response_exceeds_512_kib_of_text_partial" formatted="false">"Response exceeds 512 KiB of text; partial response kept"</string>
+    <string name="ui_too_many_response_blocks" formatted="false">"Too many response blocks"</string>
+    <string name="ui_provider_used_an_unsupported_finish_mode_tool" formatted="false">"Provider used an unsupported finish mode; tool calls are not executed"</string>
+    <string name="ui_too_many_response_events" formatted="false">"Too many response events"</string>
+    <string name="ui_stream_ended_without_finish_reason" formatted="false">"Stream ended without finish_reason"</string>
+    <string name="ui_model_requested_tools_this_text_client_does" formatted="false">"Model requested tools; this text client does not execute them"</string>
+    <string name="ui_unsupported_claude_block_tools_are_not_executed" formatted="false">"Unsupported Claude block; tools are not executed"</string>
+    <string name="ui_delta_before_block_start" formatted="false">"Delta before block start"</string>
+    <string name="ui_unsupported_claude_delta" formatted="false">"Unsupported Claude delta"</string>
+    <string name="ui_provider_did_not_complete_the_response_partial" formatted="false">"Provider did not complete the response. Partial response kept"</string>
+    <string name="ui_tools_non_text_responses_are_not_supported" formatted="false">"Tools/non-text responses are not supported yet"</string>
+    <string name="ui_internal_state_exceeded_1_mib_partial_response" formatted="false">"Internal state exceeded 1 MiB; partial response kept"</string>
+    <string name="ui_response_files_exceed_6_mib_in_total" formatted="false">"Response files exceed 6 MiB in total"</string>
+    <string name="ui_incomplete_responses_response" formatted="false">"Incomplete Responses response"</string>
+    <string name="ui_tools_are_not_supported_yet" formatted="false">"Tools are not supported yet"</string>
+    <string name="ui_non_text_response" formatted="false">"Non-text response"</string>
+    <string name="ui_provider_revised_text_already_delivered" formatted="false">"Provider revised text already delivered"</string>
+    <string name="ui_connection_ended_before_response_completion_partial_text" formatted="false">"Connection ended before response completion. Partial text kept; no retry"</string>
+    <string name="ui_model_not_loaded" formatted="false">"Model not loaded"</string>
+    <string name="ui_command_error" formatted="false">"Command error"</string>
+    <string name="ui_token_counter_is_available_when_the_model" formatted="false">"Token counter is available when the model is ready"</string>
+    <string name="ui_start_a_new_chat_for_the_selected" formatted="false">"Start a new chat for the selected model"</string>
+    <string name="ui_model_state_changed" formatted="false">"Model state changed"</string>
+    <string name="ui_unload_the_selected_model_first" formatted="false">"Unload the selected model first"</string>
+    <string name="ui_model_deleted" formatted="false">"Model deleted"</string>
+    <string name="ui_load_the_model_and_wait_until_ready" formatted="false">"Load the model and wait until ready first; stop any running API"</string>
+    <string name="ui_selected_model_changed_check_the_profile_before" formatted="false">"Selected model changed. Check the profile before starting API"</string>
+    <string name="ui_preparing_secure_api" formatted="false">"Preparing secure API…"</string>
+    <string name="ui_api_startup_cancelled" formatted="false">"API startup cancelled"</string>
+    <string name="ui_api_enabled_97d824">"API enabled · %1$s"</string>
+    <string name="ui_api_not_started" formatted="false">"API not started"</string>
+    <string name="ui_catalogue_request_already_in_progress_wait_for" formatted="false">"Catalogue request already in progress; wait for the result"</string>
+    <string name="ui_connection_changed_repeat_the_check_explicitly" formatted="false">"Connection changed; repeat the check explicitly"</string>
+    <string name="ui_catalogue_received_but_settings_could_not_be" formatted="false">"Catalogue received, but settings could not be saved. Check free storage."</string>
+    <string name="ui_catalogue_unavailable_check_url_network_and_api" formatted="false">"Catalogue unavailable. Check URL, network and API key. "</string>
+    <string name="ui_catalogue_7e2f0a" formatted="false">"Catalogue"</string>
+    <string name="ui_confirm_deletion_of_saved_chats" formatted="false">"Confirm deletion of saved chats"</string>
+    <string name="ui_connection_changed_summary_not_applied" formatted="false">"Connection changed; summary not applied"</string>
+    <string name="ui_unknown_command" formatted="false">"Unknown command"</string>
+    <string name="ui_connection_changed_compaction_was_not_sent_to" formatted="false">"Connection changed. Compaction was not sent to a different source"</string>
+    <string name="ui_load_this_chat_s_model" formatted="false">"Load this chat\'s model"</string>
+    <string name="ui_checking_context" formatted="false">"Checking context…"</string>
+    <string name="ui_check_cancelled_draft_kept" formatted="false">"Check cancelled; draft kept"</string>
+    <string name="ui_input_response_exceed_context_history_was_not">"Input %1$s + response %2$s exceed context %3$s. History was not truncated; use compaction"</string>
+    <string name="ui_request_rejected" formatted="false">"Request rejected"</string>
+    <string name="ui_draft_exceeds_512_kib_a8cf23" formatted="false">"Draft exceeds 512 KiB"</string>
+    <string name="ui_load_this_chat_s_model_for_compaction" formatted="false">"Load this chat\'s model for compaction"</string>
+    <string name="ui_enter_the_api_window_in_compaction_settings" formatted="false">"Enter the API window in compaction settings: catalogue did not provide it"</string>
+    <string name="ui_preparing_context_compaction" formatted="false">"Preparing context compaction…"</string>
+    <string name="ui_compaction_stopped" formatted="false">"Compaction stopped"</string>
+    <string name="ui_compacting_context_step">"Compacting context · step %1$s"</string>
+    <string name="ui_summary_did_not_reduce_the_working_context" formatted="false">"Summary did not reduce the working context. History kept"</string>
+    <string name="ui_input_plus_response_still_does_not_fit" formatted="false">"Input plus response still does not fit after compaction. Reduce the draft or response reserve"</string>
+    <string name="ui_summary_ready_review_and_apply_it" formatted="false">"Summary ready — review and apply it"</string>
+    <string name="ui_summary_ready" formatted="false">"Summary ready"</string>
+    <string name="ui_compaction_incomplete_history_kept" formatted="false">"Compaction incomplete; history kept"</string>
+    <string name="ui_compaction_incomplete" formatted="false">"Compaction incomplete"</string>
+    <string name="ui_connection_changed_start_a_new_chat_history" formatted="false">"Connection changed. Start a new chat; history was not sent"</string>
+    <string name="ui_previous_response_was_interrupted_start_a_new" formatted="false">"Previous response was interrupted. Start a new chat to avoid losing internal reasoning state"</string>
+    <string name="ui_api_request_error" formatted="false">"API request error"</string>
+    <string name="ui_response_exceeded_memory_budget_partial_text_kept" formatted="false">"Response exceeded memory budget; partial text kept"</string>
+    <string name="ui_api_response_completed" formatted="false">"API response completed"</string>
+    <string name="ui_could_not_start_request_open_llamur_and" formatted="false">"Could not start request. Open llamur and retry explicitly"</string>
+    <string name="ui_wait_until_the_model_is_ready" formatted="false">"Wait until the model is ready"</string>
+    <string name="ui_start_a_new_chat_for_a_different" formatted="false">"Start a new chat for a different model"</string>
+    <string name="ui_api_checking_context" formatted="false">"API · checking context…"</string>
+    <string name="ui_api_request_cancelled" formatted="false">"API request cancelled"</string>
+    <string name="ui_api_request_rejected">"API request rejected: %1$s"</string>
+    <string name="ui_local_model" formatted="false">"Local model"</string>
+    <string name="ui_llamur_local_model" formatted="false">"llamur — local model"</string>
+    <string name="ui_stop_and_unload" formatted="false">"Stop and unload"</string>
+    <string name="ui_runtime_is_closing" formatted="false">"Runtime is closing"</string>
+    <string name="ui_estimating_memory_for_selected_gpu_profile" formatted="false">"Estimating memory for selected GPU profile…"</string>
+    <string name="ui_estimation_cancelled" formatted="false">"Estimation cancelled"</string>
+    <string name="ui_gpu_profile_not_loaded">"GPU profile not loaded: %1$s"</string>
+    <string name="ui_no_model_selected" formatted="false">"No model selected"</string>
+    <string name="ui_model_file_not_found" formatted="false">"Model file not found"</string>
+    <string name="ui_invalid_context_size" formatted="false">"Invalid context size"</string>
+    <string name="ui_invalid_thread_count" formatted="false">"Invalid thread count"</string>
+    <string name="ui_invalid_prefill_thread_count" formatted="false">"Invalid prefill thread count"</string>
+    <string name="ui_not_enough_memory_to_check_gpu_profile" formatted="false">"Not enough memory to check GPU profile. Unload the current model first."</string>
+    <string name="ui_this_experimental_profile_failed_stability_checks_or" formatted="false">"This experimental profile failed stability checks or is unsupported for the selected model. Use the native profile."</string>
+    <string name="ui_not_enough_free_memory_for_safe_loading">"Not enough free memory for safe loading: %1$s MiB available, %2$s MiB budget"</string>
+    <string name="ui_loading_model_into_memory" formatted="false">"Loading model into memory…"</string>
+    <string name="ui_stopping_load_not_enough_free_memory" formatted="false">"Stopping load: not enough free memory"</string>
+    <string name="ui_verifying_model_file_sha_256" formatted="false">"Verifying model file SHA-256…"</string>
+    <string name="ui_memory_became_insufficient_during_loading" formatted="false">"Memory became insufficient during loading"</string>
+    <string name="ui_model_ready_0c37f0" formatted="false">"Model ready"</string>
+    <string name="ui_loading_stopped_not_enough_free_memory" formatted="false">"Loading stopped: not enough free memory"</string>
+    <string name="ui_loading_failed">"Loading failed: %1$s"</string>
+    <string name="ui_enter_a_prompt_up_to_32_kib" formatted="false">"Enter a prompt up to 32 KiB"</string>
+    <string name="ui_response_reserve_must_fit_the_context" formatted="false">"Response reserve must fit the context"</string>
+    <string name="ui_generating" formatted="false">"Generating…"</string>
+    <string name="ui_response_limit_reached" formatted="false">"Response limit reached"</string>
+    <string name="ui_response_completed" formatted="false">"Response completed"</string>
+    <string name="ui_request_stopped_phone_overheated_let_it_cool" formatted="false">"Request stopped: phone overheated. Let it cool down; context and weights are unchanged."</string>
+    <string name="ui_request_stopped_not_enough_free_memory_context" formatted="false">"Request stopped: not enough free memory. Context was not shortened."</string>
+    <string name="ui_generation_stopped" formatted="false">"Generation stopped"</string>
+    <string name="ui_error_47c833">"Error: %1$s"</string>
+    <string name="ui_could_not_save_test_report" formatted="false">"Could not save test report"</string>
+    <string name="ui_stopping_api_request" formatted="false">"Stopping API request…"</string>
+    <string name="ui_stopping" formatted="false">"Stopping…"</string>
+    <string name="ui_unloading_model" formatted="false">"Unloading model…"</string>
+    <string name="ui_model_unloaded" formatted="false">"Model unloaded"</string>
+    <string name="ui_compaction_interrupted_original_history_kept" formatted="false">"Compaction interrupted; original history kept"</string>
+    <string name="ui_compaction_interrupted" formatted="false">"Compaction interrupted"</string>
+    <string name="ui_json_exceeds_size_limit" formatted="false">"JSON exceeds size limit"</string>
+    <string name="ui_http_badge" formatted="false">"⚠ HTTP"</string>
+    <string name="ui_http_connection_status" formatted="false">"⚠ HTTP — connection without TLS"</string>
+    <string name="ui_allow_http_for_this_address" formatted="false">"Allow HTTP for this address"</string>
+    <string name="ui_http_warning_title" formatted="false">"Allow this HTTP connection?"</string>
+    <string name="ui_http_warning_body">"Address: %1$s\n\nHTTP itself does not encrypt conversations, files, API keys or headers. Anyone who can intercept the connection can read or change them. Tailscale encrypts traffic between its nodes while the VPN is connected, but llamur cannot verify the route.\n\nAllow only a server you trust. Permission is saved for this exact address and port. Changing the address requires confirmation again."</string>
+    <string name="ui_allow_for_this_address" formatted="false">"Allow for this address"</string>
+    <string name="ui_enter_http_address_first" formatted="false">"Enter an http:// API address first"</string>
+    <string name="ui_http_requires_address_approval" formatted="false">"HTTPS is required unless you explicitly allow HTTP for this exact address in the connection settings."</string>
+    <string name="ui_about_llamur" formatted="false">"About llamur"</string>
+    <string name="ui_source_code_on_github" formatted="false">"Source code on GitHub"</string>
+    <string name="ui_about_llamur_description" formatted="false">"Run GGUF models on your phone, connect your own AI providers, and share a local model through the API. Original model weights stay unchanged."</string>
+</resources>

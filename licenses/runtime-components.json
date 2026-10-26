@@ -1,0 +1,99 @@
+{
+  "scope": "Source/component notice inventory for portable text-only CPU build, not final binary SBOM or completed F-Droid audit",
+  "project_license": "Apache-2.0",
+  "components": [
+    {
+      "name": "llama.cpp / GGML (including its C++ Jinja engine)",
+      "version": "701fd25b3a55a90297dec0d925204b29084054c8",
+      "license": "MIT",
+      "notice": "llama.cpp.MIT.txt",
+      "source": "third_party/llama.cpp; hash-locked local patches in patches/cpu-numeric/series.json"
+    },
+    {
+      "name": "nlohmann/json",
+      "version": "3.12.0",
+      "license": "MIT",
+      "notice": "nlohmann-json.MIT.txt",
+      "source": "third_party/llama.cpp/vendor/nlohmann/json.hpp"
+    },
+    {
+      "name": "cpp-httplib",
+      "license": "MIT",
+      "notice": "cpp-httplib.MIT.txt",
+      "source": "third_party/llama.cpp/vendor/cpp-httplib"
+    },
+    {
+      "name": "xxHash",
+      "license": "BSD-2-Clause",
+      "notice": "xxhash.BSD-2-Clause.txt",
+      "source": "third_party/llama.cpp/vendor/hash/xxhash"
+    },
+    {
+      "name": "rotate-bits",
+      "license": "MIT",
+      "notice": "rotate-bits.MIT.txt",
+      "source": "third_party/llama.cpp/vendor/hash/rotate-bits"
+    },
+    {
+      "name": "SHA-1 (Steve Reid)",
+      "license": "LicenseRef-Public-Domain",
+      "notice": "sha1.Public-Domain.txt",
+      "source": "third_party/llama.cpp/vendor/hash/sha1"
+    },
+    {
+      "name": "SHA-256 (Igor Pavlov)",
+      "license": "LicenseRef-Public-Domain",
+      "notice": "sha256.Public-Domain.txt",
+      "source": "third_party/llama.cpp/vendor/hash/sha256"
+    },
+    {
+      "name": "subprocess.h",
+      "license": "Unlicense",
+      "notice": "subprocess.Unlicense.txt",
+      "source": "third_party/llama.cpp/vendor/sheredom/subprocess.h"
+    },
+    {
+      "name": "LLVM C++ runtime / libc++abi / compiler runtime notices",
+      "version": "Android NDK28.2.13676358",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "notice": "LLVM-NDK-r28c.NOTICE.txt",
+      "source": "Official pinned NDK toolchain NOTICE; complete LLVM notice bundle retained, including unused components"
+    },
+    {
+      "name": "org.jetbrains.kotlin:kotlin-stdlib",
+      "version": "2.3.0",
+      "license": "Apache-2.0",
+      "notice": "MotoAI.Apache-2.0.txt",
+      "provenance": "Pinned trusted-Maven artifact; local POM declares Apache2.0",
+      "jar_sha256": "887587c91713250ad52fe14ad9166d042c33835049890e9437f355ffc5a195b1",
+      "pom_sha256": "4d5256d3e4844e656b0ca405f6350d6f21795c24375b3452526c5467dd99b5a2"
+    },
+    {
+      "name": "org.jetbrains:annotations",
+      "version": "13.0",
+      "license": "Apache-2.0",
+      "notice": "MotoAI.Apache-2.0.txt",
+      "provenance": "Pinned trusted-Maven artifact; local POM declares Apache2.0",
+      "jar_sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478",
+      "pom_sha256": "965aeb2bedff369819bdde1bf7a0b3b89b8247dd69c88b86375d76163bb8c397"
+    }
+  ],
+  "excluded": [
+    "No model files or developer test fixtures bundled",
+    "KleidiAI disabled in main CPU build",
+    "OpenCL/Vulkan/Hexagon backend binaries excluded from CPU build",
+    "Optional llguidance/Rust backend disabled"
+  ],
+  "notice_sha256": {
+    "sha256.Public-Domain.txt": "b81d0022ca6367918c67b57e9647d3513ee58809fd4b0ef0b3492f1356bced25",
+    "LLVM-NDK-r28c.NOTICE.txt": "f96f763beb66a7ba7a667647fc64c0226ace875e590c831fdd9579ec1c1d91e1",
+    "subprocess.Unlicense.txt": "87e83b5fb7afe48f3b8a441bff76bb7ddbe6d885acaebfc2f2fbb935d08e27df",
+    "sha1.Public-Domain.txt": "5cb2ba855aece83531c4cac45c9ffe8ea8020bd11d01a77474aa199b575deb0a",
+    "MotoAI.Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "cpp-httplib.MIT.txt": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b",
+    "rotate-bits.MIT.txt": "ca0b44aec101afb6b46f4c39b23369fa06a64fb9c0add37c2689d702156fee55",
+    "xxhash.BSD-2-Clause.txt": "6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a",
+    "llama.cpp.MIT.txt": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+    "nlohmann-json.MIT.txt": "c0d068392ea65358b798b8c165103560f06e9e3b38c4ab4e2d8810a7b931af86"
+  }
+}

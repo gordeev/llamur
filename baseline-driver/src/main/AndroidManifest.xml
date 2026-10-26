@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="MotoAI B0 test driver" android:allowBackup="false" />
+    <instrumentation android:name=".BaselineInstrumentation"
+        android:targetPackage="com.example.llama.aichat"
+        android:label="Official llama.cpp native JNI baseline" />
+</manifest>

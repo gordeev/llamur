@@ -1,0 +1,99 @@
+{
+  "scope": "Planning and historical actual-filled evidence kept separate. no_alloc-read-layout buffers are not measured resident memory or model inference acceptance.",
+  "apk_sha256": "1758e23c0315bfc68087e0eb51b8b919db3c5418f50156ee229504458fbe973f",
+  "planning_report": "bench/results/gpu-plan-cpu-20261026T020516Z/report.json",
+  "models": {
+    "Ornith-1.5-9B-Q4_K_M.gguf": [
+      {
+        "configured_context": 4096,
+        "planned_context_bytes": 186908672,
+        "planned_compute_bytes": 138680864,
+        "new_filled_trial": "bench/results/context-ornith-4096-20261026T072252Z/report.json",
+        "profile_qualified": false,
+        "retrieval_passed": true,
+        "conservative_app_default": true,
+        "status": "default-point-measured",
+        "prefill_seconds": 562.956312,
+        "decode_seconds": 27.777015,
+        "completed_pss_kib": 5251917,
+        "qualification_scope": "Single filled3-depth retrieval; corpus/coding/numeric/sustained evidence recorded separately. Not an arbitrary-context quality or speed promotion."
+      },
+      {
+        "configured_context": 8192,
+        "planned_context_bytes": 321126400,
+        "planned_compute_bytes": 141826592,
+        "new_filled_trial": "pending",
+        "profile_qualified": false
+      },
+      {
+        "configured_context": 16384,
+        "planned_context_bytes": 589561856,
+        "planned_compute_bytes": 143923744,
+        "new_filled_trial": "bench/results/context-ornith-16384-20261026T021721Z/report.json",
+        "profile_qualified": false,
+        "status": "experimental-slow",
+        "retrieval_passed": true,
+        "prefill_seconds": 2117.766403
+      },
+      {
+        "configured_context": 32768,
+        "planned_context_bytes": 1126432768,
+        "planned_compute_bytes": 148118048,
+        "new_filled_trial": "bench/results/context-ornith-32768-20261026T040306Z/report.json",
+        "profile_qualified": false,
+        "status": "experimental-very-slow",
+        "retrieval_passed": true,
+        "prefill_seconds": 6092.265303,
+        "decode_seconds": 100.954899,
+        "completed_pss_kib": 6225044,
+        "swap_kib": 115864
+      }
+    ],
+    "gemma-4-E4B-it-Q4_K_M.gguf": [
+      {
+        "configured_context": 4096,
+        "planned_context_bytes": 234881024,
+        "planned_compute_bytes": 148381696,
+        "new_filled_trial": "bench/results/context-gemma-4096-20261026T073309Z/report.json",
+        "profile_qualified": false,
+        "retrieval_passed": true,
+        "conservative_app_default": true,
+        "status": "default-point-measured",
+        "prefill_seconds": 423.279691,
+        "decode_seconds": 43.905849,
+        "completed_pss_kib": 3310876,
+        "qualification_scope": "Single filled3-depth retrieval; corpus/coding/numeric/sustained evidence recorded separately. Not an arbitrary-context quality or speed promotion."
+      },
+      {
+        "configured_context": 8192,
+        "planned_context_bytes": 469762048,
+        "planned_compute_bytes": 150478848,
+        "new_filled_trial": "pending",
+        "profile_qualified": false
+      },
+      {
+        "configured_context": 16384,
+        "planned_context_bytes": 939524096,
+        "planned_compute_bytes": 154673152,
+        "new_filled_trial": "bench/results/context-gemma-16384-20261026T030548Z/report.json",
+        "profile_qualified": false,
+        "status": "experimental-slow",
+        "retrieval_passed": true,
+        "prefill_seconds": 1628.751707
+      },
+      {
+        "configured_context": 32768,
+        "planned_context_bytes": 1879048192,
+        "planned_compute_bytes": 163061760,
+        "new_filled_trial": "bench/results/context-gemma-32768-20261026T055945Z/report.json",
+        "profile_qualified": false,
+        "status": "experimental-very-slow",
+        "retrieval_passed": true,
+        "prefill_seconds": 4585.583714,
+        "decode_seconds": 21.126047,
+        "completed_pss_kib": 4959819,
+        "swap_kib": 352440
+      }
+    ]
+  }
+}

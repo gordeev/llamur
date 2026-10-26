@@ -1,0 +1,39 @@
+diff --git a/include/llama.h b/include/llama.h
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -2,6 +2,7 @@
+ #define LLAMA_H
+ 
+ #define LLAMA_MOTOAI_REPACK_FILTER 1
++#define LLAMA_MOTOAI_MMAP_PREFAULT_CONTROL 1
+ 
+ #include "ggml.h"
+ #include "ggml-cpu.h"
+@@ -356,6 +357,7 @@
+         bool vocab_only;      // only load the vocabulary, no weights
+         bool check_tensors;   // validate model tensor data
+         bool use_extra_bufts; // use extra buffer types (used for weight repacking)
++        bool mmap_prefault;   // prefetch/populate source mappings; false leaves demand paging
+         bool no_host;         // bypass host buffer allowing extra buffers to be used
+         bool no_alloc;        // only load metadata and simulate memory allocations
+         bool load_mtp;        // whether to load MTP layers
+diff --git a/src/llama-model.cpp b/src/llama-model.cpp
+--- a/src/llama-model.cpp
++++ b/src/llama-model.cpp
+@@ -1904,7 +1904,7 @@
+ 
+     // CPU_REPACK keeps committed weights. Faulting the complete source mmap
+     // first retains an unnecessary resident copy while packing on Android.
+-    bool prefetch_sources = true;
++    bool prefetch_sources = params.mmap_prefault;
+ #if defined(__ANDROID__)
+     for (const auto & entry : ml.ctx_map) {
+         if (strcmp(ggml_backend_buft_name(entry.first.buft), "CPU_REPACK") == 0) {
+@@ -3395,6 +3395,7 @@
+         /*.vocab_only                  =*/ false,
+         /*.check_tensors               =*/ false,
+         /*.use_extra_bufts             =*/ true,
++        /*.mmap_prefault               =*/ true,
+         /*.no_host                     =*/ false,
+         /*.no_alloc                    =*/ false,
+         /*.load_mtp                    =*/ false,

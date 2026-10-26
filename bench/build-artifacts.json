@@ -1,0 +1,67 @@
+{
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "toolchain_lock": "toolchain.lock.json",
+  "artifacts": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 11752162,
+      "sha256": "aaf8573ead4a54efe26af1fdff2f371e467f28a3532b1570e605823bc38d911d",
+      "profile": "M2 conservative CPU; use_extra_bufts=false; read mode; F16 KV"
+    },
+    {
+      "path": "build/android-cpu/bin/libggml-base.so",
+      "bytes": 8904264,
+      "sha256": "888ecf091c18e486a3748019523b52a4a9eb5e70885e65bf4a5dfec21144f654"
+    },
+    {
+      "path": "build/android-cpu/bin/libggml-cpu.so",
+      "bytes": 4405848,
+      "sha256": "614a837afc8972fc454481b47628abe157370394c002b9ed97ba5096d60fd986"
+    },
+    {
+      "path": "build/android-cpu/bin/libggml.so",
+      "bytes": 1816448,
+      "sha256": "a4d870ca297b321eb43ac6d5bb9ef28502d2541b52e9664a1e4075afdc85624d"
+    },
+    {
+      "path": "build/android-cpu/bin/libllama-bench-impl.so",
+      "bytes": 4273216,
+      "sha256": "b218dec4ffbf55d926485981cf6816dda451881cd089f9945317298794258be3"
+    },
+    {
+      "path": "build/android-cpu/bin/libllama-common.so",
+      "bytes": 84965312,
+      "sha256": "c6a11bfb40264ffde1bc4a854672c662e55196922760c6670d0ec6c21c17d503"
+    },
+    {
+      "path": "build/android-cpu/bin/libllama-completion-impl.so",
+      "bytes": 1413744,
+      "sha256": "ceb98d3fa3fdd333c9e8eecbfbc036a2d7a4e984fe9e9ece20830f2763e76868"
+    },
+    {
+      "path": "build/android-cpu/bin/libllama.so",
+      "bytes": 45554120,
+      "sha256": "38a4bfcd223ab3bfea885111e2d5fbd7f7e90afd3ba651a628ee6b7520e5b3b6"
+    },
+    {
+      "path": "build/android-cpu/bin/llama-completion",
+      "bytes": 7192,
+      "sha256": "3bb3c740832081048ba4b8fc102eee4109d0f817f7cf949127d729415f5d5eac"
+    },
+    {
+      "path": "build/android-cpu/bin/llama-bench",
+      "bytes": 7168,
+      "sha256": "70b9218e084c909c66df6b4c7eac3f4bd2bbf7f3e099b4d54d5789ee1a0e2b53"
+    },
+    {
+      "path": "build/android-cpu/bin/llama-tokenize",
+      "bytes": 678288,
+      "sha256": "9947bbb05ca6dcfcbd7d0c502f8a315215e2c72ec12fb166ee5f68d33553f30d"
+    },
+    {
+      "path": "build/android-cpu/bin/test-backend-ops",
+      "bytes": 16145912,
+      "sha256": "8c958cbbbfa6633c142d188b90bf5e423d647a6ea9259e566aa5d5ed2e1f2ba9"
+    }
+  ]
+}

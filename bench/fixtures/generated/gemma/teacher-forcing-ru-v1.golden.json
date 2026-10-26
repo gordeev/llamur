@@ -1,0 +1,18 @@
+{
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "9e9031a2c29a5ba9cc62beeb2b079cbde5ae10eed7183e4c871c15739a7ba12e",
+  "kind": "teacher_forcing",
+  "expected_identifier": null,
+  "expected": {
+    "rendered_prompt": "Русский текст:\n\n",
+    "prompt_ids": [
+      2,
+      193805,
+      12973,
+      94831,
+      236787,
+      108
+    ]
+  }
+}

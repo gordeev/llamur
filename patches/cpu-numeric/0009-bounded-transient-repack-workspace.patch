@@ -1,0 +1,134 @@
+--- a/ggml/src/ggml-cpu/repack.h
++++ b/ggml/src/ggml-cpu/repack.h
+@@ -9,6 +9,11 @@
+ // GGML internal header
+ 
+ ggml_backend_buffer_type_t ggml_backend_cpu_repack_buffer_type(void);
++
++// Experimental explicit per-op opt-in. Default graph and model buffers stay native.
++bool ggml_backend_cpu_mark_transient_repack(struct ggml_tensor * op);
++size_t ggml_backend_cpu_transient_repack_size(const struct ggml_tensor * op);
++
+ 
+ template <int K> constexpr int QK_0() {
+     if constexpr (K == 1) {
+--- a/ggml/src/ggml-cpu/repack.cpp
++++ b/ggml/src/ggml-cpu/repack.cpp
+@@ -5191,7 +5191,79 @@
+     GGML_UNUSED(buft);
+ }
+ 
++// One shared CPU graph workspace, never a persistent model-weight allocation.
++// Last op-parameter word is private to this experimental CPU MUL_MAT path;
++// precision remains in word0. No global switch or mutation of source metadata.
++static constexpr uint32_t transient_repack_tag = 0x4d545250;
++static bool transient_repack_marked(const ggml_tensor * op) {
++    uint32_t tag = 0;
++    memcpy(&tag, (const char *) op->op_params + GGML_MAX_OP_PARAMS - sizeof(tag), sizeof(tag));
++    return op->op == GGML_OP_MUL_MAT && tag == transient_repack_tag;
++}
++static bool transient_repack_eligible(const ggml_tensor * op) {
++    if (op->op != GGML_OP_MUL_MAT || !ggml_cpu_has_neon() || !ggml_cpu_has_matmul_int8()) return false;
++    const auto * w = op->src[0];
++    const auto * x = op->src[1];
++    if (!w || !x || (w->type != GGML_TYPE_Q4_K && w->type != GGML_TYPE_Q6_K) ||
++        ggml_n_dims(w) != 2 || ggml_n_dims(x) != 2 || !ggml_is_contiguous(w) ||
++        !ggml_is_contiguous(x) || x->type != GGML_TYPE_F32 || op->type != GGML_TYPE_F32 ||
++        w->ne[0] != x->ne[0] || w->ne[0] > 16384 || w->ne[1] > 16384 ||
++        w->ne[0] % QK_K || w->ne[1] % 8 || x->ne[1] < 4 || x->ne[1] > 512 ||
++        ggml_nbytes(w) > 64*1024*1024 || !ggml_repack_get_optimal_repack_type(w)) return false;
++    for (const auto * t : {w, x}) {
++        if (t->buffer && !ggml_backend_buft_is_host(t->buffer->buft)) return false;
++    }
++    const size_t size = GGML_PAD(ggml_nbytes(w), 64) + ggml_row_size(GGML_TYPE_Q8_K, ggml_nelements(x));
++    return size <= 80*1024*1024;
++}
++bool ggml_backend_cpu_mark_transient_repack(ggml_tensor * op) {
++    if (!transient_repack_eligible(op)) return false;
++    memcpy((char *) op->op_params + GGML_MAX_OP_PARAMS - sizeof(transient_repack_tag),
++           &transient_repack_tag, sizeof(transient_repack_tag));
++    return true;
++}
++size_t ggml_backend_cpu_transient_repack_size(const ggml_tensor * op) {
++    if (!transient_repack_marked(op)) return 0;
++    GGML_ASSERT(transient_repack_eligible(op));
++    return GGML_PAD(ggml_nbytes(op->src[0]), 64) + ggml_row_size(GGML_TYPE_Q8_K, ggml_nelements(op->src[1]));
++}
+ namespace ggml::cpu::repack {
++class transient_tensor_traits : public ggml::cpu::tensor_traits {
++    bool work_size(int, const ggml_tensor * op, size_t & size) override {
++        size = ggml_backend_cpu_transient_repack_size(op);
++        return true;
++    }
++    bool compute_forward(ggml_compute_params * params, ggml_tensor * op) override {
++        const auto * original = op->src[0];
++        const size_t offset = GGML_PAD(ggml_nbytes(original), 64);
++        GGML_ASSERT(params->wsize >= ggml_backend_cpu_transient_repack_size(op));
++        auto * traits = (tensor_traits_base *) ggml_repack_get_optimal_repack_type(original);
++        GGML_ASSERT(traits);
++        // Partition complete eight-row groups: disjoint writes and unchanged
++        // original scales/quants. Only stack-local tensor metadata is modified.
++        const int64_t groups = original->ne[1] / 8;
++        const int64_t first = groups * params->ith / params->nth * 8;
++        const int64_t end = groups * (params->ith + 1) / params->nth * 8;
++        if (end > first) {
++            ggml_tensor slice = *original;
++            slice.ne[1] = end - first;
++            slice.nb[2] = slice.nb[1] * slice.ne[1];
++            slice.nb[3] = slice.nb[2];
++            slice.data = (char *) params->wdata + first * original->nb[1];
++            GGML_ASSERT(traits->repack(&slice, (const char *) original->data + first * original->nb[1], ggml_nbytes(&slice)) == 0);
++        }
++        ggml_barrier(params->threadpool);
++        ggml_tensor packed = *original;
++        packed.data = params->wdata;
++        ggml_tensor local_op = *op;
++        local_op.src[0] = &packed;
++        ggml_compute_params local_params = *params;
++        local_params.wdata = (char *) params->wdata + offset;
++        local_params.wsize -= offset;
++        GGML_ASSERT(traits->compute_forward(&local_params, &local_op));
++        return true;
++    }
++};
+ class extra_buffer_type : ggml::cpu::extra_buffer_type {
+     bool supports_op(ggml_backend_dev_t, const struct ggml_tensor * op) override {
+         if (    op->op == GGML_OP_MUL_MAT &&
+@@ -5230,6 +5302,11 @@
+     }
+ 
+     ggml::cpu::tensor_traits * get_tensor_traits(const struct ggml_tensor * op) override {
++        if (transient_repack_marked(op)) {
++            GGML_ASSERT(transient_repack_eligible(op));
++            static transient_tensor_traits transient;
++            return &transient;
++        }
+         if (op->op == GGML_OP_MUL_MAT || op->op == GGML_OP_MUL_MAT_ID) {
+             if (op->src[0]->buffer && op->src[0]->buffer->buft == ggml_backend_cpu_repack_buffer_type()) {
+                 return (ggml::cpu::tensor_traits *) op->src[0]->extra;
+--- a/ggml/src/ggml-cpu/ggml-cpu.cpp
++++ b/ggml/src/ggml-cpu/ggml-cpu.cpp
+@@ -655,7 +655,23 @@
+     GGML_UNUSED(reg);
+ }
+ 
++static size_t ggml_backend_cpu_workspace_size(ggml_backend_t backend) {
++    GGML_ASSERT(ggml_backend_is_cpu(backend));
++    return ((ggml_backend_cpu_context *) backend->context)->work_size;
++}
++
+ static void * ggml_backend_cpu_get_proc_address(ggml_backend_reg_t reg, const char * name) {
++#ifdef GGML_USE_CPU_REPACK
++    if (strcmp(name, "ggml_backend_cpu_workspace_size") == 0) {
++        return (void *)ggml_backend_cpu_workspace_size;
++    }
++    if (strcmp(name, "ggml_backend_cpu_mark_transient_repack") == 0) {
++        return (void *)ggml_backend_cpu_mark_transient_repack;
++    }
++    if (strcmp(name, "ggml_backend_cpu_transient_repack_size") == 0) {
++        return (void *)ggml_backend_cpu_transient_repack_size;
++    }
++#endif
+     if (strcmp(name, "ggml_backend_set_n_threads") == 0) {
+         ggml_backend_set_n_threads_t fct = ggml_backend_cpu_set_n_threads;
+         return (void *)fct;

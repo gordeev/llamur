@@ -1,0 +1,57 @@
+[
+  {
+    "op": "RMS_NORM",
+    "params": "type=f32,ne=\\[64,5,4,3\\],v=0,eps=.*inplace=1"
+  },
+  {
+    "op": "SSM_SCAN",
+    "params": "type=f32,d_state=128,head_dim=64,n_head=16,n_group=2,n_seq_tokens=32,n_seqs=4,"
+  },
+  {
+    "op": "GATED_DELTA_NET",
+    "params": "type=f32,head_count=32,head_size=16,n_seq_tokens=1,n_seqs=1,v_repeat=1,permuted=0,kda=0,K=1"
+  },
+  {
+    "op": "FLASH_ATTN_EXT",
+    "params": "hsk=64,hsv=64,nh=8,nr23=\\[4,1\\],kv=1024,nb=32,mask=1,sinks=0.*type_K=f16,type_V=f16"
+  },
+  {
+    "op": "SOFT_MAX",
+    "params": "type=f32,ne=\\[1024,16,1,1\\],mask=0"
+  },
+  {
+    "id": "gdn-qwen35-decode",
+    "op": "GATED_DELTA_NET",
+    "params": "type=f32,head_count=32,head_size=128,n_seq_tokens=1,n_seqs=1,v_repeat=1,permuted=0,kda=0,K=1$"
+  },
+  {
+    "id": "gdn-chunked-128",
+    "op": "GATED_DELTA_NET",
+    "params": "type=f32,head_count=16,head_size=128,n_seq_tokens=65,n_seqs=1,v_repeat=1,permuted=0,kda=0,K=1$"
+  },
+  {
+    "id": "fa-global-512",
+    "op": "FLASH_ATTN_EXT",
+    "params": "hsk=512,hsv=512,nh=4,nr23=\\[4,1\\],kv=512,nb=32,mask=1,sinks=0,max_bias=0.000000,logit_softcap=0.000000.*type_K=f16,type_V=f16,permute=\\[0,1,2,3\\]"
+  },
+  {
+    "id": "fa-local-256",
+    "op": "FLASH_ATTN_EXT",
+    "params": "hsk=256,hsv=256,nh=8,nr23=\\[4,1\\],kv=1024,nb=32,mask=1,sinks=0.*type_K=f16,type_V=f16"
+  },
+  {
+    "id": "rope-gemma-global",
+    "op": "ROPE",
+    "params": "type=f32,ne_a=\\[512,8,512,1\\],n_dims=128,mode=2,.*ff=1,v=0,inplace=0,n_offs=0$"
+  },
+  {
+    "id": "rope-qwen35",
+    "op": "ROPE",
+    "params": "type=f32,ne_a=\\[256,16,512,1\\],n_dims=64,.*v=0,inplace=0,n_offs=0$"
+  },
+  {
+    "id": "ssm-conv-k4",
+    "op": "SSM_CONV",
+    "params": "type=f32,ne_a=\\[4,2048,1,1\\],ne_b=\\[4,2048,1,1\\]$"
+  }
+]

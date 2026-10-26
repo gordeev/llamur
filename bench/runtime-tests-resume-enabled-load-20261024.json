@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "apk_sha256": "a7f4e9c0f2f48dcc58eff0a784a2f01ea15e904f71a8f784a6ced1be3b27fac3",
+  "test_apk_sha256": "1b0eee723d873bef7de0dfe63c0e0ff42ab047167c8d46b2e0ee9e824f1ce973",
+  "runtime": {
+    "passed": true,
+    "arm64_fpcr": 0,
+    "service": {
+      "passed": true,
+      "isolated_pid": 1614,
+      "recovered_pid": 4399,
+      "recovery_ui": "Visible enabled Load button after disconnect; explicit recovery; no prompt replay",
+      "above_1024_budget": "1536 accepted; prompt+2048 correctly rejected in2048 context",
+      "import_ui": "SAF imported SHA-256 file loaded/generated through normal UI",
+      "notification_stop": "passed via notification PendingIntent",
+      "load_cancellation": "passed on Gemma",
+      "prefill_cancellation": "passed on Gemma; stop-to-ready 64ms",
+      "checks": "Messenger load/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+    },
+    "cycles": 30,
+    "memory_samples": [
+      {
+        "cycle": 0,
+        "pss_kib": 35642,
+        "native_heap_bytes": 6844960
+      },
+      {
+        "cycle": 5,
+        "pss_kib": 37673,
+        "native_heap_bytes": 6837008
+      },
+      {
+        "cycle": 10,
+        "pss_kib": 36555,
+        "native_heap_bytes": 6831296
+      },
+      {
+        "cycle": 15,
+        "pss_kib": 36611,
+        "native_heap_bytes": 6831296
+      },
+      {
+        "cycle": 20,
+        "pss_kib": 36671,
+        "native_heap_bytes": 6831296
+      },
+      {
+        "cycle": 25,
+        "pss_kib": 36731,
+        "native_heap_bytes": 6831296
+      },
+      {
+        "cycle": 29,
+        "pss_kib": 36779,
+        "native_heap_bytes": 6831296
+      }
+    ],
+    "reference": ", there was a little girl named Lily. She loved to play",
+    "checks": "repeat load/generate/unload; double unload; queued/decode cancellation; explicit overflow; invalid JSON type; recovery; callback exception; Unicode JNI"
+  },
+  "artifact": "bench/results/runtime-tests-20261024T195914Z"
+}

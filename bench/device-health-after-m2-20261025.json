@@ -1,0 +1,19 @@
+{
+  "scope": "Read-only final snapshot, no inference launched",
+  "health": {
+    "ready": true,
+    "boot_completed": true,
+    "battery": {
+      "percent": 81.0,
+      "status": 4,
+      "charging": false,
+      "temperature_c": 35.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 6782.78
+  },
+  "inference_pid_output": "",
+  "pid_query_exit_code": 1
+}

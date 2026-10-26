@@ -1,0 +1,64 @@
+{
+  "scope": "Observed load failure; no claim that swap alone caused it, or that MemAvailable guarantees admission.",
+  "failed_artifact": "bench/results/app-service-ornith-20261024T195231Z-749cc42e",
+  "failed_apk_sha256": "fb18bb11165a7d4b8c335f87613f5d91a07635c6261709e46d5450ae671b7ccd",
+  "collector_result": "timeout after300s; inference died during load, before a generating marker",
+  "native_exit": {
+    "pid": 26075,
+    "local_timestamp": "2026-10-24 21:52:40.280",
+    "reason": "LOW_MEMORY",
+    "rss_reported": "5.7GB",
+    "evidence": "bench/results/app-service-ornith-20261024T195231Z-749cc42e/exit-info.txt"
+  },
+  "before_load_memavailable_kib": 6761532,
+  "successful_same_config_artifact": "bench/results/app-service-ornith-20261024T193101Z-0f99082d",
+  "successful_load": {
+    "ok": true,
+    "load_us": 6690421,
+    "context": 8192,
+    "threads": 4,
+    "batch": 512,
+    "micro_batch": 128,
+    "load_mode": "read",
+    "kv_type": "f16",
+    "tensor_probe": false,
+    "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+    "all_extra_buffers_disabled": true,
+    "buffer_allocations": [
+      {
+        "buffer": "CPU",
+        "model_bytes": 5618141184,
+        "context_bytes": 321126400,
+        "compute_bytes": 141826592
+      }
+    ]
+  },
+  "successful_endpoint_process_status": "VmHWM:\t 5955468 kB\nVmRSS:\t 5363880 kB\nVmSwap:\t  647500 kB\nCpus_allowed_list:\t0-6",
+  "policy": "No automatic retry/replay, no model/context change, no system memory/LMKD/governor changes.",
+  "next_control": "Separate same-weight/token mmap fixture, independent fresh-load repeats. Main read baseline unchanged.",
+  "mmap_control": {
+    "repeatability": "bench/results/score-repeat-ornith-teacher-forcing-code-mmap-v1-20261024T195946Z/repeatability.json",
+    "passed": true,
+    "runs": [
+      {
+        "artifact": "bench/results/app-service-ornith-20261024T195946Z-578a8ded",
+        "apk_sha256": "a7f4e9c0f2f48dcc58eff0a784a2f01ea15e904f71a8f784a6ced1be3b27fac3",
+        "load_us": 5388070,
+        "process_status": "VmHWM:\t 6002524 kB\nVmRSS:\t 6000820 kB\nVmSwap:\t   19432 kB\nCpus_allowed_list:\t0-6",
+        "nll_exactly_matches_earlier_read": true,
+        "top8_exactly_matches_earlier_read": true
+      },
+      {
+        "artifact": "bench/results/app-service-ornith-20261024T200002Z-9e3dbb46",
+        "apk_sha256": "a7f4e9c0f2f48dcc58eff0a784a2f01ea15e904f71a8f784a6ced1be3b27fac3",
+        "load_us": 1203198,
+        "process_status": "VmHWM:\t 5998312 kB\nVmRSS:\t 5756592 kB\nVmSwap:\t   19416 kB\nCpus_allowed_list:\t0-6",
+        "nll_exactly_matches_earlier_read": true,
+        "top8_exactly_matches_earlier_read": true
+      }
+    ],
+    "earlier_read_score_artifact": "bench/results/app-service-ornith-20261024T185457Z-a845fcae",
+    "earlier_read_apk_sha256": "05a5e4b04b1413cc047b664a234e78707471649efa720cf44ccb3c97df76ea01",
+    "scope": "Two fresh mmap loads and exact26-token score repeat; also identical to earlier successful read score. Lifecycle/diagnostic APK differs from the read reference; no isolated RAM/speed A/B claim, no universal memory guarantee. Canonical read baseline unchanged."
+  }
+}

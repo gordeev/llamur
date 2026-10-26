@@ -1,0 +1,141 @@
+{
+  "passed": true,
+  "scope": "Serial fresh-process load/scoring on one APK. No generated task quality or speed claim; ambient Android memory/cache state is uncontrolled.",
+  "apk_sha256": "144471b72063a81acb8337dce9259bad3acc2f168bb97c3f9cdfbc83c083e798",
+  "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "model_source": {
+    "path": "files/models/Ornith-1.5-9B-Q4_K_M.gguf",
+    "storage": "app-private"
+  },
+  "base_request_sha256": "3b7327126b521dcecd3fcff698c03617e73221850ac263bbcba7fb9e6a5dda2d",
+  "runs": [
+    {
+      "mode": "mmap",
+      "passed": true,
+      "artifact": "bench/results/app-service-ornith-20261024T204332Z-d98391a3",
+      "pid": 5851,
+      "load_us": 2056596,
+      "loaded_pss_kib": 5454818,
+      "memory_before_load": {
+        "available_bytes": 6955167744,
+        "total_bytes": 11843080192,
+        "low_memory": false,
+        "system_threshold_bytes": 226492416,
+        "model_file_bytes": 5780090816,
+        "model_location": "\u0412\u043d\u0443\u0442\u0440\u0435\u043d\u043d\u0435\u0435 \u0445\u0440\u0430\u043d\u0438\u043b\u0438\u0449\u0435"
+      },
+      "process_status": "VmHWM:\t 6003424 kB\nVmRSS:\t 6001852 kB\nVmSwap:\t   19132 kB\nCpus_allowed_list:\t0-6",
+      "buffer_allocations": [
+        {
+          "buffer": "CPU",
+          "model_bytes": 0,
+          "context_bytes": 321126400,
+          "compute_bytes": 141826592
+        },
+        {
+          "buffer": "CPU_Mapped",
+          "model_bytes": 5618141184,
+          "context_bytes": 0,
+          "compute_bytes": 0
+        }
+      ],
+      "mean_nll": 1.3366109242354156,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    },
+    {
+      "mode": "read",
+      "passed": true,
+      "artifact": "bench/results/app-service-ornith-20261024T204348Z-29499108",
+      "pid": 6758,
+      "load_us": 4559702,
+      "loaded_pss_kib": 5917072,
+      "memory_before_load": {
+        "available_bytes": 7102394368,
+        "total_bytes": 11843080192,
+        "low_memory": false,
+        "system_threshold_bytes": 226492416,
+        "model_file_bytes": 5780090816,
+        "model_location": "\u0412\u043d\u0443\u0442\u0440\u0435\u043d\u043d\u0435\u0435 \u0445\u0440\u0430\u043d\u0438\u043b\u0438\u0449\u0435"
+      },
+      "process_status": "VmHWM:\t 5997196 kB\nVmRSS:\t 5996224 kB\nVmSwap:\t   19140 kB\nCpus_allowed_list:\t0-6",
+      "buffer_allocations": [
+        {
+          "buffer": "CPU",
+          "model_bytes": 5618141184,
+          "context_bytes": 321126400,
+          "compute_bytes": 141826592
+        }
+      ],
+      "mean_nll": 1.3366109242354156,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    },
+    {
+      "mode": "read",
+      "passed": true,
+      "artifact": "bench/results/app-service-ornith-20261024T204403Z-52f38470",
+      "pid": 7995,
+      "load_us": 6573887,
+      "loaded_pss_kib": 5913833,
+      "memory_before_load": {
+        "available_bytes": 7363260416,
+        "total_bytes": 11843080192,
+        "low_memory": false,
+        "system_threshold_bytes": 226492416,
+        "model_file_bytes": 5780090816,
+        "model_location": "\u0412\u043d\u0443\u0442\u0440\u0435\u043d\u043d\u0435\u0435 \u0445\u0440\u0430\u043d\u0438\u043b\u0438\u0449\u0435"
+      },
+      "process_status": "VmHWM:\t 6001744 kB\nVmRSS:\t 6000916 kB\nVmSwap:\t   19144 kB\nCpus_allowed_list:\t0-6",
+      "buffer_allocations": [
+        {
+          "buffer": "CPU",
+          "model_bytes": 5618141184,
+          "context_bytes": 321126400,
+          "compute_bytes": 141826592
+        }
+      ],
+      "mean_nll": 1.3366109242354156,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    },
+    {
+      "mode": "mmap",
+      "passed": true,
+      "artifact": "bench/results/app-service-ornith-20261024T204420Z-ed0dce60",
+      "pid": 8639,
+      "load_us": 5334492,
+      "loaded_pss_kib": 5895060,
+      "memory_before_load": {
+        "available_bytes": 7297003520,
+        "total_bytes": 11843080192,
+        "low_memory": false,
+        "system_threshold_bytes": 226492416,
+        "model_file_bytes": 5780090816,
+        "model_location": "\u0412\u043d\u0443\u0442\u0440\u0435\u043d\u043d\u0435\u0435 \u0445\u0440\u0430\u043d\u0438\u043b\u0438\u0449\u0435"
+      },
+      "process_status": "VmHWM:\t 6000880 kB\nVmRSS:\t 5999600 kB\nVmSwap:\t   19140 kB\nCpus_allowed_list:\t0-6",
+      "buffer_allocations": [
+        {
+          "buffer": "CPU",
+          "model_bytes": 0,
+          "context_bytes": 321126400,
+          "compute_bytes": 141826592
+        },
+        {
+          "buffer": "CPU_Mapped",
+          "model_bytes": 5618141184,
+          "context_bytes": 0,
+          "compute_bytes": 0
+        }
+      ],
+      "mean_nll": 1.3366109242354156,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    }
+  ]
+}

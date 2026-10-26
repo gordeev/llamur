@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "apk_sha256": "a02b4206b5e7f53bbdf16768f45066ed5151c3ccba3108c7685cbbaa223adede",
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "config": {
+    "context": 8192,
+    "threads": 4,
+    "batch": 512,
+    "micro_batch": 128,
+    "load_mode": "mmap"
+  },
+  "scope": "Bounded same-phone CPU_REPACK screening only; not full coding/context/thermal/product acceptance",
+  "checks": {
+    "code_nll": true,
+    "russian_nll": true,
+    "completed_task": true,
+    "filled_context": true
+  },
+  "evidence": {
+    "code_nll": {
+      "path": "bench/results/weight-buffers-gemma-teacher-forcing-code-v1-20261025T074420Z/report.json",
+      "sha256": "4b0021055a7bb7ad06d0cfb021bce75e2bf3113fbbcfdb13c5d3275f288731e2"
+    },
+    "russian_nll": {
+      "path": "bench/results/weight-buffers-gemma-teacher-forcing-ru-v1-20261025T074451Z/report.json",
+      "sha256": "899036e40b6ef1ac05d3bf3bd771c75d39c87f2a7437c869744ee37eba1aeb44"
+    },
+    "completed_task": {
+      "path": "bench/results/weight-buffers-gemma-binary-search-quality-4096-mmap-v1-20261025T075319Z/report.json",
+      "sha256": "03cf3ed9d9637a8fdf82094b471302506d3752ab5632881b08761eb93b14e28c"
+    },
+    "filled_context": {
+      "path": "bench/results/weight-buffers-gemma-pp8064-full-mmap-v1-20261025T080038Z/report.json",
+      "sha256": "ff5183a5028475c9941d2fc441d6a8b1abf01a9645554b05682b5dcfa11c85c0"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "scope": "Bounded synthetic per-op CPU-workspace feasibility; not app speed or model quality",
+  "report": "bench/results/prefill-pack-20261025T180932Z/report.json",
+  "apk_sha256": "6cfbc20767d5728e807d1d35c07f82ad0df5ba1dad7bdc13f2426cfcda8a5ce8",
+  "patch": "patches/cpu-numeric/0009-bounded-transient-repack-workspace.patch",
+  "all_16_cases_bit_equal": true,
+  "maximum_actual_cpu_workspace_bytes": 48464128,
+  "large_cases": [
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 128,
+      "requested_workspace_bytes": 28909568,
+      "native_candidate_paired_median_ratio": 1.8730141993532967
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 512,
+      "requested_workspace_bytes": 30703616,
+      "native_candidate_paired_median_ratio": 2.018226697990942
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 128,
+      "requested_workspace_bytes": 43081728,
+      "native_candidate_paired_median_ratio": 1.6112763495170832
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 512,
+      "requested_workspace_bytes": 48463872,
+      "native_candidate_paired_median_ratio": 1.7749215237125646
+    }
+  ]
+}

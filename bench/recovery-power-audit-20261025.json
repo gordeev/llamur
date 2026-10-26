@@ -1,0 +1,91 @@
+{
+  "scope": "Post-hoc power audit only. Original collector reports remain unchanged. These are diagnostic quality trials, not paired/sustained speed acceptance.",
+  "policy": "Minimum20%, known and unchanged charging/source state",
+  "policy_source_sha256": "6d577752eeb12baefcede24bc975ffcdfedfd051f2f0b93b0df37a95affaf44a",
+  "trials": [
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T220836Z-82257c5b",
+      "before": {
+        "percent": 49.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 38.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "after": {
+        "percent": 53.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 42.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "new_policy_power_eligible": true,
+      "quality_results_unchanged": true
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T221603Z-2398c2cc",
+      "before": {
+        "percent": 53.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 42.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "after": {
+        "percent": 57.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 43.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "new_policy_power_eligible": true,
+      "quality_results_unchanged": true
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T222655Z-29fcd6dc",
+      "before": {
+        "percent": 58.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 42.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "after": {
+        "percent": 69.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 40.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "new_policy_power_eligible": true,
+      "quality_results_unchanged": true
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T224511Z-a92c72c6",
+      "before": {
+        "percent": 70.0,
+        "status": 2,
+        "charging": true,
+        "temperature_c": 40.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "after": {
+        "percent": 81.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 39.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "new_policy_power_eligible": false,
+      "quality_results_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "milestone": "M3",
+  "milestone_accepted": false,
+  "status": "bounded_quality_and_prefill_screen_completed",
+  "variant": "f32-recurrent-transient-threshold",
+  "apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "source_snapshot": "910c1fa680c5badd41873545108f54ca0abc69b7443a02ff00938eef24da148e",
+  "minimum_rows": 24,
+  "default_enabled": false,
+  "weight_buffers": "native",
+  "identity": "bench/m3-transient-threshold-apk-identity-20261025.json",
+  "kernel_curves": [
+    "bench/results/prefill-pack-20261025T192041Z/report.json",
+    "bench/results/prefill-pack-20261025T192805Z/report.json"
+  ],
+  "basis": "Large Q4_K/Q6_K matrices at4/8 rows are slower; at24 all five paired ratios exceed1.05 for both types in the follow-up. Outliers retained. Model graph uses native below24; numerical CPU API still supports4+ for operator tests.",
+  "previous_apk_prefill_screen": "bench/m3-transient-prefill-screening-20261025.json",
+  "previous_apk_speed_not_transferred": true,
+  "framework": "bench/results/runtime-tests-20261025T193717Z/report.json",
+  "tiny_code": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T193741Z/report.json",
+  "tiny_russian": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T193815Z/report.json",
+  "host_lifecycle": "build/transient-threshold-host CTest1/1 passed",
+  "python_tests_passed": 61,
+  "quality_accepted": true,
+  "speed_accepted": true,
+  "scope": "Experimental Ornith CPU/I8MM native source weights, unchanged GGUF/quantization/F16 KV; <=8K/t4/b512/ub128 with microbatch>=24 and81MiB separate CPU workspace reserve. No UI/API work.",
+  "next": "M3 remains open: decode/threads/affinity and stable frequency evidence, remaining CPU/backend matrix (Vulkan/OpenCL and bounded alternatives). No UI/API or larger-context promotion yet.",
+  "code_nll": "bench/results/weight-buffers-ornith-teacher-forcing-code-prefill-v2-20261025T193845Z/report.json",
+  "russian_nll": "bench/results/weight-buffers-ornith-teacher-forcing-ru-prefill-v2-20261025T193921Z/report.json",
+  "scored_corpora_passed": true,
+  "scored_max_nll_and_top8_error": 0,
+  "completed_task": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T194131Z/report.json",
+  "completed_task_passed": true,
+  "completed_ids_exact": true,
+  "completed_top8_error": 0,
+  "tiny_actual_workspace_bytes": 1179904,
+  "medium_actual_workspace_bytes": {
+    "code29": 41694400,
+    "russian43": 41890624
+  },
+  "filled_context": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T194716Z/report.json",
+  "filled_context_passed": true,
+  "filled_ids_and_top8_exact": true,
+  "cancellation_recovery": "bench/results/transient-service-20261025T200309Z/report.json",
+  "cancellation_passed": true,
+  "quality_scope": "Bounded scored corpora, tiny native path, completed lower_bound and8K retrieval only; no broad/product acceptance",
+  "boundary_reports": [
+    "bench/results/weight-buffers-ornith-pp151-threshold-boundary-v1-20261025T200456Z/report.json",
+    "bench/results/weight-buffers-ornith-pp152-threshold-boundary-v1-20261025T200600Z/report.json"
+  ],
+  "boundary_switching_passed": true,
+  "operator_guards": "bench/results/prefill-pack-20261025T200655Z/report.json",
+  "prerequisites": "bench/m3-threshold-prerequisites-20261025.json",
+  "pristine_api_regression": "build/repack-baseline-host-regression CTest1/1 passed",
+  "boundary_marker_counts": {
+    "151": 741,
+    "152": 986
+  },
+  "boundary_marker_delta_positive": true,
+  "current_prefill_screen": "bench/results/transient-workspace-screen-20261025T200803Z/report.json",
+  "current_prefill_report": "bench/results/weight-buffers-ornith-pp512-prefill-speed-v1-20261025T201358Z/report.json",
+  "current_quality_lock": "bench/results/transient-workspace-screen-20261025T200803Z/ornith-quality-gate.json",
+  "current_prefill_scope": "Separate native2048 preconditioning, one warmup excluded, five counterbalanced measured pairs with unchanged numeric/power/frequency gates. Decode not part of this bounded screen.",
+  "prefill_speed_accepted": true,
+  "speed_scope": "Bounded Ornith CPU/I8MM prefill-only screen. Not decode, complete-M3, default/product, other-device, broad task, cold-storage or endurance acceptance. Measured frequency endpoints match, not a clock-residency proof.",
+  "screening": "bench/m3-transient-threshold-screening-20261025.json",
+  "prefill_speed_ratio": {
+    "values": [
+      1.642061096197173,
+      1.6790721807031928,
+      1.674796100082372,
+      1.621229377380667,
+      1.6492153298064887
+    ],
+    "median": 1.6492153298064887,
+    "minimum": 1.621229377380667,
+    "maximum": 1.6790721807031928,
+    "bootstrap_median_ci95": [
+      1.621229377380667,
+      1.6790721807031928
+    ]
+  },
+  "native_prefill_median_s": 82.579678,
+  "candidate_prefill_median_s": 49.574804,
+  "decode_timing_accepted": false,
+  "default_profile_promoted": false,
+  "final_health": "bench/m3-transient-threshold-final-health-20261025.json",
+  "active_phone_workload": false
+}

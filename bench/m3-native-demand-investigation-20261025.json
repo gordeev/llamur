@@ -1,0 +1,760 @@
+{
+  "milestone": "M3",
+  "milestone_accepted": false,
+  "status": "bounded_control_completed_no_long_prefill_gain",
+  "scope": "Native mmap without initial prefault/WILLNEED; same-APK paired loading control. No changed weights, quantization, KV, arithmetic, context or output budget. Not a product profile.",
+  "current_apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "current_variant": "f32-recurrent-native-demand",
+  "candidate_policy": "native_no_prefault",
+  "default_mmap_prefault": true,
+  "default_weight_buffers": "native",
+  "build_kleidiai": false,
+  "controller": "bench/results/m3-native-demand-20261025T093522Z/report.json",
+  "patch_series": "patches/cpu-numeric/series.json",
+  "new_patch": "patches/cpu-numeric/0008-explicit-mmap-prefault-control.patch",
+  "native_identity": "bench/m3-native-demand-apk-identity-20261025.json",
+  "host_python_tests_passed": 55,
+  "host_lifecycle": "build/native-demand-host CTest1/1 passed",
+  "pristine_api_regression": "build/repack-baseline-host-regression CTest1/1 passed; no demand API fallback allowed",
+  "b0_pristine": true,
+  "quality_so_far": {
+    "code_nll": "bench/results/weight-buffers-ornith-teacher-forcing-code-v1-20261025T093549Z/report.json",
+    "russian_nll": "bench/results/weight-buffers-ornith-teacher-forcing-ru-v1-20261025T093624Z/report.json",
+    "completed_task": "bench/results/weight-buffers-ornith-binary-search-quality-4096-mmap-v1-20261025T093657Z/report.json",
+    "filled_context": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T094245Z/report.json"
+  },
+  "hypotheses": [
+    "Initial load residency can fall while first inference refaults the same clean weights; compare load+first piece and full request, not load alone.",
+    "Past long-prefill process CPU/wall ratio near4 includes possible spin/barriers; page faults/read counters and separate sampling are needed before naming a hot operation.",
+    "A Vk/GPU, batch or kernel optimization is a separate experiment after this isolated loading control."
+  ],
+  "cache_limit": "App-UID model SHA reads precede series. Fresh processes are not cold storage. No global cache eviction/governor/battery changes.",
+  "profile_sampling_script": "scripts/run-prefill-profile.py; completed: bench/m3-ornith-prefill-profile-20261025.json",
+  "ui_api": "Deferred per PLAN.",
+  "cold_output_repack_hypothesis": {
+    "status": "unproven tensor-level swap attribution; source/metadata observation only",
+    "metadata": "bench/results/repack-selective-host-plan-20261025T082933Z/ornith.json",
+    "output_q6_bytes": 834355200,
+    "all_q6_packed_bytes": 1839022080,
+    "packed_without_output_bytes": 1004666880,
+    "source_observation": "Runtime requests output logits only for final prompt token. Prior prefill chunks do not use output.weight. Q6-only precommits that packed matrix; native keeps the original clean mapped head. Cold anonymous output may contribute to swap; VmSwap does not identify tensor pages. Do not claim proof or enable an output-excluding variant without its own quality/load/speed tests."
+  },
+  "intermediate_native_long_observation": {
+    "artifact": "bench/results/app-service-ornith-20261025T094245Z-bf15cd98",
+    "through_token": 3072,
+    "observed_prefill_s": 507.353716,
+    "process_cpu_per_wall": 3.9728830920792944,
+    "sampled_peak_swap_bytes": 17793024,
+    "post_first_chunk_major_faults": 0,
+    "note": "Incomplete first native-prefault arm; not a comparison result. High CPU time can include barriers/spin. Entire-request figures will supersede this observation.",
+    "status": "Superseded by completed four-trial long analysis"
+  },
+  "source_only_rejected_shortcut": {
+    "idea": "Enable GGML_LLAMAFILE expecting native Q4_K/Q6_K prompt acceleration",
+    "status": "not a demonstrated optimization; no build/phone trial performed",
+    "evidence": [
+      "third_party/llama.cpp/ggml/src/ggml-cpu/ggml-cpu.c disables GGML_USE_LLAMAFILE when __ARM_FEATURE_MATMUL_INT8 or SVE is defined",
+      "Pinned llamafile_sgemm type switch has no Q4_K/Q6_K cases"
+    ],
+    "note": "Active SM8550 I8MM native path uses nrows2 dot kernels. Do not silently remove ISA guards or attribute speed to an ineffective CMake flag. Sampling must establish actual hotspots."
+  },
+  "initial_long_pair": {
+    "scope": "First of two completed pairs, retained as originally collected observations. Final four-trial analysis supersedes pending status; both quality pairs passed. No demonstrated prefill gain.",
+    "trials": [
+      {
+        "artifact": "bench/results/app-service-ornith-20261025T094245Z-bf15cd98",
+        "prefill_s": 1373.470808,
+        "end_memory_bytes": {
+          "VmHWM": 6160666624,
+          "VmRSS": 5734727680,
+          "VmSwap": 85307392
+        },
+        "completed_pss_kib": 5598500,
+        "prefill_observations": {
+          "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+          "observed_from_token": 0,
+          "observed_to_token": 7168,
+          "observed_wall_s": 1270.730344,
+          "observed_process_cpu_s": 5050.86,
+          "process_cpu_seconds_per_wall_second": 3.9747693315490698,
+          "intervals": [
+            {
+              "from_token": 0,
+              "to_token": 512,
+              "wall_s": 80.866273,
+              "process_cpu_s": 320.72,
+              "process_cpu_seconds_per_wall_second": 3.9660539320267674,
+              "minor_faults": 13287,
+              "major_faults": 2487,
+              "read_bytes": 288440320,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160408576,
+                "VmRSS": 6160384000,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 7019147264,
+                "Cached": 7283118080,
+                "SwapFree": 6594662400,
+                "Dirty": 2473984
+              }
+            },
+            {
+              "from_token": 512,
+              "to_token": 1024,
+              "wall_s": 82.223606,
+              "process_cpu_s": 326.919,
+              "process_cpu_seconds_per_wall_second": 3.9759749773076116,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160535552,
+                "VmRSS": 6160510976,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6978498560,
+                "Cached": 7302713344,
+                "SwapFree": 6585323520,
+                "Dirty": 2166784
+              }
+            },
+            {
+              "from_token": 1024,
+              "to_token": 1536,
+              "wall_s": 83.464468,
+              "process_cpu_s": 331.932,
+              "process_cpu_seconds_per_wall_second": 3.976925845858144,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 49152,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 6129434624,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 7007768576,
+                "Cached": 7258013696,
+                "SwapFree": 6585638912,
+                "Dirty": 2387968
+              }
+            },
+            {
+              "from_token": 1536,
+              "to_token": 2048,
+              "wall_s": 85.278714,
+              "process_cpu_s": 338.968,
+              "process_cpu_seconds_per_wall_second": 3.9748254177472706,
+              "minor_faults": 116,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 6009176064,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6958084096,
+                "Cached": 7190794240,
+                "SwapFree": 6532788224,
+                "Dirty": 7208960
+              }
+            },
+            {
+              "from_token": 2048,
+              "to_token": 2560,
+              "wall_s": 86.830393,
+              "process_cpu_s": 345.312,
+              "process_cpu_seconds_per_wall_second": 3.976856352590734,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5988999168,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6954876928,
+                "Cached": 7175430144,
+                "SwapFree": 6539943936,
+                "Dirty": 3682304
+              }
+            },
+            {
+              "from_token": 2560,
+              "to_token": 3072,
+              "wall_s": 88.690262,
+              "process_cpu_s": 351.806,
+              "process_cpu_seconds_per_wall_second": 3.9666812575206962,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 49152,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5814300672,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6887514112,
+                "Cached": 7017730048,
+                "SwapFree": 6633914368,
+                "Dirty": 7643136
+              }
+            },
+            {
+              "from_token": 3072,
+              "to_token": 3584,
+              "wall_s": 90.108036,
+              "process_cpu_s": 357.995,
+              "process_cpu_seconds_per_wall_second": 3.972953089333786,
+              "minor_faults": 116,
+              "major_faults": 60,
+              "read_bytes": 610304,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5810130944,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6857228288,
+                "Cached": 7049281536,
+                "SwapFree": 6728024064,
+                "Dirty": 6930432
+              }
+            },
+            {
+              "from_token": 3584,
+              "to_token": 4096,
+              "wall_s": 91.485713,
+              "process_cpu_s": 363.793,
+              "process_cpu_seconds_per_wall_second": 3.9765006804942318,
+              "minor_faults": 117,
+              "major_faults": 3,
+              "read_bytes": 28672,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5810425856,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6838222848,
+                "Cached": 7064903680,
+                "SwapFree": 6719897600,
+                "Dirty": 2281472
+              }
+            },
+            {
+              "from_token": 4096,
+              "to_token": 4608,
+              "wall_s": 93.201435,
+              "process_cpu_s": 370.668,
+              "process_cpu_seconds_per_wall_second": 3.97706322869385,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5808918528,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6803329024,
+                "Cached": 7017701376,
+                "SwapFree": 6695780352,
+                "Dirty": 2142208
+              }
+            },
+            {
+              "from_token": 4608,
+              "to_token": 5120,
+              "wall_s": 94.73122,
+              "process_cpu_s": 376.711,
+              "process_cpu_seconds_per_wall_second": 3.976629879779866,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5809197056,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6798823424,
+                "Cached": 7066386432,
+                "SwapFree": 6627549184,
+                "Dirty": 9048064
+              }
+            },
+            {
+              "from_token": 5120,
+              "to_token": 5632,
+              "wall_s": 96.274432,
+              "process_cpu_s": 382.874,
+              "process_cpu_seconds_per_wall_second": 3.976902195590206,
+              "minor_faults": 116,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5809369088,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6819016704,
+                "Cached": 7084597248,
+                "SwapFree": 6635147264,
+                "Dirty": 507904
+              }
+            },
+            {
+              "from_token": 5632,
+              "to_token": 6144,
+              "wall_s": 97.798918,
+              "process_cpu_s": 388.861,
+              "process_cpu_seconds_per_wall_second": 3.976127834052315,
+              "minor_faults": 121,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5809532928,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6903455744,
+                "Cached": 7130513408,
+                "SwapFree": 6622892032,
+                "Dirty": 5758976
+              }
+            },
+            {
+              "from_token": 6144,
+              "to_token": 6656,
+              "wall_s": 99.20961,
+              "process_cpu_s": 394.258,
+              "process_cpu_seconds_per_wall_second": 3.97399001971684,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 32768,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5715775488,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6827900928,
+                "Cached": 6983954432,
+                "SwapFree": 6301106176,
+                "Dirty": 15118336
+              }
+            },
+            {
+              "from_token": 6656,
+              "to_token": 7168,
+              "wall_s": 100.567264,
+              "process_cpu_s": 400.043,
+              "process_cpu_seconds_per_wall_second": 3.977865003864478,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 6160666624,
+                "VmRSS": 5716062208,
+                "VmSwap": 17600512
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6800363520,
+                "Cached": 7007776768,
+                "SwapFree": 6300889088,
+                "Dirty": 2224128
+              }
+            }
+          ],
+          "minor_faults": 14801,
+          "major_faults": 2550,
+          "read_bytes": 289210368,
+          "sampled_peak_process_swap_bytes": 95313920
+        }
+      },
+      {
+        "artifact": "bench/results/app-service-ornith-20261025T100603Z-aec43a66",
+        "prefill_s": 1375.689888,
+        "end_memory_bytes": {
+          "VmHWM": 5610909696,
+          "VmRSS": 5599354880,
+          "VmSwap": 17616896
+        },
+        "completed_pss_kib": 5391207,
+        "prefill_observations": {
+          "scope": "Observed prefill intervals only; boundary polling can miss the final chunk. CPU time includes busy-wait/barriers and does not identify the hot operation. VmSwap is process accounting, not measured disk-wait time.",
+          "observed_from_token": 0,
+          "observed_to_token": 7168,
+          "observed_wall_s": 1272.400174,
+          "observed_process_cpu_s": 5056.864,
+          "process_cpu_seconds_per_wall_second": 3.9742716979540424,
+          "intervals": [
+            {
+              "from_token": 0,
+              "to_token": 512,
+              "wall_s": 80.834132,
+              "process_cpu_s": 321.245,
+              "process_cpu_seconds_per_wall_second": 3.974125682453051,
+              "minor_faults": 81237,
+              "major_faults": 100,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666650624,
+                "VmRSS": 4666626048,
+                "VmSwap": 17596416
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6650847232,
+                "Cached": 6747512832,
+                "SwapFree": 6118494208,
+                "Dirty": 3469312
+              }
+            },
+            {
+              "from_token": 512,
+              "to_token": 1024,
+              "wall_s": 82.466734,
+              "process_cpu_s": 327.669,
+              "process_cpu_seconds_per_wall_second": 3.973347604623217,
+              "minor_faults": 114,
+              "major_faults": 0,
+              "read_bytes": 57344,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665200640,
+                "VmSwap": 17596416
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6611435520,
+                "Cached": 6750441472,
+                "SwapFree": 5913804800,
+                "Dirty": 1568768
+              }
+            },
+            {
+              "from_token": 1024,
+              "to_token": 1536,
+              "wall_s": 83.661863,
+              "process_cpu_s": 332.723,
+              "process_cpu_seconds_per_wall_second": 3.9769972609861677,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665327616,
+                "VmSwap": 17596416
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6581669888,
+                "Cached": 6758998016,
+                "SwapFree": 5916164096,
+                "Dirty": 2797568
+              }
+            },
+            {
+              "from_token": 1536,
+              "to_token": 2048,
+              "wall_s": 85.462621,
+              "process_cpu_s": 339.906,
+              "process_cpu_seconds_per_wall_second": 3.977247550130717,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665602048,
+                "VmSwap": 17596416
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6636441600,
+                "Cached": 6775451648,
+                "SwapFree": 5913804800,
+                "Dirty": 5410816
+              }
+            },
+            {
+              "from_token": 2048,
+              "to_token": 2560,
+              "wall_s": 86.866349,
+              "process_cpu_s": 345.32,
+              "process_cpu_seconds_per_wall_second": 3.975302334854663,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665872384,
+                "VmSwap": 17596416
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6582042624,
+                "Cached": 6795182080,
+                "SwapFree": 5994545152,
+                "Dirty": 7667712
+              }
+            },
+            {
+              "from_token": 2560,
+              "to_token": 3072,
+              "wall_s": 89.06943,
+              "process_cpu_s": 353.053,
+              "process_cpu_seconds_per_wall_second": 3.9637954346401454,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665180160,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6455545856,
+                "Cached": 6657937408,
+                "SwapFree": 5976690688,
+                "Dirty": 24051712
+              }
+            },
+            {
+              "from_token": 3072,
+              "to_token": 3584,
+              "wall_s": 90.272478,
+              "process_cpu_s": 358.076,
+              "process_cpu_seconds_per_wall_second": 3.9666131686337445,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4664999936,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6414295040,
+                "Cached": 6555631616,
+                "SwapFree": 5974622208,
+                "Dirty": 14258176
+              }
+            },
+            {
+              "from_token": 3584,
+              "to_token": 4096,
+              "wall_s": 91.483047,
+              "process_cpu_s": 363.798,
+              "process_cpu_seconds_per_wall_second": 3.9766712186575948,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665286656,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6478872576,
+                "Cached": 6594076672,
+                "SwapFree": 5978214400,
+                "Dirty": 10391552
+              }
+            },
+            {
+              "from_token": 4096,
+              "to_token": 4608,
+              "wall_s": 93.034655,
+              "process_cpu_s": 369.931,
+              "process_cpu_seconds_per_wall_second": 3.9762709927822057,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665565184,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6508371968,
+                "Cached": 6626918400,
+                "SwapFree": 5909737472,
+                "Dirty": 4374528
+              }
+            },
+            {
+              "from_token": 4608,
+              "to_token": 5120,
+              "wall_s": 94.807399,
+              "process_cpu_s": 376.951,
+              "process_cpu_seconds_per_wall_second": 3.975966053029258,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665835520,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6479101952,
+                "Cached": 6678781952,
+                "SwapFree": 5907042304,
+                "Dirty": 20447232
+              }
+            },
+            {
+              "from_token": 5120,
+              "to_token": 5632,
+              "wall_s": 96.211134,
+              "process_cpu_s": 382.563,
+              "process_cpu_seconds_per_wall_second": 3.9762861541575845,
+              "minor_faults": 119,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4665995264,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6464372736,
+                "Cached": 6728474624,
+                "SwapFree": 5841301504,
+                "Dirty": 7012352
+              }
+            },
+            {
+              "from_token": 5632,
+              "to_token": 6144,
+              "wall_s": 97.962881,
+              "process_cpu_s": 389.556,
+              "process_cpu_seconds_per_wall_second": 3.9765674102622603,
+              "minor_faults": 117,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4666269696,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6480048128,
+                "Cached": 6747439104,
+                "SwapFree": 5873504256,
+                "Dirty": 15179776
+              }
+            },
+            {
+              "from_token": 6144,
+              "to_token": 6656,
+              "wall_s": 99.254902,
+              "process_cpu_s": 394.363,
+              "process_cpu_seconds_per_wall_second": 3.9732344907257073,
+              "minor_faults": 115,
+              "major_faults": 0,
+              "read_bytes": 57344,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666744832,
+                "VmRSS": 4666531840,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6530998272,
+                "Cached": 6732615680,
+                "SwapFree": 5891448832,
+                "Dirty": 1966080
+              }
+            },
+            {
+              "from_token": 6656,
+              "to_token": 7168,
+              "wall_s": 101.012549,
+              "process_cpu_s": 401.71,
+              "process_cpu_seconds_per_wall_second": 3.9768326210637452,
+              "minor_faults": 116,
+              "major_faults": 0,
+              "read_bytes": 0,
+              "end_process_memory_bytes": {
+                "VmHWM": 4666839040,
+                "VmRSS": 4666814464,
+                "VmSwap": 17604608
+              },
+              "end_system_memory_bytes": {
+                "MemAvailable": 6491541504,
+                "Cached": 6767878144,
+                "SwapFree": 5913731072,
+                "Dirty": 1343488
+              }
+            }
+          ],
+          "minor_faults": 82744,
+          "major_faults": 100,
+          "read_bytes": 114688,
+          "sampled_peak_process_swap_bytes": 17801216
+        }
+      }
+    ]
+  },
+  "pause_checkpoint": "bench/results/m3-native-demand-20261025T093522Z/pause-checkpoint.json",
+  "long_analysis": "bench/m3-native-demand-long-analysis-20261025.json",
+  "ornith_quality_lock": "bench/results/m3-native-demand-20261025T093522Z/ornith-quality-gate.json",
+  "pause_reason": "User leaves at12:00 Europe/Belgrade; active four-trial long Ornith comparison finished at12:16; no subsequent phone workloads until user returns.",
+  "phone_cleanup": "bench/device-health-after-native-demand-20261025.json",
+  "remaining": [
+    "Ornith warmup+5 short-speed pairs using existing same-APK quality lock",
+    "Gemma native-prefault quality/speed control",
+    "Separate bounded CPU sampling to locate prefill bottleneck"
+  ],
+  "completed_long_findings": {
+    "same_apk_pairs": 2,
+    "all_generated_ids_identical": true,
+    "first_top8_max_absolute_error": 0.0,
+    "native_prefill_s": [
+      1373.470808,
+      1378.298941
+    ],
+    "demand_prefill_s": [
+      1375.689888,
+      1373.499383
+    ],
+    "native_peak_rss_gib": [
+      5.737567901611328,
+      5.6855621337890625
+    ],
+    "demand_peak_rss_gib": [
+      5.225566864013672,
+      5.227619171142578
+    ],
+    "native_sampled_peak_swap_mib": [
+      90.8984375,
+      103.625
+    ],
+    "demand_sampled_peak_swap_mib": [
+      16.9765625,
+      16.9296875
+    ],
+    "scope": "Two long quality pairs, descriptive only; short-speed, Gemma, endurance/product acceptance pending. Reduced process mapped residency does not establish equivalent system RAM savings. Slow prefill persists without1GiB swap; CPU sampling required, CPU time includes barriers/spin."
+  },
+  "latest_tools_source_snapshot": "7b2b4f89424e750db3c5e7f74ad7ee5b27af4b1036ec60044c9d7175c64b4fdb",
+  "resume": "bench/m3-native-demand-resume-20261025.json",
+  "dispatch_audit": "bench/results/native-demand-dispatch-audit-20261025/report.json",
+  "ornith_completed_screen": "bench/m3-native-demand-ornith-screening-20261025.json",
+  "ornith_analysis": "bench/m3-native-demand-ornith-analysis-20261025.json",
+  "short_speed_conclusion": "Five pairs passed, emission ratio0.97984 with95% bootstrap interval0.85921\u20131.04281. No demonstrated decode gain. Load+TTFT interval also spans1. Pair4 pressure/refault outlier retained, sampled swap360\u2013362MiB both arms; no universal swap fix.",
+  "transient_pack_feasibility": {
+    "status": "Host/Android binary built; phone run waits for serialized Gemma controller",
+    "source": "native-runtime/tools/prefill-pack-bench.cpp",
+    "runner": "scripts/run-prefill-pack-bench.py",
+    "host_negative": "bench/results/prefill-pack-host-20261025/report.json",
+    "scope": "Q4_K/DOTPROD host cases differ by up to3.82e-6 and fail strict byte equality; Q6_K host small cases pass. Not phone correctness or speed evidence."
+  },
+  "frequency_audit": "bench/m3-frequency-cap-audit-20261025-v2.json",
+  "frequency_caveat": "Relevant ceiling snapshots changed in1/5 earlier Gemma full-repack and2/5 evening Ornith demand pairs. No trial removed or statistics recomputed; do not promote a causal speed gain from these alone. Quality unchanged.",
+  "completed_screening": "bench/m3-native-demand-screening-20261025.json",
+  "completed_analysis": "bench/m3-native-demand-analysis-20261025.json",
+  "superseded_by": "bench/m3-q4-repack-investigation-20261025.json"
+}

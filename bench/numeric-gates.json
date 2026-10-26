@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "scope": "Synthetic matrix multiplication vs scalar double accumulation of dequantized represented weights and F32 activations. Baseline CPU may internally quantize activations; these tolerances do not establish whole-model quality.",
+  "fixed_before_optimization": "2026-10-24",
+  "dimensions": {"k": 256, "output_rows": 32, "token_batches": [1, 16, 128], "seeds": [1, 17, 91]},
+  "types": {
+    "f32": {"nmse": 1e-10, "max_relative_to_peak": 0.00005},
+    "f16": {"nmse": 0.000001, "max_relative_to_peak": 0.01},
+    "bf16": {"nmse": 0.0001, "max_relative_to_peak": 0.03},
+    "q4_K": {"nmse": 0.0005, "max_relative_to_peak": 0.05},
+    "q5_K": {"nmse": 0.0005, "max_relative_to_peak": 0.05},
+    "q6_K": {"nmse": 0.0005, "max_relative_to_peak": 0.05}
+  },
+  "requirements": ["All outputs finite", "Report unsupported extra buffer paths as skipped, never passed", "At least default CPU passes every selected type", "No tolerance relaxation after inspecting an optimization result"]
+}

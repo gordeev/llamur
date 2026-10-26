@@ -1,0 +1,9 @@
+{
+  "scope": "Same APK, phone, model, fixture and CPU profile across independent process loads. Repeatability alone is not quality equivalence to a different reference.",
+  "minimum_runs": 2,
+  "mean_absolute_token_nll_error_max": 0.000001,
+  "maximum_absolute_token_nll_error_max": 0.00001,
+  "first_top8_absolute_error_max": 0.00001,
+  "first_top8_set_must_match": true,
+  "finite_raw_logits_required": true
+}

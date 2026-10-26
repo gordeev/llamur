@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "kleidiai": {
+    "version": "1.32.0",
+    "url": "https://github.com/ARM-software/kleidiai/releases/download/v1.32.0/kleidiai-v1.32.0-src.tar.gz",
+    "bytes": 4701556,
+    "sha256": "a48d373e7c5d721a0aecbf5ddaf0bdf245bc8064e6b84086f13db0e102b553a6",
+    "upstream_md5": "05f1953428ffe8e8c7f585dc6d508887",
+    "verification": "archive selected and MD5-verified by pinned llama.cpp CMake; local SHA-256 additionally recorded",
+    "licenses": [
+      "Apache-2.0",
+      "BSD-3-Clause"
+    ],
+    "offline_source_recipe": "required before release; current CMake FetchContent may access network on clean build",
+    "main_release_usage": "Excluded: MotoAI portable CPU build compiles KleidiAI OFF; no FetchContent download is needed for this component in the main release."
+  }
+}

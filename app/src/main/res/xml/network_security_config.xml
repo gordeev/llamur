@@ -1,0 +1,6 @@
+<network-security-config>
+    <!-- User-configured HTTP providers require platform support for dynamic hosts.
+         RemoteNetwork still rejects every HTTP request without this profile's exact
+         address approval (or the existing loopback opt-in). HF remains HTTPS-only. -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

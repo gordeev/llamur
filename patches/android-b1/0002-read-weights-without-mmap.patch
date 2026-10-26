@@ -1,0 +1,10 @@
+--- a/examples/llama.android/lib/src/main/cpp/ai_chat.cpp
++++ b/examples/llama.android/lib/src/main/cpp/ai_chat.cpp
+@@ -60,6 +60,7 @@
+ JNIEXPORT jint JNICALL
+ Java_com_arm_aichat_internal_InferenceEngineImpl_load(JNIEnv *env, jobject, jstring jmodel_path) {
+     llama_model_params model_params = llama_model_default_params();
++    model_params.load_mode = LLAMA_LOAD_MODE_NONE;
+ 
+     const auto *model_path = env->GetStringUTFChars(jmodel_path, 0);
+     LOGd("%s: Loading model from: \n%s\n", __func__, model_path);

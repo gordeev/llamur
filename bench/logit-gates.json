@@ -1,0 +1,11 @@
+{
+  "scope": "Initial teacher-forcing CPU reference capture, before any optimized backend acceptance. Small owned code/Russian corpora are diagnostic coverage, not whole-model quality certification.",
+  "reference": "Host native CPU, same pinned model SHA/template/token IDs, original weight buffers, F16 KV, no GPU",
+  "candidate": "Product APK CPU profile; identical prompt and teacher-forced continuation token IDs",
+  "finite_raw_logits_required": true,
+  "mean_absolute_token_nll_error_max": 0.02,
+  "maximum_absolute_token_nll_error_max": 0.1,
+  "first_top8_max_shared_logit_absolute_error": 0.1,
+  "rationale": "Provisional screening budget fixed before reference collection: small differences in log probabilities, with a stricter mean and a bounded worst token. Preserve failures; investigate rather than widening bounds to accept a backend. Larger corpora/task quality remain separate gates.",
+  "first_top8_set_must_match": true
+}

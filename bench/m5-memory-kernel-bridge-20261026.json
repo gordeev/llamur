@@ -1,0 +1,22 @@
+{
+  "apk_sha256": "1758e23c0315bfc68087e0eb51b8b919db3c5418f50156ee229504458fbe973f",
+  "prior_apk_sha256": "2655eab1b9d74def32a043f34879147abecd74abab4de2dc17ec6b8211b5d206",
+  "all_native_libraries_identical": true,
+  "libraries_sha256": {
+    "lib/arm64-v8a/libggml-base.so": "8c8f874fdd9424bd72e845fadb5f9995426f0d8306c366db4c48c3285897cde1",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so": "e36b197c066a5b13aa88dc061f5b6e3fa1ec7ab74db7d64e07e7bee34a29a8b6",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so": "4d1b28939e3b2146c921c757e8ae90fc3813da47eb6e0d2e2cfa3fad2f8ba28d",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so": "fdcc6224f9298754e993c47defa03c4a6a717849a11d4e6a9c5bdd33f4cd0463",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so": "c6bf0ea20d0c768a1d3d0ab6db23819bc3a9a865a1f9a42d21b048f69aa5ee7d",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so": "0b5f227f0bf12692a2dca35801c118a4f0b9370a49878ed85df12339161ee920",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so": "22fbcb0206674d254e03171d1d40bd9f6ada6c07645d80ef587429d0364d22a9",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so": "b4e6936c07f92f56bfc07183cd895652f7f75db55760af32fe63f7fc3fc9fadb",
+    "lib/arm64-v8a/libggml.so": "364f6c0302f24a0c6e5b19a39fc57d91c1919671924f1f9b34efce3d6a8f1a57",
+    "lib/arm64-v8a/libllama-common.so": "c80ae193806a5963e86ac1a030956df434e13300073a3b44b152158e80ab0537",
+    "lib/arm64-v8a/libllama.so": "219c34ccc655a5bcf565d850ab5bd4da9dbacc716340501fb73a9442544dc217",
+    "lib/arm64-v8a/libmotoai-checks.so": "06b2c7f3b12873c6950f15380a6157eb7398b9a5e2c9ebf935fe9d882f561cce",
+    "lib/arm64-v8a/libmotoai-probe.so": "3406b232e1da4da0e3a7b00a8a2739ea2bbe533cbe053c5c63d7bfa08b13d777",
+    "lib/arm64-v8a/libmotoai-runtime.so": "5d38d8a98c901ff422416cfdf47e154f4fc319f0341e6a68aee9cfe1a01665dd"
+  },
+  "phone_attention_gate": "bench/results/attention-long-phone-20261026T015739884793Z/report.json"
+}

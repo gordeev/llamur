@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ui_completed_responses" formatted="false">"Готовые ответы"</string>
+    <string name="ui_response_ready" formatted="false">"Ответ готов"</string>
+    <string name="ui_tap_to_return_to_llamur" formatted="false">"Нажмите, чтобы вернуться в llamur"</string>
+    <string name="ui_wait_for_the_operation_to_finish" formatted="false">"Дождитесь завершения операции"</string>
+    <string name="ui_load_model">"Загрузить модель · %1$s"</string>
+    <string name="ui_api">"По API · %1$s · %2$s"</string>
+    <string name="ui_on_device">"На телефоне · %1$s"</string>
+    <string name="ui_choose_model" formatted="false">"Выбрать модель  ▾"</string>
+    <string name="ui_a_request_is_running_in_another_chat" formatted="false">"В другом диалоге выполняется запрос"</string>
+    <string name="ui_no_model_selected_yet" formatted="false">"Модель ещё не выбрана"</string>
+    <string name="ui_compacting_context" formatted="false">"Сжатие контекста…"</string>
+    <string name="ui_api_request" formatted="false">"Запрос по API…"</string>
+    <string name="ui_api_31d58b" formatted="false">"По API · "</string>
+    <string name="ui_permanent_chat" formatted="false">"постоянный диалог"</string>
+    <string name="ui_temporary_chat" formatted="false">"временный диалог"</string>
+    <string name="ui_load_this_chat_s_local_model_to" formatted="false">"Чтобы продолжить этот диалог, загрузите его локальную модель"</string>
+    <string name="ui_load_chat_model" formatted="false">"Загрузить модель диалога"</string>
+    <string name="ui_choose_chat_model" formatted="false">"Выбрать модель диалога"</string>
+    <string name="ui_stop" formatted="false">"Остановить"</string>
+    <string name="ui_send" formatted="false">"Отправить"</string>
+    <string name="ui_choose_a_different_model" formatted="false">"Выбрать другую модель?"</string>
+    <string name="ui_a_new_empty_chat_will_open_this" formatted="false">"Откроется новый пустой диалог. Текущая переписка останется в памяти и не будет передана другому провайдеру."</string>
+    <string name="ui_new_chat" formatted="false">"Новый диалог"</string>
+    <string name="ui_keep" formatted="false">"Оставить"</string>
+    <string name="ui_no_active_models" formatted="false">"Нет активных моделей"</string>
+    <string name="ui_add_a_gguf_model_or_an_api" formatted="false">"Добавьте GGUF или подключение по API в настройках и активируйте модели."</string>
+    <string name="ui_settings" formatted="false">"Настройки"</string>
+    <string name="ui_back" formatted="false">"Назад"</string>
+    <string name="ui_active_models" formatted="false">"Активные модели"</string>
+    <string name="ui_active_models_appear_when_you_create_a" formatted="false">"Активные модели появятся при создании диалога. Файлы не удаляются при отключении."</string>
+    <string name="ui_add_gguf_hf" formatted="false">"Добавить GGUF / HF"</string>
+    <string name="ui_active_local_models" formatted="false">"Активные локальные модели"</string>
+    <string name="ui_could_not_retrieve_chat" formatted="false">"Ошибка получения диалога"</string>
+    <string name="ui_processing_input_tokens">"Обработка ввода: %1$s / %2$s токенов"</string>
+    <string name="ui_response_reserved_tokens">"Ответ: %1$s / %2$s токенов резерва"</string>
+    <string name="ui_connection_to_the_model_process_lost_the" formatted="false">"Соединение с процессом модели потеряно. Запрос не повторяется"</string>
+    <string name="ui_start_a_conversation" formatted="false">"Начните разговор"</string>
+    <string name="ui_choose_a_model" formatted="false">"Выберите модель"</string>
+    <string name="ui_write_a_message_below" formatted="false">"Напишите сообщение ниже"</string>
+    <string name="ui_on_device_or_via_api_your_choice" formatted="false">"На телефоне или по API — выбираете вы"</string>
+    <string name="ui_choose_model_4c36d5" formatted="false">"Выбрать модель"</string>
+    <string name="ui_load_model_28b19c" formatted="false">"Загрузить модель"</string>
+    <string name="ui_permanent_encrypted_storage" formatted="false">"Постоянный · зашифрованное хранение"</string>
+    <string name="ui_temporary_no_saved_history" formatted="false">"Временный · без записи истории"</string>
+    <string name="ui_error" formatted="false">"Ошибка"</string>
+    <string name="ui_ok" formatted="false">"Понятно"</string>
+    <string name="ui_back_to_chats" formatted="false">"Назад к диалогам"</string>
+    <string name="ui_about_the_model" formatted="false">"О модели"</string>
+    <string name="ui_ai" formatted="false">"ИИ"</string>
+    <string name="ui_search_in_chat" formatted="false">"Поиск в диалоге"</string>
+    <string name="ui_chat_actions" formatted="false">"Действия с диалогом"</string>
+    <string name="ui_go_to_pinned_message" formatted="false">"К закреплённому сообщению"</string>
+    <string name="ui_unpin_message" formatted="false">"Открепить сообщение"</string>
+    <string name="ui_previous_match" formatted="false">"Предыдущее совпадение"</string>
+    <string name="ui_next_match" formatted="false">"Следующее совпадение"</string>
+    <string name="ui_close_chat_search" formatted="false">"Закрыть поиск в диалоге"</string>
+    <string name="ui_message" formatted="false">"Сообщение"</string>
+    <string name="ui_attach_file" formatted="false">"Прикрепить файл"</string>
+    <string name="ui_message_exceeds_512_kib_all_text_is" formatted="false">"Сообщение превышает 512 КиБ. Текст оставлен целиком; отправка недоступна."</string>
+    <string name="ui_response_limit_provider_counts_tokens_context_history">"Лимит ответа %1$s · токены/контекст считает провайдер · история не обрезается"</string>
+    <string name="ui_input_response_tokens">"Ввод %1$s + ответ %2$s / %3$s токенов"</string>
+    <string name="ui_fits" formatted="false">" · помещается"</string>
+    <string name="ui_overflow_full_history_retained" formatted="false">" · переполнение, история сохранена целиком"</string>
+    <string name="ui_no_connection_to_the_model_reopen_the" formatted="false">"Нет связи с моделью. Откройте приложение заново."</string>
+    <string name="ui_no_connection_to_the_model_process" formatted="false">"Нет связи с процессом модели"</string>
+    <string name="ui_request_exceeds_8_mib_nothing_was_truncated" formatted="false">"Запрос превышает 8 МиБ. Данные не обрезаны; начните новый диалог."</string>
+    <string name="ui_attachments_removed_after_changing_the_model_original" formatted="false">"Вложения убраны после смены модели. Исходные файлы сохранены"</string>
+    <string name="ui_this_response_is_no_longer_available_the" formatted="false">"Этот ответ уже недоступен: диалог закрыт или процесс был завершён. Запрос не повторяется."</string>
+    <string name="ui_input_response_context">"%1$s вход · %2$s ответ · контекст %3$s"</string>
+    <string name="ui_api_limit">"По API · лимит %1$s · "</string>
+    <string name="ui_permanent" formatted="false">"постоянный"</string>
+    <string name="ui_temporary" formatted="false">"временный"</string>
+    <string name="ui_connecting_to_model_process" formatted="false">"Подключение к процессу модели…"</string>
+    <string name="ui_on_device_a8395a" formatted="false">"На телефоне"</string>
+    <string name="ui_responding" formatted="false">"отвечает…"</string>
+    <string name="ui_on_device_50a404">"%1$s · на телефоне"</string>
+    <string name="ui_wait_for_the_model_process_to_connect" formatted="false">"Подождите подключения к процессу модели"</string>
+    <string name="ui_add_a_model" formatted="false">"Добавьте модель"</string>
+    <string name="ui_connect_a_gguf_file_on_your_phone" formatted="false">"Подключите GGUF на телефоне или провайдера по API и активируйте нужные модели."</string>
+    <string name="ui_cancel" formatted="false">"Отмена"</string>
+    <string name="ui_who_shall_we_talk_to" formatted="false">"С кем поговорим"</string>
+    <string name="ui_model_for_new_chat" formatted="false">"Модель нового диалога"</string>
+    <string name="ui_permanent_save_on_device" formatted="false">"Постоянный · сохранить на устройстве"</string>
+    <string name="ui_temporary_conversations_disappear_when_the_process_ends" formatted="false">"Временная переписка исчезнет после завершения процесса. Постоянная хранится зашифрованно; срок задаётся в настройках."</string>
+    <string name="ui_allow_permanent_chat_storage" formatted="false">"Разрешить хранение постоянных диалогов"</string>
+    <string name="ui_no_folder" formatted="false">"Без папки"</string>
+    <string name="ui_folder" formatted="false">"Папка"</string>
+    <string name="ui_folder_for_new_chat" formatted="false">"Папка нового диалога"</string>
+    <string name="ui_create" formatted="false">"Создать"</string>
+    <string name="ui_enable_and_create" formatted="false">"Включить и создать"</string>
+    <string name="ui_pinned">"Закреплено%1$s\n"</string>
+    <string name="ui_unpin" formatted="false">"Открепить"</string>
+    <string name="ui_pin" formatted="false">"Закрепить"</string>
+    <string name="ui_copy" formatted="false">"Копировать"</string>
+    <string name="ui_save_text_to_file" formatted="false">"Сохранить текст в файл"</string>
+    <string name="ui_llamur_message" formatted="false">"Сообщение llamur"</string>
+    <string name="ui_text_file_utf_8" formatted="false">"Текстовый файл · UTF-8"</string>
+    <string name="ui_image_png_jpeg_webp_gif" formatted="false">"Изображение · PNG, JPEG, WebP, GIF"</string>
+    <string name="ui_pdf_document" formatted="false">"Документ PDF"</string>
+    <string name="ui_attachments">"Вложения → %1$s"</string>
+    <string name="ui_attachments_for_local_model" formatted="false">"Вложения для локальной модели"</string>
+    <string name="ui_finish_the_previous_file_save_first" formatted="false">"Завершите предыдущее сохранение файла"</string>
+    <string name="ui_no_app_found_for_saving_files" formatted="false">"Не найдено приложение для сохранения файла"</string>
+    <string name="ui_copied" formatted="false">"Скопировано"</string>
+    <string name="ui_open" formatted="false">"Открыть"</string>
+    <string name="ui_rename" formatted="false">"Переименовать"</string>
+    <string name="ui_move_to_folder" formatted="false">"Переместить в папку"</string>
+    <string name="ui_make_temporary" formatted="false">"Сделать временным"</string>
+    <string name="ui_make_permanent" formatted="false">"Сделать постоянным"</string>
+    <string name="ui_delete_chat" formatted="false">"Удалить диалог"</string>
+    <string name="ui_context_and_compaction" formatted="false">"Контекст и сжатие"</string>
+    <string name="ui_chat" formatted="false">"Диалог"</string>
+    <string name="ui_chat_name" formatted="false">"Название диалога"</string>
+    <string name="ui_name" formatted="false">"Название"</string>
+    <string name="ui_save" formatted="false">"Сохранить"</string>
+    <string name="ui_delete_chat_525ef8" formatted="false">"Удалить диалог?"</string>
+    <string name="ui_stop_the_response_in_this_chat_first" formatted="false">"Сначала остановите ответ в этом диалоге."</string>
+    <string name="ui_this_conversation_will_be_removed_from_the" formatted="false">"Переписка будет удалена с устройства. Модель и другие чаты сохранятся."</string>
+    <string name="ui_this_temporary_conversation_will_be_closed" formatted="false">"Временная переписка будет закрыта."</string>
+    <string name="ui_delete" formatted="false">"Удалить"</string>
+    <string name="ui_chat_folder" formatted="false">"Папка диалога"</string>
+    <string name="ui_allow_storage" formatted="false">"Разрешить хранение?"</string>
+    <string name="ui_permanent_chat_storage_will_be_enabled_only" formatted="false">"Включится хранение постоянных чатов. Только выбранный диалог станет постоянным; остальные временные чаты не будут записаны."</string>
+    <string name="ui_enable_and_save" formatted="false">"Включить и сохранить"</string>
+    <string name="ui_make_temporary_7ccb87" formatted="false">"Сделать временным?"</string>
+    <string name="ui_the_saved_copy_will_be_deleted_the" formatted="false">"Сохранённая копия будет удалена. Текущая переписка останется в RAM до завершения процесса."</string>
+    <string name="ui_folder_name" formatted="false">"Название папки"</string>
+    <string name="ui_new_folder" formatted="false">"Новая папка"</string>
+    <string name="ui_rename_folder" formatted="false">"Переименовать папку"</string>
+    <string name="ui_delete_folder" formatted="false">"Удалить папку"</string>
+    <string name="ui_delete_folder_445e61" formatted="false">"Удалить папку?"</string>
+    <string name="ui_chats_stay_in_the_main_list_their" formatted="false">"Диалоги останутся в общем списке. Их переписка не удалится."</string>
+    <string name="ui_folders" formatted="false">"Папки"</string>
+    <string name="ui_create_folder" formatted="false">"Создать папку"</string>
+    <string name="ui_models_and_connections" formatted="false">"МОДЕЛИ И ПОДКЛЮЧЕНИЯ"</string>
+    <string name="ui_models_on_device" formatted="false">"Модели на телефоне"</string>
+    <string name="ui_gguf_import_hugging_face_profiles_and_storage" formatted="false">"Импорт GGUF, Hugging Face, профили и место"</string>
+    <string name="ui_api_connections" formatted="false">"Подключения по API"</string>
+    <string name="ui_openrouter_openai_claude_and_custom_servers" formatted="false">"OpenRouter, OpenAI, Claude и свой сервер"</string>
+    <string name="ui_models_available_when_creating_a_chat" formatted="false">"Какие модели доступны при создании диалога"</string>
+    <string name="ui_chats" formatted="false">"ДИАЛОГИ"</string>
+    <string name="ui_keep_permanent_chats" formatted="false">"Сохранять постоянные"</string>
+    <string name="ui_auto_delete_permanent_chats" formatted="false">"Автоудаление постоянных"</string>
+    <string name="ui_never_save" formatted="false">"Никогда не сохранять"</string>
+    <string name="ui_chat_storage" formatted="false">"Хранение диалогов"</string>
+    <string name="ui_temporary_chats_are_not_saved" formatted="false">" · временные не записываются"</string>
+    <string name="ui_create_rename_and_organize_chat_folders" formatted="false">"Создание, названия и распределение диалогов"</string>
+    <string name="ui_automatically_compact_context" formatted="false">"Автоматически сжимать контекст"</string>
+    <string name="ui_off_by_default_before_sending_when_the" formatted="false">"По умолчанию выключено. При заполнении около 80% контекста модель создаёт сводку: возможна потеря деталей и дополнительные запросы к API. Оригиналы остаются в чате."</string>
+    <string name="ui_storage_unavailable" formatted="false">"Хранилище недоступно"</string>
+    <string name="ui_appearance_and_behavior" formatted="false">"ОФОРМЛЕНИЕ И РАБОТА"</string>
+    <string name="ui_theme" formatted="false">"Тема"</string>
+    <string name="ui_system" formatted="false">"Системная"</string>
+    <string name="ui_light" formatted="false">"Светлая"</string>
+    <string name="ui_dark" formatted="false">"Тёмная"</string>
+    <string name="ui_app_language" formatted="false">"Язык приложения"</string>
+    <string name="ui_russian" formatted="false">"Русский"</string>
+    <string name="ui_follow_system" formatted="false">"Как в системе"</string>
+    <string name="ui_notifications" formatted="false">"Уведомления"</string>
+    <string name="ui_response_ready_no_conversation_text" formatted="false">"Ответ готов — без текста переписки"</string>
+    <string name="ui_local_model_reasoning" formatted="false">"Рассуждение локальной модели"</string>
+    <string name="ui_for_local_models_with_switchable_thinking_configure" formatted="false">"Для локальных моделей с отключаемым thinking. Рассуждение API настраивается в подключении провайдера."</string>
+    <string name="ui_local_model_temperature" formatted="false">"Температура локальной модели"</string>
+    <string name="ui_temperature_0_5" formatted="false">"Температура 0–5"</string>
+    <string name="ui_temperature" formatted="false">"Температура"</string>
+    <string name="ui_work_with_screen_off" formatted="false">"Работа с выключенным экраном"</string>
+    <string name="ui_android_limits_and_battery_settings" formatted="false">"Ограничения Android и настройки батареи"</string>
+    <string name="ui_background_operation" formatted="false">"Работа в фоне"</string>
+    <string name="ui_a_foreground_service_supports_a_response_you" formatted="false">"Foreground service поддерживает явно запущенный ответ. В глубоком Doze Android может отложить CPU/сеть. Неограниченную работу можно разрешить вручную; приложение не меняет системные настройки само."</string>
+    <string name="ui_battery_settings" formatted="false">"Настройки батареи"</string>
+    <string name="ui_application" formatted="false">"ПРИЛОЖЕНИЕ"</string>
+    <string name="ui_diagnostics" formatted="false">"Диагностика"</string>
+    <string name="ui_device_capabilities_and_runtime_checks" formatted="false">"Возможности устройства и проверка runtime"</string>
+    <string name="ui_licenses" formatted="false">"Лицензии"</string>
+    <string name="ui_you_can_continue_temporary_chats_resetting_deletes" formatted="false">"\n\nМожно продолжать временные чаты. Сброс удалит недоступные сохранённые диалоги и папки; это действие нельзя отменить."</string>
+    <string name="ui_delete_saved_data" formatted="false">"Удалить сохранённые данные"</string>
+    <string name="ui_confirm_reset" formatted="false">"Подтвердите сброс"</string>
+    <string name="ui_delete_all_saved_chats_and_the_history" formatted="false">"Удалить все сохранённые диалоги и ключ истории? Настройки моделей и ключи провайдеров останутся."</string>
+    <string name="ui_continue_without_saving" formatted="false">"Продолжить без хранения"</string>
+    <string name="ui_all_chats_stay_in_memory_only_history" formatted="false">"Все диалоги остаются только в памяти. После завершения процесса история исчезает."</string>
+    <string name="ui_permanent_chats_are_encrypted_on_your_device" formatted="false">"Постоянные диалоги хранятся на устройстве в зашифрованном виде. Временные не записываются."</string>
+    <string name="ui_encrypted_history_is_deleted_after_a_selected" formatted="false">"Зашифрованная история удаляется через выбранное время после последней активности."</string>
+    <string name="ui_choose_what_stays_on_your_device_temporary" formatted="false">"Выберите, что остаётся на устройстве. Временные диалоги никогда не сохраняются на диск."</string>
+    <string name="ui_delete_saved_chats" formatted="false">"Удалить сохранённые диалоги?"</string>
+    <string name="ui_all_saved_copies_will_be_deleted_conversations" formatted="false">"Будут удалены все сохранённые копии. Содержимое, уже находящееся в RAM, останется временным до завершения процесса. Папки останутся настройкой."</string>
+    <string name="ui_delete_and_stop_saving" formatted="false">"Удалить и не сохранять"</string>
+    <string name="ui_after_1_hour" formatted="false">"Через 1 час"</string>
+    <string name="ui_after_24_hours" formatted="false">"Через 24 часа"</string>
+    <string name="ui_after_7_days" formatted="false">"Через 7 дней"</string>
+    <string name="ui_after_30_days" formatted="false">"Через 30 дней"</string>
+    <string name="ui_auto_delete" formatted="false">"Автоудаление"</string>
+    <string name="ui_retention_starts_from_the_last_activity_android" formatted="false">"Срок считается от последней активности. Android может задержать фоновую очистку; при открытии истёкшие чаты скрываются. Активный ответ сначала завершится."</string>
+    <string name="ui_apply_this_retention_period_to_all_permanent" formatted="false">"Применить этот срок ко всем постоянным диалогам? История старше выбранного срока будет удалена."</string>
+    <string name="ui_apply" formatted="false">"Применить"</string>
+    <string name="ui_follow_the_android_theme" formatted="false">"Следовать оформлению Android"</string>
+    <string name="ui_light_background_and_subtle_dividers" formatted="false">"Светлый фон и мягкие разделители"</string>
+    <string name="ui_dark_surfaces_and_soft_accents" formatted="false">"Тёмные поверхности и спокойные акценты"</string>
+    <string name="ui_choose_the_app_s_appearance" formatted="false">"Выберите оформление приложения."</string>
+    <string name="ui_interface_language_does_not_change_your_messages" formatted="false">"Язык интерфейса не меняет язык сообщений и ответов модели."</string>
+    <string name="ui_russian_or_english_english_for_other_languages" formatted="false">"Русский или English; для других языков — English"</string>
+    <string name="ui_russian_interface" formatted="false">"Русский интерфейс"</string>
+    <string name="ui_compacting_context_stop_with" formatted="false">"Сжатие контекста… · остановить кнопкой ■"</string>
+    <string name="ui_summary_ready_view_and_apply" formatted="false">"Сводка готова · посмотреть и применить"</string>
+    <string name="ui_compaction_incomplete_details" formatted="false">"Сжатие не завершено · подробнее"</string>
+    <string name="ui_context_compacted_view_summary_undo" formatted="false">"Контекст сжат · посмотреть сводку / отменить"</string>
+    <string name="ui_original_messages">"Исходных сообщений: %1$s · "</string>
+    <string name="ui_encrypted_storage_with_chat_retention" formatted="false">"зашифрованное хранение по сроку чата"</string>
+    <string name="ui_temporary_chat_ram_only" formatted="false">"временный чат, только RAM"</string>
+    <string name="ui_the_summary_replaces_earlier_messages_only_in" formatted="false">"Сводка заменяет ранние сообщения только во вводе модели и может упустить детали. Оригинал переписки остаётся в чате. Отмена вернёт весь исходный контекст, который снова может превысить окно модели."</string>
+    <string name="ui_auto_compaction_is_paused_for_this_chat" formatted="false">"Автокомпакт приостановлен для этого чата после отмены или ошибки."</string>
+    <string name="ui_auto_compaction_is_on_runs_before_sending" formatted="false">"Автокомпакт включён: срабатывает перед отправкой около 80% окна с резервом ответа."</string>
+    <string name="ui_auto_compaction_is_off_enable_it_in" formatted="false">"Автокомпакт выключен. Включается в Настройках → Диалоги."</string>
+    <string name="ui_steps_messages_summarized">"%1$s: %2$s → %3$s · этапов: %4$s · свёрнуто сообщений: %5$s"</string>
+    <string name="ui_tokens" formatted="false">"Токены"</string>
+    <string name="ui_estimated_api_tokens" formatted="false">"Оценка токенов API"</string>
+    <string name="ui_preview_not_applied_yet" formatted="false">"Предпросмотр · ещё не применяется"</string>
+    <string name="ui_apply_summary" formatted="false">"Применить сводку"</string>
+    <string name="ui_discard_preview" formatted="false">"Не применять"</string>
+    <string name="ui_active_summary" formatted="false">"Активная сводка"</string>
+    <string name="ui_undo_compaction" formatted="false">"Отменить сжатие"</string>
+    <string name="ui_resume_auto_compaction" formatted="false">"Возобновить автокомпакт"</string>
+    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Окно из каталога: %1$s. Для API заполнение оценивается по usage и размеру текста; изображения и PDF могут занимать больше. Укажите фактическое окно модели, если каталог его не сообщил."</string>
+    <string name="ui_unknown" formatted="false">"неизвестно"</string>
+    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"Окно API в токенах · 0 = каталог"</string>
+    <string name="ui_save_api_window" formatted="false">"Сохранить окно API"</string>
+    <string name="ui_enter_0_or_1024_2097152" formatted="false">"Введите 0 или 1024–2097152"</string>
+    <string name="ui_operation_in_progress" formatted="false">"Операция выполняется…"</string>
+    <string name="ui_compact_context" formatted="false">"Сжать контекст"</string>
+    <string name="ui_create_summary" formatted="false">"Создать сводку?"</string>
+    <string name="ui_the_same_model_will_process_earlier_conversation" formatted="false">"Та же модель обработает раннюю переписку и создаст сводку. "</string>
+    <string name="ui_this_uses_up_to_16_additional_requests" formatted="false">"Будет до 16 дополнительных запросов к этому провайдеру по его тарифу. Затем вы сможете посмотреть и применить результат."</string>
+    <string name="ui_this_takes_time_on_your_phone_you" formatted="false">"Это займёт время на телефоне. Затем вы сможете посмотреть и применить результат."</string>
+    <string name="ui_create_summary_72b9b5" formatted="false">"Создать сводку"</string>
+    <string name="ui_compaction_started_the_completed_summary_will_appear" formatted="false">"Сжатие запущено. Готовая сводка появится над перепиской; её можно посмотреть перед применением."</string>
+    <string name="ui_refresh" formatted="false">"Обновить"</string>
+    <string name="ui_on_device_original_gguf" formatted="false">"На телефоне · исходный GGUF"</string>
+    <string name="ui_api_256236">"По API · %1$s"</string>
+    <string name="ui_response_reserve_context_and_usage_are_determined">"Резерв ответа: %1$s\nКонтекст и usage определяет провайдер"</string>
+    <string name="ui_api_units" formatted="false">"ед.API"</string>
+    <string name="ui_reported_cost_responses">"Сообщённая стоимость: %1$s %2$s · %3$s ответов"</string>
+    <string name="ui_api_did_not_report_comparable_cost" formatted="false">"API не сообщил сопоставимую стоимость"</string>
+    <string name="ui_context_response_cpu_f16_kv_weights_unchanged">"Контекст: %1$s · ответ: %2$s\nCPU · F16 KV · веса без изменений"</string>
+    <string name="ui_model_profile" formatted="false">"Профиль модели"</string>
+    <string name="ui_load_model_profile" formatted="false">"Загрузить модель / профиль"</string>
+    <string name="ui_permanent_chat_encrypted_storage" formatted="false">"Постоянный диалог · зашифрованное хранение"</string>
+    <string name="ui_temporary_chat_ram_only_be9cea" formatted="false">"Временный диалог · только RAM"</string>
+    <string name="ui_retry_saving" formatted="false">"Повторить сохранение"</string>
+    <string name="ui_choose_another_model" formatted="false">"Выбрать другую модель"</string>
+    <string name="ui_about_model_and_chat" formatted="false">"О модели и диалоге"</string>
+    <string name="ui_done" formatted="false">"Готово"</string>
+    <string name="ui_server_running" formatted="false">"Сервер работает"</string>
+    <string name="ui_server_stopped" formatted="false">"Сервер выключен"</string>
+    <string name="ui_only_a_local_model_is_served_client" formatted="false">"Раздаётся только локальная модель. Запросы клиентов не сохраняются как ваши диалоги."</string>
+    <string name="ui_add_gguf_hugging_face" formatted="false">"Добавить GGUF / Hugging Face"</string>
+    <string name="ui_local_api_model" formatted="false">"Модель локального API"</string>
+    <string name="ui_public_model_id" formatted="false">"Публичный model ID"</string>
+    <string name="ui_model_name" formatted="false">"Имя модели"</string>
+    <string name="ui_port" formatted="false">"Порт"</string>
+    <string name="ui_wi_fi_access_https_bearer" formatted="false">"Доступ по Wi-Fi · HTTPS + Bearer"</string>
+    <string name="ui_model_id_name">"Model ID: %1$s\nИмя: %2$s\n%3$s"</string>
+    <string name="ui_copy_base_url" formatted="false">"Копировать base URL"</string>
+    <string name="ui_copy_bearer_token" formatted="false">"Копировать Bearer token"</string>
+    <string name="ui_export_certificate" formatted="false">"Экспорт сертификата"</string>
+    <string name="ui_stop_api" formatted="false">"Остановить API"</string>
+    <string name="ui_loaded_model_profile" formatted="false">"Профиль загруженной модели"</string>
+    <string name="ui_load_selected_model" formatted="false">"Загрузить выбранную модель"</string>
+    <string name="ui_start_api" formatted="false">"Запустить API"</string>
+    <string name="ui_load_the_selected_model_and_wait_until" formatted="false">"Сначала загрузите выбранную модель и дождитесь готовности"</string>
+    <string name="ui_enter_a_name_up_to_100_characters" formatted="false">"Укажите имя до 100 символов"</string>
+    <string name="ui_loopback_http_bearer_wi_fi_tls_and" formatted="false">"Loopback: HTTP + Bearer. Wi-Fi: обязательные TLS и Bearer, сертификату нужно доверять в клиенте. Сервер выключается после потери адреса или процесса; в интернет его не открывайте."</string>
+    <string name="ui_connect_an_existing_gguf_or_download_a" formatted="false">"Подключите готовый GGUF или загрузите модель с Hugging Face."</string>
+    <string name="ui_import_gguf" formatted="false">"Импорт GGUF"</string>
+    <string name="ui_choose_a_file_on_device" formatted="false">"Выбрать файл на телефоне"</string>
+    <string name="ui_download_gguf_from_a_repository" formatted="false">"Загрузить GGUF из репозитория"</string>
+    <string name="ui_storage_manager" formatted="false">"Менеджер места"</string>
+    <string name="ui_files_and_incomplete_downloads" formatted="false">"Файлы и незавершённые загрузки"</string>
+    <string name="ui_no_connected_models_yet" formatted="false">"Пока нет подключённых моделей"</string>
+    <string name="ui_external_gguf_model_profile" formatted="false">"Внешний GGUF · профиль модели"</string>
+    <string name="ui_on_device_model_profile" formatted="false">"На телефоне · профиль модели"</string>
+    <string name="ui_a_model_operation_is_in_progress_cancel" formatted="false">"Идёт операция с моделью. Её можно отменить в уведомлении."</string>
+    <string name="ui_import_sources_are_kept_disconnecting_an_external" formatted="false">"Исходники импорта сохраняются. Отключение внешнего файла удаляет только его регистрацию."</string>
+    <string name="ui_external_file_disconnect" formatted="false">"Внешний файл · отключить"</string>
+    <string name="ui_managed_model_delete" formatted="false">"Управляемая модель · удалить"</string>
+    <string name="ui_disconnect_external_file" formatted="false">"Отключить внешний файл?"</string>
+    <string name="ui_delete_model" formatted="false">"Удалить модель?"</string>
+    <string name="ui_the_source_file_will_remain" formatted="false">"\nИсточник останется на месте."</string>
+    <string name="ui_the_managed_copy_will_be_deleted_the" formatted="false">"\nУдалится управляемая копия. Исходник импорта не затрагивается."</string>
+    <string name="ui_disconnect" formatted="false">"Отключить"</string>
+    <string name="ui_incomplete_download" formatted="false">"Незавершённая загрузка"</string>
+    <string name="ui_delete_incomplete_download" formatted="false">"Удалить незавершённую загрузку?"</string>
+    <string name="ui_you_will_not_be_able_to_resume" formatted="false">"Продолжить её после удаления будет нельзя."</string>
+    <string name="ui_no_model_files_or_incomplete_downloads" formatted="false">"Нет файлов моделей или незавершённых загрузок"</string>
+    <string name="ui_device_storage" formatted="false">"Место на телефоне"</string>
+    <string name="ui_context_tokens_history_response">"Контекст: %1$s токенов (история + ответ).\n"</string>
+    <string name="ui_experimental_the_first_response_can_take_tens" formatted="false">"Экспериментально. Первый ответ может занять десятки минут; заполненный 32K проверен лишь на единичных задачах поиска. Нужна свободная RAM."</string>
+    <string name="ui_long_input_takes_several_minutes_to_process" formatted="false">"Длинный ввод обрабатывается несколько минут."</string>
+    <string name="ui_cpu_f16_kv_original_weights_no_history" formatted="false">"CPU · F16 KV · исходные веса · без сокращения истории."</string>
+    <string name="ui_context_size" formatted="false">"Размер контекста"</string>
+    <string name="ui_response_reserve_tokens" formatted="false">"Резерв ответа, токенов"</string>
+    <string name="ui_experimental_prefill_acceleration_two_verified_models" formatted="false">"Экспериментальное ускорение prefill (две проверенные модели)"</string>
+    <string name="ui_chat_prefix_cache_in_ram_128_mib" formatted="false">"Кэш начала диалога в RAM: 128 МиБ (до 8K)"</string>
+    <string name="ui_load" formatted="false">"Загрузить"</string>
+    <string name="ui_response_reserve_must_be_smaller_than_context" formatted="false">"Резерв должен быть меньше контекста"</string>
+    <string name="ui_verified_cache_works_only_up_to_8k" formatted="false">"Проверенный кэш работает только до 8K"</string>
+    <string name="ui_wait_for_the_current_operation_to_finish" formatted="false">"Дождитесь завершения текущей операции"</string>
+    <string name="ui_unload" formatted="false">"Выгрузить"</string>
+    <string name="ui_notify_when_a_response_is_ready" formatted="false">"Уведомлять о готовом ответе?"</string>
+    <string name="ui_you_can_minimize_the_app_or_turn" formatted="false">"Можно свернуть приложение или выключить экран: модель продолжит работу. Разрешение позволит показать «Ответ готов» без текста переписки. Если отказаться, чат продолжит работать, но уведомления о готовности не будет."</string>
+    <string name="ui_allow" formatted="false">"Разрешить"</string>
+    <string name="ui_not_now" formatted="false">"Пока нет"</string>
+    <string name="ui_https_server_is_already_off_turn_it" formatted="false">"Сервер HTTPS уже выключен. Включите его и повторите экспорт."</string>
+    <string name="ui_certificate_saved_configure_the_client_to_trust" formatted="false">"Сертификат сохранён. Настройте доверие к нему в клиенте; проверку TLS отключать не нужно."</string>
+    <string name="ui_could_not_save_certificate" formatted="false">"Не удалось сохранить сертификат"</string>
+    <string name="ui_api_address_copied" formatted="false">"Адрес API скопирован"</string>
+    <string name="ui_bearer_token_access_to_your_model" formatted="false">"Bearer token · доступ к вашей модели"</string>
+    <string name="ui_copy_token" formatted="false">"Копировать token"</string>
+    <string name="ui_export_certificate_for_client" formatted="false">"Экспорт сертификата для клиента"</string>
+    <string name="ui_chats_share_one_engine_request_text_is" formatted="false">"Один общий движок с чатами. Текст запросов не сохраняется. После смены Wi-Fi или процесса сервер выключается. LAN требует доверия экспортированному сертификату и Bearer token."</string>
+    <string name="ui_api_enabled" formatted="false">"API включён"</string>
+    <string name="ui_api_disabled" formatted="false">"API выключен"</string>
+    <string name="ui_computer_access_via_wi_fi_https_token" formatted="false">"Доступ с компьютера по Wi-Fi (HTTPS + token)"</string>
+    <string name="ui_default_127_0_0_1_8080_http" formatted="false">"По умолчанию: 127.0.0.1:8080, HTTP + token. Доступен только с самого телефона или через явный ADB port forwarding. Для компьютера без ADB включите Wi-Fi. Не открывайте порт в интернет."</string>
+    <string name="ui_local_api" formatted="false">"Локальный API"</string>
+    <string name="ui_enable" formatted="false">"Включить"</string>
+    <string name="ui_model_or_chat_changed_choose_the_attachment" formatted="false">"Модель или диалог сменились. Выберите вложение ещё раз"</string>
+    <string name="ui_attachment_drafts_use_6_mib_send_or" formatted="false">"Черновики вложений заняли 6 МиБ. Отправьте или удалите лишние файлы"</string>
+    <string name="ui_could_not_read_file" formatted="false">"Не удалось прочитать файл"</string>
+    <string name="ui_file_unavailable" formatted="false">"Файл недоступен"</string>
+    <string name="ui_file_saved" formatted="false">"Файл сохранён"</string>
+    <string name="ui_could_not_save_file" formatted="false">"Не удалось сохранить файл"</string>
+    <string name="ui_selected_document" formatted="false">"Выбранный документ"</string>
+    <string name="ui_size_unknown" formatted="false">"Размер неизвестен"</string>
+    <string name="ui_import_model" formatted="false">"Импортировать модель?"</string>
+    <string name="ui_an_independent_copy_will_be_created_in">"%1$s\n%2$s\n\nСоздадим независимую копию в %3$s. Нужны размер файла и запас 256 МиБ. Исходник останется до отдельного решения после проверки SHA-256."</string>
+    <string name="ui_app_storage" formatted="false">"хранилище приложения"</string>
+    <string name="ui_without_copying" formatted="false">"Без копии"</string>
+    <string name="ui_use_in_place" formatted="false">"Использовать на месте?"</string>
+    <string name="ui_permanent_access_to_a_seekable_gguf_is" formatted="false">"Потребуется постоянный доступ к seekable GGUF. Если переместить, удалить или изменить источник либо отозвать доступ, модель перестанет загружаться. Удаление источника после подключения не предлагается."</string>
+    <string name="ui_connect" formatted="false">"Подключить"</string>
+    <string name="ui_could_not_read_document" formatted="false">"Не удалось прочитать документ"</string>
+    <string name="ui_model_copy_verified_the_source_document_provider" formatted="false">"Копия модели проверена. Поставщик исходного документа не разрешил безопасное удаление из приложения. При необходимости удалите исходник вручную в файловом менеджере; копия сохранена."</string>
+    <string name="ui_copy_verified" formatted="false">"Копия проверена"</string>
+    <string name="ui_stop_the_current_operation_and_unload_the" formatted="false">"Перед удалением исходника нужно остановить текущую операцию и выгрузить модель. Диалоги останутся в RAM."</string>
+    <string name="ui_import_verified" formatted="false">"Импорт проверен"</string>
+    <string name="ui_the_model_copy_passed_another_sha_256">"%1$s\n\nКопия модели прошла повторную проверку SHA-256. Удалить этот исходный документ? Если он у облачного провайдера, удаление может затронуть облачный оригинал и не освободить место на телефоне. Импортированная копия останется."</string>
+    <string name="ui_delete_source" formatted="false">"Удалить источник"</string>
+    <string name="ui_checking_source_integrity_before_deletion" formatted="false">"Проверка неизменности исходника перед удалением…"</string>
+    <string name="ui_source_deleted_verified_copy_kept" formatted="false">"Источник удалён; проверенная копия сохранена"</string>
+    <string name="ui_choose_a_file_using_the_system_file" formatted="false">"Выберите файл через системный проводник"</string>
+    <string name="ui_file_exceeds_3_mib_choose_a_smaller" formatted="false">"Файл больше 3 МиБ. Выберите файл меньшего размера; приложение его не сжимает"</string>
+    <string name="ui_file_exceeds_3_mib" formatted="false">"Файл больше 3 МиБ"</string>
+    <string name="ui_file_is_empty" formatted="false">"Файл пуст"</string>
+    <string name="ui_text_file_up_to_256_kib" formatted="false">"Текстовый файл: не больше 256 КиБ"</string>
+    <string name="ui_utf_8_text_required" formatted="false">"Нужен текст UTF-8"</string>
+    <string name="ui_png_jpeg_webp_gif_and_pdf_are" formatted="false">"Поддерживаются PNG, JPEG, WebP, GIF и PDF"</string>
+    <string name="ui_selected_file_type_does_not_match" formatted="false">"Выбран другой тип файла"</string>
+    <string name="ui_up_to_four_attachments" formatted="false">"Не больше четырёх вложений"</string>
+    <string name="ui_attachments_exceed_6_mib_in_total" formatted="false">"Вложения вместе превышают 6 МиБ"</string>
+    <string name="ui_model_support_for_this_attachment_is_not" formatted="false">"Поддержка этого вложения моделью не подтверждена. Обновите каталог или явно задайте возможности модели"</string>
+    <string name="ui_response_image_exceeds_3_mib" formatted="false">"Изображение ответа превышает 3 МиБ"</string>
+    <string name="ui_api_returned_an_unsupported_image_link_automatic" formatted="false">"API вернул неподдержанную ссылку изображения; автоматического скачивания нет"</string>
+    <string name="ui_saved_chats_are_unavailable_data_was_not" formatted="false">"Сохранённые диалоги недоступны. Данные не удалены. Временные чаты доступны; проверьте хранилище в настройках"</string>
+    <string name="ui_storage_not_connected" formatted="false">"Хранение не подключено"</string>
+    <string name="ui_changes_are_only_in_ram_saving_failed" formatted="false">"Изменения пока только в RAM: не удалось сохранить. Освободите место и повторите сохранение"</string>
+    <string name="ui_temporary_active_chat_memory_is_full_close" formatted="false">"Память временных/активных диалогов заполнена. Закройте ненужный диалог; история не обрезана"</string>
+    <string name="ui_chat_unavailable_temporary_history_ended_or_saved" formatted="false">"Диалог уже недоступен: временная история завершилась или сохранённый диалог удалён"</string>
+    <string name="ui_chat_deleted_under_its_retention_policy" formatted="false">"Диалог удалён по выбранному сроку хранения"</string>
+    <string name="ui_saved_chat_unavailable_data_was_not_deleted" formatted="false">"Сохранённый диалог недоступен; данные не удалены"</string>
+    <string name="ui_compaction_interrupted_by_restart_original_history_kept" formatted="false">"Сжатие прервано перезапуском. Исходная история сохранена"</string>
+    <string name="ui_limit_of_1000_saved_and_32_temporary" formatted="false">"Предел1000сохранённых и32временных диалогов"</string>
+    <string name="ui_32_temporary_chats_already_in_memory_close" formatted="false">"В памяти уже32временных диалога. Закройте ненужный"</string>
+    <string name="ui_explicitly_allow_permanent_chat_storage_in_settings" formatted="false">"Сначала явно разрешите хранение постоянных диалогов в настройках"</string>
+    <string name="ui_start_a_new_chat_to_change_the" formatted="false">"Для смены модели начните новый диалог"</string>
+    <string name="ui_chat_already_deleted" formatted="false">"Диалог уже удалён"</string>
+    <string name="ui_stop_the_response_first" formatted="false">"Сначала остановите ответ"</string>
+    <string name="ui_draft_exceeds_512_kib" formatted="false">"Черновик превышает512КиБ"</string>
+    <string name="ui_chat_memory_full_text_was_not_truncated" formatted="false">"Память диалога заполнена. Текст не обрезан"</string>
+    <string name="ui_message_exceeds_512_kib" formatted="false">"Сообщение превышает512КиБ"</string>
+    <string name="ui_request_already_accepted" formatted="false">"Запрос уже принят"</string>
+    <string name="ui_session_request_limit_reached_close_unused_chats" formatted="false">"Предел принятых запросов этой сессии; закройте ненужные диалоги"</string>
+    <string name="ui_enter_a_message_up_to_512_kib" formatted="false">"Введите сообщение до512КиБ или добавьте файл"</string>
+    <string name="ui_too_many_messages_start_a_new_chat" formatted="false">"Слишком много сообщений; начните новый диалог"</string>
+    <string name="ui_full_history_exceeds_the_8_mib_request" formatted="false">"Полная история превышает8МиБ запроса. Начните новый диалог; история не обрезана"</string>
+    <string name="ui_this_chat_s_memory_is_full_start" formatted="false">"Память этого диалога заполнена. Начните новый; история не обрезана"</string>
+    <string name="ui_response_exceeds_chat_memory_budget_partial_response" formatted="false">"Ответ превышает бюджет памяти диалога; частичный ответ сохранён"</string>
+    <string name="ui_at_least_one_model_response_is_required" formatted="false">"Сначала нужен хотя бы один ответ модели"</string>
+    <string name="ui_not_enough_memory_for_summary_original_history" formatted="false">"Недостаточно памяти для сводки; исходная история сохранена"</string>
+    <string name="ui_history_changed_create_the_summary_again" formatted="false">"История изменилась. Создайте сводку заново"</string>
+    <string name="ui_chat_deleted" formatted="false">"Диалог удалён"</string>
+    <string name="ui_up_to_50_pinned_messages" formatted="false">"Не больше50закреплённых сообщений"</string>
+    <string name="ui_folder_name_1_40_characters_no_duplicates" formatted="false">"Название папки:1–40символов, без повторов"</string>
+    <string name="ui_up_to_24_folders" formatted="false">"Не больше24папок"</string>
+    <string name="ui_wait_until_the_response_finishes_before_changing" formatted="false">"Дождитесь завершения ответа перед изменением хранения"</string>
+    <string name="ui_finish_the_response_first" formatted="false">"Сначала завершите ответ"</string>
+    <string name="ui_allow_permanent_chat_storage_first" formatted="false">"Сначала разрешите хранение постоянных диалогов"</string>
+    <string name="ui_could_not_clean_up_expired_chats_they" formatted="false">"Не удалось очистить истёкшие диалоги. Они скрыты; Android повторит удаление при следующей активности"</string>
+    <string name="ui_reasoning" formatted="false">"Рассуждение  ▾"</string>
+    <string name="ui_you" formatted="false">"Вы"</string>
+    <string name="ui_model_is_reasoning" formatted="false">"Модель рассуждает…"</string>
+    <string name="ui_preparing_response" formatted="false">"Готовит ответ…"</string>
+    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"Лимит ответа закончился до текстового ответа"</string>
+    <string name="ui_model_completed_without_response_text" formatted="false">"Модель завершила ответ без текста"</string>
+    <string name="ui_response_interrupted" formatted="false">"Ответ прерван"</string>
+    <string name="ui_save_file">"Сохранить файл %1$s"</string>
+    <string name="ui_reasoning_9cade5" formatted="false">"Рассуждение  ▴"</string>
+    <string name="ui_limit" formatted="false">" · лимит"</string>
+    <string name="ui_interrupted" formatted="false">" · прерван"</string>
+    <string name="ui_pinned_f3758c" formatted="false">"Закреплено · "</string>
+    <string name="ui_compaction_requires_more_than_16_requests_history" formatted="false">"Сжатие требует больше 16 запросов. История не изменена"</string>
+    <string name="ui_previous_summary_does_not_fit_the_compaction" formatted="false">"Предыдущая сводка не помещается в окно сжатия"</string>
+    <string name="ui_fragment_does_not_fit_the_compaction_window" formatted="false">"Фрагмент не помещается в окно сжатия. Исходная история сохранена"</string>
+    <string name="ui_summary_is_incomplete_partial_results_are_not" formatted="false">"Сводка не завершена. Неполный результат не применяется"</string>
+    <string name="ui_model_did_not_return_a_substantive_summary" formatted="false">"Модель не вернула содержательную сводку"</string>
+    <string name="ui_this_debug_run_was_already_used_or" formatted="false">"Этот debug-запуск уже использован или не имеет runId. Повтор возможен только явно с новым runId."</string>
+    <string name="ui_download_one_gguf_to_downloads_llamur_models" formatted="false">"Скачаем один GGUF в Downloads/llamur/Models. Приложение закрепит commit, размер и SHA-256 из HF LFS. Лицензию модели выбираете и принимаете у её автора. Token нужен только для доступа к закрытым/gated файлам. По умолчанию он хранится только в RAM; сохранение на устройстве — отдельный выбор."</string>
+    <string name="ui_repository_author_model" formatted="false">"Репозиторий: автор/модель"</string>
+    <string name="ui_path_to_a_single_gguf_file" formatted="false">"Путь к одному файлу .gguf"</string>
+    <string name="ui_hf_token_optional" formatted="false">"HF token (необязательно)"</string>
+    <string name="ui_save_token_with_android_keystore" formatted="false">"Сохранить token с Android Keystore"</string>
+    <string name="ui_delete_saved_token" formatted="false">"Удалить сохранённый token"</string>
+    <string name="ui_check_file" formatted="false">"Проверить файл"</string>
+    <string name="ui_cancel_download" formatted="false">"Отменить загрузку"</string>
+    <string name="ui_hf_checking_size_revision_sha_256_and" formatted="false">"HF: проверка размера, revision, SHA-256 и лицензии…"</string>
+    <string name="ui_download">"Скачать %1$s?"</string>
+    <string name="ui_commit_author_s_license_gated_requires_the">"%1$s / %2$s\nCommit: %3$s\nЛицензия автора: %4$s\nGated: %5$s\n\nПонадобится размер файла и запас 256 МиБ. Канонический файл: Downloads/llamur/Models (Android 10+) или private (Android 9). Временная вторая private-копия не создаётся. Для gated-моделей сначала примите условия и получите доступ на HF."</string>
+    <string name="ui_download_79f29d" formatted="false">"Скачать"</string>
+    <string name="ui_hf_page" formatted="false">"Страница HF"</string>
+    <string name="ui_response_exceeds_in_memory_transport_budget_bytes">"Ответ превышает бюджет транспорта в памяти (%1$s байт)"</string>
+    <string name="ui_invalid_response_range" formatted="false">"Недопустимый диапазон ответа"</string>
+    <string name="ui_invalid_gguf_size" formatted="false">"Недопустимый размер GGUF"</string>
+    <string name="ui_gguf_metadata_exceeds_the_safe_64_mib" formatted="false">"Метаданные GGUF превышают безопасный бюджет 64 МиБ"</string>
+    <string name="ui_gguf_v2_v3_supported" formatted="false">"Поддерживается GGUF v2/v3"</string>
+    <string name="ui_repository_must_be_author_model" formatted="false">"Репозиторий должен иметь вид автор/модель"</string>
+    <string name="ui_invalid_gguf_path" formatted="false">"Недопустимый путь GGUF"</string>
+    <string name="ui_a_single_gguf_is_required_split_files" formatted="false">"Нужен одиночный GGUF, split-файлы пока не поддержаны"</string>
+    <string name="ui_invalid_revision" formatted="false">"Недопустимая revision"</string>
+    <string name="ui_invalid_token" formatted="false">"Недопустимый token"</string>
+    <string name="ui_downloads_require_https" formatted="false">"Загрузка разрешена только по HTTPS"</string>
+    <string name="ui_unknown_hf_cdn_host_download_stopped" formatted="false">"Неизвестный хост HF CDN; загрузка остановлена"</string>
+    <string name="ui_too_many_hf_redirects" formatted="false">"Слишком много перенаправлений HF"</string>
+    <string name="ui_hf_metadata_http_for_a_gated_model">"HF metadata: HTTP %1$s. Для gated-модели примите условия у автора и укажите token."</string>
+    <string name="ui_hf_metadata_too_large" formatted="false">"HF metadata слишком велика"</string>
+    <string name="ui_file_is_absent_from_the_pinned_revision" formatted="false">"Файл отсутствует в закреплённой revision"</string>
+    <string name="ui_hf_did_not_provide_lfs_sha_256" formatted="false">"HF не вернул LFS SHA-256; используйте ручной импорт"</string>
+    <string name="ui_not_specified_by_author" formatted="false">"Не указана автором"</string>
+    <string name="ui_unknown_4f1ecc" formatted="false">"Неизвестно"</string>
+    <string name="ui_hf_checking_existing_file" formatted="false">"HF: проверка существующего файла…"</string>
+    <string name="ui_invalid_partial_download_size_remove_it_in" formatted="false">"Неверный размер частичной загрузки; удалите её в менеджере места"</string>
+    <string name="ui_not_enough_space_to_download_the_model" formatted="false">"Недостаточно места для загрузки модели"</string>
+    <string name="ui_download_cancelled" formatted="false">"Загрузка отменена"</string>
+    <string name="ui_hf_download_http_for_401_403_check">"HF download: HTTP %1$s. Для 401/403 проверьте token и разрешённый доступ к модели."</string>
+    <string name="ui_missing_content_range" formatted="false">"Нет Content-Range"</string>
+    <string name="ui_hf_returned_an_invalid_file_range" formatted="false">"HF вернул неправильный диапазон файла"</string>
+    <string name="ui_download_cancelled_resume_or_remove_the_partial" formatted="false">"Загрузка отменена. Частичный файл можно продолжить или удалить в менеджере места."</string>
+    <string name="ui_hf_file_exceeds_its_declared_size" formatted="false">"HF файл превышает заявленный размер"</string>
+    <string name="ui_not_enough_space_download_stopped" formatted="false">"Недостаточно места; загрузка остановлена"</string>
+    <string name="ui_hf_mib">"HF: %1$s / %2$s МиБ · %3$s%%"</string>
+    <string name="ui_file_truncated_repeat_the_same_download_to" formatted="false">"Файл обрезан. Повторите ту же загрузку для продолжения."</string>
+    <string name="ui_re_reading_gguf_and_verifying_sha_256" formatted="false">"Повторное чтение GGUF и проверка SHA-256…"</string>
+    <string name="ui_unsupported_storage_version_data_was_not_deleted" formatted="false">"Неподдержанная версия хранилища. Данные не удалены"</string>
+    <string name="ui_saved_chat_key_unavailable_data_was_not" formatted="false">"Ключ сохранённых диалогов недоступен. Данные не удалены"</string>
+    <string name="ui_chat_data_key_unavailable_data_was_not" formatted="false">"Ключ данных диалогов недоступен. Данные не удалены"</string>
+    <string name="ui_saved_chat_already_deleted" formatted="false">"Сохранённый диалог уже удалён"</string>
+    <string name="ui_chat_exceeds_storage_budget" formatted="false">"Диалог превышает бюджет хранения"</string>
+    <string name="ui_storage_full_limit_of_1000_chats_256" formatted="false">"Хранилище заполнено: предел1000диалогов/256МиБ. Удалите ненужные или используйте временный чат"</string>
+    <string name="ui_storage_full_draft_is_only_in_ram" formatted="false">"Хранилище заполнено; черновик пока только в RAM"</string>
+    <string name="ui_storage_full" formatted="false">"Хранилище заполнено"</string>
+    <string name="ui_connect_to_wi_fi_for_lan_api" formatted="false">"Для LAN API подключитесь к Wi-Fi"</string>
+    <string name="ui_wi_fi_has_no_ipv4_address" formatted="false">"У Wi-Fi нет IPv4 адреса"</string>
+    <string name="ui_api_stopped_wi_fi_or_address_changed" formatted="false">"API остановлен: Wi-Fi или адрес изменился"</string>
+    <string name="ui_could_not_delete_saved_token" formatted="false">"Не удалось удалить сохранённый token"</string>
+    <string name="ui_state_error">"Ошибка состояния: %1$s"</string>
+    <string name="ui_model_process_ended_by_android_or_the" formatted="false">"Процесс модели завершён системой или native backend. Можно заново загрузить модель."</string>
+    <string name="ui_llamur_local_cpu_runtime" formatted="false">"llamur — локальный CPU runtime"</string>
+    <string name="ui_m1_test_interface_one_request_thinking_enabled" formatted="false">"Тестовый интерфейс M1. Один запрос; thinking включён. Веса и KV F16 не переквантизуются."</string>
+    <string name="ui_import_gguf_single_file" formatted="false">"Импортировать GGUF (один файл)"</string>
+    <string name="ui_cancel_import" formatted="false">"Отменить импорт"</string>
+    <string name="ui_move_selected_model_to_downloads_llamur" formatted="false">"Переместить выбранную модель в Downloads/llamur"</string>
+    <string name="ui_context_prompt_template_tokens_response_reserve" formatted="false">"Контекст: prompt + служебные токены + резерв ответа"</string>
+    <string name="ui_response_reserve_tokens_within_context" formatted="false">"Резерв ответа, токенов (в пределах контекста)"</string>
+    <string name="ui_cpu_weights_read_without_mmap_batch_512" formatted="false">"CPU, чтение весов без mmap; batch 512 / micro-batch 128; temperature 0 / seed 42."</string>
+    <string name="ui_load_into_memory" formatted="false">"Загрузить в память"</string>
+    <string name="ui_prompt" formatted="false">"Запрос"</string>
+    <string name="ui_run" formatted="false">"Запустить"</string>
+    <string name="ui_stop_response" formatted="false">"Остановить ответ"</string>
+    <string name="ui_unload_model" formatted="false">"Выгрузить модель"</string>
+    <string name="ui_cpu_gpu_diagnostics" formatted="false">"Диагностика CPU / GPU"</string>
+    <string name="ui_active_model_none" formatted="false">"Активная модель: нет"</string>
+    <string name="ui_old_debug_run_will_not_be_repeated" formatted="false">"Старый debug-запуск не повторяется. Для нового теста нужен новый runId."</string>
+    <string name="ui_connecting_to_runtime" formatted="false">"Подключение к runtime…"</string>
+    <string name="ui_runtime_connection_lost" formatted="false">"Связь с runtime потеряна"</string>
+    <string name="ui_import_a_model_first" formatted="false">"Сначала импортируйте модель"</string>
+    <string name="ui_check_context_and_cpu_threads" formatted="false">"Проверьте контекст и CPU threads"</string>
+    <string name="ui_background_responses" formatted="false">"Ответы в фоне"</string>
+    <string name="ui_computation_continues_when_you_minimize_the_app" formatted="false">"Когда вы свернёте приложение, вычисления продолжатся. Разрешите уведомления, чтобы узнать, когда ответ готов. Без разрешения чат тоже работает."</string>
+    <string name="ui_later" formatted="false">"Позже"</string>
+    <string name="ui_response_reserve_must_fit_the_loaded_context" formatted="false">"Резерв ответа должен быть в пределах загруженного контекста"</string>
+    <string name="ui_old_debug_run_will_not_be_repeated_44d3a4" formatted="false">"\nСтарый debug-запуск не повторяется. Для нового теста нужен новый runId."</string>
+    <string name="ui_context_cpu_threads_f16_kv">"%1$s\nКонтекст %2$s; CPU threads %3$s; KV F16"</string>
+    <string name="ui_tokens_prefill_ms_decode_ms">"\n%1$s токенов; prefill %2$s мс; decode %3$s мс"</string>
+    <string name="ui_this_temporary_response_is_no_longer_available" formatted="false">"\nЭтот временный ответ уже недоступен. Новый запрос не отправлялся."</string>
+    <string name="ui_could_not_read_response" formatted="false">"Не удалось прочитать ответ"</string>
+    <string name="ui_chats_8f3146" formatted="false">"Диалоги"</string>
+    <string name="ui_search_chats" formatted="false">"Поиск по диалогам"</string>
+    <string name="ui_no_chats_yet" formatted="false">"Пока нет диалогов"</string>
+    <string name="ui_start_a_conversation_with_a_model_on" formatted="false">"Начните разговор с моделью на телефоне или по API"</string>
+    <string name="ui_responding_7ec809" formatted="false">"Отвечает…"</string>
+    <string name="ui_not_saved" formatted="false">"Не сохранён"</string>
+    <string name="ui_permanent_a3d227" formatted="false">"Постоянный"</string>
+    <string name="ui_temporary_b48314" formatted="false">"Временный"</string>
+    <string name="ui_chat_folders" formatted="false">"Папки диалогов"</string>
+    <string name="ui_create_new_chat" formatted="false">"Создать новый чат"</string>
+    <string name="ui_close_search" formatted="false">"Закрыть поиск"</string>
+    <string name="ui_all" formatted="false">"Все"</string>
+    <string name="ui_nothing_found" formatted="false">"Ничего не найдено"</string>
+    <string name="ui_this_folder_is_empty" formatted="false">"В папке пока пусто"</string>
+    <string name="ui_try_another_name_or_start_a_new" formatted="false">"Попробуйте другое название или начните новый разговор"</string>
+    <string name="ui_choose_a_model_and_start_a_conversation" formatted="false">"Выберите модель и начните разговор. Временный или постоянный — решаете вы"</string>
+    <string name="ui_ai_80d4ea">"ИИ · %1$s"</string>
+    <string name="ui_source_no_longer_available" formatted="false">"Источник больше недоступен"</string>
+    <string name="ui_source_changed_after_import_it_was_kept" formatted="false">"Источник изменился после импорта. Он сохранён; проверенная копия остаётся в приложении."</string>
+    <string name="ui_document_provider_did_not_allow_deletion" formatted="false">"Поставщик документа не разрешил удаление"</string>
+    <string name="ui_models_can_be_moved_to_downloads_llamur" formatted="false">"Модели можно перенести в Downloads/llamur. Загрузка в память не скачивает файл."</string>
+    <string name="ui_a_model_operation_is_already_running" formatted="false">"Уже выполняется операция с моделью"</string>
+    <string name="ui_preparing_download" formatted="false">"Подготовка загрузки…"</string>
+    <string name="ui_saf_no_copy" formatted="false">"SAF (без копии)"</string>
+    <string name="ui_internal_storage" formatted="false">"Внутреннее хранилище"</string>
+    <string name="ui_test_model" formatted="false">"Тестовая модель: "</string>
+    <string name="ui_invalid_model_file" formatted="false">"Недопустимый файл модели"</string>
+    <string name="ui_could_not_open_model_in_downloads_llamur" formatted="false">"Не удалось открыть модель в Downloads/llamur"</string>
+    <string name="ui_model_must_be_a_regular_file" formatted="false">"Модель должна быть обычным файлом"</string>
+    <string name="ui_model_size_changed_check_the_file" formatted="false">"Размер модели изменился: проверьте файл"</string>
+    <string name="ui_file_verification_cancelled" formatted="false">"Проверка файла отменена"</string>
+    <string name="ui_model_changed_during_verification" formatted="false">"Модель изменилась во время проверки"</string>
+    <string name="ui_model_sha_256_changed_file_kept_import" formatted="false">"SHA-256 модели изменился. Файл сохранён; повторите импорт, чтобы явно выбрать новую модель."</string>
+    <string name="ui_verification_cancelled" formatted="false">"Проверка отменена"</string>
+    <string name="ui_downloads_llamur_requires_android_10_use_import" formatted="false">"Downloads/llamur поддерживается с Android 10; на Android 9 используйте импорт"</string>
+    <string name="ui_could_not_remove_incomplete_transfer_entry" formatted="false">"Не удалось убрать запись незавершённого переноса"</string>
+    <string name="ui_file_connected_without_copying_choose_import_for" formatted="false">"Файл подключён без копии. Для независимой копии выберите импорт."</string>
+    <string name="ui_downloads_file_sha_256_changed" formatted="false">"SHA-256 файла в Downloads изменился"</string>
+    <string name="ui_internal_copy_changed_it_was_kept" formatted="false">"Внутренняя копия изменилась; она сохранена"</string>
+    <string name="ui_could_not_delete_internal_copy" formatted="false">"Не удалось удалить внутреннюю копию"</string>
+    <string name="ui_internal_model_copy_not_found" formatted="false">"Внутренняя копия модели не найдена"</string>
+    <string name="ui_safe_transfer_temporarily_requires_mib_free_plus">"Для безопасного переноса нужно временно %1$s МиБ свободного места и запас 256 МиБ"</string>
+    <string name="ui_could_not_create_file_in_downloads_llamur" formatted="false">"Не удалось создать файл в Downloads/llamur"</string>
+    <string name="ui_could_not_open_new_file" formatted="false">"Не удалось открыть новый файл"</string>
+    <string name="ui_transfer_cancelled" formatted="false">"Перенос отменён"</string>
+    <string name="ui_source_model_changed_during_transfer" formatted="false">"Исходная модель изменилась при переносе"</string>
+    <string name="ui_sha_256_does_not_match_pinned_model" formatted="false">"SHA-256 не совпадает с закреплённой моделью"</string>
+    <string name="ui_internal_copy_sha_256_changed" formatted="false">"SHA-256 внутренней копии изменился"</string>
+    <string name="ui_could_not_verify_new_file" formatted="false">"Не удалось проверить новый файл"</string>
+    <string name="ui_new_copy_failed_sha_256_verification" formatted="false">"Новая копия не прошла SHA-256"</string>
+    <string name="ui_file_is_available_in_downloads_could_not" formatted="false">"Файл доступен в Downloads; не удалось удалить внутреннюю копию"</string>
+    <string name="ui_moving_to_downloads_llamur_and_checking_sha" formatted="false">"Перенос в Downloads/llamur и проверка SHA-256…"</string>
+    <string name="ui_done_downloads_llamur_models_internal_copy_deleted" formatted="false">"Готово: Downloads/llamur/Models. Внутренняя копия удалена."</string>
+    <string name="ui_could_not_move_model" formatted="false">"Не удалось перенести модель"</string>
+    <string name="ui_model_not_found" formatted="false">"Модель не найдена"</string>
+    <string name="ui_external_files_can_be_disconnected_source_deletion" formatted="false">"Внешний файл можно отключить; удаление источника здесь запрещено"</string>
+    <string name="ui_could_not_delete_model_in_downloads" formatted="false">"Не удалось удалить модель в Downloads"</string>
+    <string name="ui_could_not_delete_model" formatted="false">"Не удалось удалить модель"</string>
+    <string name="ui_cancel_the_download_and_wait_for_it" formatted="false">"Сначала отмените загрузку и дождитесь её завершения"</string>
+    <string name="ui_existing_model_failed_sha_256_verification" formatted="false">"Существующая модель не прошла SHA-256"</string>
+    <string name="ui_this_is_not_an_external_connection" formatted="false">"Это не внешнее подключение"</string>
+    <string name="ui_delete_managed_models_using_storage_manager" formatted="false">"Управляемую модель удаляют через менеджер места"</string>
+    <string name="ui_checking_external_gguf_without_copying" formatted="false">"Проверка внешнего GGUF без копирования…"</string>
+    <string name="ui_provider_did_not_grant_persistent_access_use" formatted="false">"Поставщик не выдал постоянный доступ. Используйте независимый импорт."</string>
+    <string name="ui_document_unavailable" formatted="false">"Документ недоступен"</string>
+    <string name="ui_a_regular_seekable_gguf_is_required" formatted="false">"Нужен обычный seekable GGUF"</string>
+    <string name="ui_gguf_without_copying" formatted="false">"GGUF без копии"</string>
+    <string name="ui_file_connected_without_copying_do_not_delete" formatted="false">"Файл подключён без копии. Не удаляйте и не изменяйте источник; доступ проверяется при каждой загрузке."</string>
+    <string name="ui_could_not_connect_gguf" formatted="false">"Не удалось подключить GGUF"</string>
+    <string name="ui_preparing_import" formatted="false">"Подготовка импорта…"</string>
+    <string name="ui_split_gguf_is_not_supported_yet_choose" formatted="false">"Split GGUF пока не поддержан: выберите одиночный файл"</string>
+    <string name="ui_not_enough_space_for_an_independent_model" formatted="false">"Недостаточно места для независимой копии модели"</string>
+    <string name="ui_import_cancelled" formatted="false">"Импорт отменён"</string>
+    <string name="ui_model_exceeds_64_gib" formatted="false">"Модель превышает 64 ГиБ"</string>
+    <string name="ui_not_enough_free_space" formatted="false">"Недостаточно свободного места"</string>
+    <string name="ui_import_mib">"Импорт: %1$s МиБ"</string>
+    <string name="ui_mib">" / %1$s МиБ"</string>
+    <string name="ui_could_not_open_document" formatted="false">"Не удалось открыть документ"</string>
+    <string name="ui_source_size_changed_during_import" formatted="false">"Размер источника изменился во время импорта"</string>
+    <string name="ui_re_reading_and_verifying_gguf_copy_sha" formatted="false">"Повторное чтение и проверка копии GGUF / SHA-256…"</string>
+    <string name="ui_model_already_exists_no_duplicate_copy_created">"Модель уже есть: %1$s. Повторная копия не создана."</string>
+    <string name="ui_import_verified_sha_256">"Импорт проверен. %1$s. SHA-256: %2$s"</string>
+    <string name="ui_import_error" formatted="false">"Ошибка импорта"</string>
+    <string name="ui_an_import_or_download_is_already_running" formatted="false">"Уже выполняется импорт или загрузка"</string>
+    <string name="ui_preparing" formatted="false">"Подготовка…"</string>
+    <string name="ui_llamur_model" formatted="false">"llamur · модель"</string>
+    <string name="ui_cancel_d1c0c3" formatted="false">"Отменить"</string>
+    <string name="ui_model_downloads" formatted="false">"Загрузка моделей"</string>
+    <string name="ui_operation_busy" formatted="false">"Операция занята"</string>
+    <string name="ui_model_ready">"Модель готова: %1$s"</string>
+    <string name="ui_internal_storage_9591ff" formatted="false">"внутреннее хранилище"</string>
+    <string name="ui_download_failed" formatted="false">"Загрузка не удалась"</string>
+    <string name="ui_incomplete_model_is_inaccessible" formatted="false">"Нет доступа к незавершённой модели"</string>
+    <string name="ui_gguf_truncated" formatted="false">"GGUF обрезан"</string>
+    <string name="ui_single_gguf_v2_v3_supported" formatted="false">"Поддерживается одиночный GGUF v2/v3"</string>
+    <string name="ui_file_size_does_not_match" formatted="false">"Размер файла не совпадает"</string>
+    <string name="ui_sha_256_mismatch" formatted="false">"SHA-256 не совпадает"</string>
+    <string name="ui_could_not_finish_import" formatted="false">"Не удалось завершить импорт"</string>
+    <string name="ui_model_ready_could_not_remove_operation_journal" formatted="false">"Модель готова; не удалось убрать журнал операции"</string>
+    <string name="ui_operation_already_exists" formatted="false">"Операция уже существует"</string>
+    <string name="ui_could_not_create_model_in_downloads_llamur" formatted="false">"Не удалось создать модель в Downloads/llamur/Models"</string>
+    <string name="ui_message_exceeds_transport_budget" formatted="false">"Сообщение превышает бюджет транспорта"</string>
+    <string name="ui_transport_message_truncated_or_damaged" formatted="false">"Сообщение транспорта обрезано или повреждено"</string>
+    <string name="ui_openrouter_rejected_the_model_due_to_account">"OpenRouter отклонил модель из-за политики данных аккаунта (HTTP %1$s). Проверьте https://openrouter.ai/settings/privacy: бесплатный endpoint может требовать разрешения на обучение. Настройки аккаунта приложение не меняет."</string>
+    <string name="ui_key_hidden" formatted="false">"[ключ скрыт]"</string>
+    <string name="ui_hidden" formatted="false">"[скрыто]"</string>
+    <string name="ui_bearer_hidden" formatted="false">"Bearer [скрыто]"</string>
+    <string name="ui_check_key_permissions_and_account" formatted="false">"Проверьте ключ, права и аккаунт"</string>
+    <string name="ui_check_model_id_availability_and_base_url" formatted="false">"Проверьте model ID, доступность модели и base URL"</string>
+    <string name="ui_provider_rate_limit_reached" formatted="false">"Достигнут лимит провайдера"</string>
+    <string name="ui_check_model_parameters" formatted="false">"Проверьте параметры модели"</string>
+    <string name="ui_provider_rejected_request_http">"Провайдер отклонил запрос (HTTP %1$s). %2$s"</string>
+    <string name="ui_no_automatic_retry" formatted="false">". Автоматического повтора нет"</string>
+    <string name="ui_api_requests" formatted="false">"Запросы по API"</string>
+    <string name="ui_an_api_request_is_already_running" formatted="false">"Уже выполняется запрос по API"</string>
+    <string name="ui_llamur_api_request" formatted="false">"llamur · запрос по API"</string>
+    <string name="ui_waiting_for_provider_response" formatted="false">"Ожидание ответа провайдера"</string>
+    <string name="ui_could_not_start_background_api_request" formatted="false">"Не удалось начать фоновый запрос по API"</string>
+    <string name="ui_android_stopped_a_long_network_request" formatted="false">"Android остановил длительный сетевой запрос"</string>
+    <string name="ui_android_stopped_the_background_request" formatted="false">"Android остановил фоновый запрос"</string>
+    <string name="ui_saved_connection_key_unavailable_enter_it_again" formatted="false">"Сохранённый ключ подключения недоступен. Введите его заново."</string>
+    <string name="ui_connection_deleted" formatted="false">"Подключение удалено"</string>
+    <string name="ui_enter_api_key_in_connection_settings" formatted="false">"Введите API key в настройках подключения"</string>
+    <string name="ui_up_to_32_connections" formatted="false">"Не больше32подключений"</string>
+    <string name="ui_response_reserve_1_131072_tokens" formatted="false">"Резерв ответа:1–131072токена"</string>
+    <string name="ui_model_history_stream_limit_tools_are_set" formatted="false">"Model/history/stream/лимит/tools задаются приложением"</string>
+    <string name="ui_invalid_api_key" formatted="false">"Некорректный API key"</string>
+    <string name="ui_invalid_additional_header" formatted="false">"Недопустимый дополнительный заголовок"</string>
+    <string name="ui_headers_printable_ascii_only" formatted="false">"Заголовки: только печатный ASCII"</string>
+    <string name="ui_could_not_save_connection" formatted="false">"Не удалось сохранить подключение"</string>
+    <string name="ui_up_to_64_active_models_per_connection" formatted="false">"Не больше64активных моделей подключения"</string>
+    <string name="ui_enter_a_model_id_up_to_256" formatted="false">"Введите model ID до256символов"</string>
+    <string name="ui_invalid_base_url" formatted="false">"Некорректный base URL"</string>
+    <string name="ui_base_url_address_without_key_query_or" formatted="false">"Base URL: адрес без ключа, query и fragment"</string>
+    <string name="ui_https_required_http_can_be_explicitly_allowed" formatted="false">"Нужен HTTPS. HTTP разрешается явно только для loopback этого телефона"</string>
+    <string name="ui_could_not_perform_action" formatted="false">"Не удалось выполнить действие"</string>
+    <string name="ui_history_is_sent_only_to_the_provider" formatted="false">"История отправляется только выбранному в диалоге провайдеру."</string>
+    <string name="ui_add_connection" formatted="false">"＋ Добавить подключение"</string>
+    <string name="ui_loading_connections" formatted="false">"Загрузка подключений…"</string>
+    <string name="ui_other_compatible_server" formatted="false">"Другой совместимый сервер"</string>
+    <string name="ui_add_provider" formatted="false">"Добавить провайдера"</string>
+    <string name="ui_model_catalogue" formatted="false">"Каталог моделей"</string>
+    <string name="ui_find_and_enable_models" formatted="false">"Поиск и активация моделей"</string>
+    <string name="ui_enable_model_by_id" formatted="false">"Активировать модель по ID"</string>
+    <string name="ui_if_the_catalogue_is_unavailable" formatted="false">"Если каталог недоступен"</string>
+    <string name="ui_available_in_new_chats" formatted="false">"Доступные в новых диалогах"</string>
+    <string name="ui_edit_connection" formatted="false">"Изменить подключение"</string>
+    <string name="ui_key_address_response_limit_and_reasoning" formatted="false">"Ключ, адрес, лимит ответа и reasoning"</string>
+    <string name="ui_delete_connection" formatted="false">"Удалить подключение"</string>
+    <string name="ui_delete_connection_30e2a1" formatted="false">"Удалить подключение?"</string>
+    <string name="ui_key_and_settings_will_be_deleted_chats" formatted="false">"Ключ и настройки будут удалены. Диалоги не переключатся на другой сервер."</string>
+    <string name="ui_no_active_models_yet" formatted="false">"Пока нет активных моделей"</string>
+    <string name="ui_add_model" formatted="false">"＋ Добавить модель"</string>
+    <string name="ui_new_chats_will_use_this_server">"%1$s · новый диалог будет обращаться к этому серверу."</string>
+    <string name="ui_if_capabilities_are_missing_from_the_catalogue" formatted="false">"Если каталог не описывает возможности, укажите их вручную только для поддерживающей модели."</string>
+    <string name="ui_understands_images" formatted="false">"Понимает изображения"</string>
+    <string name="ui_accepts_pdf" formatted="false">"Принимает PDF"</string>
+    <string name="ui_returns_images_in_chat_api" formatted="false">"Возвращает изображения в Chat API"</string>
+    <string name="ui_enable_3a3d7a" formatted="false">"Активировать"</string>
+    <string name="ui_enter_model_id" formatted="false">"Введите model ID"</string>
+    <string name="ui_model_enabled_choose_it_when_creating_a" formatted="false">"Модель активна. Выберите её при создании нового диалога"</string>
+    <string name="ui_load_catalogue" formatted="false">"Загрузить каталог"</string>
+    <string name="ui_add_model_2350fb" formatted="false">"Добавить модель"</string>
+    <string name="ui_loading_catalogue" formatted="false">"Загрузка каталога…"</string>
+    <string name="ui_search_model_by_name_or_id" formatted="false">"Поиск модели по имени или ID"</string>
+    <string name="ui_retry_loading" formatted="false">"Повторить загрузку"</string>
+    <string name="ui_catalogue">"Каталог · %1$s"</string>
+    <string name="ui_models_found">"Моделей: %1$s · найдено %2$s"</string>
+    <string name="ui_catalogue_unavailable" formatted="false">"Каталог недоступен"</string>
+    <string name="ui_key_is_used_only_for_this_server" formatted="false">"Ключ относится только к этому серверу. Пустое поле оставляет сохранённый ключ."</string>
+    <string name="ui_base_url_with_v1_or_api_v1" formatted="false">"Base URL с /v1 или /api/v1"</string>
+    <string name="ui_protocol" formatted="false">"Протокол"</string>
+    <string name="ui_save_key_protected_by_androidkeystore" formatted="false">"Сохранить ключ с защитой AndroidKeyStore"</string>
+    <string name="ui_forget_previous_key_and_headers" formatted="false">"Забыть прежний ключ и заголовки"</string>
+    <string name="ui_server_requires_api_key" formatted="false">"Сервер требует API key"</string>
+    <string name="ui_default_model_id_can_be_added_later" formatted="false">"Model ID по умолчанию (можно позже)"</string>
+    <string name="ui_openrouter_reasoning_other_apis_use_json_below" formatted="false">"Рассуждение OpenRouter (для других API — JSON ниже)"</string>
+    <string name="ui_provider_default" formatted="false">"Как у провайдера"</string>
+    <string name="ui_on" formatted="false">"Включено"</string>
+    <string name="ui_off" formatted="false">"Выключено"</string>
+    <string name="ui_chat_completions_limit_field" formatted="false">"Поле лимита Chat Completions"</string>
+    <string name="ui_allow_http_only_to_phone_loopback" formatted="false">"Разрешить HTTP только к loopback телефона"</string>
+    <string name="ui_extra_parameters_depend_on_the_model_an" formatted="false">"Дополнительные параметры зависят от модели. Пустой JSON оставляет настройки провайдера. Изменение протокола/параметров потребует нового диалога."</string>
+    <string name="ui_request_parameters_json" formatted="false">"Параметры запроса JSON"</string>
+    <string name="ui_extra_headers_json_empty_keeps_existing" formatted="false">"Дополнительные заголовки JSON · пусто — оставить"</string>
+    <string name="ui_connection" formatted="false">"Подключение"</string>
+    <string name="ui_request_stopped_partial_response_kept" formatted="false">"Запрос остановлен. Частичный ответ сохранён"</string>
+    <string name="ui_request_exceeded_1_hour" formatted="false">"Время запроса превысило1час"</string>
+    <string name="ui_redirect_rejected_key_is_not_forwarded_to" formatted="false">"Redirect отклонён: ключ не пересылается на другой адрес"</string>
+    <string name="ui_unsupported_response_encoding" formatted="false">"Неподдержанное кодирование ответа"</string>
+    <string name="ui_network_response_exceeded_32_mib" formatted="false">"Сетевой ответ превысил32МиБ"</string>
+    <string name="ui_sse_line_too_large" formatted="false">"SSE строка слишком большая"</string>
+    <string name="ui_json_response_too_large" formatted="false">"JSON ответ слишком большой"</string>
+    <string name="ui_catalogue_too_large_enter_model_id_manually" formatted="false">"Каталог слишком большой; укажите model ID вручную"</string>
+    <string name="ui_capabilities_catalogue_too_large" formatted="false">"Каталог возможностей слишком большой"</string>
+    <string name="ui_expected_sse_or_json_response" formatted="false">"Ожидался SSE или JSON ответ"</string>
+    <string name="ui_unsupported_provider_response" formatted="false">"Неподдержанный ответ провайдера"</string>
+    <string name="ui_network_protocol_error_partial_response_kept_no">"Сетевая/протокольная ошибка (%1$s). Частичный ответ сохранён; повтора нет"</string>
+    <string name="ui_sse_line_exceeded_8_mib" formatted="false">"SSE строка превысила8МиБ"</string>
+    <string name="ui_sse_event_exceeded_8_mib" formatted="false">"SSE event превысил8МиБ"</string>
+    <string name="ui_this_model_requires_reasoning_it_cannot_be" formatted="false">"Эта модель требует reasoning; отключить его нельзя"</string>
+    <string name="ui_unknown_protocol" formatted="false">"Неизвестный протокол"</string>
+    <string name="ui_request_exceeds_8_mib_history_was_not" formatted="false">"Запрос превышает8МиБ. История не обрезана; начните новый диалог"</string>
+    <string name="ui_provider_reported_a_stream_error_partial_response" formatted="false">"Провайдер сообщил об ошибке потока. Частичный ответ сохранён; автоматического повтора нет"</string>
+    <string name="ui_unsupported_api_image" formatted="false">"Неподдержанное изображение API"</string>
+    <string name="ui_too_many_response_files" formatted="false">"Слишком много файлов ответа"</string>
+    <string name="ui_response_exceeds_512_kib_of_text_partial" formatted="false">"Ответ превышает512КиБ текста; частичный ответ сохранён"</string>
+    <string name="ui_too_many_response_blocks" formatted="false">"Слишком много блоков ответа"</string>
+    <string name="ui_provider_used_an_unsupported_finish_mode_tool" formatted="false">"Провайдер завершил ответ неподдержанным способом; tool calls не исполняются"</string>
+    <string name="ui_too_many_response_events" formatted="false">"Слишком много событий ответа"</string>
+    <string name="ui_stream_ended_without_finish_reason" formatted="false">"Поток завершён без finish_reason"</string>
+    <string name="ui_model_requested_tools_this_text_client_does" formatted="false">"Модель запросила инструменты; текстовый клиент их не исполняет"</string>
+    <string name="ui_unsupported_claude_block_tools_are_not_executed" formatted="false">"Неподдержанный блок Claude; инструменты не исполняются"</string>
+    <string name="ui_delta_before_block_start" formatted="false">"Delta до начала блока"</string>
+    <string name="ui_unsupported_claude_delta" formatted="false">"Неподдержанный delta Claude"</string>
+    <string name="ui_provider_did_not_complete_the_response_partial" formatted="false">"Провайдер не завершил ответ. Частичный ответ сохранён"</string>
+    <string name="ui_tools_non_text_responses_are_not_supported" formatted="false">"Инструменты/нетекстовые ответы пока не поддержаны"</string>
+    <string name="ui_internal_state_exceeded_1_mib_partial_response" formatted="false">"Служебное состояние превысило1МиБ; частичный ответ сохранён"</string>
+    <string name="ui_response_files_exceed_6_mib_in_total" formatted="false">"Файлы ответа вместе превышают6МиБ"</string>
+    <string name="ui_incomplete_responses_response" formatted="false">"Незавершённый Responses ответ"</string>
+    <string name="ui_tools_are_not_supported_yet" formatted="false">"Инструменты пока не поддержаны"</string>
+    <string name="ui_non_text_response" formatted="false">"Нетекстовый ответ"</string>
+    <string name="ui_provider_revised_text_already_delivered" formatted="false">"Провайдер пересмотрел уже переданный текст"</string>
+    <string name="ui_connection_ended_before_response_completion_partial_text" formatted="false">"Соединение оборвалось до завершения ответа. Частичный текст сохранён; повтора нет"</string>
+    <string name="ui_model_not_loaded" formatted="false">"Модель не загружена"</string>
+    <string name="ui_command_error" formatted="false">"Ошибка команды"</string>
+    <string name="ui_token_counter_is_available_when_the_model" formatted="false">"Счётчик доступен, когда модель готова"</string>
+    <string name="ui_start_a_new_chat_for_the_selected" formatted="false">"Начните новый диалог для выбранной модели"</string>
+    <string name="ui_model_state_changed" formatted="false">"Состояние модели изменилось"</string>
+    <string name="ui_unload_the_selected_model_first" formatted="false">"Сначала выгрузите выбранную модель"</string>
+    <string name="ui_model_deleted" formatted="false">"Модель удалена"</string>
+    <string name="ui_load_the_model_and_wait_until_ready" formatted="false">"Сначала загрузите модель и дождитесь готовности; остановите уже запущенный API"</string>
+    <string name="ui_selected_model_changed_check_the_profile_before" formatted="false">"Выбранная модель изменилась. Проверьте профиль перед запуском API"</string>
+    <string name="ui_preparing_secure_api" formatted="false">"Подготовка защищённого API…"</string>
+    <string name="ui_api_startup_cancelled" formatted="false">"Запуск API отменён"</string>
+    <string name="ui_api_enabled_97d824">"API включён · %1$s"</string>
+    <string name="ui_api_not_started" formatted="false">"API не запущен"</string>
+    <string name="ui_catalogue_request_already_in_progress_wait_for" formatted="false">"Уже запрашивается каталог; дождитесь результата"</string>
+    <string name="ui_connection_changed_repeat_the_check_explicitly" formatted="false">"Подключение изменилось; повторите проверку явно"</string>
+    <string name="ui_catalogue_received_but_settings_could_not_be" formatted="false">"Каталог получен, но не удалось сохранить его настройки. Проверьте свободное место."</string>
+    <string name="ui_catalogue_unavailable_check_url_network_and_api" formatted="false">"Каталог недоступен. Проверьте URL, сеть и API key. "</string>
+    <string name="ui_catalogue_7e2f0a" formatted="false">"Каталог"</string>
+    <string name="ui_confirm_deletion_of_saved_chats" formatted="false">"Подтвердите удаление сохранённых диалогов"</string>
+    <string name="ui_connection_changed_summary_not_applied" formatted="false">"Подключение изменилось; сводка не применена"</string>
+    <string name="ui_unknown_command" formatted="false">"Неизвестная команда"</string>
+    <string name="ui_connection_changed_compaction_was_not_sent_to" formatted="false">"Подключение изменено. Сжатие не отправлено другому источнику"</string>
+    <string name="ui_load_this_chat_s_model" formatted="false">"Загрузите модель этого диалога"</string>
+    <string name="ui_checking_context" formatted="false">"Проверка контекста…"</string>
+    <string name="ui_check_cancelled_draft_kept" formatted="false">"Проверка отменена; черновик сохранён"</string>
+    <string name="ui_input_response_exceed_context_history_was_not">"Ввод %1$s + ответ %2$s превышают контекст %3$s. История не обрезана; используйте сжатие"</string>
+    <string name="ui_request_rejected" formatted="false">"Запрос отклонён"</string>
+    <string name="ui_draft_exceeds_512_kib_a8cf23" formatted="false">"Черновик превышает 512 КиБ"</string>
+    <string name="ui_load_this_chat_s_model_for_compaction" formatted="false">"Для сжатия загрузите модель этого диалога"</string>
+    <string name="ui_enter_the_api_window_in_compaction_settings" formatted="false">"Укажите окно API в настройках сжатия: каталог его не сообщил"</string>
+    <string name="ui_preparing_context_compaction" formatted="false">"Подготовка сжатия контекста…"</string>
+    <string name="ui_compaction_stopped" formatted="false">"Сжатие остановлено"</string>
+    <string name="ui_compacting_context_step">"Сжатие контекста · этап %1$s"</string>
+    <string name="ui_summary_did_not_reduce_the_working_context" formatted="false">"Сводка не уменьшила рабочий контекст. История сохранена"</string>
+    <string name="ui_input_plus_response_still_does_not_fit" formatted="false">"После сжатия ввод с ответом всё ещё не помещается. Уменьшите черновик или резерв ответа"</string>
+    <string name="ui_summary_ready_review_and_apply_it" formatted="false">"Сводка готова — можно посмотреть и применить"</string>
+    <string name="ui_summary_ready" formatted="false">"Сводка готова"</string>
+    <string name="ui_compaction_incomplete_history_kept" formatted="false">"Сжатие не завершено; история сохранена"</string>
+    <string name="ui_compaction_incomplete" formatted="false">"Сжатие не завершено"</string>
+    <string name="ui_connection_changed_start_a_new_chat_history" formatted="false">"Подключение изменено. Начните новый диалог; история не отправлена"</string>
+    <string name="ui_previous_response_was_interrupted_start_a_new" formatted="false">"Предыдущий ответ прерван. Начните новый диалог, чтобы не потерять служебное reasoning-состояние"</string>
+    <string name="ui_api_request_error" formatted="false">"Ошибка запроса по API"</string>
+    <string name="ui_response_exceeded_memory_budget_partial_text_kept" formatted="false">"Ответ превысил бюджет памяти; частичный текст сохранён"</string>
+    <string name="ui_api_response_completed" formatted="false">"Ответ по API завершён"</string>
+    <string name="ui_could_not_start_request_open_llamur_and" formatted="false">"Не удалось начать запрос. Откройте llamur и повторите явно"</string>
+    <string name="ui_wait_until_the_model_is_ready" formatted="false">"Дождитесь готовности модели"</string>
+    <string name="ui_start_a_new_chat_for_a_different" formatted="false">"Для другой модели начните новый диалог"</string>
+    <string name="ui_api_checking_context" formatted="false">"API · проверка контекста…"</string>
+    <string name="ui_api_request_cancelled" formatted="false">"Запрос API отменён"</string>
+    <string name="ui_api_request_rejected">"Запрос API отклонён: %1$s"</string>
+    <string name="ui_local_model" formatted="false">"Локальная модель"</string>
+    <string name="ui_llamur_local_model" formatted="false">"llamur — локальная модель"</string>
+    <string name="ui_stop_and_unload" formatted="false">"Остановить и выгрузить"</string>
+    <string name="ui_runtime_is_closing" formatted="false">"Runtime закрывается"</string>
+    <string name="ui_estimating_memory_for_selected_gpu_profile" formatted="false">"Оценка памяти выбранного GPU-профиля…"</string>
+    <string name="ui_estimation_cancelled" formatted="false">"Оценка отменена"</string>
+    <string name="ui_gpu_profile_not_loaded">"GPU-профиль не загружен: %1$s"</string>
+    <string name="ui_no_model_selected" formatted="false">"Не выбрана модель"</string>
+    <string name="ui_model_file_not_found" formatted="false">"Файл модели не найден"</string>
+    <string name="ui_invalid_context_size" formatted="false">"Недопустимый контекст"</string>
+    <string name="ui_invalid_thread_count" formatted="false">"Недопустимое число потоков"</string>
+    <string name="ui_invalid_prefill_thread_count" formatted="false">"Недопустимое число потоков prefill"</string>
+    <string name="ui_not_enough_memory_to_check_gpu_profile" formatted="false">"Недостаточно памяти для проверки GPU-профиля. Сначала выгрузите текущую модель."</string>
+    <string name="ui_this_experimental_profile_failed_stability_checks_or" formatted="false">"Этот экспериментальный профиль не прошёл проверку устойчивости или не поддержан для выбранной модели. Используйте профиль native."</string>
+    <string name="ui_not_enough_free_memory_for_safe_loading">"Недостаточно свободной памяти для безопасной загрузки: доступно %1$s МиБ, бюджет %2$s МиБ"</string>
+    <string name="ui_loading_model_into_memory" formatted="false">"Загрузка модели в память…"</string>
+    <string name="ui_stopping_load_not_enough_free_memory" formatted="false">"Остановка загрузки: недостаточно свободной памяти"</string>
+    <string name="ui_verifying_model_file_sha_256" formatted="false">"Проверка SHA-256 файла модели…"</string>
+    <string name="ui_memory_became_insufficient_during_loading" formatted="false">"Памяти стало недостаточно во время загрузки"</string>
+    <string name="ui_model_ready_0c37f0" formatted="false">"Модель готова"</string>
+    <string name="ui_loading_stopped_not_enough_free_memory" formatted="false">"Загрузка остановлена: недостаточно свободной памяти"</string>
+    <string name="ui_loading_failed">"Загрузка не удалась: %1$s"</string>
+    <string name="ui_enter_a_prompt_up_to_32_kib" formatted="false">"Введите запрос до 32 КиБ"</string>
+    <string name="ui_response_reserve_must_fit_the_context" formatted="false">"Резерв ответа должен быть в пределах контекста"</string>
+    <string name="ui_generating" formatted="false">"Генерация…"</string>
+    <string name="ui_response_limit_reached" formatted="false">"Достигнут лимит ответа"</string>
+    <string name="ui_response_completed" formatted="false">"Ответ завершён"</string>
+    <string name="ui_request_stopped_phone_overheated_let_it_cool" formatted="false">"Запрос остановлен: телефон перегрелся. Дайте ему остыть; контекст и веса не изменены."</string>
+    <string name="ui_request_stopped_not_enough_free_memory_context" formatted="false">"Запрос остановлен: недостаточно свободной памяти. Контекст не сокращён."</string>
+    <string name="ui_generation_stopped" formatted="false">"Генерация остановлена"</string>
+    <string name="ui_error_47c833">"Ошибка: %1$s"</string>
+    <string name="ui_could_not_save_test_report" formatted="false">"Не удалось сохранить тестовый отчёт"</string>
+    <string name="ui_stopping_api_request" formatted="false">"Остановка запроса по API…"</string>
+    <string name="ui_stopping" formatted="false">"Остановка…"</string>
+    <string name="ui_unloading_model" formatted="false">"Выгрузка модели…"</string>
+    <string name="ui_model_unloaded" formatted="false">"Модель выгружена"</string>
+    <string name="ui_compaction_interrupted_original_history_kept" formatted="false">"Сжатие прервано; исходная история сохранена"</string>
+    <string name="ui_compaction_interrupted" formatted="false">"Сжатие прервано"</string>
+    <string name="ui_json_exceeds_size_limit" formatted="false">"JSON превышает допустимый размер"</string>
+    <string name="ui_http_badge" formatted="false">"⚠ HTTP"</string>
+    <string name="ui_http_connection_status" formatted="false">"⚠ HTTP — соединение без TLS"</string>
+    <string name="ui_allow_http_for_this_address" formatted="false">"Разрешить HTTP для этого адреса"</string>
+    <string name="ui_http_warning_title" formatted="false">"Разрешить это HTTP-подключение?"</string>
+    <string name="ui_http_warning_body">"Адрес: %1$s\n\nСам HTTP не шифрует переписку, файлы, API key и заголовки. При перехвате соединения их можно читать или менять. Tailscale шифрует трафик между своими узлами при включённом VPN, но llamur не может проверить маршрут.\n\nРазрешайте только доверенный сервер. Разрешение сохранится для этого адреса и порта. При изменении адреса потребуется новое подтверждение."</string>
+    <string name="ui_allow_for_this_address" formatted="false">"Разрешить для этого адреса"</string>
+    <string name="ui_enter_http_address_first" formatted="false">"Сначала введите адрес API с http://"</string>
+    <string name="ui_http_requires_address_approval" formatted="false">"Нужен HTTPS либо явное разрешение HTTP для этого адреса в настройках подключения."</string>
+    <string name="ui_about_llamur" formatted="false">"О llamur"</string>
+    <string name="ui_source_code_on_github" formatted="false">"Исходный код на GitHub"</string>
+    <string name="ui_about_llamur_description" formatted="false">"Запускайте GGUF-модели на телефоне, подключайте свои API-провайдеры и раздавайте локальную модель через API. Исходные веса моделей остаются неизменными."</string>
+</resources>

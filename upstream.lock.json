@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/ggml-org/llama.cpp.git",
+  "commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "path": "third_party/llama.cpp",
+  "patches": [],
+  "tree": "94dbc3fd5dc9169afb0065839fd4b75793ff5c3a"
+}

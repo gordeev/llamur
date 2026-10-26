@@ -1,0 +1,85 @@
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -1,5 +1,7 @@
+ #ifndef LLAMA_H
+ #define LLAMA_H
++
++#define LLAMA_MOTOAI_REPACK_FILTER 1
+ 
+ #include "ggml.h"
+ #include "ggml-cpu.h"
+@@ -347,6 +349,9 @@
+         // override key-value pairs of the model meta data
+         const struct llama_model_kv_override * kv_overrides;
+ 
++        // Experimental lossless CPU_REPACK type allowlist; zero permits all types.
++        uint64_t cpu_repack_type_mask;
++
+         // Keep the booleans together to avoid misalignment during copy-by-value.
+         bool vocab_only;      // only load the vocabulary, no weights
+         bool check_tensors;   // validate model tensor data
+--- a/src/llama-model-loader.h
++++ b/src/llama-model-loader.h
+@@ -124,6 +124,7 @@
+     std::map<std::string, llama_tensor_weight, weight_name_comparer> weights_map;
+     std::unordered_map<std::string, llama_model_kv_override> kv_overrides;
+     const llama_model_tensor_buft_override * tensor_buft_overrides;
++    uint64_t cpu_repack_type_mask = 0;
+ 
+     gguf_context_ptr metadata_ptr;
+     struct gguf_context * metadata; // either metadata_ptr.get() or externally set
+--- a/src/llama-model.cpp
++++ b/src/llama-model.cpp
+@@ -1590,6 +1590,7 @@
+ }
+ 
+ bool llama_model_base::load_tensors(llama_model_loader & ml) {
++    ml.cpu_repack_type_mask = params.cpu_repack_type_mask;
+     const auto & split_mode   = params.split_mode;
+     const bool use_mlock      = params.load_mode == LLAMA_LOAD_MODE_MLOCK || params.load_mode == LLAMA_LOAD_MODE_MMAP_MLOCK;
+     const auto & tensor_split = params.tensor_split;
+@@ -3390,6 +3391,7 @@
+         /*.progress_callback           =*/ nullptr,
+         /*.progress_callback_user_data =*/ nullptr,
+         /*.kv_overrides                =*/ nullptr,
++        /*.cpu_repack_type_mask        =*/ 0,
+         /*.vocab_only                  =*/ false,
+         /*.check_tensors               =*/ false,
+         /*.use_extra_bufts             =*/ true,
+--- a/src/llama-model-loader.cpp
++++ b/src/llama-model-loader.cpp
+@@ -1076,11 +1076,15 @@
+ }
+ 
+ // find the first buffer type in the list that can use the tensor
+-static ggml_backend_buffer_type_t select_weight_buft(const llama_hparams & hparams, ggml_tensor * tensor, ggml_op op, const buft_list_t * buft_list) {
++static ggml_backend_buffer_type_t select_weight_buft(const llama_hparams & hparams, ggml_tensor * tensor, ggml_op op, const buft_list_t * buft_list, uint64_t repack_mask) {
+     GGML_ASSERT(!buft_list->empty());
+     for (const auto & cur : *buft_list) {
+         ggml_backend_dev_t cur_dev = cur.first;
+         ggml_backend_buffer_type_t cur_buft = cur.second;
++        if (repack_mask && strcmp(ggml_backend_buft_name(cur_buft), "CPU_REPACK") == 0 &&
++            (static_cast<unsigned>(tensor->type) >= 64 || !(repack_mask & (uint64_t(1) << tensor->type)))) {
++            continue;
++        }
+         if (weight_buft_supported(hparams, tensor, op, cur_buft, cur_dev)) {
+             return cur_buft;
+         }
+@@ -1251,7 +1255,7 @@
+                 if (std::regex_search(tensor_name, pattern)) {
+                     if (overrides->buft == ggml_backend_cpu_buffer_type()) {
+                         // when overriding to a CPU buffer, consider the extra buffer types
+-                        buft = select_weight_buft(hparams, t_meta, op, buft_list_cpu);
++                        buft = select_weight_buft(hparams, t_meta, op, buft_list_cpu, cpu_repack_type_mask);
+                         if (use_mmap) {
+                             static std::once_flag once;
+                             std::call_once(once, [] {
+@@ -1272,7 +1276,7 @@
+         }
+ 
+         if (!buft) {
+-            buft = select_weight_buft(hparams, t_meta, op, buft_list);
++            buft = select_weight_buft(hparams, t_meta, op, buft_list, cpu_repack_type_mask);
+             if (!buft) {
+                 throw std::runtime_error(format("failed to find a compatible buffer type for tensor %s", tn.str().c_str()));
+             }

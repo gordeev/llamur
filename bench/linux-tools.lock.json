@@ -1,0 +1,33 @@
+{
+  "repository_sha256": "f2bc624c8e1dc14c320fdf17e49a5501c35934948e46a444df8b36a138a03e1e",
+  "packages": [
+    {
+      "package": "ndk;28.2.13676358",
+      "destination": "ndk-r28c",
+      "url": "https://dl.google.com/android/repository/android-ndk-r28c-linux.zip",
+      "bytes": 722261334,
+      "sha1": "a7b54a5de87fecd125a17d54f73c446199e72a64",
+      "sha256": "dfb20d396df28ca02a8c708314b814a4d961dc9074f9a161932746f815aa552f",
+      "archive": "android-ndk-r28c-linux.zip"
+    },
+    {
+      "package": "build-tools;36.1.0",
+      "destination": "sdk/build-tools/36.1.0",
+      "url": "https://dl.google.com/android/repository/build-tools_r36.1_linux.zip",
+      "bytes": 64195204,
+      "sha1": "936a0d6bd5ae3e2118a7567dddbc95ff67ed46e9",
+      "sha256": "a7b5889e4a79fcf3b0976bef40d401f4240fb1eed891d9d91169da1111e11d78",
+      "archive": "build-tools_r36.1_linux.zip"
+    },
+    {
+      "package": "cmake;3.31.6",
+      "destination": "cmake-3.31.6",
+      "url": "https://dl.google.com/android/repository/cmake-3.31.6-linux.zip",
+      "bytes": 30771638,
+      "sha1": "a54551dabd5daf8cc99f7f51769fd00ca759be0a",
+      "sha256": "ce136bb4b02580b36e53d9ccfe5275069655e6ef7d46d6fe2fcf88cfdf8fb761",
+      "archive": "cmake-3.31.6-linux.zip"
+    }
+  ],
+  "platform_jar_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a"
+}

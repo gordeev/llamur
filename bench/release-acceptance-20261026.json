@@ -1,0 +1,302 @@
+{
+  "passed": true,
+  "accepted_utc": "2026-10-26T12:37:18.246922+00:00",
+  "scope": "Bounded standalone0.1.0-dev release candidate for owner review, one physical phone/two original GGUFs and16KiB ARM64 emulator. Not arbitrary models/devices/tasks, every context quality, production identity, catalog inclusion or publication.",
+  "milestones": {
+    "M0": "Toolchain/upstream/model/license sources locked",
+    "M1": "Official baseline plus independent APK engine/service mechanics",
+    "M2": "Fixed CPU-reference numeric/template/token/complete-code harness",
+    "M3": "Bounded backend/scheduler screening closed; CPU4 retained, failed GPU candidates excluded",
+    "M4": "Measured numeric/loading/workspace/state corrections with original weights/F16KV; optional scratch/cache off by default; no blanket speedup",
+    "M5": "Default4K actual filled controls, prior sustained scheduling/cancel/recovery;16K/32K single exact experimental slow retrieval points both models",
+    "M6": "RAM-only dialogs/UI/profiles/storage/publicHF/background/notifications; limited device/a11y scope",
+    "M7": "Authenticated loopback/LAN TLS text API, contract/cancel/recovery and real two-turn Aider",
+    "M8": "Clean byte-equal Linux pair, real non-debug APK, audited dependencies/notices/SBOM, executed draft recipe/source+binary scanner, source package/checksums prepared separately; no publish"
+  },
+  "planned_not_implemented": {
+    "M9": "External OpenRouter/OpenAI/Anthropic/custom provider client in PLAN section17; not part of this APK or acceptance"
+  },
+  "defaults": {
+    "backend": "CPU",
+    "threads": 4,
+    "context": 4096,
+    "kv": "F16",
+    "weights": "original native representation",
+    "load": "mmap/no full prefault",
+    "swa_full": true,
+    "transient_repack": false,
+    "prefix_cache_mib": 0
+  },
+  "evidence": {
+    "m2_harness": {
+      "path": "bench/m2-acceptance-20261025.json",
+      "sha256": "8cc7a304f1e79b621be02df3521d4e1017c54c1f05bf8e61d2d8e472840ec6d1",
+      "acceptance_field": "milestone_accepted"
+    },
+    "m3_comparison": {
+      "path": "bench/m3-comparison-acceptance-20261026.json",
+      "sha256": "495db630d9defa306621c7c30178e8a3417d83ed1166f99de14e19d59b807117",
+      "acceptance_field": "comparison_complete"
+    },
+    "final_linux_pair": {
+      "path": "bench/results/linux-product-url-copy-pair-20261026/report.json",
+      "sha256": "b32aafae96536a357d87a48a58d699e14c7852832e1300a2029a03592bdcd72f",
+      "acceptance_field": "passed"
+    },
+    "final_native_bridge": {
+      "path": "bench/results/linux-url-copy-native-bridge-20261026/report.json",
+      "sha256": "388ab149f1a67f4c416807ff55f607e826d9c84002257db245698508b5664ddb",
+      "acceptance_field": "passed"
+    },
+    "e_debug_native_bridge": {
+      "path": "bench/results/linux-release-test-kernel-bridge-20261026/report.json",
+      "sha256": "336569acd59ee177f6016e95934be0c7ceb40803812f9e7cd26dce5b304e89d3",
+      "acceptance_field": "passed"
+    },
+    "url_ui_change_scope": {
+      "path": "bench/results/url-copy-change-scope-20261026/report.json",
+      "sha256": "f20ec508a109dfdb4b227ad14281be3bb7966d36241239c80b94c2b9d7276a50",
+      "acceptance_field": "passed"
+    },
+    "final_apk_audit": {
+      "path": "bench/results/release-audit-url-copy-signed-20261026/report.json",
+      "sha256": "361ff16b65fe55159e909c758029225fefe668735d15c32818c5d31af496918b",
+      "acceptance_field": "passed"
+    },
+    "final_binary_scanner": {
+      "path": "bench/results/fdroid-binary-scan-url-copy-signed-20261026/report.json",
+      "sha256": "b20c8a47c6776fd9b65f2b8b1c1bda40911927079a8bc6c9fab81befe2280f0e",
+      "acceptance_field": "passed"
+    },
+    "actual_fdroid_prebuild": {
+      "path": "bench/results/fdroid-prebuild-url-copy-executed-20261026/report.json",
+      "sha256": "6a94e70e313c4e57adbfc833796f17071e7fcd27d96061c97692ab5ce7e32926",
+      "acceptance_field": "passed"
+    },
+    "final_sbom_schema": {
+      "path": "bench/results/release-sbom-url-copy-schema-20261026/report.json",
+      "sha256": "f383eaca5d387430a2216548e0a9c6516d6db449c222e872363120fcebef3cef",
+      "acceptance_field": "passed"
+    },
+    "final_release_emulator_ui": {
+      "path": "bench/results/release-ui-emulator-20261026T070445Z/report.json",
+      "sha256": "527f499b9a892a2c6c81a9589736e2b13d10ccfa9bcd6f1860e6f34d630eba0a",
+      "acceptance_field": "passed"
+    },
+    "final_ui_product_emulator": {
+      "path": "bench/results/product-emulator-20261026T065732Z/report.json",
+      "sha256": "2ea2743024a7905777111124d08a2f36138448aad46b1d0a1f1c5e768a6375fc",
+      "acceptance_field": "passed"
+    },
+    "final_kernel_emulator_framework": {
+      "path": "bench/results/emulator-16k-20261026T054809Z/report.json",
+      "sha256": "f7b91b5d83bc5bafc0e87707994c6522e7f3186991b65e303ef56dfa12fad1cb",
+      "acceptance_field": "passed"
+    },
+    "final_kernel_emulator_product": {
+      "path": "bench/results/product-emulator-20261026T054803Z/report.json",
+      "sha256": "e4ecd62fd28c6100688b483dade2af6eb2d691769ad997a0b1a8279817b00902",
+      "acceptance_field": "passed"
+    },
+    "copy_original_deletion": {
+      "path": "bench/results/saf-copy-delete-emulator-20261026T051733Z/report.json",
+      "sha256": "3be37cebfc5e6782b53bb65e264f827d2147823673d8aa8793ce00949c15e419",
+      "acceptance_field": "passed"
+    },
+    "saf_actual_reboot": {
+      "path": "bench/results/saf-reboot-20261026T045541Z/report.json",
+      "sha256": "cf8db502f3b95a905ef9603fbe3c4ab804d38ee9fb368fa213089bc1056aafba",
+      "acceptance_field": "passed"
+    },
+    "public_hf_download": {
+      "path": "bench/results/downloads-emulator-20261026T045817Z/report.json",
+      "sha256": "303239742c62206749cba271bcc14346a0acd7d91b55e57328c8f58813601c98",
+      "acceptance_field": "passed"
+    },
+    "storage": {
+      "path": "bench/results/storage-emulator-20261026T045812Z/report.json",
+      "sha256": "f5bf1735b199e9c46198ad20e97594bc713ff78f0ff6ef10c6e95b806958c838",
+      "acceptance_field": "passed"
+    },
+    "host_parser": {
+      "path": "bench/results/product-parser-host-auto-format-20261026/report.json",
+      "sha256": "9a580656d7412695f68da53df92955fc28909d67d927666f4d97b9c65870a512",
+      "acceptance_field": "passed"
+    },
+    "ornith16k": {
+      "path": "bench/results/context-ornith-16384-20261026T021721Z/report.json",
+      "sha256": "3222151a2d02a2e8bf1f421e5d0985916ab432088b19c0dbc4cc2f64017fe474",
+      "acceptance_field": "passed"
+    },
+    "gemma16k": {
+      "path": "bench/results/context-gemma-16384-20261026T030548Z/report.json",
+      "sha256": "158efb25955a31585084a91f6fa0e2226ce3e474d87a015d084f9ec293826057",
+      "acceptance_field": "passed"
+    },
+    "ornith32k": {
+      "path": "bench/results/context-ornith-32768-20261026T040306Z/report.json",
+      "sha256": "d23df05c5e2dfd6cd153e09bea18d6516accc945d66626e096e43dd12f3131cb",
+      "acceptance_field": "passed"
+    },
+    "gemma32k": {
+      "path": "bench/results/context-gemma-32768-20261026T055945Z/report.json",
+      "sha256": "1274f023e3c1877792cef9228580949a497fb887f2380ae2106adb1ad3800f68",
+      "acceptance_field": "passed"
+    },
+    "final_phone_idle": {
+      "path": "bench/results/release-phone-idle-20261026T123539Z/report.json",
+      "sha256": "623d73049a69f75949e74a652c75217958c4153a8bceacc11a75e97220d3745e",
+      "acceptance_field": "passed"
+    },
+    "host_controller_unit": {
+      "path": "bench/results/host-final-unit-20261026/report.json",
+      "sha256": "39dd227171ac91e4950473dfe901583f384572d42b771dbba7b668ee1ebfa90b",
+      "acceptance_field": "passed"
+    },
+    "host_script_syntax": {
+      "path": "bench/results/host-final-syntax-20261026/report.json",
+      "sha256": "5fc1277a4e43c7447d174bc06090db471e863e758f9b81f65276184f7ca22d2e",
+      "acceptance_field": "passed"
+    },
+    "keyguard_diagnosis": {
+      "path": "bench/results/background-keyguard-diagnosis-20261026/report.json",
+      "sha256": "c22e833bed511dadd32eacd99a82ac391f0a9652be4c4e0fc84b705f98b5c5ec",
+      "acceptance_field": "passed"
+    },
+    "usb_transport_diagnosis": {
+      "path": "bench/results/usb-relay-option-diagnosis-20261026/report.json",
+      "sha256": "6561ba28a0b661be2b16172e0956d7455b95a0c5b48fa40e8959a2603176aa4a",
+      "acceptance_field": "passed"
+    },
+    "quality_checkpoint": {
+      "path": "bench/m4-m5-quality-checkpoint-20261026.json",
+      "sha256": "fbf677dcc6d6a9d3f467b5ac5602a93046841ba5bed509ad598ca60120008e57",
+      "acceptance_field": "passed"
+    },
+    "phone_resume_sequence": {
+      "path": "bench/results/final-phone-resume-VALIDATED/report.json",
+      "sha256": "640b5e6ca568e0d3d87ac141a491ed697f64077c179295b149eb50fb35696f6b",
+      "acceptance_field": "passed"
+    },
+    "phone_attention": {
+      "path": "bench/results/attention-long-phone-20261026T071652537070Z/report.json",
+      "sha256": "17654f5462b99ebe5b2282117eca654af5d494fbead7446e9dc7469c2dfffc26",
+      "acceptance_field": "passed"
+    },
+    "phone_product": {
+      "path": "bench/results/product-phone-20261026T072238Z/report.json",
+      "sha256": "2665242900f9dff41325c27f0e832b1aed0c2595214a8af9a08c6513013b14d9",
+      "acceptance_field": "passed"
+    },
+    "phone_numeric": {
+      "path": "bench/results/numeric-20261026T072246Z/report.json",
+      "sha256": "d78e7432ea36ce20cc19d6fd2520857c90652dc37558fa0d3257b5dff49088c2",
+      "acceptance_field": "passed"
+    },
+    "phone_context_ornith_4k": {
+      "path": "bench/results/context-ornith-4096-20261026T072252Z/report.json",
+      "sha256": "7df4769fdd493f2997e159ce0ad9d0f79636f40ae1c072b07da740402ce3082d",
+      "acceptance_field": "passed"
+    },
+    "phone_context_gemma_4k": {
+      "path": "bench/results/context-gemma-4096-20261026T073309Z/report.json",
+      "sha256": "27e160c99e598018bcacb2904e129a62cee4c744eaa546705cb15ec685f36126",
+      "acceptance_field": "passed"
+    },
+    "phone_background": {
+      "path": "bench/results/background-phone-20261026T115321Z/report.json",
+      "sha256": "361f63d69a1fd43aa523f5e13ca7284f83269d98c6652c69c0c1cf4bb2ff3a19",
+      "acceptance_field": "passed"
+    },
+    "phone_ui_ornith": {
+      "path": "bench/results/ui-performance-ornith-20261026T115653Z/report.json",
+      "sha256": "b5a272d6fc15e0915ecc8f0f178298eada82b8ffd02a96d0498afacb4fd1b0e0",
+      "acceptance_field": "passed"
+    },
+    "phone_ui_gemma": {
+      "path": "bench/results/ui-performance-gemma-20261026T120028Z/report.json",
+      "sha256": "29bea203dd7bcd15106bc27c64cbff96033272838b70e34825957d7695cc1433",
+      "acceptance_field": "passed"
+    },
+    "phone_aider": {
+      "path": "bench/results/aider-phone-20261026T120319Z/report.json",
+      "sha256": "395566e7cea25283ee0e47c6784dbf3aa66221a5271b94f3460077d255e79dd5",
+      "acceptance_field": "passed"
+    },
+    "actual_release_phone_ui": {
+      "path": "bench/results/release-ui-phone-20261026T123200Z/report.json",
+      "sha256": "4d0209ebca29612686a85952f01253de7cee38f49e4e0bc1e1a6dfd11b8623e2",
+      "acceptance_field": "passed"
+    },
+    "fixture_cleanup": {
+      "path": "bench/results/fixture-cleanup-phone-20261026T121803Z/report.json",
+      "sha256": "1089de8090c2f15d4e9e318232d0a7562e659088166271cc6f5da43eacdc9f91",
+      "acceptance_field": "passed"
+    }
+  },
+  "artifacts": {
+    "MotoAI-0.1.0-dev-arm64-development-signed.apk": {
+      "sha256": "3af31ad02535f1a4e08516d64f5715b1c1c5623dcca8fbf41f8fac3faf065c30",
+      "bytes": 9469464
+    },
+    "MotoAI-0.1.0-dev-arm64-unsigned.apk": {
+      "sha256": "d1ffdb8329d7d883b3af5e2e1c0ef50d8eeabdcbed70e15188191875d106f14d",
+      "bytes": 9457901
+    },
+    "MotoAI-0.1.0-dev.cdx.json": {
+      "sha256": "a8fe2fca58e5928f12776736854f630fbdafd00c615a86f90c9733c71c5f6c53",
+      "bytes": 15235
+    },
+    "production-source-identity.json": {
+      "sha256": "6adddb6e89bb838f0b68345d801c6bb67b83259f7179d1496ffa7933fab29db6",
+      "bytes": 13038
+    },
+    "linux-build-environment.json": {
+      "sha256": "813769c08346beb2e283efee1a545351d6ab87ba4552a86b0e743ee489915d72",
+      "bytes": 5562
+    }
+  },
+  "retained_failed_attempts": [
+    {
+      "path": "bench/results/background-phone-20261026T113625Z/report.json",
+      "sha256": "282b5f3d602a2ff36e070c7cbb60de4ae0adb2d37414a63ad7e2c2cc5f478556",
+      "error": "granted: Results: bench/results/product-background-phone-20261026T113625Z\njava.lang.IllegalStateException: Background UI/notification timed out: {\"product_completed\":{\"load_admission\":{\"accepted\":true,\"available_bytes\":4975939584,\"reclaimable_anonymous_bytes\":0,\"effective_available_bytes\":4975939584,\"required_bytes\":806491744,\"headroom_bytes\":805306368,\"model_file_bytes\":1185376,\"low_memory\":false,\"estimated_context_bytes\":null,\"weight_budget_bytes\":1185376,\"load_mode\":\"read\",\"swa_full\":true,\"compact_swa_supported\":true,\"weight_buffers\":\"native\",\"weight_policy_supported\":true,\"transient_repack\":false,\"cpu_workspace_reserve_bytes\":0,\"prefix_cache_reserve_bytes\":0,\"prefix_cache_supported\":true,\"transient_min_rows\":0,\"rejection_reason\":null,\"packed_weight_bytes\":0,\"transient_source_window_bytes\":0,\"streamed_repack_sources\":false,\"phase_budget_before_headroom_bytes\":1185376,\"mapped_weight_window\":false,\"profile_qualified\":false,\"profile\":\"file-size-lower-bound-only\",\"scope\":\"CPU\\/F16 KV. Native disables extras. Patched streaming builds budget committed weights plus max(source packing,native\\/context\\/compute); other repack builds add windows. Headroom unchanged. Repack is not a qualified RSS bound; concurrent system pressure can still cause LMKD.\"},\"memory_before_load\":{\"available_bytes\":4975939584,\"total_bytes\":11843080192,\"low_memory\":false,\"system_threshold_bytes\":226492416,\"model_file_bytes\":1185376,\"model_location\":\"Внутреннее хранилище\"},\"state\":\"ready\",\"message\":\"Достигнут лимит ответа\",\"model\":\"stories260K.gguf\",\"config\":{\"context\":2048,\"threads\":2,\"batch\":128,\"micro_batch\":64,\"load_mode\":\"read\"},\"pid\":4919,\"backend\":{\"ok\":true,\"system_info\":\"CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | REPACK = 1 | \",\"backend_profile\":\"cpu\",\"page_size\":4096,\"backend_registries\":[\"CPU\"],\"devices\":[{\"name\":\"CPU\",\"backend\":\"CPU\",\"type\":0,\"description\":\"CPU\"}]},\"load\":{\"ok\":true,\"backend\":\"cpu\",\"backend_profile\":\"cpu\",\"gpu_layers\":0,\"runtime_variant\":\"f32-recurrent-long-attention-v2\",\"load_us\":12708,\"context\":2048,\"literal_chat_controls\":true,\"attention_f32_kv_chunks\":4,\"long_attention_wide_accumulator\":true,\"threads\":2,\"threads_batch\":2,\"cpu_affinity\":[],\"explicit_threadpools\":false,\"batch\":128,\"micro_batch\":64,\"load_mode\":\"read\",\"kv_type\":\"f16\",\"tensor_probe\":false,\"attention_capture\":false,\"weight_buffers\":\"native\",\"mmap_prefault\":true,\"swa_full\":true,\"transient_repack\":false,\"prefix_cache_mib\":0,\"exact_state_layout\":true,\"transient_min_rows\":0,\"cpu_workspace_reserve_bytes\":0,\"repack_type_filter\":\"none\",\"weight_buffer_policy\":\"native CPU buffers; no extra weight buffers\",\"all_extra_buffers_disabled\":true,\"buffer_allocations\":[{\"buffer\":\"CPU\",\"model_bytes\":1171200,\"context_bytes\":1310720,\"compute_bytes\":478720}],\"verified_source_sha256\":\"270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d\",\"source_verify_us\":8968,\"model_location\":\"private\",\"model_file_bytes\":1185376,\"backend_initialize_us\":16760,\"service_load_wall_us\":119336},\"loaded_pss_kib\":35081,\"load_memory_watch\":{\"minimum_available_bytes\":4975939584,\"peak_sampled_rss_bytes\":0,\"peak_sampled_anonymous_bytes\":0,\"peak_sampled_mapped_bytes\":0,\"threshold_bytes\":536870912,\"poll_interval_ms\":100,\"pressure_abort\":false},\"chat_id\":\"01eb74df-1931-4bab-9195-74f3d6799189\",\"output_id\":\"1e9b5539-1b7c-4972-aa2d-18a6e918da84\",\"output_transport\":\"memory\",\"output_bytes\":2327,\"native_phase\":\"decode\",\"generation_memory_watch\":{\"minimum_available_bytes\":4869324800,\"threshold_bytes\":536870912,\"poll_interval_ms\":1000,\"samples\":3,\"pressure_abort\":false,\"thermal_abort\":false,\"thermal_stop_threshold\":\"SEVERE\"},\"service_compute_wall_us\":2113749,\"client_to_first_piece_us\":173037,\"completed_importance\":125,\"completed_interactive\":false,\"completed_pss_kib\":68955,\"process_status\":\"VmHWM:\\t  152048 kB\\nVmRSS:\\t  151304 kB\\nVmSwap:\\t   19356 kB\\nCpus_allowed_list:\\t0-6\",\"thermal_status\":0,\"result\":{\"prompt_tokens\":597,\"processed_prompt_tokens\":597,\"generated_tokens\":1024,\"finish_reason\":\"length\",\"prepare_us\":2015,\"reset_us\":40,\"prefill_us\":164258,\"decode_us\":1939152,\"first_target_token_us\":166433,\"first_nonempty_piece_us\":166433,\"reused_prompt_tokens\":0,\"prefix_cache_bytes\":0,\"cache_capture_us\":0,\"cache_restore_us\":0,\"cache_status\":\"disabled\",\"logits_checks\":0,\"mode\":\"generation\",\"backend_perf\":{\"prompt_tokens\":597,\"decode_evals\":1023,\"prefill_ms\":164.286,\"decode_ms\":1501.613}}},\"notification_root\":\"com.android.systemui\",\"matching_notification_titles\":0}\n",
+      "scope": "Failed setup/transport/notification acceptance, not a passed model-quality result; retained without changing weights/native production inputs or widening gates."
+    },
+    {
+      "path": "bench/results/background-phone-20261026T114028Z/report.json",
+      "sha256": "fe3470065948b21d4e34803b76390679e7312e1c228f21e8c9535559e8686d0f",
+      "error": "granted: Results: bench/results/product-background-phone-20261026T114028Z\njava.lang.IllegalStateException: Background UI/notification timed out: {\"product_completed\":{\"load_admission\":{\"accepted\":true,\"available_bytes\":5033525248,\"reclaimable_anonymous_bytes\":0,\"effective_available_bytes\":5033525248,\"required_bytes\":806491744,\"headroom_bytes\":805306368,\"model_file_bytes\":1185376,\"low_memory\":false,\"estimated_context_bytes\":null,\"weight_budget_bytes\":1185376,\"load_mode\":\"read\",\"swa_full\":true,\"compact_swa_supported\":true,\"weight_buffers\":\"native\",\"weight_policy_supported\":true,\"transient_repack\":false,\"cpu_workspace_reserve_bytes\":0,\"prefix_cache_reserve_bytes\":0,\"prefix_cache_supported\":true,\"transient_min_rows\":0,\"rejection_reason\":null,\"packed_weight_bytes\":0,\"transient_source_window_bytes\":0,\"streamed_repack_sources\":false,\"phase_budget_before_headroom_bytes\":1185376,\"mapped_weight_window\":false,\"profile_qualified\":false,\"profile\":\"file-size-lower-bound-only\",\"scope\":\"CPU\\/F16 KV. Native disables extras. Patched streaming builds budget committed weights plus max(source packing,native\\/context\\/compute); other repack builds add windows. Headroom unchanged. Repack is not a qualified RSS bound; concurrent system pressure can still cause LMKD.\"},\"memory_before_load\":{\"available_bytes\":5033525248,\"total_bytes\":11843080192,\"low_memory\":false,\"system_threshold_bytes\":226492416,\"model_file_bytes\":1185376,\"model_location\":\"Внутреннее хранилище\"},\"state\":\"ready\",\"message\":\"Достигнут лимит ответа\",\"model\":\"stories260K.gguf\",\"config\":{\"context\":2048,\"threads\":2,\"batch\":128,\"micro_batch\":64,\"load_mode\":\"read\"},\"pid\":8510,\"backend\":{\"ok\":true,\"system_info\":\"CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | REPACK = 1 | \",\"backend_profile\":\"cpu\",\"page_size\":4096,\"backend_registries\":[\"CPU\"],\"devices\":[{\"name\":\"CPU\",\"backend\":\"CPU\",\"type\":0,\"description\":\"CPU\"}]},\"load\":{\"ok\":true,\"backend\":\"cpu\",\"backend_profile\":\"cpu\",\"gpu_layers\":0,\"runtime_variant\":\"f32-recurrent-long-attention-v2\",\"load_us\":7803,\"context\":2048,\"literal_chat_controls\":true,\"attention_f32_kv_chunks\":4,\"long_attention_wide_accumulator\":true,\"threads\":2,\"threads_batch\":2,\"cpu_affinity\":[],\"explicit_threadpools\":false,\"batch\":128,\"micro_batch\":64,\"load_mode\":\"read\",\"kv_type\":\"f16\",\"tensor_probe\":false,\"attention_capture\":false,\"weight_buffers\":\"native\",\"mmap_prefault\":true,\"swa_full\":true,\"transient_repack\":false,\"prefix_cache_mib\":0,\"exact_state_layout\":true,\"transient_min_rows\":0,\"cpu_workspace_reserve_bytes\":0,\"repack_type_filter\":\"none\",\"weight_buffer_policy\":\"native CPU buffers; no extra weight buffers\",\"all_extra_buffers_disabled\":true,\"buffer_allocations\":[{\"buffer\":\"CPU\",\"model_bytes\":1171200,\"context_bytes\":1310720,\"compute_bytes\":478720}],\"verified_source_sha256\":\"270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d\",\"source_verify_us\":9446,\"model_location\":\"private\",\"model_file_bytes\":1185376,\"backend_initialize_us\":8647,\"service_load_wall_us\":90084},\"loaded_pss_kib\":34988,\"load_memory_watch\":{\"minimum_available_bytes\":5033525248,\"peak_sampled_rss_bytes\":0,\"peak_sampled_anonymous_bytes\":0,\"peak_sampled_mapped_bytes\":0,\"threshold_bytes\":536870912,\"poll_interval_ms\":100,\"pressure_abort\":false},\"chat_id\":\"7fd9141b-b6f4-4a42-8be5-91232d77904f\",\"output_id\":\"d54f6d4c-d84d-4a5d-8379-83875768a38b\",\"output_transport\":\"memory\",\"output_bytes\":2327,\"native_phase\":\"decode\",\"generation_memory_watch\":{\"minimum_available_bytes\":4752510976,\"threshold_bytes\":536870912,\"poll_interval_ms\":1000,\"samples\":3,\"pressure_abort\":false,\"thermal_abort\":false,\"thermal_stop_threshold\":\"SEVERE\"},\"service_compute_wall_us\":2143675,\"client_to_first_piece_us\":179763,\"completed_importance\":125,\"completed_interactive\":false,\"completed_pss_kib\":68975,\"process_status\":\"VmHWM:\\t  152596 kB\\nVmRSS:\\t  152116 kB\\nVmSwap:\\t   19340 kB\\nCpus_allowed_list:\\t0-6\",\"thermal_status\":0,\"result\":{\"prompt_tokens\":597,\"processed_prompt_tokens\":597,\"generated_tokens\":1024,\"finish_reason\":\"length\",\"prepare_us\":2662,\"reset_us\":41,\"prefill_us\":168266,\"decode_us\":1962279,\"first_target_token_us\":171091,\"first_nonempty_piece_us\":171091,\"reused_prompt_tokens\":0,\"prefix_cache_bytes\":0,\"cache_capture_us\":0,\"cache_restore_us\":0,\"cache_status\":\"disabled\",\"logits_checks\":0,\"mode\":\"generation\",\"backend_perf\":{\"prompt_tokens\":597,\"decode_evals\":1023,\"prefill_ms\":167.192,\"decode_ms\":1520.422}}},\"notification_root\":\"com.android.systemui\",\"matching_notification_titles\":0,\"root_node_count\":77,\"title_text_contains_count\":0,\"title_description_contains_count\":0,\"own_app_label_count\":0,\"systemui_resource_ids\":[\"com.android.systemui:id\\/legacy_window_root\",\"com.android.systemui:id\\/scrim_behind\",\"com.android.systemui:id\\/scrim_notifications\",\"com.android.systemui:id\\/light_reveal_scrim\",\"com.android.systemui:id\\/scrim_in_front\",\"com.android.systemui:id\\/front_light_reveal_scrim\",\"com.android.systemui:id\\/shared_notification_container\",\"com.android.systemui:id\\/carousel_container\",\"com.android.systemui:id\\/keyguard_bouncer_container\",\"com.android.systemui:id\\/keyguard_security_container\",\"com.android.systemui:id\\/view_flipper\",\"com.android.systemui:id\\/keyguard_pin_view\",\"com.android.systemui:id\\/bouncer_message_view\",\"com.android.systemui:id\\/bouncer_primary_message_area\",\"com.android.systemui:id\\/pin_container\",\"com.android.systemui:id\\/flow1\",\"com.android.systemui:id\\/row0\",\"com.android.systemui:id\\/pinEntry\",\"com.android.systemui:id\\/key1\",\"com.android.systemui:id\\/digit_text\",\"com.android.systemui:id\\/key2\",\"com.android.systemui:id\\/key3\",\"com.android.systemui:id\\/key4\",\"com.android.systemui:id\\/key5\",\"com.android.systemui:id\\/key6\",\"com.android.systemui:id\\/key7\",\"com.android.systemui:id\\/key8\",\"com.android.systemui:id\\/key9\",\"com.android.systemui:id\\/delete_button\",\"com.android.systemui:id\\/key0\",\"com.android.systemui:id\\/key_enter\",\"com.android.systemui:id\\/keyguard_selector_fade_container\",\"com.android.systemui:id\\/emergency_call_button\",\"com.android.systemui:id\\/keyguard_root_view\",\"com.android.systemui:id\\/custom_keyguard_media_plugin_container\",\"com.android.systemui:id\\/lockscreen_clock_view_large\",\"com.android.systemui:id\\/nssl_placeholder\",\"com.android.systemui:id\\/nssl_placeholder_barrier_bottom\",\"com.android.systemui:id\\/custom_notification_icon_container_host\",\"com.android.systemui:id\\/custom_notification_indicator\",\"com.android.systemui:id\\/keyguard_indication_area\",\"com.android.systemui:id\\/keyguard_indication_text_bottom\",\"com.android.systemui:id\\/start_button\",\"com.android.systemui:id\\/device_entry_icon_view\",\"com.android.systemui:id\\/device_entry_icon_bg\",\"com.android.systemui:id\\/device_entry_icon_fg\",\"com.android.systemui:id\\/end_button\",\"com.android.systemui:id\\/burn_in_layer_empty_view\",\"com.android.systemui:id\\/burn_in_layer\",\"com.android.systemui:id\\/keyguard_message_area_container\"],\"keyguard_locked\":true,\"device_locked\":true}\n",
+      "scope": "Failed setup/transport/notification acceptance, not a passed model-quality result; retained without changing weights/native production inputs or widening gates."
+    },
+    {
+      "path": "bench/results/aider-phone-20261026T114607Z/report.json",
+      "sha256": "cdbf40471672c0baa68e8e8e0cb09e48f3c480f584684f5ecec743ccebe00b2b",
+      "error": "<urlopen error timed out>",
+      "scope": "Failed setup/transport/notification acceptance, not a passed model-quality result; retained without changing weights/native production inputs or widening gates."
+    },
+    {
+      "path": "bench/results/aider-phone-20261026T115119Z/report.json",
+      "sha256": "2fb8ed6644aa54b110b0ee7568b735e3e965f0146e4c49169c36e78a27cf89c1",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)>",
+      "scope": "Failed setup/transport/notification acceptance, not a passed model-quality result; retained without changing weights/native production inputs or widening gates."
+    },
+    {
+      "path": "bench/results/release-ui-phone-20261026T121900Z/report.json",
+      "sha256": "beb6186e55eefca4dc3d9538fdb77b36f1f5f175beb3d82b97016b178b62d24c",
+      "error": "Owner unlock required; no security settings changed",
+      "scope": "Failed setup/transport/notification acceptance, not a passed model-quality result; retained without changing weights/native production inputs or widening gates."
+    }
+  ],
+  "limitations": [
+    "Final-kernel Aider uses explicit developer USB opaque TLS relay because current Wi-Fi subnets differ. Prior real direct Wi-Fi CA/hostname acceptance is retained separately; no new direct LAN claim.",
+    "Single-file GGUF only; split/sharded GGUF import is not implemented.",
+    "16K/32K used731a experimental transientON; single retrieval per point, very slow, not arbitrary dialogue quality/default4K timing. Current native14-library bridge covers final kernel tests on d281; only later5-line URL-copy UI differs and was checked in actual normal release.",
+    "Only MotorolaEdge40Pro/12GB/Android16 physical; API36 ARM64 emulator has actual16KiB pages. Other devices/Android versions/unseen GGUFs are unqualified.",
+    "UI is Russian; no all-orientation/accessibility certification.",
+    "Public HF HTTPS/resume/cancel and Keystore tested; valid gated/private account token not supplied/tested.",
+    "FGS/wake lease do not bypass deepDoze/OEM policy; no forced battery/governor/whitelist, no discharge-energy claim.",
+    "Dependency hashes bootstrapped from existing cache; no independent upstream artifact-signature attestation. Linux byte equality scoped to recorded environment/canonicalpath.",
+    "Signed with existing development certificate, not production identity. Draft F-Droid public URLs/appcommit/eligibility/signing require owner decisions before publication; nothing uploaded/committed/pushed."
+  ]
+}

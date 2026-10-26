@@ -1,0 +1,145 @@
+{
+  "passed": true,
+  "scope": "Bounded Ornith CPU/I8MM512-token prefill, after separately recorded native2048 preconditioning and one warmup. Not overall M3, default/product, decode, cold-storage, other-device or8K-speed acceptance. Equal frequency endpoints do not prove clock residency.",
+  "apk_sha256": "a41f7fd34d7c432048f05583fcb9111e00c2fcfb0cfd04ed3c1eff9e97abba32",
+  "speed_report": "bench/results/weight-buffers-ornith-pp512-prefill-speed-v1-20261025T185527Z/report.json",
+  "speed_report_sha256": "9d34bcafd3982ff03c320442e90a7b85aa04b112ecc6cef29138934bb9ad93a8",
+  "quality_lock": "bench/results/transient-workspace-screen-20261025T185012Z/ornith-quality-gate.json",
+  "quality_lock_sha256": "2b58e0fc70fcfdc77a257cea784978bc1098281a7ce8ce8557334536386e66da",
+  "preconditioning": "bench/results/app-service-ornith-20261025T185012Z-f4409a6b/result.json",
+  "measured_pairs": 5,
+  "all_numeric_and_frequency_gates_passed": true,
+  "strengthened_workspace_evidence_revalidated": [
+    {
+      "role": "code_nll",
+      "raw": "bench/results/app-service-ornith-20261025T181525Z-61a8daff/result.json",
+      "sha256": "225eb73c6a7e3fb73580c301e841d5f1e328b64e1a8ceec34e3639a56c100f3d",
+      "workspace": {
+        "allocated_bytes": 41344000,
+        "transient_maximum_requested_bytes": 43081728,
+        "graph_nodes_marked": 741,
+        "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+      }
+    },
+    {
+      "role": "russian_nll",
+      "raw": "bench/results/app-service-ornith-20261025T181624Z-e8f0ae6c/result.json",
+      "sha256": "cfef1c2414cf96e8bf78b23606d5dcf2d7277924cb9a5a84d161415232ea4fe6",
+      "workspace": {
+        "allocated_bytes": 41358016,
+        "transient_maximum_requested_bytes": 43081728,
+        "graph_nodes_marked": 741,
+        "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+      }
+    },
+    {
+      "role": "completed_task",
+      "raw": "bench/results/app-service-ornith-20261025T181645Z-bef4ea24/result.json",
+      "sha256": "167e124bf798220058fe7a5ab15b4b4315acfc463504a70f85409b25dd8010f6",
+      "workspace": {
+        "allocated_bytes": 42437248,
+        "transient_maximum_requested_bytes": 43081728,
+        "graph_nodes_marked": 741,
+        "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+      }
+    },
+    {
+      "role": "filled_context",
+      "raw": "bench/results/app-service-ornith-20261025T182235Z-388c0474/result.json",
+      "sha256": "9418fca876719febeba4b6fa50986149b3ffb16cbba690edc116f1bdfe3e1506",
+      "workspace": {
+        "allocated_bytes": 43081984,
+        "transient_maximum_requested_bytes": 43081728,
+        "graph_nodes_marked": 8336,
+        "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+      }
+    }
+  ],
+  "profiles": {
+    "native": {
+      "load_us": 1445118,
+      "ttft_us": 82315079,
+      "client_to_first_piece_us": 82334583,
+      "service_request_us": 82339511,
+      "prefill_us": 82273814,
+      "native_load_plus_ttft_us": 83571582,
+      "completed_pss_kib": 5940960
+    },
+    "cpu_repack": {
+      "load_us": 1671409,
+      "ttft_us": 49978719,
+      "client_to_first_piece_us": 49995213,
+      "service_request_us": 49999364,
+      "prefill_us": 49935337,
+      "native_load_plus_ttft_us": 52073069,
+      "completed_pss_kib": 5979237
+    }
+  },
+  "paired_ratios": {
+    "prefill_speed_ratio": {
+      "values": [
+        1.6495325795851548,
+        1.585542706024626,
+        1.6411454477617724,
+        1.6689128426459425,
+        1.628336974210105
+      ],
+      "median": 1.6411454477617724,
+      "minimum": 1.585542706024626,
+      "maximum": 1.6689128426459425,
+      "bootstrap_median_ci95": [
+        1.585542706024626,
+        1.6689128426459425
+      ]
+    },
+    "ttft_speed_ratio": {
+      "values": [
+        1.6488069751749177,
+        1.5849396783821583,
+        1.6407911735392817,
+        1.6683322337253563,
+        1.6274738368779242
+      ],
+      "median": 1.6407911735392817,
+      "minimum": 1.5849396783821583,
+      "maximum": 1.6683322337253563,
+      "bootstrap_median_ci95": [
+        1.5849396783821583,
+        1.6683322337253563
+      ]
+    },
+    "client_first_piece_speed_ratio": {
+      "values": [
+        1.648430490418513,
+        1.5844363446141358,
+        1.640649735805706,
+        1.6680429630339524,
+        1.6271715823034667
+      ],
+      "median": 1.640649735805706,
+      "minimum": 1.5844363446141358,
+      "maximum": 1.6680429630339524,
+      "bootstrap_median_ci95": [
+        1.5844363446141358,
+        1.6680429630339524
+      ]
+    },
+    "native_load_plus_ttft_speed_ratio": {
+      "values": [
+        1.6319465623677865,
+        1.5723228005136602,
+        1.6060323467482711,
+        1.6235684514772886,
+        1.6063593216333263
+      ],
+      "median": 1.6063593216333263,
+      "minimum": 1.5723228005136602,
+      "maximum": 1.6319465623677865,
+      "bootstrap_median_ci95": [
+        1.5723228005136602,
+        1.6319465623677865
+      ]
+    }
+  },
+  "default_profile_promoted": false
+}

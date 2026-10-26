@@ -1,0 +1,58 @@
+--- a/src/llama-model.cpp
++++ b/src/llama-model.cpp
+@@ -1901,7 +1901,18 @@
+     // per-tensor activation precision policy
+     prec_policy.load(ml, *this);
+ 
+-    ml.init_mappings(true, use_mlock ? &pimpl->mlock_mmaps : nullptr);
++    // CPU_REPACK keeps committed weights. Faulting the complete source mmap
++    // first retains an unnecessary resident copy while packing on Android.
++    bool prefetch_sources = true;
++#if defined(__ANDROID__)
++    for (const auto & entry : ml.ctx_map) {
++        if (strcmp(ggml_backend_buft_name(entry.first.buft), "CPU_REPACK") == 0) {
++            prefetch_sources = false;
++            break;
++        }
++    }
++#endif
++    ml.init_mappings(prefetch_sources, use_mlock ? &pimpl->mlock_mmaps : nullptr);
+     pimpl->mappings.reserve(ml.mappings.size());
+ 
+     // create the backend buffers
+--- a/src/llama-model-loader.cpp
++++ b/src/llama-model-loader.cpp
+@@ -14,6 +14,10 @@
+ #include <future>
+ #include <regex>
+ #include <unordered_set>
++#if defined(__ANDROID__)
++#include <sys/mman.h>
++#include <unistd.h>
++#endif
+ 
+ static const size_t kiB = 1024;
+ static const size_t MiB = 1024*kiB;
+@@ -1740,6 +1744,22 @@
+                 mmap_used.second = std::max(mmap_used.second, weight->offs + n_size);
+             } else {
+                 ggml_backend_tensor_set(cur, data, 0, n_size);
++#if defined(__ANDROID__)
++                // CPU packing is synchronous. Drop only clean source PTEs,
++                // never the mapping or the packed weights. Tied/aliased tensors
++                // can refault the same original bytes later. Leave boundary
++                // pages intact and use the actual OS page size (4K or 16K).
++                if (strcmp(ggml_backend_buffer_name(cur->buffer), "CPU_REPACK") == 0) {
++                    const long page = sysconf(_SC_PAGESIZE);
++                    if (page > 0) {
++                        const size_t first = weight->offs + (page - weight->offs % page) % page;
++                        const size_t last = (weight->offs + n_size) / page * page;
++                        if (last > first && madvise((uint8_t *) mapping->addr() + first, last - first, MADV_DONTNEED) != 0) {
++                            throw std::runtime_error("CPU_REPACK source-page discard failed");
++                        }
++                    }
++                }
++#endif
+             }
+         } else {
+             const auto & file = files.at(weight->idx);

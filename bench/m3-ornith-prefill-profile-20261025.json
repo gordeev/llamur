@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "scope": "Diagnostic sampled CPU self time during a separate synthetic 2048-token prefill. Sampling overhead excluded from speed acceptance. Does not prove late8K behavior or useful work vs spin from CPU accounting alone.",
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "profile_report": "bench/results/prefill-profile-ornith-20261025T163211Z/report.json",
+  "profile_report_sha256": "3b304a35bece0b3ea677756a2360c990cee934e01a463e2edbc8b14f87d67348",
+  "samples": 71059,
+  "record_statistics": {
+    "sample_record_count": 71059,
+    "kernelspace_lost_records": 0,
+    "userspace_lost_samples": 0,
+    "userspace_lost_non_samples": 0,
+    "userspace_truncated_stack_samples": 0
+  },
+  "window_start_progress": {
+    "phase": "prefill",
+    "completed": 512,
+    "total": 2048,
+    "elapsed_us": 98503140,
+    "eval_us": 98452785,
+    "pid": 19725,
+    "run_id": "1b9974ac9baf49b49c38b34287d5a085",
+    "service_elapsed_us": 98516958,
+    "cpu_ms": 389564,
+    "output_file": "output-e2f3b890-ac5e-4ede-a4e3-21cde214fe0a.bin",
+    "process_status": "VmHWM:\t 4557164 kB\nVmRSS:\t 4552952 kB\nVmSwap:\t   18732 kB\nCpus_allowed_list:\t0-6",
+    "process_stat": "19725 (ntime:inference) S 1777 1777 0 0 -1 1077936448 190054 0 2417 0 38815 140 0 0 20 0 15 0 6806568 23559196672 1138238 18446744073709551615 402067554304 402067558848 549098646176 0 0 0 4612 1 1073775864 0 0 0 17 3 0 0 0 0 0 402067566592 402067566616 402260127744 549098649862 549098649961 549098649961 549098655710 0",
+    "process_io": "rchar: 11335564\nwchar: 187813\nsyscr: 2869\nsyscw: 2015\nread_bytes: 13041664\nwrite_bytes: 126976\ncancelled_write_bytes: 0",
+    "system_memory": "MemAvailable:    5951052 kB\nCached:          6171236 kB\nSwapFree:        5137168 kB\nDirty:             12792 kB"
+  },
+  "window_end_progress": {
+    "phase": "prefill",
+    "completed": 512,
+    "total": 2048,
+    "elapsed_us": 98503140,
+    "eval_us": 98452785,
+    "pid": 19725,
+    "run_id": "1b9974ac9baf49b49c38b34287d5a085",
+    "service_elapsed_us": 98516958,
+    "cpu_ms": 389564,
+    "output_file": "output-e2f3b890-ac5e-4ede-a4e3-21cde214fe0a.bin",
+    "process_status": "VmHWM:\t 4557164 kB\nVmRSS:\t 4552952 kB\nVmSwap:\t   18732 kB\nCpus_allowed_list:\t0-6",
+    "process_stat": "19725 (ntime:inference) S 1777 1777 0 0 -1 1077936448 190054 0 2417 0 38815 140 0 0 20 0 15 0 6806568 23559196672 1138238 18446744073709551615 402067554304 402067558848 549098646176 0 0 0 4612 1 1073775864 0 0 0 17 3 0 0 0 0 0 402067566592 402067566616 402260127744 549098649862 549098649961 549098649961 549098655710 0",
+    "process_io": "rchar: 11335564\nwchar: 187813\nsyscr: 2869\nsyscw: 2015\nread_bytes: 13041664\nwrite_bytes: 126976\ncancelled_write_bytes: 0",
+    "system_memory": "MemAvailable:    5951052 kB\nCached:          6171236 kB\nSwapFree:        5137168 kB\nDirty:             12792 kB"
+  },
+  "cpu_self_percent": {
+    "ggml_vec_dot_q4_K_q8_K": 71.36,
+    "ggml_vec_dot_q6_K_q8_K": 20.13,
+    "ggml_compute_forward_flash_attn_ext": 2.36,
+    "ggml_graph_compute_thread": 1.66,
+    "ggml_compute_forward_gated_delta_net": 1.24
+  },
+  "raw_self_time": "bench/results/prefill-profile-ornith-20261025T163211Z/cpu-self-time.txt",
+  "raw_thread_self_time": "bench/results/prefill-profile-ornith-20261025T163211Z/cpu-thread-self-time.txt",
+  "inference_completed": true,
+  "prefill_us_diagnostic_only": 410718909,
+  "decision": "Quantized matmul dominates this early/middle prefill window. Prioritize Q4_K/Q6_K kernel reuse/packing experiments. No measured app speed improvement from sampling, no late8K/tensor-level swap attribution."
+}

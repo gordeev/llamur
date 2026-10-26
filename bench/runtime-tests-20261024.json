@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "service": {
+    "passed": true,
+    "isolated_pid": 5701,
+    "recovered_pid": 6057,
+    "load_cancellation": "passed on Gemma",
+    "prefill_cancellation": "passed on Gemma; stop-to-ready 876ms",
+    "checks": "Messenger load\/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+  },
+  "cycles": 30,
+  "memory_samples": [
+    {
+      "cycle": 0,
+      "pss_kib": 36064,
+      "native_heap_bytes": 6841376
+    },
+    {
+      "cycle": 5,
+      "pss_kib": 37841,
+      "native_heap_bytes": 6833408
+    },
+    {
+      "cycle": 10,
+      "pss_kib": 36773,
+      "native_heap_bytes": 6827648
+    },
+    {
+      "cycle": 15,
+      "pss_kib": 36809,
+      "native_heap_bytes": 6827648
+    },
+    {
+      "cycle": 20,
+      "pss_kib": 36845,
+      "native_heap_bytes": 6827648
+    },
+    {
+      "cycle": 25,
+      "pss_kib": 36881,
+      "native_heap_bytes": 6827648
+    },
+    {
+      "cycle": 29,
+      "pss_kib": 36909,
+      "native_heap_bytes": 6827648
+    }
+  ],
+  "reference": ", there was a little girl named Lily. She loved to play",
+  "checks": "repeat load\/generate\/unload; double unload; queued\/decode cancellation; explicit overflow; invalid JSON type; recovery; callback exception; Unicode JNI"
+}

@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "scope": "Bounded Ornith CPU/I8MM prefill-only screen. Not decode, complete-M3, default/product, other-device, broad task, cold-storage or endurance acceptance. Measured frequency endpoints match, not a clock-residency proof.",
+  "apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "variant": "f32-recurrent-transient-threshold",
+  "minimum_rows": 24,
+  "default_profile_promoted": false,
+  "milestone_accepted": false,
+  "decode_timing_accepted": false,
+  "controller": "bench/results/transient-workspace-screen-20261025T200803Z/report.json",
+  "controller_sha256": "b290b654523108cec8d3cf05d46c28310300d3acd90ae82b8687ce3a314db324",
+  "speed_report": "bench/results/weight-buffers-ornith-pp512-prefill-speed-v1-20261025T201358Z/report.json",
+  "speed_report_sha256": "b42dcadddf4979da783f3edf033a32188f5047f42d9e6edda0521908a2221623",
+  "quality_lock": "bench/results/transient-workspace-screen-20261025T200803Z/ornith-quality-gate.json",
+  "quality_lock_sha256": "ec38ea017592cf9870cdecaa426bc46e630b0f1e5d9f9d471dc791fbeb9bc632",
+  "measured_pairs": 5,
+  "profiles": {
+    "native": {
+      "load_us": 1507161,
+      "ttft_us": 82630076,
+      "client_to_first_piece_us": 82646915,
+      "service_request_us": 82651878,
+      "prefill_us": 82579678,
+      "native_load_plus_ttft_us": 84215550,
+      "completed_pss_kib": 5843427
+    },
+    "cpu_repack": {
+      "load_us": 1595402,
+      "ttft_us": 49622294,
+      "client_to_first_piece_us": 49638886,
+      "service_request_us": 49641908,
+      "prefill_us": 49574804,
+      "native_load_plus_ttft_us": 51021679,
+      "completed_pss_kib": 5879124
+    }
+  },
+  "paired_ratios": {
+    "prefill_speed_ratio": {
+      "values": [
+        1.642061096197173,
+        1.6790721807031928,
+        1.674796100082372,
+        1.621229377380667,
+        1.6492153298064887
+      ],
+      "median": 1.6492153298064887,
+      "minimum": 1.621229377380667,
+      "maximum": 1.6790721807031928,
+      "bootstrap_median_ci95": [
+        1.621229377380667,
+        1.6790721807031928
+      ]
+    },
+    "ttft_speed_ratio": {
+      "values": [
+        1.6415142556690345,
+        1.6783989823098169,
+        1.674206371990318,
+        1.6204261542020717,
+        1.648530885345474
+      ],
+      "median": 1.648530885345474,
+      "minimum": 1.6204261542020717,
+      "maximum": 1.6783989823098169,
+      "bootstrap_median_ci95": [
+        1.6204261542020717,
+        1.6783989823098169
+      ]
+    },
+    "client_first_piece_speed_ratio": {
+      "values": [
+        1.6413335907659168,
+        1.6781437847061567,
+        1.6739409978773032,
+        1.6203035266957677,
+        1.6483063138137264
+      ],
+      "median": 1.6483063138137264,
+      "minimum": 1.6203035266957677,
+      "maximum": 1.6781437847061567,
+      "bootstrap_median_ci95": [
+        1.6203035266957677,
+        1.6781437847061567
+      ]
+    },
+    "native_load_plus_ttft_speed_ratio": {
+      "values": [
+        1.6252892226459266,
+        1.6553686505457506,
+        1.657492897517597,
+        1.6010478827531573,
+        1.6358917436266258
+      ],
+      "median": 1.6358917436266258,
+      "minimum": 1.6010478827531573,
+      "maximum": 1.657492897517597,
+      "bootstrap_median_ci95": [
+        1.6010478827531573,
+        1.657492897517597
+      ]
+    }
+  },
+  "scratch_reserve_bytes": 84934656,
+  "observed_max_model_scratch_bytes": 43081984
+}

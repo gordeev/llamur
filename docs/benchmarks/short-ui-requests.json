@@ -1,0 +1,112 @@
+{
+  "ornith": {
+    "passed": true,
+    "source_report_sha256": "b5a272d6fc15e0915ecc8f0f178298eada82b8ffd02a96d0498afacb4fd1b0e0",
+    "apk_sha256": "d281a711f30249cbd0282393a313cbb222fd366ab03f4597b389553fa4e23980",
+    "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+    "rows": [
+      {
+        "kind": "baseline",
+        "wall_us": 35800725,
+        "result": {
+          "prompt_tokens": 30,
+          "generated_tokens": 128,
+          "prefill_us": 4900991,
+          "decode_us": 30573877,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "product",
+        "wall_us": 35187395,
+        "result": {
+          "prompt_tokens": 30,
+          "generated_tokens": 128,
+          "prefill_us": 4795172,
+          "decode_us": 30129220,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "product",
+        "wall_us": 35823301,
+        "result": {
+          "prompt_tokens": 30,
+          "generated_tokens": 128,
+          "prefill_us": 4785664,
+          "decode_us": 30789914,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "baseline",
+        "wall_us": 34157435,
+        "result": {
+          "prompt_tokens": 30,
+          "generated_tokens": 128,
+          "prefill_us": 4712759,
+          "decode_us": 29197225,
+          "finish_reason": "length"
+        }
+      }
+    ],
+    "raw_output_identical": true,
+    "scope": "Two B/P/P/B pairs on one loaded CPU4/4K engine with original GGUF, short public prompt,128-token reserve, thinkingON/cacheOFF/transientOFF. Actual UI sends; raw output equality required. An overhead observation, not5-pair speed acceptance, long-history UI, general model quality or discharge energy certification.",
+    "speed_promoted": false
+  },
+  "gemma": {
+    "passed": true,
+    "source_report_sha256": "29bea203dd7bcd15106bc27c64cbff96033272838b70e34825957d7695cc1433",
+    "apk_sha256": "d281a711f30249cbd0282393a313cbb222fd366ab03f4597b389553fa4e23980",
+    "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+    "rows": [
+      {
+        "kind": "baseline",
+        "wall_us": 21975844,
+        "result": {
+          "prompt_tokens": 31,
+          "generated_tokens": 128,
+          "prefill_us": 3008910,
+          "decode_us": 18793658,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "product",
+        "wall_us": 22772181,
+        "result": {
+          "prompt_tokens": 31,
+          "generated_tokens": 128,
+          "prefill_us": 2941558,
+          "decode_us": 19682127,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "product",
+        "wall_us": 22786526,
+        "result": {
+          "prompt_tokens": 31,
+          "generated_tokens": 128,
+          "prefill_us": 2978278,
+          "decode_us": 19629813,
+          "finish_reason": "length"
+        }
+      },
+      {
+        "kind": "baseline",
+        "wall_us": 22648606,
+        "result": {
+          "prompt_tokens": 31,
+          "generated_tokens": 128,
+          "prefill_us": 3134736,
+          "decode_us": 19331352,
+          "finish_reason": "length"
+        }
+      }
+    ],
+    "raw_output_identical": true,
+    "scope": "Two B/P/P/B pairs on one loaded CPU4/4K engine with original GGUF, short public prompt,128-token reserve, thinkingON/cacheOFF/transientOFF. Actual UI sends; raw output equality required. An overhead observation, not5-pair speed acceptance, long-history UI, general model quality or discharge energy certification.",
+    "speed_promoted": false
+  }
+}

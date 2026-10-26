@@ -1,0 +1,319 @@
+{
+  "passed": true,
+  "scope": "Same-APK bounded weight/loading screening; not whole-model/sustained acceptance",
+  "apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "config": {
+    "context": 8192,
+    "threads": 4,
+    "batch": 512,
+    "micro_batch": 128,
+    "load_mode": "mmap"
+  },
+  "fixture": "pp512-prefill-speed-v1",
+  "frequency_gate_scope": "All measured performance pairs require equal relevant boundary caps; warmup snapshots are diagnostic and excluded from statistics",
+  "prefill_speed_ratio": {
+    "values": [
+      1.642061096197173,
+      1.6790721807031928,
+      1.674796100082372,
+      1.621229377380667,
+      1.6492153298064887
+    ],
+    "median": 1.6492153298064887,
+    "minimum": 1.621229377380667,
+    "maximum": 1.6790721807031928,
+    "bootstrap_median_ci95": [
+      1.621229377380667,
+      1.6790721807031928
+    ]
+  },
+  "profiles": {
+    "native": {
+      "load_us": 1507161,
+      "ttft_us": 82630076,
+      "client_to_first_piece_us": 82646915,
+      "service_request_us": 82651878,
+      "prefill_us": 82579678,
+      "native_load_plus_ttft_us": 84215550,
+      "completed_pss_kib": 5843427
+    },
+    "cpu_repack": {
+      "load_us": 1595402,
+      "ttft_us": 49622294,
+      "client_to_first_piece_us": 49638886,
+      "service_request_us": 49641908,
+      "prefill_us": 49574804,
+      "native_load_plus_ttft_us": 51021679,
+      "completed_pss_kib": 5879124
+    }
+  },
+  "source_report_sha256": "b42dcadddf4979da783f3edf033a32188f5047f42d9e6edda0521908a2221623",
+  "device": "Motorola Edge 40 Pro / Snapdragon 8 Gen 2 / 12 GB / Android 16",
+  "pairs": [
+    {
+      "warmup": true,
+      "order": [
+        "native",
+        "cpu_repack"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.5834390251974844,
+      "trials": {
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 82289236,
+          "decode_us": 15016,
+          "load_us": 2060083,
+          "ttft_us": 82342682,
+          "client_to_first_piece_us": 82360252,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 51968680,
+          "decode_us": 22391,
+          "load_us": 3137789,
+          "ttft_us": 52026428,
+          "client_to_first_piece_us": 52044142,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    },
+    {
+      "warmup": false,
+      "order": [
+        "cpu_repack",
+        "native"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.642061096197173,
+      "trials": {
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 49574804,
+          "decode_us": 9812,
+          "load_us": 1399385,
+          "ttft_us": 49622294,
+          "client_to_first_piece_us": 49638886,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 81404857,
+          "decode_us": 14417,
+          "load_us": 1469282,
+          "ttft_us": 81455703,
+          "client_to_first_piece_us": 81473971,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    },
+    {
+      "warmup": false,
+      "order": [
+        "native",
+        "cpu_repack"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.6790721807031928,
+      "trials": {
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 82579678,
+          "decode_us": 14786,
+          "load_us": 1507161,
+          "ttft_us": 82630076,
+          "client_to_first_piece_us": 82646915,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 49181732,
+          "decode_us": 12424,
+          "load_us": 1595402,
+          "ttft_us": 49231486,
+          "client_to_first_piece_us": 49249007,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    },
+    {
+      "warmup": false,
+      "order": [
+        "cpu_repack",
+        "native"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.674796100082372,
+      "trials": {
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 49366376,
+          "decode_us": 13988,
+          "load_us": 1397339,
+          "ttft_us": 49411657,
+          "client_to_first_piece_us": 49429103,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 82678614,
+          "decode_us": 15455,
+          "load_us": 1490239,
+          "ttft_us": 82725311,
+          "client_to_first_piece_us": 82741402,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    },
+    {
+      "warmup": false,
+      "order": [
+        "native",
+        "cpu_repack"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.621229377380667,
+      "trials": {
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 82485881,
+          "decode_us": 10849,
+          "load_us": 1763838,
+          "ttft_us": 82531903,
+          "client_to_first_piece_us": 82549526,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 50878600,
+          "decode_us": 14661,
+          "load_us": 1718135,
+          "ttft_us": 50932221,
+          "client_to_first_piece_us": 50946952,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    },
+    {
+      "warmup": false,
+      "order": [
+        "cpu_repack",
+        "native"
+      ],
+      "passed": true,
+      "frequency_caps_comparable": true,
+      "prefill_speed_ratio": 1.6492153298064887,
+      "trials": {
+        "cpu_repack": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 50643379,
+          "decode_us": 14079,
+          "load_us": 1731820,
+          "ttft_us": 50692844,
+          "client_to_first_piece_us": 50710191,
+          "cpu_workspace": {
+            "allocated_bytes": 43081984,
+            "transient_maximum_requested_bytes": 43081728,
+            "graph_nodes_marked": 1476,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        },
+        "native": {
+          "prompt_tokens": 512,
+          "generated_tokens": 1,
+          "finish_reason": "length",
+          "prefill_us": 83521837,
+          "decode_us": 9617,
+          "load_us": 2192356,
+          "ttft_us": 83568719,
+          "client_to_first_piece_us": 83585928,
+          "cpu_workspace": {
+            "allocated_bytes": 1794304,
+            "transient_maximum_requested_bytes": 0,
+            "graph_nodes_marked": 0,
+            "scope": "Marked graph nodes include reservation/rebuilds, not executed-node count; allocated bytes include native CPU scratch"
+          }
+        }
+      }
+    }
+  ]
+}

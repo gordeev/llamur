@@ -1,0 +1,137 @@
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -416,6 +416,7 @@
+         bool offload_kqv; // offload the KQV ops (including the KV cache) to GPU
+         bool no_perf;     // measure performance timings
+         bool op_offload;  // offload host tensor operations to device
++        bool cpu_transient_repack; // Explicit CPU/I8MM bounded prefill experiment; default false
+         bool swa_full;    // use full-size SWA cache (https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+                           // NOTE: setting to false when n_seq_max > 1 can cause bad performance in some cases
+                           //       ref: https://github.com/ggml-org/llama.cpp/pull/13845#issuecomment-2924800573
+@@ -487,6 +488,13 @@
+     // Helpers for getting default parameters
+     // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+     LLAMA_API struct llama_model_params          llama_model_default_params(void);
++    #define LLAMA_MOTOAI_TRANSIENT_REPACK 1
++    struct llama_motoai_transient_stats {
++        uint64_t graph_nodes_marked; // includes reservation/rebuilt graphs, not executed-node count
++        uint64_t maximum_requested_bytes;
++        uint64_t allocated_cpu_workspace_bytes;
++    };
++    LLAMA_API struct llama_motoai_transient_stats llama_motoai_get_transient_stats(const struct llama_context * ctx);
+     LLAMA_API struct llama_context_params        llama_context_default_params(void);
+     LLAMA_API struct llama_sampler_chain_params  llama_sampler_chain_default_params(void);
+     LLAMA_API struct llama_model_quantize_params llama_model_quantize_default_params(void);
+--- a/src/llama-cparams.h
++++ b/src/llama-cparams.h
+@@ -53,6 +53,7 @@
+     bool no_perf;
+     bool warmup;             // TODO: remove [TAG_LLAMA_GRAPH_NO_WARMUP]
+     bool op_offload;
++    bool cpu_transient_repack;
+     bool kv_unified;
+     bool pipeline_parallel;
+     bool training;           // set by llama_opt_init()
+--- a/src/llama-context.h
++++ b/src/llama-context.h
+@@ -62,6 +62,7 @@
+ 
+     const llama_model   & get_model()   const;
+     const llama_cparams & get_cparams() const;
++    llama_motoai_transient_stats get_transient_stats() const;
+ 
+     ggml_backend_sched_t get_sched() const;
+ 
+@@ -257,6 +258,10 @@
+     ggml_status graph_compute(ggml_cgraph * gf, bool batched);
+ 
+     // reserve a graph with a dummy ubatch of the specified size
++    ggml_cgraph * build_graph_with_cpu_workspace(const llm_graph_params & params);
++    uint64_t transient_graph_nodes_marked = 0;
++    uint64_t transient_maximum_requested_bytes = 0;
++
+     ggml_cgraph * graph_reserve(
+         uint32_t n_tokens, uint32_t n_seqs, uint32_t n_outputs, const llama_memory_context_i * mctx, bool split_only = false, size_t * sizes = nullptr);
+ 
+--- a/src/llama-context.cpp
++++ b/src/llama-context.cpp
+@@ -367,6 +367,7 @@
+     }
+ 
+     cparams.op_offload     = params.op_offload;
++    cparams.cpu_transient_repack = params.cpu_transient_repack;
+     cparams.kv_unified     = params.kv_unified;
+     cparams.moe_cache_size = params.moe_cache_size;
+ 
+@@ -687,6 +688,36 @@
+         resolve(llm_fused_op_top_k_mask_probe, cparams.fused_top_k_mask);
+         cparams.auto_ftkm = false;
+     }
++}
++
++ggml_cgraph * llama_context::build_graph_with_cpu_workspace(const llm_graph_params & params) {
++    auto * gf = model.build_graph(params);
++    if (!gf || !cparams.cpu_transient_repack) return gf;
++    auto reg = ggml_backend_dev_backend_reg(ggml_backend_get_device(backend_cpu));
++    using mark_fn = bool (*)(ggml_tensor *);
++    using size_fn = size_t (*)(const ggml_tensor *);
++    auto mark = (mark_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_mark_transient_repack");
++    auto size = (size_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_transient_repack_size");
++    if (!mark || !size) throw std::runtime_error("Explicit transient repack API unavailable");
++    for (int i = 0; i < ggml_graph_n_nodes(gf); ++i) {
++        auto * node = ggml_graph_node(gf, i);
++        if (mark(node)) {
++            ++transient_graph_nodes_marked;
++            transient_maximum_requested_bytes = std::max<uint64_t>(transient_maximum_requested_bytes, size(node));
++        }
++    }
++    return gf;
++}
++
++llama_motoai_transient_stats llama_context::get_transient_stats() const {
++    using size_fn = size_t (*)(ggml_backend_t);
++    auto reg = ggml_backend_dev_backend_reg(ggml_backend_get_device(backend_cpu));
++    auto size = (size_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_workspace_size");
++    return {transient_graph_nodes_marked, transient_maximum_requested_bytes, size ? size(backend_cpu) : 0};
++}
++
++llama_motoai_transient_stats llama_motoai_get_transient_stats(const llama_context * ctx) {
++    return ctx->get_transient_stats();
+ }
+ 
+ static int llama_graph_n_input_tensors(ggml_cgraph * gf) {
+@@ -1554,7 +1585,7 @@
+ 
+         //const auto t_start_us = ggml_time_us();
+ 
+-        gf = model.build_graph(gparams);
++        gf = build_graph_with_cpu_workspace(gparams);
+ 
+         //LLAMA_LOG_INFO("graph build time: %.3f ms\n", (ggml_time_us() - t_start_us)/1000.0);
+ 
+@@ -2671,7 +2702,7 @@
+ 
+     res->reset();
+ 
+-    auto * gf = model.build_graph(gparams);
++    auto * gf = build_graph_with_cpu_workspace(gparams);
+ 
+     // check the graph before scheduling: cross-backend copies break the producer chain that the check follows
+     if (!hadamard_verified && gf && (!model.hdmd.rot.empty() || !model.hdmd.inv.empty())) {
+@@ -3897,7 +3928,7 @@
+             gf_res_prev_active = nullptr;
+             res->reset();
+ 
+-            auto * gf = model.build_graph(gparams);
++            auto * gf = build_graph_with_cpu_workspace(gparams);
+ 
+             struct ggml_context * ctx_compute_opt;
+             {
+@@ -4024,6 +4055,7 @@
+         /*.offload_kqv                 =*/ true,
+         /*.no_perf                     =*/ true,
+         /*.op_offload                  =*/ true,
++        /*.cpu_transient_repack         =*/ false,
+         /*.swa_full                    =*/ true,
+         /*.kv_unified                  =*/ false,
+         /*.sampler                     =*/ nullptr,

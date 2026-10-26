@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "upstream_tree": "94dbc3fd5dc9169afb0065839fd4b75793ff5c3a",
+  "patched_tree": "990a04b18b67779b631bde36c6597c9bad877481",
+  "scope": "Exact full file/mode Git-tree equivalence between prepared Git checkout and metadata-free source export; no Linux APK build acceptance",
+  "invalidated_export": "build/linux-source-20261026-invalidated.json",
+  "verified_export": "build/linux-source-20261026-v2"
+}

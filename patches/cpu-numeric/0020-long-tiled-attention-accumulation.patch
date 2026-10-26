@@ -1,0 +1,74 @@
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -9292,6 +9292,9 @@
+     static constexpr int Q_TILE_SZ  = ggml_fa_tile_config::Q;
+     static constexpr int KV_TILE_SZ = ggml_fa_tile_config::KV;
+ 
++    const bool wide_acc = ggml_prec_get_acc(dst) == GGML_PREC_F32 && nek1 > 8192;
++    std::vector<double> VKQ64(wide_acc ? Q_TILE_SZ * DV : 0);
++    double S64[Q_TILE_SZ] = {};
+     int ir = ir0;
+     while (ir < ir1) {
+         // q indices for the start of this tile
+@@ -9311,6 +9314,10 @@
+ 
+         float S[Q_TILE_SZ];
+         float M[Q_TILE_SZ];
++        if (wide_acc) {
++            std::fill(VKQ64.begin(), VKQ64.end(), 0.0);
++            std::fill(S64, S64 + Q_TILE_SZ, 0.0);
++        }
+ 
+         for (int i = 0 ; i < Q_TILE_SZ; ++i) {
+             S[i] = 0.;
+@@ -9439,13 +9446,20 @@
+ 
+                 if (Mnew > Mold) {
+                     const float ms = motoai_expf(Mold - Mnew);
+-                    ggml_vec_scale_f32(DV, VKQ32 + tq * DV, ms);
+-                    S[tq] *= ms;
++                    if (wide_acc) {
++                        for (int64_t d = 0; d < DV; ++d) VKQ64[tq * DV + d] *= ms;
++                        S64[tq] *= ms;
++                    } else {
++                        ggml_vec_scale_f32(DV, VKQ32 + tq * DV, ms);
++                        S[tq] *= ms;
++                    }
+                 }
+                 M[tq] = Mnew;
+ 
+ 
+-                S[tq] += ggml_vec_soft_max_f32(KV_TILE_SZ, kq_row, kq_row, Mnew);
++                const auto tile_sum = ggml_vec_soft_max_f32(KV_TILE_SZ, kq_row, kq_row, Mnew);
++                if (wide_acc) S64[tq] += tile_sum;
++                else S[tq] += tile_sum;
+             }
+ 
+             // V accumulation: VKQ32 += softmax(KQ) * V
+@@ -9463,7 +9477,15 @@
+                     memset(KQ + tq * KV_TILE_SZ, 0, KV_TILE_SZ * sizeof(float));
+                 }
+             }
++            // Retain SIMD F32 products within each small tile, then combine
++            // tile results in F64 for long contexts instead of one long F32 sum.
++            if (wide_acc) memset(VKQ32, 0, Q_TILE_SZ * DV * sizeof(float));
+             simd_gemm(VKQ32, KQ, V32, Q_TILE_SZ, KV_TILE_SZ, DV);
++            if (wide_acc) for (int64_t i = 0; i < Q_TILE_SZ * DV; ++i) VKQ64[i] += VKQ32[i];
++        }
++        if (wide_acc) {
++            for (int tq = 0; tq < tile_rows; ++tq) S[tq] = static_cast<float>(S64[tq]);
++            for (int64_t i = 0; i < Q_TILE_SZ * DV; ++i) VKQ32[i] = static_cast<float>(VKQ64[i]);
+         }
+ 
+         // sinks (apply only to valid rows in the tile)
+--- a/ggml/include/ggml-cpu.h
++++ b/ggml/include/ggml-cpu.h
+@@ -5,6 +5,8 @@
+ 
+ // Experimental: retain the accepted4-worker F32 attention reduction grouping.
+ #define GGML_MOTOAI_F32_KV_CHUNKS 4
++// Local F64 accumulation only for long F32 attention; tensor storage unchanged.
++#define GGML_MOTOAI_LONG_F32_ACC 1
+ 
+ #ifdef  __cplusplus
+ extern "C" {

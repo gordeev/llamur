@@ -1,0 +1,24 @@
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -489,6 +489,7 @@
+     // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+     LLAMA_API struct llama_model_params          llama_model_default_params(void);
+     #define LLAMA_MOTOAI_TRANSIENT_REPACK 1
++    #define LLAMA_MOTOAI_TRANSIENT_MIN_ROWS 24
+     struct llama_motoai_transient_stats {
+         uint64_t graph_nodes_marked; // includes reservation/rebuilt graphs, not executed-node count
+         uint64_t maximum_requested_bytes;
+--- a/src/llama-context.cpp
++++ b/src/llama-context.cpp
+@@ -701,6 +701,11 @@
+     if (!mark || !size) throw std::runtime_error("Explicit transient repack API unavailable");
+     for (int i = 0; i < ggml_graph_n_nodes(gf); ++i) {
+         auto * node = ggml_graph_node(gf, i);
++        // Large matrices at4/8 rows lose more to packing than they gain from
++        // GEMM. The pinned phone curve has a stable margin at24 rows for both
++        // Q4_K and Q6_K. Keep short requests on their original native path.
++        if (node->op == GGML_OP_MUL_MAT && node->src[1] &&
++            node->src[1]->ne[1] < LLAMA_MOTOAI_TRANSIENT_MIN_ROWS) continue;
+         if (mark(node)) {
+             ++transient_graph_nodes_marked;
+             transient_maximum_requested_bytes = std::max<uint64_t>(transient_maximum_requested_bytes, size(node));

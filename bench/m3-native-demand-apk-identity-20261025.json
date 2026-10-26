@@ -1,0 +1,151 @@
+{
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "scope": "Static ELF alignment and strip-normalized identity against current CMake libraries; actual16KiB execution untested",
+  "native_libraries": "app/build/intermediates/cxx/Release/84e6626c/obj/arm64-v8a",
+  "libraries": [
+    {
+      "name": "libggml-base.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "98f87b4f863b74869d539750fc8a01a5b89e3b20ace7082b2889f3f2c7d3838a",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "27d2f0aeef20954a7d1468184a87063781f07226a02f72c7b36c782ed9badb83",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "3bdc6304371d7290bdfb4fafcb1a2f195fc9179074f1e3ac2f3211744dbcb120",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "93cb8fa204aece029558953e9cefccbdbfbad74bbb36b109c9f3e88cca356109",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.6_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "22875a008dfa72c0e47b3e8ab66c0d8078bf8ae5b5e2e69fd5547ea372616707",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "9b57743d105d04fa4b137cc0b72500cbdac3c025e35957c409e4d52fcf1da954",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "68c7846906664c6cb71c7a4e268a9c31e408acf61595ce9c4cd0d834f0655702",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "99c87c0a5187abc86b8a6b13bffbc2adf1b974b19204200e7032a0c99a5c5694",
+      "passed": true
+    },
+    {
+      "name": "libggml.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "8ff27a118a056ea7ee71a5a00d78e2deca190a6b3a8b8ee0c1065f66eb269abf",
+      "passed": true
+    },
+    {
+      "name": "libllama-common.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "302251e63221a57f0e45e7da333715be297ea55107da941f6549340bf7c8bdc9",
+      "passed": true
+    },
+    {
+      "name": "libllama.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "0a51bca859549a90e270c5c45372094a882cc165587df525203443115f8bd285",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-probe.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "7256f5e86494413b3594c050f53fc8b50413085f3932513bdbea40c15aef309e",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-runtime.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "66a6aca0902bbc99a209503ade1b9c7e02f96f6e8bdca7733ec3d37e348df6bb",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

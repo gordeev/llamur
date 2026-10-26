@@ -1,0 +1,9 @@
+{
+  "scope": "Coarse process-CPU progress sample within prefill, not a hardware-utilization counter or isolated whole-request fraction.",
+  "artifact": "bench/results/app-service-gemma-20261024T190703Z-8485f0aa",
+  "from_prompt_tokens": 0,
+  "to_prompt_tokens": 7680,
+  "elapsed_seconds": 826.153372,
+  "cpu_seconds": 3273.341,
+  "process_cpu_seconds_per_wall_second": 3.9621468736194907
+}

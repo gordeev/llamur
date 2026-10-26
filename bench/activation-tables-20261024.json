@@ -1,0 +1,34 @@
+{
+  "scope": "Actual65536-entry CPU table comparison, not reimplemented formula or whole-model quality. Nonfinite inputs separated.",
+  "host_fpcr": 0,
+  "phone_fpcr": 0,
+  "tables": {
+    "gelu_f16": {
+      "host_sha256": "b0bed191c607ce58dd4ed9d83abc8e9a9be9465c9c8e4b76583792f15e210540",
+      "phone_sha256": "a34714cfa1b16e08925da9601b0a9ec1afb70d0b8adfb2ae889dc244e9449fc7",
+      "finite_input_differences": 1,
+      "nonfinite_input_differences": 0,
+      "active_window_differences": 1,
+      "differences": [
+        {
+          "input_bits": 50472,
+          "input": -5.15625,
+          "host_bits": 32771,
+          "phone_bits": 32768,
+          "host": -1.7881393432617188e-07,
+          "phone": -0.0,
+          "in_f32_lookup_window": true
+        }
+      ]
+    },
+    "gelu_quick_f16": {
+      "host_sha256": "b83e7abae9775dae1a2024621da3f59baa6c2d925063a559837b27e91a614f6c",
+      "phone_sha256": "b83e7abae9775dae1a2024621da3f59baa6c2d925063a559837b27e91a614f6c",
+      "finite_input_differences": 0,
+      "nonfinite_input_differences": 0,
+      "active_window_differences": 0,
+      "differences": []
+    }
+  },
+  "artifact": "bench/results/activation-tables-20261024"
+}

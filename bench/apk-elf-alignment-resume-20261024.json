@@ -1,0 +1,254 @@
+{
+  "apk_sha256": "008b0c1f616fa1ce3771c36d990579ab1b4ec0729e2911eb361b7ea77952fed8",
+  "scope": "Static ELF64 load-segment alignment and offset/address congruence only. No claim of actual16K device launch.",
+  "libraries": [
+    {
+      "library": "lib/arm64-v8a/libggml-base.so",
+      "sha256": "a3ff28ac91fefd398ecda3e79f863937369b84b22bca209f73db211f4224307d",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+      "sha256": "19c25d9fd93baf3ebe6b3cfb045b6a0a96dc950eaf6ce9386d13cb92d761635d",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+      "sha256": "6b4b38547cf743c3fecbd8b28660b65e38ff42d53a8b9cf5aca713784a0dd07b",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+      "sha256": "18dd1e9b5681e3205ec0118e5283ba98190ba08ba1ab5b64dbb80e76deec239c",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+      "sha256": "c621056c5c4aba01c631334f2ae3715535d01dd00a1d0c01d3d7c7aa8bf28013",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+      "sha256": "e9c3ca832c1747d86df453cd5114ad6bd0adf5813e8d7f41bbce4c04fde4ac20",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+      "sha256": "6095b6e545e7b8adb492cb8f5bc9a864e3b0e9777e98813cbec6be7701ba6be6",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+      "sha256": "7b8519c79c6ed47362f2a89918e9041ea2e2863e813f10bdb21ce83230e544cd",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libggml.so",
+      "sha256": "d7f8d811a0e67d49d38965f31ae1fe851ad7f28d0374918e8b0806d84ee0aa14",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libllama-common.so",
+      "sha256": "20900e0bce5c61090df139c5a2f4f17642fc23c48401e313eb1bee5311fb035b",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libllama.so",
+      "sha256": "bf88134b394bed930c7811dc7656f1726e229c85ce15ed825a9ca0c41242dbe1",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libmotoai-probe.so",
+      "sha256": "0a4eb4053ab1ea10d8935849f07510e43d9e76bdebf40bd875c09066ee7343ab",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "library": "lib/arm64-v8a/libmotoai-runtime.so",
+      "sha256": "60f02bb5697752e3e60587f4f592b631194c0b6161a474ef5bf42a8f8e6555fd",
+      "loads": [
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        },
+        {
+          "alignment": 16384,
+          "congruent_16k": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "static_passed": true
+}

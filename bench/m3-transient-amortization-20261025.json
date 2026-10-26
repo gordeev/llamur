@@ -1,0 +1,444 @@
+{
+  "passed": true,
+  "scope": "Two bounded synthetic phone kernel curves, not app speed, universal hardware tuning or product acceptance. Separate runs; all points/outliers retained.",
+  "sources": {
+    "bench/results/prefill-pack-20261025T192041Z/report.json": "e675bc6669508e01752a383201bed9e4968d6eaa243005df37fe078f25ac6096",
+    "bench/results/prefill-pack-20261025T192805Z/report.json": "4852f5dff200e4a25ba23f4fcf4f301c1e1ec5b97472498fbd8dcec534f4bc56"
+  },
+  "rows": [
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 4,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.3996219657779546,
+        0.514634659928406,
+        0.4247948951686418,
+        0.46868894601542416,
+        0.40095909179878647
+      ],
+      "median": 0.4247948951686418,
+      "minimum": 0.3996219657779546,
+      "maximum": 0.514634659928406,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 8,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.6549737769753246,
+        0.6786545924967659,
+        0.6601150115869883,
+        0.7031758599454562,
+        0.621677568932682
+      ],
+      "median": 0.6601150115869883,
+      "minimum": 0.621677568932682,
+      "maximum": 0.7031758599454562,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 16,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.9650109134201997,
+        1.3911099064913945,
+        0.9943468192344367,
+        1.1100521119034559,
+        0.9698499226058281
+      ],
+      "median": 0.9943468192344367,
+      "minimum": 0.9650109134201997,
+      "maximum": 1.3911099064913945,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 17,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.2356836774444877,
+        1.2179639223519132,
+        0.84231125326151,
+        1.2232732351447435,
+        1.21183500385505
+      ],
+      "median": 1.2179639223519132,
+      "minimum": 0.84231125326151,
+      "maximum": 1.2356836774444877,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 18,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.1947402180885183,
+        1.1886505014599467,
+        1.105172311171954,
+        1.1794065878803117,
+        1.1157686948444032
+      ],
+      "median": 1.1794065878803117,
+      "minimum": 1.105172311171954,
+      "maximum": 1.1947402180885183,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 20,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.088595544837215,
+        1.0623976714571584,
+        0.6038316072249125,
+        1.0985122897800776,
+        0.9545328681397796
+      ],
+      "median": 1.0623976714571584,
+      "minimum": 0.6038316072249125,
+      "maximum": 1.0985122897800776,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 24,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.2059765208110993,
+        1.144566189624329,
+        1.2001816736686726,
+        1.252988047808765,
+        1.1827750639683647
+      ],
+      "median": 1.2001816736686726,
+      "minimum": 1.144566189624329,
+      "maximum": 1.252988047808765,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 25,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.5342697171541655,
+        1.3957578053135653,
+        1.449059829059829,
+        1.4332013164500474,
+        1.4101870757684454
+      ],
+      "median": 1.4332013164500474,
+      "minimum": 1.3957578053135653,
+      "maximum": 1.5342697171541655,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 32,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.3783390451152528,
+        1.3713964470429503,
+        1.34724166900028,
+        1.3660342000468493,
+        0.9496593737717804
+      ],
+      "median": 1.3660342000468493,
+      "minimum": 0.9496593737717804,
+      "maximum": 1.3783390451152528,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 33,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.8794741344378911,
+        1.587473849372385,
+        1.6236025964659213,
+        1.6375180115273775,
+        1.8934671997092496
+      ],
+      "median": 1.6375180115273775,
+      "minimum": 1.587473849372385,
+      "maximum": 1.8934671997092496,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 48,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.5382545174932718,
+        1.5631412334566537,
+        1.7419230472665588,
+        1.541624990382396,
+        1.548048742865957
+      ],
+      "median": 1.548048742865957,
+      "minimum": 1.5382545174932718,
+      "maximum": 1.7419230472665588,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "n": 64,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.3094653792344213,
+        1.6109598270683023,
+        1.6451640759930914,
+        1.4475063651340423,
+        1.6634500451881868
+      ],
+      "median": 1.6109598270683023,
+      "minimum": 1.3094653792344213,
+      "maximum": 1.6634500451881868,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 4,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.4035316254161239,
+        0.41648714634496625,
+        0.41518859045826395,
+        0.4164561530133526,
+        0.37392337392337394
+      ],
+      "median": 0.41518859045826395,
+      "minimum": 0.37392337392337394,
+      "maximum": 0.41648714634496625,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 8,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.6265523358959195,
+        0.6607752315943443,
+        0.6371300448430494,
+        0.6712172239595863,
+        0.5978009585565266
+      ],
+      "median": 0.6371300448430494,
+      "minimum": 0.5978009585565266,
+      "maximum": 0.6712172239595863,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 16,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        0.9402158997346994,
+        0.9198542805100182,
+        1.200497512437811,
+        0.9461954791467685,
+        0.9336327345309381
+      ],
+      "median": 0.9402158997346994,
+      "minimum": 0.9198542805100182,
+      "maximum": 1.200497512437811,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 17,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.490693670055756,
+        1.5028460650057747,
+        1.0027989550567789,
+        1.4844556427032958,
+        1.4890815273477813
+      ],
+      "median": 1.4890815273477813,
+      "minimum": 1.0027989550567789,
+      "maximum": 1.5028460650057747,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 18,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.4527477017364658,
+        1.7372603637555302,
+        1.48318422796554,
+        1.4679986871256256,
+        1.4641619927416694
+      ],
+      "median": 1.4679986871256256,
+      "minimum": 1.4527477017364658,
+      "maximum": 1.7372603637555302,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 20,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.0232548216419184,
+        1.0327271167538818,
+        1.0381544304890156,
+        1.0331960775990152,
+        1.0318405828155133
+      ],
+      "median": 1.0327271167538818,
+      "minimum": 1.0232548216419184,
+      "maximum": 1.0381544304890156,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 24,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.0966057441253263,
+        1.1152749013324996,
+        1.4458472014996748,
+        1.1245172615564658,
+        1.0738168918408937
+      ],
+      "median": 1.1152749013324996,
+      "minimum": 1.0738168918408937,
+      "maximum": 1.4458472014996748,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 25,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.9579148216150053,
+        1.7794711053465917,
+        1.7648521093778147,
+        1.253604577240941,
+        1.7761204784551088
+      ],
+      "median": 1.7761204784551088,
+      "minimum": 1.253604577240941,
+      "maximum": 1.9579148216150053,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 32,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.2244305426681432,
+        1.2372229623349884,
+        1.2230817666636682,
+        1.2229557389347336,
+        1.2422517582548576
+      ],
+      "median": 1.2244305426681432,
+      "minimum": 1.2229557389347336,
+      "maximum": 1.2422517582548576,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 33,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.9781567838626513,
+        2.1697252935141913,
+        1.995554171150252,
+        1.5432423472206873,
+        2.013189347281982
+      ],
+      "median": 1.995554171150252,
+      "minimum": 1.5432423472206873,
+      "maximum": 2.1697252935141913,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 48,
+      "source": "bench/results/prefill-pack-20261025T192805Z/report.json",
+      "paired_ratios": [
+        1.3764396503445422,
+        1.3559019829891814,
+        1.3800449526043193,
+        1.5382896015549077,
+        1.3775237168572123
+      ],
+      "median": 1.3775237168572123,
+      "minimum": 1.3559019829891814,
+      "maximum": 1.5382896015549077,
+      "all_bits_equal": true
+    },
+    {
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "n": 64,
+      "source": "bench/results/prefill-pack-20261025T192041Z/report.json",
+      "paired_ratios": [
+        1.4449279213445825,
+        1.4785496057518157,
+        1.5761666303795632,
+        1.4553156502466575,
+        1.1776641589365275
+      ],
+      "median": 1.4553156502466575,
+      "minimum": 1.1776641589365275,
+      "maximum": 1.5761666303795632,
+      "all_bits_equal": true
+    }
+  ],
+  "chosen_model_minimum_rows": 24,
+  "selection_basis": "At24 both types have all five native/workspace ratios >1.05.4/8 lose heavily;16 is marginal. Q4 N20 outlier0.604 is retained. Threshold is separately validated in the app."
+}

@@ -1,0 +1,67 @@
+--- a/ggml/src/ggml-opencl/CMakeLists.txt
++++ b/ggml/src/ggml-opencl/CMakeLists.txt
+@@ -8,6 +8,10 @@
+                          cl-program-cache.cpp
+                          cl-program-cache.h
+                          ../../include/ggml-opencl.h)
++option(GGML_OPENCL_MOTOAI_MATMUL_ONLY "Research profile: compute only validated matrix products on GPU" OFF)
++if (GGML_OPENCL_MOTOAI_MATMUL_ONLY)
++    target_compile_definitions(${TARGET_NAME} PRIVATE GGML_OPENCL_MOTOAI_MATMUL_ONLY=1)
++endif ()
+ target_link_libraries(${TARGET_NAME} PRIVATE ${OpenCL_LIBRARIES})
+ target_include_directories(${TARGET_NAME} PRIVATE ${OpenCL_INCLUDE_DIRS})
+ 
+--- a/ggml/src/ggml-opencl/ggml-opencl.cpp
++++ b/ggml/src/ggml-opencl/ggml-opencl.cpp
+@@ -13567,6 +13567,22 @@
+ }
+ 
+ static bool ggml_backend_opencl_device_supports_op(ggml_backend_dev_t dev, const struct ggml_tensor * op) {
++#ifdef GGML_OPENCL_MOTOAI_MATMUL_ONLY
++    // Other arithmetic stays on the established CPU path until independently
++    // qualified. Views have no arithmetic and may retain device storage.
++    switch (op->op) {
++        case GGML_OP_NONE:
++        case GGML_OP_VIEW:
++        case GGML_OP_RESHAPE:
++        case GGML_OP_PERMUTE:
++        case GGML_OP_TRANSPOSE:
++            return true;
++        case GGML_OP_MUL_MAT:
++            break;
++        default:
++            return false;
++    }
++#endif
+     ggml_cl_init(dev);
+     return ggml_opencl_supports_op(dev, op);
+ }
+@@ -13628,11 +13644,27 @@
+     GGML_UNUSED(index);
+ }
+ 
++static const char * ggml_backend_opencl_math_profile(void) {
++#ifdef GGML_OPENCL_MOTOAI_MATMUL_ONLY
++    return "matmul_only";
++#else
++    return "upstream";
++#endif
++}
++
++static void * ggml_backend_opencl_reg_get_proc_address(ggml_backend_reg_t reg, const char * name) {
++    GGML_UNUSED(reg);
++    if (strcmp(name, "ggml_backend_opencl_math_profile") == 0) {
++        return reinterpret_cast<void *>(ggml_backend_opencl_math_profile);
++    }
++    return nullptr;
++}
++
+ static struct ggml_backend_reg_i ggml_backend_opencl_reg_i = {
+     /* .get_name         = */ ggml_backend_opencl_reg_get_name,
+     /* .device_count     = */ ggml_backend_opencl_reg_device_count,
+     /* .device_get       = */ ggml_backend_opencl_reg_device_get,
+-    /* .get_proc_address = */ NULL,
++    /* .get_proc_address = */ ggml_backend_opencl_reg_get_proc_address,
+ };
+ 
+ ggml_backend_reg_t ggml_backend_opencl_reg(void) {

@@ -1,0 +1,47 @@
+{
+  "captured_utc": "2026-10-25T17:16:34.026217+00:00",
+  "scope": "Post-hoc CPU policy topology for same-boot boundary-cap audits; actual clock residency not measured.",
+  "command": "for d in /sys/devices/system/cpu/cpufreq/policy*; do echo \"$d\"; cat \"$d/related_cpus\"; cat \"$d/scaling_max_freq\"; done",
+  "health": {
+    "ready": true,
+    "boot_completed": true,
+    "battery": {
+      "percent": 47.0,
+      "status": 2,
+      "charging": true,
+      "temperature_c": 41.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 70714.64
+  },
+  "exit_code": 0,
+  "stdout": "/sys/devices/system/cpu/cpufreq/policy0\n0 1 2\n1459200\n/sys/devices/system/cpu/cpufreq/policy3\n3 4 5 6\n1286400\n/sys/devices/system/cpu/cpufreq/policy7\n7\n1132800\n",
+  "stderr": "",
+  "policies": {
+    "0": {
+      "cpus": [
+        0,
+        1,
+        2
+      ],
+      "max_khz": 1459200
+    },
+    "3": {
+      "cpus": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "max_khz": 1286400
+    },
+    "7": {
+      "cpus": [
+        7
+      ],
+      "max_khz": 1132800
+    }
+  }
+}

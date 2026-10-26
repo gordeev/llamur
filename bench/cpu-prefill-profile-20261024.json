@@ -1,0 +1,39 @@
+{
+  "scope": "Separate10-second user-mode CPU sample during512 prefill; profiling run excluded from speed baseline. No root/governor/thermal changes.",
+  "app_artifact": "bench/results/app-service-gemma-20261024T192347Z-dc01178e",
+  "apk_sha256": "19a97d4561f8da6a6f6a93330eac4b16e40bbb54dc17a9fdb80e102af850de99",
+  "pid": 24612,
+  "command": [
+    "/data/local/tmp/motoai/m2-perf/simpleperf",
+    "record",
+    "--app",
+    "org.motoai.runtime",
+    "-p",
+    "24612",
+    "-e",
+    "task-clock:u",
+    "-f",
+    "400",
+    "--call-graph",
+    "fp",
+    "--duration",
+    "10",
+    "--size-limit",
+    "32M",
+    "-o",
+    "/data/local/tmp/motoai/m2-perf/perf-7eeed1b5470f40009d57247da6aed601.data"
+  ],
+  "exit_code": 0,
+  "remote": "/data/local/tmp/motoai/m2-perf/perf-7eeed1b5470f40009d57247da6aed601.data",
+  "sample_count": 15862,
+  "lost_samples": 0,
+  "window_scope": "10s within the first512-token prefill call; not an exact whole-request CPU fraction",
+  "hotspots_self_percent": {
+    "ggml_vec_dot_q4_K_q8_K": 61.73,
+    "ggml_vec_dot_q6_K_q8_K": 15.98,
+    "ggml_vec_dot_bf16": 12.15,
+    "ggml_compute_forward_flash_attn_ext": 3.59,
+    "ggml_vec_dot_f32": 2.62
+  },
+  "artifact": "bench/results/profile-prefill-20261024T192418Z"
+}

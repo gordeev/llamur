@@ -1,0 +1,162 @@
+{
+  "scope": "Read-only audit of recorded power state. Numerical/correctness passes are not retroactively failed solely for low battery. Low-battery timings cannot establish normal powered performance; original raw artifacts are unchanged.",
+  "minimum_start_percent_for_new_workloads": 20,
+  "flagged": [
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T212107Z-c3e9994b",
+      "battery_before": {
+        "percent": 10.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T212126Z-e042278b",
+      "battery_before": {
+        "percent": 10.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T212514Z-b1dac01f",
+      "battery_before": {
+        "percent": 6.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 35.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T204403Z-52f38470",
+      "battery_before": {
+        "percent": 19.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T204420Z-ed0dce60",
+      "battery_before": {
+        "percent": 19.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212019Z-7991b0cb",
+      "battery_before": {
+        "percent": 11.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 30.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212044Z-14abd050",
+      "battery_before": {
+        "percent": 10.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212144Z-f7886be3",
+      "battery_before": {
+        "percent": 10.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 31.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212155Z-5b34ae90",
+      "battery_before": {
+        "percent": 10.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 32.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212206Z-3fc9d55f",
+      "battery_before": {
+        "percent": 9.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 32.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212216Z-50776380",
+      "battery_before": {
+        "percent": 9.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 32.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212334Z-c77d54f6",
+      "battery_before": {
+        "percent": 9.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 32.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T212603Z-5812bf80",
+      "battery_before": {
+        "percent": 4.0,
+        "status": 4,
+        "charging": false,
+        "temperature_c": 36.0,
+        "ac_connected": true,
+        "usb_connected": false
+      },
+      "performance_comparable_power": false
+    }
+  ]
+}

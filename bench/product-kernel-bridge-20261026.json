@@ -1,0 +1,191 @@
+{
+  "old_apk_sha256": "731a854cbdc4f0aa1aaff5f73218b94ae51ca925d341f6eede564f93d16494dc",
+  "product_apk_sha256": "d86f2644e383ef97aa8d92ae448101877c6616cf8359097911dd3d0de2638793",
+  "libraries": [
+    {
+      "path": "lib/arm64-v8a/libggml-base.so",
+      "sha256": [
+        "8c8f874fdd9424bd72e845fadb5f9995426f0d8306c366db4c48c3285897cde1",
+        "fc29ade09c686594a349dcaa5bebc1253af5bc8413984092fd63974421365d0b"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+      "sha256": [
+        "e36b197c066a5b13aa88dc061f5b6e3fa1ec7ab74db7d64e07e7bee34a29a8b6",
+        "afa46e2f92977433295a985cc593bffab22439f2d9912c30f5a52b09452d9fa9"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+      "sha256": [
+        "4d1b28939e3b2146c921c757e8ae90fc3813da47eb6e0d2e2cfa3fad2f8ba28d",
+        "f8708362d9866435f68416a3da850467c48eed7f167ac6bc15fe754b2f0edc86"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+      "sha256": [
+        "fdcc6224f9298754e993c47defa03c4a6a717849a11d4e6a9c5bdd33f4cd0463",
+        "d8ed9de6b9a4127e7f6052e6b35404474cd366eb5bfc3a8a5dbae8ab086a659c"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+      "sha256": [
+        "c6bf0ea20d0c768a1d3d0ab6db23819bc3a9a865a1f9a42d21b048f69aa5ee7d",
+        "b9749ae15d250e1596a443d7e320fd4d3f7b66a947ab882d3f94327962e32f85"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+      "sha256": [
+        "0b5f227f0bf12692a2dca35801c118a4f0b9370a49878ed85df12339161ee920",
+        "48cd118ac937801ad652eda01ed8ff1ae0854a34413c020dd60e1da6cef70eeb"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+      "sha256": [
+        "22fbcb0206674d254e03171d1d40bd9f6ada6c07645d80ef587429d0364d22a9",
+        "c797812e1db123176351c97ceea9ed463caf15c2f81b8a69bd9f9b6418c6608d"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+      "sha256": [
+        "b4e6936c07f92f56bfc07183cd895652f7f75db55760af32fe63f7fc3fc9fadb",
+        "6f0d325e064fdd0361b7069f3238df2cd5982586d579857e7c51d651959bc011"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libggml.so",
+      "sha256": [
+        "364f6c0302f24a0c6e5b19a39fc57d91c1919671924f1f9b34efce3d6a8f1a57",
+        "7a30b7739abd903de87b466375779721d0b53ca88d4a824c747802c8c1feb041"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libllama-common.so",
+      "sha256": [
+        "c80ae193806a5963e86ac1a030956df434e13300073a3b44b152158e80ab0537",
+        "e8e53363756d11931a3492e6ad4290df2c2a618be6f162f9bb16c88b124aa90a"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libllama.so",
+      "sha256": [
+        "219c34ccc655a5bcf565d850ab5bd4da9dbacc716340501fb73a9442544dc217",
+        "69cef7640668680626b9ae2d3408b57abd1f0dec1ec08caf94b4195460802335"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libmotoai-checks.so",
+      "sha256": [
+        "06b2c7f3b12873c6950f15380a6157eb7398b9a5e2c9ebf935fe9d882f561cce",
+        "b99e5dc51763519be393f51857b1155b3afcdbad6d38b27edf3fb907f53012ed"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libmotoai-probe.so",
+      "sha256": [
+        "3406b232e1da4da0e3a7b00a8a2739ea2bbe533cbe053c5c63d7bfa08b13d777",
+        "1698c3180ea47a9a8458b51f7c51e8e217581ea865d2a3367dc23dcf545cf05f"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id"
+      ],
+      "text_identical": true
+    },
+    {
+      "path": "lib/arm64-v8a/libmotoai-runtime.so",
+      "sha256": [
+        "65682dd8333fe7ff91dad1db555d465ee1228306ec00f12bfb6818efb5671d60",
+        "7545a44ab07813f315135609965c7893e253f690aaa16e3096c88abc7705d2a4"
+      ],
+      "identical": false,
+      "different_sections": [
+        ".note.gnu.build-id",
+        ".dynsym",
+        ".gnu.version",
+        ".gnu.version_r",
+        ".gnu.hash",
+        ".dynstr",
+        ".rela.dyn",
+        ".rela.plt",
+        ".gcc_except_table",
+        ".rodata",
+        ".eh_frame_hdr",
+        ".eh_frame",
+        ".text",
+        ".plt",
+        ".data.rel.ro",
+        ".dynamic",
+        ".got.plt"
+      ],
+      "text_identical": false
+    }
+  ],
+  "scope": "Post-build packaged shared library byte bridge. Wrapper changes implement structured parsing and product adaptation; no whole-product performance acceptance. Section comparison distinguishes code/constant payload changes from packaging/build-id changes. No automatic qualification bridge claimed."
+}

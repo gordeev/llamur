@@ -1,0 +1,1151 @@
+{
+  "passed": true,
+  "scope": "Post-hoc boundary frequency-cap audit, not a newly preregistered speed test. No trials removed or ratios recomputed after filtering. Equal boundary caps do not prove equal clocks or unchanged caps inside a request.",
+  "topology": "bench/cpu-policy-topology-20261025.json",
+  "topology_sha256": "6b1219acf619ae9d713ed98fe58811dddab816e851ef5b9c13535d5c9dbe61ab",
+  "reports": [
+    {
+      "path": "bench/results/weight-buffers-gemma-short-code-mmap-v1-20261025T081520Z/report.json",
+      "sha256": "302a61a43cde14a9883f8e9896498421c5d2ec1bf5aaf6fd38c6a81246d15488",
+      "apk_sha256": "a02b4206b5e7f53bbdf16768f45066ed5151c3ccba3108c7685cbbaa223adede",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081520Z-ee57e0d3",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 2016000,
+                "3": 2188800,
+                "7": 2092800
+              },
+              "before_device_sha256": "02ffb742e03ff736ef57b4516d0b02a483fdc3e1d238de1da18eda073e3ab86e",
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after_device_sha256": "5829a51d2f412bcb63336219c01f3b214510e003d577e5b821525330c06afd46"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081553Z-b043b13e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "before_device_sha256": "1ee8917cc64e3a14bd0d341dedd5fac74ae15e2b0e9effd1dd87eead97dd06a3",
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after_device_sha256": "8f68ad577ce45c9738799c54cfa74fd8c080628b5ee782815efbfda183e91e78"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081623Z-69a121d4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "before_device_sha256": "d9e9d21281a8f030e440b12b8eb33e503c86a9e37299db3d396d83b5e95b3ad8",
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after_device_sha256": "9f05b4e6c1754745190904e7d8600d64d9f194aa1096ffe46ed00909e08e0f96"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081653Z-9b59ffed",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "before_device_sha256": "f884a97517c9a04eb9f1b1ee722057ecb64196962e4705172252eb06a6b92a7d",
+              "after": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "after_device_sha256": "1df8c7dacb8c53815752fc7f03fb8ba2864ffa8dab29e78f65c3b7eb11adf905"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081724Z-f9aa97a3",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 2016000,
+                "3": 1920000,
+                "7": 1708800
+              },
+              "before_device_sha256": "e6f368fb1ae28921267231a02f05788d0347e2045a4d288916de8a6f2f02cf63",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "cc2b6425e382faf84bd08cf7cbc73899b3b4ce7a44be48346801f979fe0d3445"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081755Z-808c06b0",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "f2876c75aec7b1e160378fcf55dc6e98e121df9ee3376569c0ce7af13207ed48",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "0e06889600a459f1674cbd48065b46d0e027ad1730c653aaeb4681419c192d33"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0",
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T081828Z-0b60a61d",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "60fd1c49f9f039b6bcbfa265ca97cbf7edf4bcb763f09ad72eddbb69f835cdc5",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "2587c7b0f7994a5b10cf8977c542dc23cce08e03f2557443cace265a29bd04a7"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081901Z-c18872a7",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "e7e1443ff0fd811e10628a0cbc1554212240fee37ecbfb1b20da3ecc96438f12",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "904d00abdf63b4ac9b8d2a08235daca1d6ba8e48c0e633ee17d126ce9b988277"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T081933Z-4d0c9e3b",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "d0334b470b8eb57d4ebe2c56c20e54dcbb6eacdc5c9168210d0fc84b9405bf22",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "46ad40bc3e4783ce6b4c32fe32c53d2aaa088d738e0c2760ea1f0811968b6690"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T082004Z-f959c581",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "83119ac015a1ebc0c8e24c120b21dcf23dca99496024ecd88ae12b9da4451527",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "b47db94f99adc0951e2febd36431231d144e9ee2388c9b2299acb3fbb680db02"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-gemma-20261025T082036Z-cb049f2e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "a0bb73fefebde69edbb3d02f17eb3649fe0de9b5e743819e7bab5514a3af5e36",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "b7bfca0e8bb2587bbadcce32b463b6720fd5ca4f45c5604dbcc69b33b72e5708"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-gemma-20261025T082109Z-02bcb453",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "preserved result.json; older comparison omitted this field",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "af84fdf83b4464c292538a54c54a4737f3490901ed7017ec0be2e72b8c51772d",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "927a29cba59a5245f3438b6d353d02e3e5f8827857b2ae4ec9911d7ddd9db5ca"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 4,
+      "all_measured_boundary_caps_comparable": false
+    },
+    {
+      "path": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T090958Z/report.json",
+      "sha256": "496c6a37c545e501a3acd442b55eb041eb13b579d2f8103ade7fbf464cc53ac2",
+      "apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T090958Z-83552588",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "before_device_sha256": "8720090af591430d12c28ca21a3729f485b359d69ac088add7b758d016039319",
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after_device_sha256": "3cc823c367ddff30caa71264fd70dd55660d1848321303d9b4f9f56c0ceec10b"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091052Z-0f9d62b4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "before_device_sha256": "b43acce640e29c010ca3b72e31a71fdf3626a1e37c4462cf532b187f40ec2624",
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after_device_sha256": "7e7230e53aeeb92a2d29aa1bb80ee8f956687dd8fdb697f06a3dea49ab1c4cb0"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091147Z-a3dd65db",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "before_device_sha256": "9e25c6a713d21844d0760088c9e4d0df9baf43e2c1d87bc2b839b4a8acb20d2b",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "0cb66fb478cad162e0443b44ac3ea5987bfd8b4ec14d0a0edca9e21be3e86a11"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091242Z-c76d8a6f",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "1526370ce9923c7e66907914c78c48942de7846e09c649351cfbcd8a45d79d39",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "80138ff74747aad62346b4fc7afe94aa8c79460d93a6f661647bc1d8899bb21a"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091342Z-323182f7",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "f84b392fa2666c8d1c4179ff0df58d88e75c178542f62c7cc2c5e657e6923d56",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "15ac9cb6edd3d6dd6f067f35dc4fecadff9e7bcf012d55998dfaca1d0a5eb345"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091442Z-d8018d44",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "6c43de1e5ab7672bea27822d9e5a320910f254c0b4e931beee7de2a2224fddda",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "c1128a8fd4dbf6ab0746b43d373d6de0e37b7a265d2cff534b9acd65a35b14f7"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091547Z-34c48110",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "f36e45d2296b025e42d37b9387aa1d6ce207262bb94e6b2f0f21100092b4d8e1",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "b9b58fd24340d8578fbe5957d62e4fe91344b687e2aef9aba44e7cfb8aba3c71"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091649Z-dbb740c8",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "862d5d8ac47d775b625cba02de6961e4d4a48f0a9a9cefd4c0431f91bd866183",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "9346289b8d03798e73303ffa1cbf4b48dfd4a8cfd98011eb39054f7a8714316d"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T091748Z-4c443d73",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "d130f046bf292cf0634fd4df0ead040d42412dcb92f1037e07f331d24a00a1f5",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "ae8dd099a67235734e605abcf884ebbdb9fd8b2a887da65ee3c8c26dfc2c39c6"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091847Z-319eb694",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "f07e41fe5c9d1f3de331a5034c3dc4d8649eb05544ea1aabcb3d6be8821867dd",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "636df44b04792fbfab4eeaa8cdd72e9d15a3f51dacd1daa1eea817ec4ccf3ce1"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T091956Z-1e40d6dc",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "2b313d238c41b13dfb694e9f0aee9c1abd92f89a592fa321ab75e911b012a960",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "95837f52a70afa4b351992447440e2dd72b372902a1d983dd1c4226cbcc1db4f"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T092100Z-9b53cb91",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "b27159229746552c8844b365aa3106b96ecb733e77af857ee633a9faa537f68a",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "d5199e532031f42ce75b97b6652bd75a60bf2f91a4b84d72cc2f30224f2667b6"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 4,
+      "all_measured_boundary_caps_comparable": false
+    },
+    {
+      "path": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json",
+      "sha256": "c0462acfe6fafe7bab149fd9aa4c18c72af02c63b4989397966ac67ca0e31f12",
+      "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+      "pairs": [
+        {
+          "warmup": true,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T161940Z-e03dd6dc",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 2016000,
+                "3": 2803200,
+                "7": 3187200
+              },
+              "before_device_sha256": "0a80c120ef7b1ccf51f3a88b19e72ec0327dcaa1e9f17525ef08650d1bf881fc",
+              "after": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "after_device_sha256": "77526b9e64dafb39f83891d1d521fd878ea6db420538ec66c4876a1211abf007"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162043Z-2f63fb8c",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1670400,
+                "3": 1785600,
+                "7": 1593600
+              },
+              "before_device_sha256": "9eb8e8edcc238951bd2b881208fe41465908094198e734e8cc788f49f296770e",
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "after_device_sha256": "e446573e4ce18909813e8ab7d744cb8bc23093c4731d6c3b9b0b308f5521d3b2"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0",
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162138Z-56b3dc0e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "before_device_sha256": "cd5a1c353247c897c6eb763b1b3cfb8f4b29b666acd4466d8673048d4a723db9",
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "after_device_sha256": "4721ed54c5ce58dd2f48a6643fec2d4eb6cc02535b8a6078a77c73c9b9ed5721"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162228Z-25f469e8",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1593600
+              },
+              "before_device_sha256": "69420c7892b753a9fbdccc07f9fce98fbc795a3a2f74eccab6f77a9d23218bcb",
+              "after": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after_device_sha256": "2671c8ebd4c686ce0a59d98b09f2fff85e9cc4eb8526ab4c5cd9c6c691534e60"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162322Z-e6963999",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1670400,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "before_device_sha256": "415610bdcc6f2bf770aa60ca0d15f9b9dbee5cd2903227e1561fa567e6612994",
+              "after": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "after_device_sha256": "c27e7a224b0d6d5bb5b81d1ddba86e7b59c24be658f4300b6882b1c267906b05"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162414Z-932d3789",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1536000,
+                "7": 1248000
+              },
+              "before_device_sha256": "d2a602cf4699339c05cb223fbe5b31b609a87578f46ea0c93a1d8fe30149e058",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "bc7d45028e985aa9ba208e40d7355e4eb9314d920a3932d67e22741471347af0"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0",
+            "Frequency ceiling changed: 3"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162505Z-759e8c5e",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "fe357612029382abe1bc4098fdf04ea5cf25a91300ee6fcb4e20e01ae932baeb",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "4e1735e0fbc04a9f244c6bd43c260d3ec3cd2fb858d31e33feb1030d35998637"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162602Z-3f9e24d4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "43cf26210d1dc0c8551f05f457070cbeaf64bd8a702d81712eff461941acb132",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "e35cabeaf1b9b1b5b8137c94d48f18627aba198efd0a4a6328fd8bb3e5017479"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        },
+        {
+          "warmup": false,
+          "order": [
+            "native",
+            "cpu_repack"
+          ],
+          "trials": {
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T162701Z-8f159e50",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "75515813b3ef5f88cc25e5da3efd6e1597b68fe3d2fe530547bcd4310ce9ecd0",
+              "after": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "d1962196c66085f814dc18f1ffb04c7e7fcab71633071079915c44a6cffcddfd"
+            },
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162813Z-41c2cea4",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1459200,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "3e2b010eaec29d53fd50f44be6594f86f5f20551fae9c5d82589d68a4d581916",
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "dcde14033eb692cddf6fcf98b4b6d1265f741633ef29ab038d2af6dfed082f47"
+            }
+          },
+          "boundary_caps_comparable": false,
+          "reasons": [
+            "Frequency ceiling changed: 0"
+          ]
+        },
+        {
+          "warmup": false,
+          "order": [
+            "cpu_repack",
+            "native"
+          ],
+          "trials": {
+            "cpu_repack": {
+              "artifact": "bench/results/app-service-ornith-20261025T162936Z-b098661d",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "ebd54ebe64b9ebb3c6f1ffe17f91b340f12d65ff386a85063b1c08ed47093e01",
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "4728b1736c41e4cfdceb4bd0505bb221136f4fb22f4e8882b3d8168c9ff2f47a"
+            },
+            "native": {
+              "artifact": "bench/results/app-service-ornith-20261025T163036Z-a24b3507",
+              "allowed_cpus": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "allowed_cpus_source": "comparison trial",
+              "before": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "before_device_sha256": "082d825eb66750607186f0a6ebcfe4370f8292161031b428a35665d46a594a60",
+              "after": {
+                "0": 1228800,
+                "3": 1286400,
+                "7": 1132800
+              },
+              "after_device_sha256": "b4d65015c51655620bd39fc8fe1118002cf1960860408f4e622c42cd8499aaeb"
+            }
+          },
+          "boundary_caps_comparable": true,
+          "reasons": []
+        }
+      ],
+      "measured_pairs": 5,
+      "measured_pairs_with_equal_boundary_caps": 3,
+      "all_measured_boundary_caps_comparable": false
+    }
+  ]
+}

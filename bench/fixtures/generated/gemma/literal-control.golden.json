@@ -1,0 +1,12 @@
+{
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "request_sha256": "7aab546d74f6949fc7c4f7b484093f8e075f2269bf56cf7105c2868419a4295a",
+  "kind": "expected_rejection",
+  "expected_identifier": null,
+  "expected": {
+    "ok": false,
+    "kind": "runtime",
+    "message": "Literal control tokens in chat message content are not supported yet"
+  }
+}

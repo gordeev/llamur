@@ -1,0 +1,82 @@
+{
+  "status": "native_control_completed_current_cpu_workspace_prefill_screen_passed",
+  "resumed_utc": "2026-10-25T16:08:57.832906+00:00",
+  "apk_sha256": "5761d83665d629aeed98af08c03dbcf2cb5ca572dd1b1c0827fbee2a5ad49be7",
+  "installed_apk_matches": true,
+  "completed_long_series_reused": true,
+  "health": {
+    "ready": false,
+    "boot_completed": true,
+    "battery": {
+      "percent": 14.0,
+      "status": 2,
+      "charging": true,
+      "temperature_c": 33.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 66989.82,
+    "reason": "Battery 14% below 20% start threshold; connected power alone is not charging proof"
+  },
+  "minimum_start_percent": 20,
+  "planned": [
+    "Ornith native_no_prefault warmup+5 short pairs using existing quality lock",
+    "Separate CPU sampling with verified symbols and loss accounting",
+    "Gemma native_no_prefault quality and speed control"
+  ],
+  "host_changes": [
+    "Verified APK/native symbol bytes and recorded CPU DSO build IDs",
+    "Reject incomplete/lost sampling evidence",
+    "Preserve diagnostics on cleanup/ADB failure"
+  ],
+  "python_tests_passed": 51,
+  "phone_workload_started": true,
+  "health_checked_utc": "2026-10-25T16:14:29.329952+00:00",
+  "dispatch_audit": "bench/results/native-demand-dispatch-audit-20261025/report.json",
+  "profile_validation": {
+    "apk_libraries_checked": 13,
+    "host_symbol_identity_passed": true,
+    "historical_real_perf_loss_accounting_passed": true,
+    "wrong_apk_recording_rejected": true,
+    "pinned_simpleperf_feature_workaround": "Dump build_id and meta_info separately; comma list returns empty output",
+    "apk_rebuilt": false
+  },
+  "started_phone_utc": "2026-10-25T16:19:31.340272+00:00",
+  "log": "/tmp/motoai-m3-native-demand-ornith-speed-resume.log",
+  "tools_source_snapshot": "05ac4dcb86e7c9087b1b2f6e26db135e6331aa25733862e7ce536c115062f492",
+  "ornith_short_speed_report": "bench/results/weight-buffers-ornith-short-code-mmap-v1-20261025T161939Z/report.json",
+  "ornith_short_speed_passed": true,
+  "ornith_bounded_screen": "bench/m3-native-demand-ornith-screening-20261025.json",
+  "ornith_cpu_profile": "bench/results/prefill-profile-ornith-20261025T163211Z/report.json",
+  "ornith_cpu_profile_passed": true,
+  "cpu_profile_hotspots_self_percent": {
+    "q4_K_dot": 71.36,
+    "q6_K_dot": 20.13,
+    "flash_attention": 2.36,
+    "gated_delta": 1.24
+  },
+  "profile_samples": 71059,
+  "profile_lost_samples": 0,
+  "gemma_log": "/tmp/motoai-m3-native-demand-gemma-resume.log",
+  "kernel_bench_prepared": {
+    "source": "native-runtime/tools/prefill-pack-bench.cpp",
+    "runner": "scripts/run-prefill-pack-bench.py",
+    "host_results": "bench/results/prefill-pack-host-final-20261025/report.json",
+    "model_shapes": "bench/prefill-pack-shapes-20261025.json",
+    "documentation": "docs/prefill-pack-feasibility.md",
+    "phone_run": "Completed: bench/results/prefill-pack-20261025T174235Z/report.json",
+    "same_apk_libraries_reverified": 13
+  },
+  "gemma_controller": "bench/results/m3-native-demand-20261025T164021Z/report.json",
+  "gemma_control_passed": true,
+  "completed_native_control": "bench/m3-native-demand-analysis-20261025.json",
+  "phone_kernel_bench": "bench/results/prefill-pack-20261025T174235Z/report.json",
+  "phone_kernel_passed": true,
+  "phone_kernel_scope": "16 synthetic cases, all output bits equal on I8MM, original sampled F64 gates passed; prospective power/thermal/boot/frequency boundary screens passed. Not app speed.",
+  "next": "Continue M3 decode/threads/affinity and remaining backends. No completed long-series replay; no UI/API yet.",
+  "q4_investigation": "bench/m3-q4-repack-investigation-20261025.json",
+  "current_experiment": "bench/m3-transient-threshold-investigation-20261025.json",
+  "current_apk_sha256": "e520cc2ea0ce59be1be32f610f624f27cdcc2c08943874870d0f9127191d19a9",
+  "current_screen": "bench/m3-transient-threshold-screening-20261025.json"
+}

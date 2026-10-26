@@ -1,0 +1,29 @@
+{
+  "scope": "Build-only open Khronos headers; not model assets or binary kernels",
+  "dependencies": [
+    {
+      "id": "vulkan-headers",
+      "repository": "https://github.com/KhronosGroup/Vulkan-Headers",
+      "commit": "4c8aa84a61c12cab9780fa44298617666b491d71",
+      "archive_sha256": "ada386ba78aa2682dca58e7cff4b959f63bab5d08ed1ec166cc5a8eeade108dd"
+    },
+    {
+      "id": "spirv-headers",
+      "repository": "https://github.com/KhronosGroup/SPIRV-Headers",
+      "commit": "2a611a970fdbc41ac2e3e328802aed9985352dca",
+      "archive_sha256": "c2225a49c3d7efa5c4f4ce4a6b42081e6ea3daca376f3353d9d7c2722d77a28a"
+    },
+    {
+      "id": "opencl-headers",
+      "repository": "https://github.com/KhronosGroup/OpenCL-Headers",
+      "commit": "8a97ebc88daa3495d6f57ec10bb515224400186f",
+      "archive_sha256": "211b3897f91136a9d4ceeb7b892cae88388408ff6c4d06428e9d3f0face2ee53"
+    },
+    {
+      "id": "opencl-loader",
+      "repository": "https://github.com/KhronosGroup/OpenCL-ICD-Loader",
+      "commit": "ad770a1b64c6b8d5f2ed4e153f22e4f45939f27f",
+      "archive_sha256": "2af329e7873817e8d568e9716532b8958bf722aef5ffa693718e0a6b52e94059"
+    }
+  ]
+}

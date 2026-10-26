@@ -1,0 +1,80 @@
+{
+  "passed": false,
+  "quality_passed": true,
+  "speed_qualified": false,
+  "default_promoted": false,
+  "milestone_accepted": false,
+  "apk_sha256": "24be50e13a9b9f05d4538b7c5cf4e34b1cac187279df87a534c0c9f0ba677f76",
+  "variant": "f32-recurrent-stable-attention-v2",
+  "scope": "Completed CPU scheduling/attention-quality checkpoint. Current-APK warm decode timing series failed the unchanged frequency gate; no speed promotion or full-M3 acceptance.",
+  "quality": {
+    "operator_gate": "bench/results/attention-thread-check-20261025T221114Z/report.json",
+    "baseline4_task": "bench/results/decode-task-20261025T221547Z/report.json",
+    "candidate7_task": "bench/results/decode-task-20261025T222200Z/report.json",
+    "generated_ids_exact": 1096,
+    "first_top8_error": 0,
+    "functional_cases": 134,
+    "framework": "bench/results/runtime-tests-20261025T221519Z/report.json",
+    "default_cycles": 30,
+    "pooled_cycles": 30,
+    "pooled_tasks_before_after": [
+      14,
+      14
+    ],
+    "pooled_fds_before_after": [
+      118,
+      118
+    ]
+  },
+  "speed": {
+    "report": "bench/results/decode-screen-20261025T222930Z/report.json",
+    "report_sha256": "a35487bc0cc438baf96385c6373bc866580d9e3e99336bad2591547f61dca69a",
+    "passed": false,
+    "measured_pairs_attempted": 3,
+    "comparable_pairs": 2,
+    "comparable_emission_ratios": [
+      1.0420332800116117,
+      1.0534532576741198
+    ],
+    "baseline_emission_tok_s": [
+      2.8717176803946907,
+      2.87454592076923
+    ],
+    "candidate_emission_tok_s": [
+      2.9924253937690164,
+      3.028199764568198
+    ],
+    "rejected_third_ratio": 1.1376977588625676,
+    "reason": "Candidate policy3 ceiling changed1286400\u21921171200; following baseline used1171200. Failed pair and excluded warmup kept; no pruning/combination/retry. Boundary caps do not measure actual running clock residency.",
+    "confidence_interval": null
+  },
+  "chosen_default": {
+    "threads": 4,
+    "threads_batch": 0,
+    "cpu_affinity": [],
+    "weight_buffers": "native",
+    "transient_repack": false
+  },
+  "final_health": "bench/m3-decode-final-health-20261025.json",
+  "next": "Actual APK/app-UID Vulkan/OpenCL numeric/storage feasibility and CPU recovery; then finalist quality/context/speed. No UI/API acceptance yet.",
+  "latest_sustained": {
+    "report": "bench/results/sustained-decode-20261025T225449Z/report.json",
+    "report_sha256": "42c46ff0437a55918c17df5c74100cdc70e042d48a6a38ce82ba43cd31c7e37b",
+    "all_four_arms_quality_passed": true,
+    "strict_post_validation_all_four_passed": true,
+    "matched_start_conditions": false,
+    "paired_ratios": [
+      {
+        "emission_tok_s": 1.029508388348559,
+        "final_five_minute_emission_tok_s": 1.0060242363021197
+      },
+      {
+        "emission_tok_s": 1.03582100761162,
+        "final_five_minute_emission_tok_s": 1.017693929243517
+      }
+    ],
+    "speed_candidate_qualified": false,
+    "default_promoted": false,
+    "scope": "Four >=900s arms4/7/7/4 and final5min; actual initial CPU caps differed. Tail gains0.6%/1.77% below predeclared3%; no speed claim. Default4 retained; not full M3/M5 acceptance."
+  }
+}

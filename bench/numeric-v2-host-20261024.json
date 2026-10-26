@@ -1,0 +1,1817 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 1.887619089382286e-14,
+        "max_relative_to_peak": 2.26312958685201e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 1.887619089382286e-14,
+        "max_relative_to_peak": 2.26312958685201e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 6.002806167786526e-14,
+        "max_relative_to_peak": 3.801987909116494e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 6.002806167786526e-14,
+        "max_relative_to_peak": 3.801987909116494e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 3.55630924920563e-14,
+        "max_relative_to_peak": 2.4777566290710627e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 3.55630924920563e-14,
+        "max_relative_to_peak": 2.4777566290710627e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 2.4667975952299274e-14,
+        "max_relative_to_peak": 2.300808123794052e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 2.4667975952299274e-14,
+        "max_relative_to_peak": 2.300808123794052e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 3.9138167813799013e-14,
+        "max_relative_to_peak": 3.3287927499573595e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 3.9138167813799013e-14,
+        "max_relative_to_peak": 3.3287927499573595e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 2.930890721903213e-14,
+        "max_relative_to_peak": 2.9152099221855256e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 2.930890721903213e-14,
+        "max_relative_to_peak": 2.9152099221855256e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 2.6429462025695796e-14,
+        "max_relative_to_peak": 2.8760481853646664e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 2.6429462025695796e-14,
+        "max_relative_to_peak": 2.8760481853646664e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 3.3717259464565004e-14,
+        "max_relative_to_peak": 2.9018479899090214e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 3.3717259464565004e-14,
+        "max_relative_to_peak": 2.9018479899090214e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 3.175747223454245e-14,
+        "max_relative_to_peak": 2.9018479899090214e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f32",
+      "operator_correctness": {
+        "nmse": 3.175747223454245e-14,
+        "max_relative_to_peak": 2.9018479899090214e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 4.3412386986354467e-07,
+        "max_relative_to_peak": 0.0009733244581610828,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 4.0474392230903457e-07,
+        "max_relative_to_peak": 0.0008152454617964032,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 1.2656161905744826e-06,
+        "max_relative_to_peak": 0.0017497099289428164,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 1.2528405659841015e-06,
+        "max_relative_to_peak": 0.0020084326807267862,
+        "finite": true,
+        "within_limits": false
+      },
+      "status": "fail"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 8.874905361366965e-07,
+        "max_relative_to_peak": 0.001168587594299517,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 8.228757749321352e-07,
+        "max_relative_to_peak": 0.0011735582971470395,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 6.90533247578265e-07,
+        "max_relative_to_peak": 0.0014103435658906554,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 5.64502044631895e-07,
+        "max_relative_to_peak": 0.0012722350649406438,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 9.956377452277268e-07,
+        "max_relative_to_peak": 0.001554262488666862,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 8.638465562853511e-07,
+        "max_relative_to_peak": 0.0014923252069915466,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 1.004149493553884e-06,
+        "max_relative_to_peak": 0.0014034052576727863,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 9.157268635082737e-07,
+        "max_relative_to_peak": 0.0014019684084000958,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 7.455027320081767e-07,
+        "max_relative_to_peak": 0.0014103435658906554,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 6.257329216408136e-07,
+        "max_relative_to_peak": 0.0012722350649406438,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 9.404474871380317e-07,
+        "max_relative_to_peak": 0.0014093930253694885,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 8.435786815464087e-07,
+        "max_relative_to_peak": 0.0014120790782699167,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 9.230078092023921e-07,
+        "max_relative_to_peak": 0.0014093930253694885,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "f16",
+      "operator_correctness": {
+        "nmse": 8.322750077799119e-07,
+        "max_relative_to_peak": 0.0014120790782699167,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 5.8304740811510436e-06,
+        "max_relative_to_peak": 0.0032720777399701697,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 6.953696612426761e-16,
+        "max_relative_to_peak": 5.016631135540544e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 1.3870199208711018e-05,
+        "max_relative_to_peak": 0.003814511039321783,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 6.774529553097794e-16,
+        "max_relative_to_peak": 4.081016003214535e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 4.1687807847274206e-05,
+        "max_relative_to_peak": 0.004014435881786415,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 3.302694715913777e-16,
+        "max_relative_to_peak": 2.3994894654254204e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 1.0260957946320973e-05,
+        "max_relative_to_peak": 0.0035339495755235344,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 6.87236549234593e-16,
+        "max_relative_to_peak": 3.6355718749105874e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 1.6352766177868514e-05,
+        "max_relative_to_peak": 0.0034606650425779073,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 8.307020045692452e-16,
+        "max_relative_to_peak": 4.048293551157435e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 1.2583577286411777e-05,
+        "max_relative_to_peak": 0.0033563216586644596,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 6.813548039232355e-16,
+        "max_relative_to_peak": 3.7088379717359104e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 1.2658187538120268e-05,
+        "max_relative_to_peak": 0.0035339495755235344,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 7.685289324311196e-16,
+        "max_relative_to_peak": 3.6355718749105874e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 1.2930735936692981e-05,
+        "max_relative_to_peak": 0.0033484825598076597,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 7.523183357193212e-16,
+        "max_relative_to_peak": 3.525450775593883e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 1.2350948695986034e-05,
+        "max_relative_to_peak": 0.0033484825598076597,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "bf16",
+      "operator_correctness": {
+        "nmse": 7.438334207189692e-16,
+        "max_relative_to_peak": 3.525450775593883e-08,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0005017821714673535,
+        "max_relative_to_peak": 0.020050920906766377,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.5808922961602176e-14,
+        "max_relative_to_peak": 3.202978548765495e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0005034493820910798,
+        "max_relative_to_peak": 0.018588237182931712,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 1.5285331760001793e-13,
+        "max_relative_to_peak": 3.5574320890352536e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0002471100241190256,
+        "max_relative_to_peak": 0.014810445697198402,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 6.10521882945133e-14,
+        "max_relative_to_peak": 2.8777232845512437e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003946565121524443,
+        "max_relative_to_peak": 0.014978505545753501,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.3891208762960887e-14,
+        "max_relative_to_peak": 2.781707696886421e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037791638220084346,
+        "max_relative_to_peak": 0.016515092629885594,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.1427285875299775e-14,
+        "max_relative_to_peak": 3.060606809486154e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00036312165478548917,
+        "max_relative_to_peak": 0.015535053500861888,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.188500905404865e-14,
+        "max_relative_to_peak": 3.112168243460097e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003843421498741087,
+        "max_relative_to_peak": 0.01508361419083042,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.36497815953263e-14,
+        "max_relative_to_peak": 2.9699865048908937e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003791301342375839,
+        "max_relative_to_peak": 0.015349087038072154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.1306742677101173e-14,
+        "max_relative_to_peak": 2.902801276560343e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037861921424358816,
+        "max_relative_to_peak": 0.015349087038072154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.086087485198547e-14,
+        "max_relative_to_peak": 2.902801276560343e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004915521109983555,
+        "max_relative_to_peak": 0.019941978494093533,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.815602814058061e-14,
+        "max_relative_to_peak": 3.207411587554288e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004919558148772126,
+        "max_relative_to_peak": 0.01921504638951969,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 1.2688930346876989e-13,
+        "max_relative_to_peak": 3.676697977230909e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0002518163103383419,
+        "max_relative_to_peak": 0.015071265468750364,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.6203903576403263e-14,
+        "max_relative_to_peak": 3.1567191662469234e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003969298284575099,
+        "max_relative_to_peak": 0.015326965508952324,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.667073801606754e-14,
+        "max_relative_to_peak": 2.7378728214958497e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037809893959066655,
+        "max_relative_to_peak": 0.016762289784358387,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 6.516990229929609e-14,
+        "max_relative_to_peak": 3.381896804418987e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003640550296695408,
+        "max_relative_to_peak": 0.01510764850888857,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.644513833618405e-14,
+        "max_relative_to_peak": 2.699912801361581e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003861333786594272,
+        "max_relative_to_peak": 0.01547349560856769,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.42166401034414e-14,
+        "max_relative_to_peak": 3.20921334866335e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037980219037475344,
+        "max_relative_to_peak": 0.015212920098228411,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.5002280813672467e-14,
+        "max_relative_to_peak": 2.915434385975879e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003793515970487815,
+        "max_relative_to_peak": 0.015212920098228411,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.354129482523066e-14,
+        "max_relative_to_peak": 3.01325536153734e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.000495203631748388,
+        "max_relative_to_peak": 0.02004341526810075,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.238544957320721e-14,
+        "max_relative_to_peak": 2.287433776327546e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004894542172850771,
+        "max_relative_to_peak": 0.019029297183356966,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 1.1215082110834453e-13,
+        "max_relative_to_peak": 2.6901839901514635e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0002474567957589752,
+        "max_relative_to_peak": 0.014234976850760724,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 2.873317555612598e-14,
+        "max_relative_to_peak": 1.4816448426304318e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003965268142229229,
+        "max_relative_to_peak": 0.01534321995801345,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.289288045774552e-14,
+        "max_relative_to_peak": 1.813308805547442e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.000378585713858207,
+        "max_relative_to_peak": 0.016551088514872154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.652640643488501e-14,
+        "max_relative_to_peak": 2.048336585778588e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00036331433493506005,
+        "max_relative_to_peak": 0.014924453891160665,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.5026057186080385e-14,
+        "max_relative_to_peak": 1.7654911375604556e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.00038575419427435147,
+        "max_relative_to_peak": 0.015414306866410805,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.142540702253194e-14,
+        "max_relative_to_peak": 1.992077790700758e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003800611648764253,
+        "max_relative_to_peak": 0.01496468039626709,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.019166807410034e-14,
+        "max_relative_to_peak": 1.984246927113901e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037913527673187825,
+        "max_relative_to_peak": 0.01496468039626709,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.951979807988732e-14,
+        "max_relative_to_peak": 1.984246927113901e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f32",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "f16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "status": "unsupported"
+    },
+    {
+      "type": "bf16",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "status": "unsupported"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0005017830399682992,
+        "max_relative_to_peak": 0.020051022027007696,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 2.6476257726772497e-14,
+        "max_relative_to_peak": 2.749756312969282e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0005034479450832768,
+        "max_relative_to_peak": 0.018588344959834364,
+        "finite": true,
+        "within_limits": false
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 2.0051637092021664e-13,
+        "max_relative_to_peak": 4.5402053634733224e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00024711036590532664,
+        "max_relative_to_peak": 0.014810445697198402,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 7.008120798741179e-14,
+        "max_relative_to_peak": 2.9892713400640513e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003946565121524443,
+        "max_relative_to_peak": 0.014978505545753501,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.3891208762960887e-14,
+        "max_relative_to_peak": 2.781707696886421e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037791638220084346,
+        "max_relative_to_peak": 0.016515092629885594,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.1427285875299775e-14,
+        "max_relative_to_peak": 3.060606809486154e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00036312165478548917,
+        "max_relative_to_peak": 0.015535053500861888,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.188500905404865e-14,
+        "max_relative_to_peak": 3.112168243460097e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003843421498741087,
+        "max_relative_to_peak": 0.01508361419083042,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.36497815953263e-14,
+        "max_relative_to_peak": 2.9699865048908937e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003791301342375839,
+        "max_relative_to_peak": 0.015349087038072154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.1306742677101173e-14,
+        "max_relative_to_peak": 2.902801276560343e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q4_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037861921424358816,
+        "max_relative_to_peak": 0.015349087038072154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.086087485198547e-14,
+        "max_relative_to_peak": 2.902801276560343e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004915532866907165,
+        "max_relative_to_peak": 0.019941978494093533,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.0279430228636094e-14,
+        "max_relative_to_peak": 2.696086315188833e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004919553285035115,
+        "max_relative_to_peak": 0.01921499021890558,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 1.2659300574642746e-13,
+        "max_relative_to_peak": 3.749171720184233e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00025181720258940195,
+        "max_relative_to_peak": 0.015071265468750364,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.555455717916481e-14,
+        "max_relative_to_peak": 2.3235858604756104e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003969298284575099,
+        "max_relative_to_peak": 0.015326965508952324,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.667073801606754e-14,
+        "max_relative_to_peak": 2.7378728214958497e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037809893959066655,
+        "max_relative_to_peak": 0.016762289784358387,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 6.516990229929609e-14,
+        "max_relative_to_peak": 3.381896804418987e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003640550296695408,
+        "max_relative_to_peak": 0.01510764850888857,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.644513833618405e-14,
+        "max_relative_to_peak": 2.699912801361581e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003861333786594272,
+        "max_relative_to_peak": 0.01547349560856769,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.42166401034414e-14,
+        "max_relative_to_peak": 3.20921334866335e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037980219037475344,
+        "max_relative_to_peak": 0.015212920098228411,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.5002280813672467e-14,
+        "max_relative_to_peak": 2.915434385975879e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q5_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003793515970487815,
+        "max_relative_to_peak": 0.015212920098228411,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 5.354129482523066e-14,
+        "max_relative_to_peak": 3.01325536153734e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.000495203631748388,
+        "max_relative_to_peak": 0.02004341526810075,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.238544957320721e-14,
+        "max_relative_to_peak": 2.287433776327546e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0004894542172850771,
+        "max_relative_to_peak": 0.019029297183356966,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 1.1215082110834453e-13,
+        "max_relative_to_peak": 2.6901839901514635e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 1,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.0002474567957589752,
+        "max_relative_to_peak": 0.014234976850760724,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 2.873317555612598e-14,
+        "max_relative_to_peak": 1.4816448426304318e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003965268142229229,
+        "max_relative_to_peak": 0.01534321995801345,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.289288045774552e-14,
+        "max_relative_to_peak": 1.813308805547442e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.000378585713858207,
+        "max_relative_to_peak": 0.016551088514872154,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.652640643488501e-14,
+        "max_relative_to_peak": 2.048336585778588e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 16,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00036331433493506005,
+        "max_relative_to_peak": 0.014924453891160665,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.5026057186080385e-14,
+        "max_relative_to_peak": 1.7654911375604556e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 1,
+      "f32_activation_accuracy": {
+        "nmse": 0.00038575419427435147,
+        "max_relative_to_peak": 0.015414306866410805,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.142540702253194e-14,
+        "max_relative_to_peak": 1.992077790700758e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 17,
+      "f32_activation_accuracy": {
+        "nmse": 0.0003800611648764253,
+        "max_relative_to_peak": 0.01496468039626709,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 4.019166807410034e-14,
+        "max_relative_to_peak": 1.984246927113901e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    },
+    {
+      "type": "q6_K",
+      "buffer": "CPU_REPACK",
+      "tokens": 128,
+      "seed": 91,
+      "f32_activation_accuracy": {
+        "nmse": 0.00037913527673187825,
+        "max_relative_to_peak": 0.01496468039626709,
+        "finite": true,
+        "within_limits": true
+      },
+      "activation_reference": "q8_K",
+      "operator_correctness": {
+        "nmse": 3.951979807988732e-14,
+        "max_relative_to_peak": 1.984246927113901e-07,
+        "finite": true,
+        "within_limits": true
+      },
+      "status": "pass"
+    }
+  ],
+  "system_info": "CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | SME = 1 | ACCELERATE = 1 | REPACK = 1 | ",
+  "baseline_passed": false,
+  "scope": "Host CPU reference calibration; not target phone performance."
+}

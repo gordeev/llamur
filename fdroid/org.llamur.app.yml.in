@@ -1,0 +1,36 @@
+# REVIEW TEMPLATE ONLY. Resolve public URLs/immutable app revision before use.
+# Not submitted, not runnable with placeholders, no private source URL embedded.
+Categories:
+  - Writing
+License: Apache-2.0
+AntiFeatures:
+  NonFreeNet:
+    en-US: Optional presets connect to OpenRouter, OpenAI and Anthropic proprietary services; local GGUF chat works offline.
+SourceCode: 'https://github.com/gordeev/llamur'
+IssueTracker: 'https://github.com/gordeev/llamur/issues'
+RepoType: git
+Repo: 'https://github.com/gordeev/llamur.git'
+Builds:
+  - versionName: 0.6.4-dev
+    versionCode: 12
+    commit: '@IMMUTABLE_APPLICATION_COMMIT@'
+    subdir: app
+    gradle:
+      - yes
+    gradleprops:
+      - motoaiCpuVariant=f32-recurrent-long-attention-v2
+      - motoaiCpuKleidiAI=false
+    sudo:
+      - apt-get update
+      - apt-get install -y python3 git
+    srclibs:
+      - llamacpp@701fd25b3a55a90297dec0d925204b29084054c8
+    prebuild:
+      - mkdir -p ../third_party/llama.cpp && git -C "$$llamacpp$$" archive 701fd25b3a55a90297dec0d925204b29084054c8 | tar -x -C ../third_party/llama.cpp
+      - (cd .. && python3 scripts/prepare-cpu-variant.py f32-recurrent-long-attention-v2)
+      # Unused upstream Keynote presentation, executable-bit binary warning.
+      - rm -f ../third_party/llama.cpp/docs/development/llama-star/idea-arch.key ../.tools/llama-long-attention-v2/docs/development/llama-star/idea-arch.key
+    # Stable r28c; use the locked SDK/CMake/Gradle versions in toolchain.lock.json.
+    ndk: r28c
+AutoUpdateMode: None
+UpdateCheckMode: None

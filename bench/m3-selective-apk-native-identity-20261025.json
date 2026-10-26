@@ -1,0 +1,150 @@
+{
+  "apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+  "passed": true,
+  "scope": "Static ELF and strip-normalized diagnostic-library identity only; actual16KiB execution unverified",
+  "libraries": [
+    {
+      "name": "libggml-base.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "4c0ca9b84a8d5beaa87188ffdc4786027fb2d06473546c40b1c16da58d67ca12",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "9edd321012159e674f4ce51b5883fcf911971d15d08f2c7d2f6537c2df7610eb",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "a25b7a18328f15f3e4a92cc176c2271fffa1b5ab1b1a72ebdb4ea6078b506e1f",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "cb022b5cfaf1a6bd52ab7e7aa8a324138fde08fdf189aea2d2a8dde262daf201",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv8.6_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "5d8e3a7f1195dd5569d5a0ba3cacc3f1d00bdb9b497f1b6745984328f20ee3b8",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.0_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "b5ef07e30ec1f90d6228886afef49fd5796bbf4c95ee651377fd2fd0abad9466",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_1.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "5efec3d81c8aadaeb251bd448b5eddd3a6fe63ccfa641a365cb497f275d3a833",
+      "passed": true
+    },
+    {
+      "name": "libggml-cpu-android_armv9.2_2.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "d8c6a3f2d47590ab51ba4f4f0b9f72b5b149253c75f7d404b010f75e5d437398",
+      "passed": true
+    },
+    {
+      "name": "libggml.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "13701746dd60f1a4a9b3ae2e22c70ebcf72886ac267fa6f2eaaa8fc895608ec3",
+      "passed": true
+    },
+    {
+      "name": "libllama-common.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "987056da554550d9fc36204bc76f8718c440de1069436bc8dcbc06df1ad69d19",
+      "passed": true
+    },
+    {
+      "name": "libllama.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "7f65adeed6b4611af0d9300e39592971378e9dbdb2646e356997ccf5a6939ee7",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-probe.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "a2810d49483d65bd7a37d4fe93be9a73b8f9a8b210a2eaaf5ef464f7bbddd298",
+      "passed": true
+    },
+    {
+      "name": "libmotoai-runtime.so",
+      "elf_load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "strip_normalized_identity": true,
+      "sha256": "1377b3eed762b7d3150df945353df4e85d3f9b9c3c420220f5f91753cf527760",
+      "passed": true
+    }
+  ]
+}

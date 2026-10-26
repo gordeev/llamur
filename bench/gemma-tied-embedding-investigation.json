@@ -1,0 +1,34 @@
+{
+  "model": "gemma",
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "tensors": [
+    {
+      "name": "per_layer_model_proj.weight",
+      "dimensions": [
+        2560,
+        10752
+      ],
+      "ggml_type_id": 30,
+      "offset": 10240
+    },
+    {
+      "name": "token_embd.weight",
+      "dimensions": [
+        2560,
+        262144
+      ],
+      "ggml_type_id": 12,
+      "offset": 1992830976,
+      "bytes": 377487360
+    }
+  ],
+  "output_weight_present": false,
+  "source_observation": "Pinned gemma4.cpp creates duplicated output from token_embd before creating tok_embd. Loader duplicate reuse only checks already-created tensors. Same CPU buffer context then creates a second token_embd allocation. Candidate cause of model buffer exceeding file payload; confirm with later value-preserving patch and allocation comparison, no speedup claim.",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "actual_mmap_observation": {
+    "artifact": "bench/results/prefix-service-20261026T014225Z/observations.jsonl",
+    "cpu_mapped_model_bytes": 4961343656,
+    "read_layout_planned_model_bytes": 5338832192,
+    "decision": "Mmap already maps the original payload without a second360MiB allocation. Reordering is a read-layout-only candidate; no current mmap RAM/speed benefit established, so do not add an unneeded patch to the selected mmap profile."
+  }
+}

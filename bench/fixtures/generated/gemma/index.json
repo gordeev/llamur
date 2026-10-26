@@ -1,0 +1,240 @@
+[
+  {
+    "id": "short-code",
+    "kind": "performance",
+    "request": "bench/fixtures/generated/gemma/short-code.json",
+    "sha256": "31ca56840d578886880b81d32613e731823adbf13558e7b8c95f1a2fbab7e9c1",
+    "prompt_tokens": 31
+  },
+  {
+    "id": "unicode-code",
+    "kind": "template",
+    "request": "bench/fixtures/generated/gemma/unicode-code.json",
+    "sha256": "600242c93ff33444414a3ea3667b73d2db9cf9a462cbfb6094f96804e1a83328",
+    "prompt_tokens": 58
+  },
+  {
+    "id": "multi-turn",
+    "kind": "template",
+    "request": "bench/fixtures/generated/gemma/multi-turn.json",
+    "sha256": "0f090c787e5ad817aac54cee6b70abe36b439efd8414b2339cf9a4f92a080e0f",
+    "prompt_tokens": 57
+  },
+  {
+    "id": "literal-control",
+    "kind": "expected_rejection",
+    "request": "bench/fixtures/generated/gemma/literal-control.json",
+    "sha256": "7aab546d74f6949fc7c4f7b484093f8e075f2269bf56cf7105c2868419a4295a",
+    "prompt_tokens": 0
+  },
+  {
+    "id": "add-quality",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/add-quality.json",
+    "sha256": "ceb4b4f62a201ac9a2e8bb1255e279b95cdf4b4c5489da806efdd1894a201b49",
+    "prompt_tokens": 55
+  },
+  {
+    "id": "binary-search-quality",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/binary-search-quality.json",
+    "sha256": "80c7b2972cd77871bdcdf80a96693c9559ac7b0f9adfa4b305e7203a01b17530",
+    "prompt_tokens": 88
+  },
+  {
+    "id": "pp128",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp128.json",
+    "sha256": "206b99a0ed933986994e62030f9eea2ca68f152e63a409e30a747ff5c7848eae",
+    "prompt_tokens": 128
+  },
+  {
+    "id": "pp512",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp512.json",
+    "sha256": "880ca6971c1dfb4544eb88dd36ed612f50cb685de1118ffebf9a15c1046fc88d",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "pp2048",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp2048.json",
+    "sha256": "ccde6c149bfcd3d8197b86f8b6d243724a3ac140ce01dbbe144470b626341919",
+    "prompt_tokens": 2048
+  },
+  {
+    "id": "pp4096",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp4096.json",
+    "sha256": "72604dc97af314d82e6037610efbcd5bb1e86b8b3e331f92674731b81b286068",
+    "prompt_tokens": 4096
+  },
+  {
+    "id": "pp8064",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp8064.json",
+    "sha256": "1eed2e2d1ca17d125ce3553448ba4954119360afbbf56c6b97f70fd81ee2b130",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "needle-7680",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/needle-7680.json",
+    "sha256": "ade47121c8681e547ff7f07b4b35d57e853ec03143550e2c05a7172734aaf3cf",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "binary-search-quality-2048",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/binary-search-quality-2048.json",
+    "sha256": "a084994a216a49f4b8a65189ee5947f88482e31c85525f8025d20375b98eb3e9",
+    "prompt_tokens": 88
+  },
+  {
+    "id": "binary-search-quality-4096",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/binary-search-quality-4096.json",
+    "sha256": "1f802748996dc6d60e62cb837ff23f4348b68e35c9b62e1a8b34be71dab046fe",
+    "prompt_tokens": 88
+  },
+  {
+    "id": "pp128-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp128-diag.json",
+    "sha256": "dac4d50f2d5d8ca8cffd4f9484202a55a909ec114bfe87d8c81fdece7f349249",
+    "prompt_tokens": 128
+  },
+  {
+    "id": "pp512-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp512-diag.json",
+    "sha256": "f6d470e069ce091b118bb55333f6f8c783556c97c53ceeb86995785523f68cd4",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "pp2048-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp2048-diag.json",
+    "sha256": "64124ad854f3ab002fc2d2ec53525b1522d3ffbdaf2a2e1552a19aaee0f4cff0",
+    "prompt_tokens": 2048
+  },
+  {
+    "id": "pp4096-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp4096-diag.json",
+    "sha256": "b7d712732bd792394b2c0ac06fa6e4a7eab0a8c7fa329eb9a1750531d3cc480a",
+    "prompt_tokens": 4096
+  },
+  {
+    "id": "pp8064-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp8064-diag.json",
+    "sha256": "7aec80e0359386f6abc7801b6308485653a5f8ea956b7c87b39d318e8815048b",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "teacher-forcing-code-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/gemma/teacher-forcing-code-v1.json",
+    "sha256": "460b0191ef0f9ee32fe0559bffed8fbba9cf7f22a64b3cf70845cc9c42c91c00",
+    "prompt_tokens": 5
+  },
+  {
+    "id": "teacher-forcing-ru-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/gemma/teacher-forcing-ru-v1.json",
+    "sha256": "9e9031a2c29a5ba9cc62beeb2b079cbde5ae10eed7183e4c871c15739a7ba12e",
+    "prompt_tokens": 6
+  },
+  {
+    "id": "pp8064-full-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp8064-full-diag.json",
+    "sha256": "3553bcd8a3c6c5ec9b3542cd11b18eefc76c6ce2a1b74b3fb2048a1aee8a306d",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "teacher-forcing-code-probe-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/gemma/teacher-forcing-code-probe-v1.json",
+    "sha256": "a42b22bf5616cecfa43ec9b10cc12fbab72a0ac8fbedbfe24b03cc9b1ac0cad4",
+    "prompt_tokens": 5
+  },
+  {
+    "id": "teacher-forcing-bos-probe-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/gemma/teacher-forcing-bos-probe-v1.json",
+    "sha256": "3f9ea650577328941e42703d0084531c0b98ae0c6ea14973b25c831795c0ee11",
+    "prompt_tokens": 1
+  },
+  {
+    "id": "needle-7680-diag",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/needle-7680-diag.json",
+    "sha256": "f6a6c6d0fa9823420172ceb020cbedf53969d2829977aa3bd059754a1b95b0c9",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "add-quality-mmap-v1",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/add-quality-mmap-v1.json",
+    "sha256": "ff2fcc9c01f630cb1f6045860f8a065a9572b15406a34ff613732b98e71c4b08",
+    "prompt_tokens": 55
+  },
+  {
+    "id": "binary-search-quality-4096-mmap-v1",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/gemma/binary-search-quality-4096-mmap-v1.json",
+    "sha256": "baf207b816ebde4d61e784d2dc0e7544b787c9d9776e5afd8f1ebc2d43d97d87",
+    "prompt_tokens": 88
+  },
+  {
+    "id": "needle-7680-mmap-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/needle-7680-mmap-v1.json",
+    "sha256": "9d566a3148050c759c2e65fb2bdb6000e93afc843223c1240c419c88dcf90c37",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "pp8064-full-mmap-v1",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/gemma/pp8064-full-mmap-v1.json",
+    "sha256": "60191ff3560778d90f8061ca1ee5dc2f43f058ae58fde7ecf56e94551abc7de0",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "needle-7680-exact-mmap-v2",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/needle-7680-exact-mmap-v2.json",
+    "sha256": "9e892a34e2bbd52b165fb150cf7743b1cff39ed9eaa154020ad5c3d52f650794",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "short-code-mmap-v1",
+    "kind": "performance",
+    "request": "bench/fixtures/generated/gemma/short-code-mmap-v1.json",
+    "sha256": "737f49b60847e5a3a761006b1de5c70e3c68193143c182e1624896649a8384a9",
+    "prompt_tokens": 31
+  },
+  {
+    "id": "context-16384-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/context-16384-three-depth-v1.json",
+    "sha256": "2140b1b0b47cd962baaddb94fe39526954264191910b53c7c0eda53ccb359d8e",
+    "prompt_tokens": 15872
+  },
+  {
+    "id": "context-32768-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/context-32768-three-depth-v1.json",
+    "sha256": "455efe8677086a57eb94261b2e7c17c2f477e0d75c38e92cb7de5b745fad947a",
+    "prompt_tokens": 32256
+  },
+  {
+    "id": "context-4096-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/gemma/context-4096-three-depth-v1.json",
+    "sha256": "9d95a05742a09139898e23abdc42ac072fe632917ebafd6e7548d1cefd2a4eb7",
+    "prompt_tokens": 3584
+  }
+]

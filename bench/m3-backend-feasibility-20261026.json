@@ -1,0 +1,42 @@
+{
+  "scope": "M3 bounded source/build feasibility; no alternate-model conversion, weights or quantization changed",
+  "captured_utc": "2026-10-25T23:09:48.285650+00:00",
+  "gpu": {
+    "build_report": "bench/results/gpu-build-20261025T230236Z/report.json",
+    "source_build_passed": true,
+    "app_uid_compute_tested": true,
+    "profile_accepted": false,
+    "decision": "CPU remains finalist; tested GPU profiles rejected, unchanged gates",
+    "vulkan_report": "bench/results/gpu-numeric-vulkan-20261026T004249Z/report.json",
+    "opencl_numeric_report": "bench/results/gpu-numeric-opencl-20261026T004432Z/report.json",
+    "opencl_model_report": "bench/results/gpu-model-screen-20261026T012157Z/report.json",
+    "matmul_only_numeric_report": "bench/results/gpu-numeric-opencl-20261026T013621Z/report.json",
+    "matmul_only_model_report": "bench/results/gpu-model-screen-20261026T013729Z/report.json"
+  },
+  "opencl_bf16": {
+    "status": "rejected-as-is",
+    "evidence": "third_party/llama.cpp/ggml/src/ggml-opencl/ggml-opencl.cpp:12090",
+    "reason": "Pinned upload converts BF16 to F16; native runtime now refuses BF16-containing model profiles before replacing a live model"
+  },
+  "mnn": {
+    "commit": "959640b4a168667bc2e0e43ba7d334a2041aaa50",
+    "url": "https://github.com/alibaba/MNN/blob/959640b4a168667bc2e0e43ba7d334a2041aaa50/transformers/llm/export/gguf2mnn.py",
+    "sha256": "8a89c3738947d4ff8a8415fd62f763a762268bc39636d10b0e8b25727afcf9ef",
+    "status": "not-qualified-as-is",
+    "reason": "Existing GGUF importer was inspected: F32 convolution weights downcast to F16; this file lacks Q5_K/BF16 branches. No certified lossless complete import for both locked artifacts. No export executed. This is not a claim that MNN cannot ever support these architectures."
+  },
+  "litert_lm": {
+    "commit": "9a9a74fc1e22831a7888e3ed7e40f73b510016b8",
+    "url": "https://github.com/google-ai-edge/LiteRT-LM/tree/9a9a74fc1e22831a7888e3ed7e40f73b510016b8",
+    "sha256": "e5f4e07969d91b9b1356d7e994d40219c135e91ecab31c7b0edf3fdc8606be19",
+    "status": "not-qualified-for-locked-GGUF",
+    "reason": "Documented execution uses .litertlm; no demonstrated exact-import path for these locked GGUF weights. Re-export/download of a differently quantized model is excluded by owner instruction.",
+    "conversion_docs": "https://developers.google.com/edge/litert/conversion/pytorch/genai"
+  },
+  "hexagon": {
+    "status": "feasibility-unqualified-main-build-excluded",
+    "reason": "Pinned build requires external Hexagon SDK/tools to compile DSP skels; these are absent and their build/distribution licensing is not qualified. Source supports v73 and K quants, so hardware/type support is not falsely ruled out. No DSP performance claim or proprietary binaries downloaded.",
+    "source": "third_party/llama.cpp/ggml/src/ggml-hexagon/CMakeLists.txt",
+    "upstream_hardware_report": "https://github.com/ggml-org/llama.cpp/discussions/26227"
+  }
+}

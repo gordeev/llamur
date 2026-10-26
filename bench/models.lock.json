@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "ornith",
+      "repo": "ornith-ai/Ornith-1.5-9B-GGUF",
+      "revision": "abdd624b12ebf020b767fff532ff44fe552b28c3",
+      "filename": "Ornith-1.5-9B-Q4_K_M.gguf",
+      "bytes": 5780090816,
+      "sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+      "license": "mit",
+      "quantization": "Q4_K_M",
+      "verified_local": true,
+      "metadata_status": "full download SHA-256 verified; GGUF header inspected",
+      "architecture": "qwen35",
+      "metadata_file": "bench/ornith-metadata.json",
+      "tokenizer_hashes": {
+        "tokenizer.chat_template": "f55f52930aa8bf44ab5cb85f99370fcc3c56e9a85640b812086d5330bce5d86b",
+        "tokenizer.ggml.tokens": "5ee0f927bcaa4b9fe85c244776ae9487468e427f83e053fc81f2a186f14936a3",
+        "tokenizer.ggml.merges": "7e299304d9ad9dc312acdbcb1f6ccf0dce1256bf1aa986d651f13814dfd27e7b"
+      },
+      "license_provenance": {
+        "declared_spdx": "MIT",
+        "status": "model-card declaration; no license file found in the inspected GGUF or origin repository tree",
+        "gguf_card_revision": "abdd624b12ebf020b767fff532ff44fe552b28c3",
+        "origin_metadata_revision": "489cb97981b8654bcfcf30ce1f94ed1b62e07b53",
+        "evidence": "bench/results/model-license-research-curl-20261026",
+        "weights_bundled_in_app": false
+      }
+    },
+    {
+      "id": "gemma",
+      "repo": "unsloth/gemma-4-E4B-it-GGUF",
+      "revision": "bfc15c382204943c3a8fff0c750b94ae2364d7a3",
+      "filename": "gemma-4-E4B-it-Q4_K_M.gguf",
+      "bytes": 4977171584,
+      "sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+      "license": "apache-2.0",
+      "quantization": "Q4_K_M",
+      "verified_local": true,
+      "metadata_status": "full download SHA-256 verified; GGUF header inspected",
+      "architecture": "gemma4",
+      "metadata_file": "bench/gemma-metadata.json",
+      "tokenizer_hashes": {
+        "tokenizer.chat_template": "241c50d86bdfe5e43307da87f559cd2416aacd67a8de46c15acc0105ef2200b7",
+        "tokenizer.ggml.tokens": "7905cebbe55e92782d7179b7341d19a4968fdb69e76de970b2d9ede21f1b880d",
+        "tokenizer.ggml.merges": "930c8fe84d284f73233935b8dc5b1499a9810f59a8d64f580c1a5e9c123134de"
+      },
+      "license_provenance": {
+        "declared_spdx": "Apache-2.0",
+        "status": "GGUF card declares Apache2.0 and links official Google license text; inspected Google page supplies Apache2.0",
+        "gguf_card_revision": "bfc15c382204943c3a8fff0c750b94ae2364d7a3",
+        "official_license_url": "https://ai.google.dev/gemma/apache_2",
+        "evidence": "bench/results/model-license-research-curl-20261026",
+        "weights_bundled_in_app": false
+      }
+    },
+    {
+      "id": "smoke",
+      "repo": "ggml-org/models-moved",
+      "revision": "499bc8821c6b12b4e53c5bffcb21ec206f212d81",
+      "filename": "stories260K.gguf",
+      "remote_filename": "tinyllamas/stories260K.gguf",
+      "bytes": 1185376,
+      "sha256": "270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d",
+      "license": "unverified; test fixture only",
+      "role": "smoke-only; never performance evidence for main models",
+      "verified_local": true,
+      "metadata_status": "full download SHA-256 verified; GGUF header inspected"
+    }
+  ]
+}

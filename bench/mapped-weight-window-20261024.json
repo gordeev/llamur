@@ -1,0 +1,86 @@
+{
+  "ornith": {
+    "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+    "scope": "Largest tensor spans from pinned GGUF descriptors, including alignment. No tensor payload change.",
+    "largest": [
+      {
+        "name": "output.weight",
+        "shape": [
+          4096,
+          248320
+        ],
+        "type": 14,
+        "span_bytes": 834355200
+      },
+      {
+        "name": "token_embd.weight",
+        "shape": [
+          4096,
+          248320
+        ],
+        "type": 12,
+        "span_bytes": 572129280
+      },
+      {
+        "name": "blk.0.ffn_down.weight",
+        "shape": [
+          12288,
+          4096
+        ],
+        "type": 14,
+        "span_bytes": 41287680
+      },
+      {
+        "name": "blk.1.ffn_down.weight",
+        "shape": [
+          12288,
+          4096
+        ],
+        "type": 14,
+        "span_bytes": 41287680
+      }
+    ]
+  },
+  "gemma": {
+    "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+    "scope": "Largest tensor spans from pinned GGUF descriptors, including alignment. No tensor payload change.",
+    "largest": [
+      {
+        "name": "per_layer_token_embd.weight",
+        "shape": [
+          10752,
+          262144
+        ],
+        "type": 13,
+        "span_bytes": 1937768448
+      },
+      {
+        "name": "token_embd.weight",
+        "shape": [
+          2560,
+          262144
+        ],
+        "type": 12,
+        "span_bytes": 377487360
+      },
+      {
+        "name": "per_layer_model_proj.weight",
+        "shape": [
+          2560,
+          10752
+        ],
+        "type": 30,
+        "span_bytes": 55050240
+      },
+      {
+        "name": "blk.0.ffn_down.weight",
+        "shape": [
+          10240,
+          2560
+        ],
+        "type": 14,
+        "span_bytes": 21504000
+      }
+    ]
+  }
+}

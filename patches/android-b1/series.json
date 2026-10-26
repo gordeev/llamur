@@ -1,0 +1,29 @@
+{
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "variants": {
+    "B1-jinja": {
+      "directory": ".tools/llama-b1",
+      "diff_sha256": "51175f813b25a8db45cec297c14f7cabe590fdba408d555aee444bb6ca431d9c",
+      "patches": [
+        {
+          "path": "patches/android-b1/0001-enable-jinja.patch",
+          "sha256": "51175f813b25a8db45cec297c14f7cabe590fdba408d555aee444bb6ca431d9c"
+        }
+      ]
+    },
+    "B1-jinja-no-mmap": {
+      "directory": ".tools/llama-b1-no-mmap",
+      "diff_sha256": "2941dbe787976d94e658606b642015f84ea5a80e2358b97b2549b4acfa7f3297",
+      "patches": [
+        {
+          "path": "patches/android-b1/0001-enable-jinja.patch",
+          "sha256": "51175f813b25a8db45cec297c14f7cabe590fdba408d555aee444bb6ca431d9c"
+        },
+        {
+          "path": "patches/android-b1/0002-read-weights-without-mmap.patch",
+          "sha256": "bc4abc5367b99d665b5f5f30dca7187327eab5f2ed9213133c3d06e7a2e44558"
+        }
+      ]
+    }
+  }
+}

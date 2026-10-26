@@ -1,0 +1,457 @@
+{
+  "model": "gemma",
+  "fixture": "teacher-forcing-code-probe-v1",
+  "passed": false,
+  "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+  "request_sha256": "a42b22bf5616cecfa43ec9b10cc12fbab72a0ac8fbedbfe24b03cc9b1ac0cad4",
+  "gates_sha256": "f875bbad6c158074d1a0ee17f08551d00596f4317310ef172d63ee5a16f541c2",
+  "scope": "Small owned teacher-forcing corpus; cross-ISA CPU reference, not whole-model quality or performance acceptance.",
+  "host_runner": "build/reference-host/runtime-run",
+  "host_runner_sha256": "47d07e5e77a9b58308374072f5d1d1be72d87d3978d6ee6d6bc5f9b478766ca7",
+  "host_libraries_sha256": {
+    "build/reference-host/bin/libllama.0.7.0.dylib": "66c6aea7b7d564ca8eb1c19345378c6d5234144d2fe7761e9f7f1ab49c946afd",
+    "build/reference-host/bin/libllama-common.0.7.0.dylib": "9237dd366f550e8860e724b89d5391af42836b0882e4e2e4878c94c648579412",
+    "build/reference-host/bin/libggml-cpu.0.27.0.dylib": "99463e5dc00ab62d0ed12fc0565afb03d9888bbecdcb5ca6a54cc1ea86676b4a",
+    "build/reference-host/bin/libggml.0.27.0.dylib": "45ac4483838e54e380169fd8804bacc4d7cdf9d7a978a2ee4d8998a2a8df711f",
+    "build/reference-host/bin/libggml-base.0.27.0.dylib": "128ec09f8712c6a1f428d3a2baf9a65175e59d885ac91a611854fc721daddb63"
+  },
+  "host_build_flags": [
+    "CMAKE_BUILD_TYPE:STRING=Release",
+    "GGML_ACCELERATE:BOOL=OFF",
+    "GGML_BLAS:BOOL=OFF",
+    "GGML_CPU_ARM_ARCH:STRING=armv8.2-a+fp16+dotprod",
+    "GGML_CPU_KLEIDIAI:BOOL=OFF",
+    "GGML_LLAMAFILE:BOOL=OFF",
+    "GGML_METAL:BOOL=OFF",
+    "GGML_NATIVE:BOOL=OFF",
+    "GGML_OPENMP:BOOL=OFF"
+  ],
+  "app_artifact": "bench/results/app-service-gemma-20261024T201552Z-16ec7804",
+  "apk_sha256": "008b0c1f616fa1ce3771c36d990579ab1b4ec0729e2911eb361b7ea77952fed8",
+  "host_arm64_fpcr": 0,
+  "app_arm64_fpcr": 0,
+  "scored_tokens": 27,
+  "host_mean_nll": 1.8880484815183152,
+  "app_mean_nll": 1.844137477171441,
+  "mean_absolute_token_nll_error": 0.0728725779593486,
+  "maximum_absolute_token_nll_error": 0.3768461376843959,
+  "first_top8_set_matches": true,
+  "first_top8_max_shared_logit_absolute_error": 0.5406684875488281,
+  "layer6_nodes": [
+    {
+      "name": "attn_norm-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 239.39743009158036,
+      "app_l2": 239.39743009158036,
+      "finite": true
+    },
+    {
+      "name": "Qcur-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2048,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 400.39511006119324,
+      "app_l2": 400.39511006119324,
+      "finite": true
+    },
+    {
+      "name": "Qcur_normed-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        256,
+        8,
+        5,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 103.56458967012985,
+      "app_l2": 103.56458967012985,
+      "finite": true
+    },
+    {
+      "name": "Qcur_pos-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        256,
+        8,
+        5,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 103.56458960465886,
+      "app_l2": 103.56458961384709,
+      "finite": true
+    },
+    {
+      "name": "Kcur-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        512,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 415.4403432158109,
+      "app_l2": 415.4403432158109,
+      "finite": true
+    },
+    {
+      "name": "Kcur_normed-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        256,
+        2,
+        5,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 6.176323377598311,
+      "app_l2": 6.176323377598311,
+      "finite": true
+    },
+    {
+      "name": "Kcur_pos-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        256,
+        2,
+        5,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 6.176323370014084,
+      "app_l2": 6.176323369920188,
+      "finite": true
+    },
+    {
+      "name": "Vcur-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        512,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 333.8700767585547,
+      "app_l2": 333.8700767585547,
+      "finite": true
+    },
+    {
+      "name": "Vcur_normed-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        256,
+        2,
+        5,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 50.59643853603499,
+      "app_l2": 50.59643853603499,
+      "finite": true
+    },
+    {
+      "name": "kqv_out-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2048,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 86.01696811576514,
+      "app_l2": 86.0169679274419,
+      "finite": true
+    },
+    {
+      "name": "attn_post_norm-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 208.14428127440422,
+      "app_l2": 208.14428123178052,
+      "finite": true
+    },
+    {
+      "name": "attn_out-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 445.26463333088464,
+      "app_l2": 445.2646333151726,
+      "finite": true
+    },
+    {
+      "name": "ffn_norm-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 97.96883649709103,
+      "app_l2": 97.96883649957675,
+      "finite": true
+    },
+    {
+      "name": "ffn_gate-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        10240,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 601.5377658850624,
+      "app_l2": 601.5377658850624,
+      "finite": true
+    },
+    {
+      "name": "ffn_up-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        10240,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 316.17071203274577,
+      "app_l2": 316.17071203274577,
+      "finite": true
+    },
+    {
+      "name": "ffn_geglu-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        10240,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 525.0267611871137,
+      "app_l2": 525.0267611871137,
+      "finite": true
+    },
+    {
+      "name": "ffn_out-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 625.9087014537531,
+      "app_l2": 625.9087014537531,
+      "finite": true
+    },
+    {
+      "name": "ffn_post_norm-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": true,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 100.12478343041668,
+      "app_l2": 100.12478343041668,
+      "finite": true
+    },
+    {
+      "name": "l_out-6",
+      "host_status": "captured",
+      "app_status": "captured",
+      "shape": [
+        2560,
+        5,
+        1,
+        1
+      ],
+      "host_prompt_end": 5,
+      "app_prompt_end": 5,
+      "fingerprint_matches": false,
+      "sampled_max_absolute_error": 0.0,
+      "host_l2": 273.2902515892726,
+      "app_l2": 273.2902515807426,
+      "finite": true
+    }
+  ],
+  "artifact": "bench/results/score-gemma-teacher-forcing-code-probe-v1-20261024T201538Z",
+  "trig_control": {
+    "scope": "Only first scored token after the original5-token Gemma prefix. Measured Android float trig replaces host trig at exact input bits. |angle|<2^-13 uses correctly-rounded binary32 identities sin(x)=x/cos(x)=1; other unmeasured angles abort. No phone/runtime change, no generated quality or speed claim.",
+    "passed": false,
+    "app_artifact": "bench/results/app-service-gemma-20261024T201552Z-16ec7804",
+    "comparison": "bench/results/score-gemma-teacher-forcing-code-probe-v1-20261024T201538Z/comparison.json",
+    "apk_sha256": "008b0c1f616fa1ce3771c36d990579ab1b4ec0729e2911eb361b7ea77952fed8",
+    "unique_measured_angles": 1507,
+    "host_runner_sha256": "47d07e5e77a9b58308374072f5d1d1be72d87d3978d6ee6d6bc5f9b478766ca7",
+    "interposer_sha256": "216365cb4cb2347647005267633de54cf6afdbc4d66ea006dade466221fae370",
+    "interposer_source_sha256": "824a70a069e64a940e0615a3c303dea3e7e46f1dbcb6e5b821ade19ad755a5f2",
+    "request_sha256": "8e26c46d4d732fa8818f7d15455e98ca5ffd56ceaa0bab565bfac3f1e0a1b4e9",
+    "component_inputs": {
+      "bench/results/math-libm-20261024/phone-10000-256.json": "4c88f43536c0f0bbef7177e8ae34b103f456ea3cf70e63ff586f027d41c5d557",
+      "bench/results/math-libm-20261024/phone-1000000-512.json": "9b6a1f953d567fd45d6fdc2158b76d5e246560daa0833555f91b9bf15ca75d59"
+    },
+    "returncode": 0,
+    "interposition_calls": [
+      0,
+      0,
+      75264,
+      24092
+    ],
+    "first_token_nll_error": 0.320161374800346,
+    "top8_exact": false,
+    "node_fingerprint_mismatches": [
+      "kqv_out-6",
+      "attn_post_norm-6",
+      "attn_out-6",
+      "ffn_norm-6",
+      "ffn_geglu-6",
+      "l_out-6",
+      "l_out-7",
+      "l_out-8",
+      "l_out-9",
+      "l_out-10",
+      "l_out-11",
+      "l_out-12",
+      "l_out-13",
+      "l_out-14",
+      "l_out-15",
+      "l_out-16",
+      "l_out-17",
+      "l_out-18",
+      "l_out-19",
+      "l_out-20",
+      "l_out-21",
+      "l_out-22",
+      "l_out-23",
+      "l_out-24",
+      "l_out-25",
+      "l_out-26",
+      "l_out-27",
+      "l_out-28",
+      "l_out-29",
+      "l_out-30",
+      "l_out-31",
+      "l_out-32",
+      "l_out-33",
+      "l_out-34",
+      "l_out-35",
+      "l_out-36",
+      "l_out-37",
+      "l_out-38",
+      "l_out-39",
+      "l_out-40",
+      "l_out-41",
+      "result_norm"
+    ],
+    "artifact": "bench/results/host-libm-control-20261024T201710Z"
+  },
+  "conclusion": "With measured float trig on host, layer6 Q/K/V and rotated Q/K fingerprints match; earliest remaining captured mismatch is attention output kqv_out-6, before output projection. This localizes a boundary, not the exact kernel/exp/reduction cause.",
+  "observer_control": "bench/results/score-repeat-gemma-teacher-forcing-code-v1-20261024T201646Z/repeatability.json"
+}

@@ -1,0 +1,18 @@
+{
+  "scope": "Passive snapshots during the same unfinished8K run; no causal speedup measured.",
+  "artifact": "bench/results/app-service-gemma-20261024T124923Z-62aaa21b",
+  "ui_cpu_group": "/top-app",
+  "ui_allowed_cpus": "0-7",
+  "inference_cpu_group": "/foreground",
+  "inference_allowed_cpus": "0-6",
+  "observed_vm_swap_kib": 3117096,
+  "cpu_ticks_before_timeout": {
+    "user": 332632,
+    "system": 869
+  },
+  "notes": [
+    "Kernel service and UI groups differ even when UI is top. Investigate supported binding/scheduling APIs without bypassing OS restrictions.",
+    "CPU ticks and major faults retained for profiling; no claim that swapping alone caused the timeout.",
+    "Inference was force-stopped by runner cleanup at15:04:26; not a native crash/OOM diagnosis."
+  ]
+}

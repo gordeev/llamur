@@ -1,0 +1,69 @@
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -11,6 +11,7 @@
+ #include <algorithm>
+ #include <cfloat>
+ #include <cmath>
++#include <vector>
+ 
+ #ifndef MOTOAI_SCALAR_MATH_HELPERS
+ #define MOTOAI_SCALAR_MATH_HELPERS
+@@ -9027,6 +9028,11 @@
+     GGML_ASSERT((                            q_to_vec_dot) && "fattn: unsupported K-type");
+     GGML_ASSERT((v->type == GGML_TYPE_F32 || v_to_float  ) && "fattn: unsupported V-type");
+ 
++    // A long unsplit tail can accumulate tens of thousands of F32 terms.
++    // Wider local accumulation avoids drift without changing KV/Q storage or
++    // the previously qualified <=8192-key arithmetic. Decode chunks stay native.
++    const bool wide_acc = f32_acc && ic_end - ic_start > 8192;
++    std::vector<double> VKQ64(wide_acc ? DV : 0);
+     int ith = params->ith;
+ 
+     for (int ir = ir0; ir < ir1; ++ir) {
+@@ -9038,6 +9044,8 @@
+         const uint32_t h = iq2; // head index
+         const float slope = (max_bias > 0.0f) ? h < n_head_log2 ? powf(m0, h + 1) : powf(m1, 2*(h - n_head_log2) + 1) : 1.0f;
+ 
++        double S64 = 0.0;
++        if (wide_acc) std::fill(VKQ64.begin(), VKQ64.end(), 0.0);
+         float S = 0.0f;      // sum
+         float M = -INFINITY; // maximum KQ value
+ 
+@@ -9103,7 +9111,18 @@
+ 
+             const char * v_data = ((const char *) v->data + (ic*nbv1 + iv2*nbv2 + iv3*nbv3));
+ 
+-            if (v->type == GGML_TYPE_F16 && !f32_acc) {
++            if (wide_acc) {
++                if (s > M) {
++                    M = s;
++                    ms = motoai_expf(Mold - M);
++                    for (int64_t d = 0; d < DV; ++d) VKQ64[d] *= ms;
++                } else {
++                    vs = motoai_expf(s - M);
++                }
++                const float * values = reinterpret_cast<const float *>(v_data);
++                if (v_to_float) { v_to_float(v_data, V32, DV); values = V32; }
++                for (int64_t d = 0; d < DV; ++d) VKQ64[d] += double(values[d]) * vs;
++            } else if (v->type == GGML_TYPE_F16 && !f32_acc) {
+                 if (s > M) {
+                     // s is new maximum, ms < 1.0f, vs == motoai_expf(s - s) == 1.0f
+                     M = s;
+@@ -9141,9 +9160,14 @@
+                 }
+             }
+ 
+-            S = S*ms + vs; // scale and increment sum with partial sum
+-        }
+-
++            if (wide_acc) S64 = S64*ms + vs;
++            else S = S*ms + vs; // scale and increment sum with partial sum
++        }
++
++        if (wide_acc) {
++            S = static_cast<float>(S64);
++            for (int64_t d = 0; d < DV; ++d) VKQ32[d] = static_cast<float>(VKQ64[d]);
++        }
+         if (v->type == GGML_TYPE_F16 && !f32_acc) {
+             for (int64_t d = 0; d < DV; ++d) {
+                 VKQ32[d] = GGML_CPU_FP16_TO_FP32(VKQ16[d]);

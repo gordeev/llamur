@@ -1,0 +1,236 @@
+{
+  "scope": "Corrected CPU-reference APK baseline, no extra weight buffers,F16 KV,ctx8192,t4,b512,ub128,mmap. One warm-up then5 fresh-process short-code128-budget trials/model; storage cache unknown. Not complete-answer/sustained/8K-interactive speed acceptance; no comparison to a speed candidate.",
+  "apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "reference_lock": "bench/cpu-reference.lock.json",
+  "passed": true,
+  "models": {
+    "gemma": {
+      "artifact": "bench/results/series-gemma-short-code-mmap-v1-20261024T231230Z/summary.json",
+      "summary": {
+        "started_utc": "2026-10-24T23:12:30.814733+00:00",
+        "model": "gemma",
+        "fixture": "short-code-mmap-v1",
+        "request_sha256": "737f49b60847e5a3a761006b1de5c70e3c68193143c182e1624896649a8384a9",
+        "kind": "performance",
+        "arguments": {
+          "model": "gemma",
+          "fixture": "short-code-mmap-v1",
+          "repeat": 5,
+          "warmup": 1,
+          "timeout": 600,
+          "cutoff": null
+        },
+        "protocol": "bench/PROTOCOL.md",
+        "scope": "fresh process; storage cache unknown; CPU product APK",
+        "golden_sha256": "6aa7699c9e61499b2f7c56820025f4887340e789981f7b992e5d09ffc5245596",
+        "controller_sources_sha256": {
+          "benchmark.py": "5328093b8c995e4af19cd7057230ea1fa35be6eb770d7f3a7500155998862409",
+          "phone_health.py": "6d577752eeb12baefcede24bc975ffcdfedfd051f2f0b93b0df37a95affaf44a",
+          "phone_model.py": "b362337638e4e1c39efdb3862e263403bc1f10288c21206cf56adbaf5420fe5b",
+          "phone_lease.py": "63ed9b1c47899bb8a53c93ea331e1352b2fe10681face3d51caf3fc3f54c40dd",
+          "evaluate-code.py": "ce900bed260065d06c3f57b561d5d1cf09d4109c9e8e6d5a287002996e1505bc"
+        },
+        "model_phone_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+        "completed_trials": 5,
+        "requested_trials": 5,
+        "paused_at_cutoff": false,
+        "accepted": true,
+        "failure": null,
+        "load_ms": {
+          "values": [
+            1346.418,
+            1275.024,
+            1452.2,
+            1267.546,
+            1307.306
+          ],
+          "median": 1307.306,
+          "minimum": 1267.546,
+          "maximum": 1452.2,
+          "bootstrap_median_ci95": [
+            1267.546,
+            1452.2
+          ]
+        },
+        "ttft_ms": {
+          "values": [
+            3142.664,
+            3425.028,
+            3470.357,
+            3436.309,
+            3377.245
+          ],
+          "median": 3425.028,
+          "minimum": 3142.664,
+          "maximum": 3470.357,
+          "bootstrap_median_ci95": [
+            3142.664,
+            3470.357
+          ]
+        },
+        "prefill_tok_s": {
+          "values": [
+            10.009392684942096,
+            9.137830914755828,
+            9.014743758816637,
+            9.293683083608071,
+            9.280028450771095
+          ],
+          "median": 9.280028450771095,
+          "minimum": 9.014743758816637,
+          "maximum": 10.009392684942096,
+          "bootstrap_median_ci95": [
+            9.014743758816637,
+            10.009392684942096
+          ]
+        },
+        "backend_decode_tok_s": {
+          "values": [
+            6.094513133819768,
+            5.922219711366866,
+            5.835989934158086,
+            5.886387529535065,
+            5.838325906477098
+          ],
+          "median": 5.886387529535065,
+          "minimum": 5.835989934158086,
+          "maximum": 6.094513133819768,
+          "bootstrap_median_ci95": [
+            5.835989934158086,
+            6.094513133819768
+          ]
+        },
+        "completed_pss_kib": {
+          "values": [
+            5443511,
+            5418202,
+            5439754,
+            5442732,
+            5442457
+          ],
+          "median": 5442457,
+          "minimum": 5418202,
+          "maximum": 5443511,
+          "bootstrap_median_ci95": [
+            5418202,
+            5443511
+          ]
+        }
+      }
+    },
+    "ornith": {
+      "artifact": "bench/results/series-ornith-short-code-mmap-v1-20261024T231546Z/summary.json",
+      "summary": {
+        "started_utc": "2026-10-24T23:15:46.788602+00:00",
+        "model": "ornith",
+        "fixture": "short-code-mmap-v1",
+        "request_sha256": "737f49b60847e5a3a761006b1de5c70e3c68193143c182e1624896649a8384a9",
+        "kind": "performance",
+        "arguments": {
+          "model": "ornith",
+          "fixture": "short-code-mmap-v1",
+          "repeat": 5,
+          "warmup": 1,
+          "timeout": 600,
+          "cutoff": null
+        },
+        "protocol": "bench/PROTOCOL.md",
+        "scope": "fresh process; storage cache unknown; CPU product APK",
+        "golden_sha256": "c3fd3af588c3db837b416a4225f375afeb1f5cb3321b2a69718d39fc777615a4",
+        "controller_sources_sha256": {
+          "benchmark.py": "5328093b8c995e4af19cd7057230ea1fa35be6eb770d7f3a7500155998862409",
+          "phone_health.py": "6d577752eeb12baefcede24bc975ffcdfedfd051f2f0b93b0df37a95affaf44a",
+          "phone_model.py": "b362337638e4e1c39efdb3862e263403bc1f10288c21206cf56adbaf5420fe5b",
+          "phone_lease.py": "63ed9b1c47899bb8a53c93ea331e1352b2fe10681face3d51caf3fc3f54c40dd",
+          "evaluate-code.py": "ce900bed260065d06c3f57b561d5d1cf09d4109c9e8e6d5a287002996e1505bc"
+        },
+        "model_phone_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+        "completed_trials": 5,
+        "requested_trials": 5,
+        "paused_at_cutoff": false,
+        "accepted": true,
+        "failure": null,
+        "load_ms": {
+          "values": [
+            1305.866,
+            1281.905,
+            1274.896,
+            1465.525,
+            1487.278
+          ],
+          "median": 1305.866,
+          "minimum": 1274.896,
+          "maximum": 1487.278,
+          "bootstrap_median_ci95": [
+            1274.896,
+            1487.278
+          ]
+        },
+        "ttft_ms": {
+          "values": [
+            6203.39,
+            6161.387,
+            6178.682,
+            6464.077,
+            6330.12
+          ],
+          "median": 6203.39,
+          "minimum": 6161.387,
+          "maximum": 6464.077,
+          "bootstrap_median_ci95": [
+            6161.387,
+            6464.077
+          ]
+        },
+        "prefill_tok_s": {
+          "values": [
+            4.870479342835964,
+            4.892308068639082,
+            4.887514664580459,
+            4.670428125691807,
+            4.764957359984905
+          ],
+          "median": 4.870479342835964,
+          "minimum": 4.670428125691807,
+          "maximum": 4.892308068639082,
+          "bootstrap_median_ci95": [
+            4.670428125691807,
+            4.892308068639082
+          ]
+        },
+        "backend_decode_tok_s": {
+          "values": [
+            3.3638471350259627,
+            3.3553463428125125,
+            3.3343562193042318,
+            3.345873597321531,
+            3.318723979374784
+          ],
+          "median": 3.345873597321531,
+          "minimum": 3.318723979374784,
+          "maximum": 3.3638471350259627,
+          "bootstrap_median_ci95": [
+            3.318723979374784,
+            3.3638471350259627
+          ]
+        },
+        "completed_pss_kib": {
+          "values": [
+            5921562,
+            5921505,
+            5921394,
+            5920521,
+            5921874
+          ],
+          "median": 5921505,
+          "minimum": 5920521,
+          "maximum": 5921874,
+          "bootstrap_median_ci95": [
+            5920521,
+            5921874
+          ]
+        }
+      }
+    }
+  }
+}

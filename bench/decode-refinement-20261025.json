@@ -1,0 +1,29 @@
+{
+  "scope": "Prospective refinement after the comparable t6-auto screening pair: explicit4-thread reusable-pool control,5/7 workers, and8-worker oversubscription on the actual0\u20136 app allowed set; same4-thread prefill. The explicit4 control separates pooling from thread-count effects. No timing/acceptance transferred from exploration.",
+  "baseline": {
+    "id": "t4-auto",
+    "threads": 4
+  },
+  "candidates": [
+    {
+      "id": "t4-pool",
+      "threads": 4,
+      "threads_batch": 4
+    },
+    {
+      "id": "t5-auto",
+      "threads": 5,
+      "threads_batch": 4
+    },
+    {
+      "id": "t7-auto",
+      "threads": 7,
+      "threads_batch": 4
+    },
+    {
+      "id": "t8-auto",
+      "threads": 8,
+      "threads_batch": 4
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "libraries": 13,
+  "previous_apk_sha256": "2c38f6bcac0ac80e402245129c134c9b8d4ae4daed76b5f6b0670af7544888ff",
+  "apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+  "scope": "Java admission exclusion only; all native libraries directly byte-identical"
+}

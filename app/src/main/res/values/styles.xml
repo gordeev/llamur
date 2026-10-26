@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LlamurLight" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorAccent">#168ACB</item>
+        <item name="android:alertDialogTheme">@style/LlamurDialogLight</item>
+    </style>
+    <style name="LlamurDark" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:colorAccent">#43B3ED</item>
+        <item name="android:alertDialogTheme">@style/LlamurDialogDark</item>
+    </style>
+    <style name="LlamurDialogLight" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:colorAccent">#168ACB</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
+    <style name="LlamurDialogDark" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">#43B3ED</item>
+        <item name="android:colorBackground">#202E3B</item>
+        <item name="android:colorBackgroundFloating">#202E3B</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
+</resources>

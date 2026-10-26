@@ -1,0 +1,28 @@
+{
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "scope": "Experimental M2 numeric controls; not selected in product APK. Original B0 stays pristine. No weight/KV change. Must pass independent attention, model corpus/task and performance gates before acceptance.",
+  "variants": {
+    "f32-attention": {
+      "directory": ".tools/llama-cpu-f32-attention",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        }
+      ]
+    },
+    "f32-attention-scalar-math": {
+      "directory": ".tools/llama-cpu-f32-math-v2",
+      "patches": [
+        {
+          "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+          "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+        },
+        {
+          "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+          "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+        }
+      ]
+    }
+  }
+}

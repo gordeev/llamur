@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "apk_sha256": "a41f7fd34d7c432048f05583fcb9111e00c2fcfb0cfd04ed3c1eff9e97abba32",
+  "libraries": {
+    "libggml-base.so": {
+      "build_id": "93e3cdcf73a822d603dc01df34b1b2839019ff89",
+      "source_sha256": "66383c84019a93ad0b6748825d643143f6ba8b153605f3a503fff7c4e44957f5",
+      "apk_library_sha256": "1c31c5894a42db534d89c33d72d010d06fdb78e62a843a0f26fb90aa9f494eec",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv8.0_1.so": {
+      "build_id": "ae03f93ca6a34607a835346ddbcca5dc66bad3f4",
+      "source_sha256": "038ffd800681987f04a5867f9be3e76b7cab985c4f17a79c20dbbe1fdc68bd12",
+      "apk_library_sha256": "a903564ff0235f677b50362d06010687ece4a13970277ecbffaff9b1221a54a3",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv8.2_1.so": {
+      "build_id": "942a8619cb5aca304f34dfdd439b34af75b668fa",
+      "source_sha256": "126f1e1705538e84a3a392fe4eb20d85f4acef000437434e17b1a61b4379a906",
+      "apk_library_sha256": "ff3748ef2c03bd9eb2564549ad5487dd5237212c051efb73b74a5665c42ef235",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv8.2_2.so": {
+      "build_id": "5965fc080fdc15c7412c3dd66a949560a268e10a",
+      "source_sha256": "a0de042e87fc5831277b84c95d0829300268f207126787a0265f54e1e8f9b580",
+      "apk_library_sha256": "a0244b3c4b8abfd3f79ec22e60b4dbb1f2296fae06dd62d75f9da11e1c54a500",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv8.6_1.so": {
+      "build_id": "e620f1cbb986cbafe7459586d35dae415460a0bf",
+      "source_sha256": "f4cb13f203718ad67ea671dada2ffe5f4f9ebaf137c87da55da38e003fd30456",
+      "apk_library_sha256": "b1d14e9c29aeb67df0e83f53a5b6234df01dd1f0b919b55804ae60ff11090b26",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv9.0_1.so": {
+      "build_id": "35243b2a25f2015e8e36770e9162945d0bc52b15",
+      "source_sha256": "be938d00adbc08bc6b41acae50d47466d84e5b82c153e4334ffea9004a0b0ca2",
+      "apk_library_sha256": "9485e83de995467038badc1a09e287d0c570b142376d8737835e49137e5b79c7",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv9.2_1.so": {
+      "build_id": "9b55a375daac12c31ad5950e0a2a8fbc4e705715",
+      "source_sha256": "bf42aa84189ab47f908fad907167ca10a8cce7c2d38e1e5ee93772d039b049fd",
+      "apk_library_sha256": "599a42a963fb38c88c53014a1aacd16346e6c878f738d0f56b85324f293eae70",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml-cpu-android_armv9.2_2.so": {
+      "build_id": "4175f15e4041b5b7e705c7c8cde72fa5dc43d6d4",
+      "source_sha256": "78b59516685ebc6e2e9c2c9ed89a6f4f4a950b409ba37462549eb556c6694010",
+      "apk_library_sha256": "fea07d35752de5be82699306f281816749ea9f0163126af88bdc6276838d7be6",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libggml.so": {
+      "build_id": "dc8b4cace17661e5f3c5f3257975d98713dfb7e2",
+      "source_sha256": "cfaeb2e7523c90af72004f2f4c7aad5f9ca766b610fb1bc5005ada1eba5691b5",
+      "apk_library_sha256": "1e7ea45e2cc92bf4675b33e777fd66546fa7374f7fbd0bf77d18dbbd2ac05c20",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libllama-common.so": {
+      "build_id": "c570c238fda01383d531863d1282ecd19361eb47",
+      "source_sha256": "1b12fb8331174d644491aa706f0a5508039e33b35f84af827a9d778d70407cd8",
+      "apk_library_sha256": "3e36df25c1f49ef834a08598d0f6ab6b5b49b7f9f3fc7c28a6a74a93f5f6b124",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libllama.so": {
+      "build_id": "5e07552633a25946798e03e3e6902e439b400dd8",
+      "source_sha256": "a0dde24106ee44113480a1546f0932a04ad6ff9d02cfdb4ad7256ec76a67a504",
+      "apk_library_sha256": "c2169700febac9be1800ba29bb014753357f347c1b8b0143797f7fa8b6314a0f",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libmotoai-probe.so": {
+      "build_id": "d014acfa05215068105af721d29bc3c4993d8b3d",
+      "source_sha256": "b3f91b8ce06bb39d52967b5936dcf7a759c036235c3aff37a87f551c1a76608b",
+      "apk_library_sha256": "a06613023a629a41aacc75f5e6829b458e0c3d2b47d3362ca01e0771e30e5b6d",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    "libmotoai-runtime.so": {
+      "build_id": "6ae0e2fce2bc5c3c315508d015a31ba8ad9a892b",
+      "source_sha256": "edf3f7725d8f74b255342f0d1e49d8544af0b3fd1f2e96bbb1bafc3879e14842",
+      "apk_library_sha256": "6b91593a250557fdeb8d06b3c020cdfbb5e196b71324445fc7a0e5b33ab69c31",
+      "strip_normalized_identity": true,
+      "load_alignment_bytes": [
+        16384,
+        16384,
+        16384
+      ]
+    }
+  },
+  "scope": "Static identity/alignment only; actual16KiB device untested"
+}

@@ -1,0 +1,190 @@
+{
+  "passed": true,
+  "scope": "Packaged native/symbol byte identity and static ELF/ZIP page compatibility; no runtime/quality/speed acceptance",
+  "apk_sha256": "731a854cbdc4f0aa1aaff5f73218b94ae51ca925d341f6eede564f93d16494dc",
+  "libraries": {
+    "libggml-base.so": {
+      "build_id": "3dfb4bcdc5ea08afb674caa187ccb6d640650cea",
+      "symbol_sha256": "17e8df3abad8a13208214830ec99f46c6fc869593d84e7a733097b83057ce4d2",
+      "apk_library_sha256": "8c8f874fdd9424bd72e845fadb5f9995426f0d8306c366db4c48c3285897cde1",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 2693179
+    },
+    "libggml-cpu-android_armv8.0_1.so": {
+      "build_id": "ef2f23bb9d0279701fd25ac6b442692800c99914",
+      "symbol_sha256": "0398ca26a4624730025c0ccfd7a34d355cb049e1f4d54cf4bc96890add27ec1d",
+      "apk_library_sha256": "e36b197c066a5b13aa88dc061f5b6e3fa1ec7ab74db7d64e07e7bee34a29a8b6",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 3183604
+    },
+    "libggml-cpu-android_armv8.2_1.so": {
+      "build_id": "bd7845b743b6d354b956dff30f18e324701be3c8",
+      "symbol_sha256": "d629ae37e706b4844e376331861b1e00624667784a377fec52e28c3e61a4bd3c",
+      "apk_library_sha256": "4d1b28939e3b2146c921c757e8ae90fc3813da47eb6e0d2e2cfa3fad2f8ba28d",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 3546845
+    },
+    "libggml-cpu-android_armv8.2_2.so": {
+      "build_id": "8bdcf9a079157d3211286cb53532de7a58f84cf9",
+      "symbol_sha256": "70bc04e3b2fc8a5a65398f441186440e26b93ccba395eb0bbd850cc18121dd12",
+      "apk_library_sha256": "fdcc6224f9298754e993c47defa03c4a6a717849a11d4e6a9c5bdd33f4cd0463",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 3925704
+    },
+    "libggml-cpu-android_armv8.6_1.so": {
+      "build_id": "58ffaad87ef13898046d84d5a78dd46057b5d9c0",
+      "symbol_sha256": "955ca8882d4708ed64ff477b437db42c4842f7fcf3cc7a2e108ae4323185dcc1",
+      "apk_library_sha256": "c6bf0ea20d0c768a1d3d0ab6db23819bc3a9a865a1f9a42d21b048f69aa5ee7d",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 4304315
+    },
+    "libggml-cpu-android_armv9.0_1.so": {
+      "build_id": "acc5b6e5ead5f99c5dafa53fcc70bd34caac6735",
+      "symbol_sha256": "54b99d2f9f230b8827887b7e4f486d8b2c12ab815a92ee628fa455243d18ad8c",
+      "apk_library_sha256": "0b5f227f0bf12692a2dca35801c118a4f0b9370a49878ed85df12339161ee920",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 4691405
+    },
+    "libggml-cpu-android_armv9.2_1.so": {
+      "build_id": "ca8d8c2d02120480c7a531f740762a699aa2cd62",
+      "symbol_sha256": "6c5f8e2f3efa55c3b56c3c49c748d4e279c35fbaa9616d4d5abd9c58c029ec6c",
+      "apk_library_sha256": "22fbcb0206674d254e03171d1d40bd9f6ada6c07645d80ef587429d0364d22a9",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 5090540
+    },
+    "libggml-cpu-android_armv9.2_2.so": {
+      "build_id": "ee62d9fee06a8d409e0a8d405acd709cc050d49f",
+      "symbol_sha256": "79cb2ca598d7c66d04f3120cf3ab363f621bb73d7287d3b8c3b209000adda270",
+      "apk_library_sha256": "b4e6936c07f92f56bfc07183cd895652f7f75db55760af32fe63f7fc3fc9fadb",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 5489673
+    },
+    "libggml.so": {
+      "build_id": "522b04d18c18fdc0b057613e2d5bd73991fd5ba6",
+      "symbol_sha256": "5b05da999d1b99ea7a9482b93a15749053104759a12d414d3b7223bea43ec7fc",
+      "apk_library_sha256": "364f6c0302f24a0c6e5b19a39fc57d91c1919671924f1f9b34efce3d6a8f1a57",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 5888748
+    },
+    "libllama-common.so": {
+      "build_id": "be6530ccf47c8604bf79c2570670754271c4e773",
+      "symbol_sha256": "ee8f4a71604202ea4bb56c4d6e0d336f6b3faabe67eaba07eabab1ef9743393b",
+      "apk_library_sha256": "c80ae193806a5963e86ac1a030956df434e13300073a3b44b152158e80ab0537",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 5945191
+    },
+    "libllama.so": {
+      "build_id": "f82e4bbe5ec054bce5d47c1d18935a6825894c41",
+      "symbol_sha256": "b17a15222beb266025e75c600b4284a0ae0c16ce6bbd96b43196e2c7243fd8f5",
+      "apk_library_sha256": "219c34ccc655a5bcf565d850ab5bd4da9dbacc716340501fb73a9442544dc217",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 7797867
+    },
+    "libmotoai-checks.so": {
+      "build_id": "ff8f9fbaa37d97eac73be5407e6147fc401b1214",
+      "symbol_sha256": "5700c0d19e3c522506d9a25065614ecfc59fb0fc8f2af46a2bfd1d795891e835",
+      "apk_library_sha256": "06b2c7f3b12873c6950f15380a6157eb7398b9a5e2c9ebf935fe9d882f561cce",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 9530030
+    },
+    "libmotoai-probe.so": {
+      "build_id": "c3855adf5d1feeeb4b61eaf262165d060553f8d0",
+      "symbol_sha256": "2b152f9908afd3caf8263fadfb31465e0da9821cc64f09ee0d970ec6f3aef1c0",
+      "apk_library_sha256": "3406b232e1da4da0e3a7b00a8a2739ea2bbe533cbe053c5c63d7bfa08b13d777",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 9617790
+    },
+    "libmotoai-runtime.so": {
+      "build_id": "01b8aa66a0d54631693ad71d1fe968a2a7a814b1",
+      "symbol_sha256": "243dd26b2a86ef01c675adafbbf7217c7ad474745d6fb7137bedc48a066d905f",
+      "apk_library_sha256": "65682dd8333fe7ff91dad1db555d465ee1228306ec00f12bfb6818efb5671d60",
+      "strip_normalized_identity": true,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "zip_compression": 8,
+      "zip_data_offset": 2510636
+    }
+  },
+  "zipalign_passed": true
+}

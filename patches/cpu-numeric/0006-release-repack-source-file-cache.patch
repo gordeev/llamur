@@ -1,0 +1,28 @@
+--- a/src/llama-model-loader.cpp
++++ b/src/llama-model-loader.cpp
+@@ -15,6 +15,7 @@
+ #include <regex>
+ #include <unordered_set>
+ #if defined(__ANDROID__)
++#include <fcntl.h>
+ #include <sys/mman.h>
+ #include <unistd.h>
+ #endif
+@@ -1757,6 +1758,17 @@
+                         if (last > first && madvise((uint8_t *) mapping->addr() + first, last - first, MADV_DONTNEED) != 0) {
+                             throw std::runtime_error("CPU_REPACK source-page discard failed");
+                         }
++                        if (last > first) {
++                            // Discarding PTEs alone leaves hot source pages in
++                            // the file cache. Advise only the consumed tensor's
++                            // clean interior, after synchronous packing; never
++                            // drop global caches or change model bytes.
++                            const int error = posix_fadvise(files.at(weight->idx)->file_id(), first,
++                                    last - first, POSIX_FADV_DONTNEED);
++                            if (error != 0) {
++                                throw std::runtime_error("CPU_REPACK source-cache advice failed: " + std::to_string(error));
++                            }
++                        }
+                     }
+                 }
+ #endif

@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "apk_sha256": "ca27a011514b9d94ec939746f7bfc8aabec3b2c3502eb07d82d766b969e1ac12",
+  "tests_sha256": "096eebac6c69346b057267860486e18173604ca92bc0d32b8fcb428de158a039",
+  "scope": "Real English Android UI, public scripted loopback conversations, no paid/model inference claim.",
+  "dark": {
+    "passed": true,
+    "screenshots": {
+      "passed": true,
+      "theme": 2,
+      "screens": 6,
+      "scope": "Actual English Android UI; four real service requests to a public scripted loopback fixture. No cloud/model inference or speed claim; no private user data."
+    }
+  },
+  "light": {
+    "passed": true,
+    "screenshots": {
+      "passed": true,
+      "theme": 1,
+      "screens": 6,
+      "scope": "Actual English Android UI; four real service requests to a public scripted loopback fixture. No cloud/model inference or speed claim; no private user data."
+    }
+  },
+  "images_sha256": {
+    "about-dark.png": "bf48226d7725c7fc37e47dcadd95ab790ee3bd6d8b398ebc9a842332fd9a1746",
+    "about-light.png": "b0e4dbf8c5997cf44c1fb355cd4aba339bb11929931cc07bb4e72991ebf12185",
+    "chat-dark.png": "1b0c0bb3f971ab1ec0ab55c3da87072fd5274b6b92eab7c62ee0951037ff8d6d",
+    "chat-light.png": "7e6287463c8d0da9835004f188b7a19be8859c38568fefa3b46a979c6d5f80f9",
+    "home-dark.png": "c143a061b0d5fe1c2124629e4168787f7e438c1c0fa29943f68cef555d839377",
+    "home-light.png": "43b47dfbd9d11b057796514da1a4fa6d2121030c9152e240d0b7f13a0791238c",
+    "hugging-face-dark.png": "7ec25cc1606c2a793966ea2f9612fbeeb90c5d558aca9f7a06507412ce968868",
+    "hugging-face-light.png": "7678d00342f3d3d0fd5b19464a3d2ee0051754506f0b24fea29b25dc83350b52",
+    "settings-dark.png": "75bf12a093e6e6752bff6a8e1577ac29c4546922a64e376b26eb89fd6b4a49d1",
+    "settings-light.png": "26eae4048b7f4752ddb767dcf686e1dca16ecc991633c5a9a385c573e7448c00",
+    "storage-dark.png": "6f08826914318421006d31e56563c155f79b210609486f3defcf3bd61d9746fc",
+    "storage-light.png": "8e5ec113de6d8c8a95239b1bb5957888b1bd1bb29e7b7e1f70857333f67514b3"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "scope": "Single long correctness runs; timings are not paired speed comparisons. VmSwap is process swap accounting, not extra physical RAM. Samples can miss brief peaks.",
+  "cases": {
+    "gemma_full": {
+      "apk_sha256": "a02b4206b5e7f53bbdf16768f45066ed5151c3ccba3108c7685cbbaa223adede",
+      "report": "bench/results/weight-buffers-gemma-pp8064-full-mmap-v1-20261025T080038Z/report.json",
+      "artifact": "bench/results/app-service-gemma-20261025T080039Z-65557a14",
+      "passed": true,
+      "prompt_tokens": 8064,
+      "generated_tokens": 128,
+      "finish_reason": "length",
+      "logits_checks": 128,
+      "prefill_s": 583.151519,
+      "decode_s": 42.865828,
+      "sampled_peak_swap_bytes": 16535552,
+      "end_status": "VmHWM:\t 3692808 kB\nVmRSS:\t 3674128 kB\nVmSwap:\t   16124 kB\nCpus_allowed_list:\t0-6",
+      "comparison": {
+        "generated_ids_match": true,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.0,
+        "numeric_passed": true
+      }
+    },
+    "ornith_q6": {
+      "apk_sha256": "9500cbaf528b30d6dce92ab8287c99161e191dc847876ce7ea0908980251e45b",
+      "report": "bench/results/weight-buffers-ornith-needle-7680-exact-mmap-v2-20261025T084819Z/report.json",
+      "artifact": "bench/results/app-service-ornith-20261025T084819Z-abc866c0",
+      "passed": true,
+      "prompt_tokens": 7680,
+      "generated_tokens": 39,
+      "finish_reason": "eog",
+      "logits_checks": 40,
+      "prefill_s": 1261.43802,
+      "decode_s": 18.198391,
+      "sampled_peak_swap_bytes": 1119436800,
+      "end_status": "VmHWM:\t 5413744 kB\nVmRSS:\t 5359180 kB\nVmSwap:\t  110708 kB\nCpus_allowed_list:\t0-6",
+      "comparison": {
+        "generated_ids_match": true,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.0,
+        "numeric_passed": true
+      }
+    }
+  }
+}

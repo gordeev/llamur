@@ -1,0 +1,29 @@
+{
+  "scope": "Bounded M2 corrected CPU reference. Original platform-table comparisons stay retained; this explicit host-only table control changes no phone/APK math. Not M2, product-profile or speed acceptance.",
+  "upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+  "runtime_variant": "f32-recurrent-scalar-math",
+  "patch_series": "patches/cpu-numeric/series.json",
+  "patch_series_sha256": "7ed85485d1e6bb4991fc7ef139a10668ad0b7e48d8be2b5638556bad9b95c42a",
+  "model_lock": "bench/models.lock.json",
+  "activation_table": "bench/fixtures/reference/android-gelu-f16-v1.json",
+  "activation_table_sha256": "43c10417223cf689bdfd7dc6ba6a4dbbab57cf4e7ef43d5ab5875755807817f0",
+  "current_apk_table_verification_pending": false,
+  "gates": "bench/logit-gates.json",
+  "gates_sha256": "f875bbad6c158074d1a0ee17f08551d00596f4317310ef172d63ee5a16f541c2",
+  "patches": [
+    {
+      "path": "patches/cpu-numeric/0001-honor-f32-attention.patch",
+      "sha256": "b61ed2bddbb739c6d1727e7415b4a9c31a125ab83e0aee8dae4b7c38a5b2ade0"
+    },
+    {
+      "path": "patches/cpu-numeric/0002-reproducible-scalar-math.patch",
+      "sha256": "d87b491b103d1b249b7830f6dd7ae502ca8c4e9332e44c99a13d71c49b60093e"
+    },
+    {
+      "path": "patches/cpu-numeric/0003-recurrent-convolution-and-unary-math.patch",
+      "sha256": "83319fa0a2736d7dca662b494b60cd5cbe35d59a995665f0cd43f636f0946241"
+    }
+  ],
+  "current_apk_table_verification": "bench/results/activation-tables-current-20261024T230931Z/report.json",
+  "qualification": "Bounded M2 same-activation-semantics CPU reference; current installed APK table verified. The frozen fixture scope describes its creation-time pending status; later proof is recorded here without mutating fixture bytes."
+}

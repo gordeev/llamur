@@ -1,0 +1,43 @@
+{
+  "health": {
+    "ready": true,
+    "boot_completed": true,
+    "battery": {
+      "percent": 81.0,
+      "status": 4,
+      "charging": false,
+      "temperature_c": 39.0,
+      "ac_connected": true,
+      "usb_connected": false
+    },
+    "boot_id_sha256": "a2e6a90bdbd73d95fb909a81f7fecabd5c42aac101e2ec1403f0ca8c9d6d7080",
+    "uptime": 76268.34
+  },
+  "utc": "2026-10-25T18:49:07.807213+00:00",
+  "purpose": "Read-only repeat precondition; no governor or power changes",
+  "policies": {
+    "0": {
+      "cpus": [
+        0,
+        1,
+        2
+      ],
+      "max_khz": 1670400
+    },
+    "3": {
+      "cpus": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "max_khz": 1785600
+    },
+    "7": {
+      "cpus": [
+        7
+      ],
+      "max_khz": 1593600
+    }
+  }
+}

@@ -1,0 +1,83 @@
+--- a/ggml/include/ggml-cpu.h
++++ b/ggml/include/ggml-cpu.h
+@@ -2,6 +2,9 @@
+ 
+ #include "ggml.h"
+ #include "ggml-backend.h"
++
++// Experimental: retain the accepted4-worker F32 attention reduction grouping.
++#define GGML_MOTOAI_F32_KV_CHUNKS 4
+ 
+ #ifdef  __cplusplus
+ extern "C" {
+--- a/ggml/src/ggml-cpu/ggml-cpu.c
++++ b/ggml/src/ggml-cpu/ggml-cpu.c
+@@ -3006,7 +3006,7 @@
+ 
+                         // Decode path: n_kv_chunks = n_tasks (one chunk per thread)
+                         // Per-thread: VKQ accmulator (DV), partial M, partial S + intra-thread scratch for V, Q and VKQ
+-                        size_t n_chunks = n_tasks;
++                        size_t n_chunks = MAX(n_tasks, GGML_MOTOAI_F32_KV_CHUNKS);
+                         size_t decode   = sizeof(float)*(neq2*n_chunks*(2+DV) + n_tasks*(DK + 2*DV));
+ 
+                         cur += MAX(prefill, decode);
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -9603,34 +9603,31 @@
+     const bool use_split_kv_path = !use_ref && (neq1 == 1 && neq3 == 1) && kv_is_f32_or_f16 && (k->type == v->type) && q->type == GGML_TYPE_F32 && nek1 >= 512;
+ 
+     if (use_split_kv_path) {
+-        const int64_t chunk_size = (nek1 + nth - 1) / nth;
+-
+-        // Partials buffer layout: [q_head][kv_chunk][M, S, VKQ]
+-        const int64_t partial_size  = 2 + DV;
+-        float *       partials_base = (float *) params->wdata + nth * (DK + 2*DV + CACHE_LINE_SIZE_F32);
+-
+-        const int64_t ic_start = ith * chunk_size;
+-        const int64_t ic_end   = std::min(ic_start + chunk_size, nek1);
+-
+-        const int64_t partial_stride = nth * partial_size;
+-        float *       chunk_partials = partials_base + ith * partial_size;
+-
+-        if (ic_start < nek1) {
+-            for (int64_t q_head = 0; q_head < neq2; q_head++) {
++        // Worker count is a scheduling choice, not a change to F32 arithmetic.
++        // Keep the accepted4-worker KV partitions and ascending reduction order;
++        // distribute independent (query head, KV chunk) jobs across all workers.
++        const int64_t n_chunks = ggml_prec_get_acc(dst) == GGML_PREC_F32 ? GGML_MOTOAI_F32_KV_CHUNKS : nth;
++        const int64_t chunk_size = (nek1 + n_chunks - 1) / n_chunks;
++        const int64_t partial_size = 2 + DV;
++        float * partials_base = (float *) params->wdata + nth * (DK + 2*DV + CACHE_LINE_SIZE_F32);
++        const int64_t partial_stride = n_chunks * partial_size;
++
++        for (int64_t job = ith; job < neq2 * n_chunks; job += nth) {
++            const int64_t q_head = job / n_chunks;
++            const int64_t chunk = job % n_chunks;
++            const int64_t ic_start = chunk * chunk_size;
++            const int64_t ic_end = std::min(ic_start + chunk_size, nek1);
++            float * partial = partials_base + job * partial_size;
++            if (ic_start < nek1) {
+                 ggml_compute_forward_flash_attn_ext_f16_one_chunk(
+-                    params, dst, q_head, q_head + 1, ic_start, ic_end,
+-                    chunk_partials, partial_stride);
+-            }
+-        } else {
+-            for (int64_t q_head = 0; q_head < neq2; q_head++) {
+-                float * q_partials = chunk_partials + q_head * partial_stride;
+-                q_partials[0] = -INFINITY;  // M
+-                q_partials[1] = 0.0f;       // S
+-            }
+-        }
+-
++                    params, dst, q_head, q_head + 1, ic_start, ic_end, partial, partial_stride);
++            } else {
++                partial[0] = -INFINITY;
++                partial[1] = 0.0f;
++            }
++        }
+         ggml_barrier(params->threadpool);
+-        ggml_flash_attn_ext_reduce_partials(params, dst, nth, chunk_size);
++        ggml_flash_attn_ext_reduce_partials(params, dst, n_chunks, chunk_size);
+     } else {
+ 
+         // total rows in q

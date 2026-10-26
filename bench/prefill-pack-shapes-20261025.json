@@ -1,0 +1,23 @@
+{
+  "scope": "Local GGUF tensor descriptors only; payload not read or rehashed here. Synthetic benchmark will use shapes, never model values.",
+  "model_sha256_from_lock": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "model_filename": "Ornith-1.5-9B-Q4_K_M.gguf",
+  "header_bytes": 10968997,
+  "header_sha256": "b75b48ed051ba447b98ee11972f2c089471d12aef9080a829e8236bbb263d999",
+  "largest_linear_shapes": {
+    "q4_K": {
+      "tensor": "blk.0.ffn_gate.weight",
+      "type": "q4_K",
+      "k": 4096,
+      "m": 12288,
+      "bytes": 28311552
+    },
+    "q6_K": {
+      "tensor": "blk.0.ffn_down.weight",
+      "type": "q6_K",
+      "k": 12288,
+      "m": 4096,
+      "bytes": 41287680
+    }
+  }
+}

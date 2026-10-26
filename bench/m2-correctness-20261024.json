@@ -1,0 +1,352 @@
+{
+  "date": "2026-10-24",
+  "apk_sha256": "aaf8573ead4a54efe26af1fdff2f371e467f28a3532b1570e605823bc38d911d",
+  "milestone_accepted": false,
+  "scope": "M2 ledger in progress. Collection success is not whole-model quality/performance acceptance.",
+  "completed": [
+    {
+      "model": "gemma",
+      "fixture": "add-quality",
+      "kind": "quality",
+      "series": "bench/results/series-gemma-add-quality-20261024T123545Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "ceb4b4f62a201ac9a2e8bb1255e279b95cdf4b4c5489da806efdd1894a201b49",
+      "artifact": "bench/results/app-service-gemma-20261024T123554Z-239a2a7a",
+      "prompt_tokens": 55,
+      "generated_tokens": 155,
+      "finish_reason": "eog",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5905644 kB\nVmRSS:\t 5887000 kB\nVmSwap:\t   18936 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "quality": {
+        "passed": true,
+        "cases": 153,
+        "finish_reason": "eog",
+        "task_completed": true,
+        "quality_passed": true
+      }
+    },
+    {
+      "model": "gemma",
+      "fixture": "binary-search-quality",
+      "kind": "quality",
+      "series": "bench/results/series-gemma-binary-search-quality-20261024T123822Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "80c7b2972cd77871bdcdf80a96693c9559ac7b0f9adfa4b305e7203a01b17530",
+      "artifact": "bench/results/app-service-gemma-20261024T123831Z-721410a0",
+      "prompt_tokens": 88,
+      "generated_tokens": 1024,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5922160 kB\nVmRSS:\t 5818044 kB\nVmSwap:\t   97736 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "quality": {
+        "passed": false,
+        "classification": "no_complete_code_block",
+        "finish_reason": "length",
+        "task_completed": false,
+        "quality_passed": false
+      }
+    },
+    {
+      "model": "gemma",
+      "fixture": "literal-control",
+      "kind": "expected_rejection",
+      "series": "bench/results/series-gemma-literal-control-20261024T123508Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "7aab546d74f6949fc7c4f7b484093f8e075f2269bf56cf7105c2868419a4295a",
+      "artifact": "bench/results/app-service-gemma-20261024T123517Z-510ea13b",
+      "prompt_tokens": null,
+      "generated_tokens": null,
+      "finish_reason": null,
+      "thermal_status": null,
+      "process_status": null,
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "expected_error_observed": "runtime"
+    },
+    {
+      "model": "gemma",
+      "fixture": "multi-turn",
+      "kind": "template",
+      "series": "bench/results/series-gemma-multi-turn-20261024T123417Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "0f090c787e5ad817aac54cee6b70abe36b439efd8414b2339cf9a4f92a080e0f",
+      "artifact": "bench/results/app-service-gemma-20261024T123425Z-37f7d3d0",
+      "prompt_tokens": 57,
+      "generated_tokens": 1,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5905424 kB\nVmRSS:\t 5888156 kB\nVmSwap:\t   18952 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    },
+    {
+      "model": "gemma",
+      "fixture": "short-code",
+      "kind": "performance",
+      "series": "bench/results/series-gemma-short-code-20261024T122033Z",
+      "data_collection_passed": true,
+      "measured_trials": 5,
+      "request_sha256": "31ca56840d578886880b81d32613e731823adbf13558e7b8c95f1a2fbab7e9c1",
+      "artifact": "bench/results/app-service-gemma-20261024T122320Z-fcf11a8e",
+      "prompt_tokens": 31,
+      "generated_tokens": 128,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5897728 kB\nVmRSS:\t 5879084 kB\nVmSwap:\t   18896 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    },
+    {
+      "model": "gemma",
+      "fixture": "unicode-code",
+      "kind": "template",
+      "series": "bench/results/series-gemma-unicode-code-20261024T123319Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "600242c93ff33444414a3ea3667b73d2db9cf9a462cbfb6094f96804e1a83328",
+      "artifact": "bench/results/app-service-gemma-20261024T123328Z-10b5a766",
+      "prompt_tokens": 58,
+      "generated_tokens": 1,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5808948 kB\nVmRSS:\t 5793424 kB\nVmSwap:\t  108916 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    },
+    {
+      "model": "ornith",
+      "fixture": "add-quality",
+      "kind": "quality",
+      "series": "bench/results/series-ornith-add-quality-20261024T123633Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "ceb4b4f62a201ac9a2e8bb1255e279b95cdf4b4c5489da806efdd1894a201b49",
+      "artifact": "bench/results/app-service-ornith-20261024T123646Z-f0d7326a",
+      "prompt_tokens": 53,
+      "generated_tokens": 239,
+      "finish_reason": "eog",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 6003268 kB\nVmRSS:\t 5365624 kB\nVmSwap:\t  639716 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "quality": {
+        "passed": true,
+        "cases": 153,
+        "finish_reason": "eog",
+        "task_completed": true,
+        "quality_passed": true
+      }
+    },
+    {
+      "model": "ornith",
+      "fixture": "binary-search-quality",
+      "kind": "quality",
+      "series": "bench/results/series-ornith-binary-search-quality-20261024T124223Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "80c7b2972cd77871bdcdf80a96693c9559ac7b0f9adfa4b305e7203a01b17530",
+      "artifact": "bench/results/app-service-ornith-20261024T124238Z-6b8cf731",
+      "prompt_tokens": 82,
+      "generated_tokens": 1024,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 6015248 kB\nVmRSS:\t 5100964 kB\nVmSwap:\t  898520 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "quality": {
+        "passed": true,
+        "cases": 134,
+        "complexity_reads": [
+          1,
+          1,
+          1,
+          5,
+          4,
+          4,
+          8,
+          7,
+          7,
+          13,
+          12,
+          12
+        ],
+        "finish_reason": "length",
+        "task_completed": false,
+        "quality_passed": false
+      }
+    },
+    {
+      "model": "ornith",
+      "fixture": "literal-control",
+      "kind": "expected_rejection",
+      "series": "bench/results/series-ornith-literal-control-20261024T123525Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "7aab546d74f6949fc7c4f7b484093f8e075f2269bf56cf7105c2868419a4295a",
+      "artifact": "bench/results/app-service-ornith-20261024T123535Z-4eb4e2cd",
+      "prompt_tokens": null,
+      "generated_tokens": null,
+      "finish_reason": null,
+      "thermal_status": null,
+      "process_status": null,
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers",
+      "expected_error_observed": "runtime"
+    },
+    {
+      "model": "ornith",
+      "fixture": "multi-turn",
+      "kind": "template",
+      "series": "bench/results/series-ornith-multi-turn-20261024T123438Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "0f090c787e5ad817aac54cee6b70abe36b439efd8414b2339cf9a4f92a080e0f",
+      "artifact": "bench/results/app-service-ornith-20261024T123448Z-c83422d8",
+      "prompt_tokens": 60,
+      "generated_tokens": 1,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 5990008 kB\nVmRSS:\t 5368640 kB\nVmSwap:\t  643860 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    },
+    {
+      "model": "ornith",
+      "fixture": "short-code",
+      "kind": "performance",
+      "series": "bench/results/series-ornith-short-code-20261024T122353Z",
+      "data_collection_passed": true,
+      "measured_trials": 5,
+      "request_sha256": "31ca56840d578886880b81d32613e731823adbf13558e7b8c95f1a2fbab7e9c1",
+      "artifact": "bench/results/app-service-ornith-20261024T122829Z-aa582140",
+      "prompt_tokens": 30,
+      "generated_tokens": 128,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 6003868 kB\nVmRSS:\t 5992020 kB\nVmSwap:\t   18864 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    },
+    {
+      "model": "ornith",
+      "fixture": "unicode-code",
+      "kind": "template",
+      "series": "bench/results/series-ornith-unicode-code-20261024T123344Z",
+      "data_collection_passed": true,
+      "measured_trials": 1,
+      "request_sha256": "600242c93ff33444414a3ea3667b73d2db9cf9a462cbfb6094f96804e1a83328",
+      "artifact": "bench/results/app-service-ornith-20261024T123355Z-97a0ccb1",
+      "prompt_tokens": 63,
+      "generated_tokens": 1,
+      "finish_reason": "length",
+      "thermal_status": 0,
+      "process_status": "VmHWM:\t 6004784 kB\nVmRSS:\t 5994052 kB\nVmSwap:\t   18932 kB\nCpus_allowed_list:\t0-6",
+      "weight_buffer_policy": "native CPU buffers; no extra weight buffers"
+    }
+  ],
+  "failed_series": [
+    {
+      "model": "gemma",
+      "fixture": "pp8064",
+      "series": "bench/results/series-gemma-pp8064-20261024T124912Z",
+      "failure_kind": "timeout",
+      "failure": "App harness timed out after900seconds without a final report; full8K not validated.",
+      "diagnostic_artifact": "bench/results/app-service-gemma-20261024T124923Z-62aaa21b"
+    }
+  ],
+  "remaining_fixtures": [
+    {
+      "model": "gemma",
+      "fixture": "pp128"
+    },
+    {
+      "model": "gemma",
+      "fixture": "pp512"
+    },
+    {
+      "model": "gemma",
+      "fixture": "pp2048"
+    },
+    {
+      "model": "gemma",
+      "fixture": "pp4096"
+    },
+    {
+      "model": "gemma",
+      "fixture": "pp8064"
+    },
+    {
+      "model": "gemma",
+      "fixture": "needle-7680"
+    },
+    {
+      "model": "ornith",
+      "fixture": "pp128"
+    },
+    {
+      "model": "ornith",
+      "fixture": "pp512"
+    },
+    {
+      "model": "ornith",
+      "fixture": "pp2048"
+    },
+    {
+      "model": "ornith",
+      "fixture": "pp4096"
+    },
+    {
+      "model": "ornith",
+      "fixture": "pp8064"
+    },
+    {
+      "model": "ornith",
+      "fixture": "needle-7680"
+    }
+  ],
+  "incomplete_quality_answers": [
+    {
+      "model": "gemma",
+      "fixture": "binary-search-quality",
+      "quality": {
+        "passed": false,
+        "classification": "no_complete_code_block",
+        "finish_reason": "length",
+        "task_completed": false,
+        "quality_passed": false
+      }
+    },
+    {
+      "model": "ornith",
+      "fixture": "binary-search-quality",
+      "quality": {
+        "passed": true,
+        "cases": 134,
+        "complexity_reads": [
+          1,
+          1,
+          1,
+          5,
+          4,
+          4,
+          8,
+          7,
+          7,
+          13,
+          12,
+          12
+        ],
+        "finish_reason": "length",
+        "task_completed": false,
+        "quality_passed": false
+      }
+    }
+  ],
+  "other_remaining": [
+    "Corrected upstream operation-smoke filters need a final run",
+    "Larger output budget for completed binary-search answers; retain thinking",
+    "Intermediate/long-depth repeat baselines and protocol review",
+    "Per-step finite/logit reference coverage and wider quality corpus before compute changes",
+    "16K runtime and sustained/endurance belong to later acceptance"
+  ],
+  "native_tests": "bench/runtime-tests-preserve-20261024.json",
+  "numeric_tests": "bench/numeric-correctness-phone-20261024.json",
+  "short_baseline": "bench/m2-baseline-20261024.json"
+}

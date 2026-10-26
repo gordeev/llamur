@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "service": {
+    "passed": true,
+    "isolated_pid": 8635,
+    "recovered_pid": 10492,
+    "above_1024_budget": "1536 accepted; prompt+2048 correctly rejected in2048 context",
+    "import_ui": "SAF imported SHA-256 file loaded/generated through normal UI",
+    "notification_stop": "passed via notification PendingIntent",
+    "load_cancellation": "passed on Gemma",
+    "prefill_cancellation": "passed on Gemma; stop-to-ready 53ms",
+    "checks": "Messenger load/generate; overflow; repeated Stop; cancellation recovery; double unload; isolated process death and reload"
+  },
+  "cycles": 30,
+  "memory_samples": [
+    {
+      "cycle": 0,
+      "pss_kib": 35388,
+      "native_heap_bytes": 6843632
+    },
+    {
+      "cycle": 5,
+      "pss_kib": 37384,
+      "native_heap_bytes": 6836832
+    },
+    {
+      "cycle": 10,
+      "pss_kib": 36449,
+      "native_heap_bytes": 6831184
+    },
+    {
+      "cycle": 15,
+      "pss_kib": 36493,
+      "native_heap_bytes": 6831184
+    },
+    {
+      "cycle": 20,
+      "pss_kib": 36545,
+      "native_heap_bytes": 6831184
+    },
+    {
+      "cycle": 25,
+      "pss_kib": 36607,
+      "native_heap_bytes": 6831184
+    },
+    {
+      "cycle": 29,
+      "pss_kib": 36647,
+      "native_heap_bytes": 6831184
+    }
+  ],
+  "reference": ", there was a little girl named Lily. She loved to play",
+  "checks": "repeat load/generate/unload; double unload; queued/decode cancellation; explicit overflow; invalid JSON type; recovery; callback exception; Unicode JNI",
+  "apk_sha256": "87073a1a47eacb51fc85357f2c45377a9b4309409a4dec56b98dd91e25078610"
+}

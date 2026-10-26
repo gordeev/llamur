@@ -1,0 +1,162 @@
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -1275,6 +1275,16 @@
+     /// @param add_special Allow to add BOS and EOS tokens if model is configured to do so.
+     /// @param parse_special Allow tokenizing special and/or control tokens which otherwise are not exposed and treated
+     ///                      as plaintext. Does not insert a leading space.
++    // Byte ranges originating in chat message contents. Control/unknown token
++    // spellings overlapping these ranges remain ordinary text. Regular text is
++    // tokenized as one span between trusted specials, preserving BPE boundaries.
++    struct llama_tokenize_input_range { uint32_t offset; uint32_t length; };
++#define LLAMA_MOTOAI_INPUT_RANGES 1
++    LLAMA_API int32_t llama_tokenize_with_input_ranges(
++        const struct llama_vocab * vocab, const char * text, int32_t text_len,
++        llama_token * tokens, int32_t n_tokens_max, bool add_special,
++        const struct llama_tokenize_input_range * ranges, int32_t n_ranges);
++
+     LLAMA_API int32_t llama_tokenize(
+         const struct llama_vocab * vocab,
+                       const char * text,
+--- a/src/llama-vocab.h
++++ b/src/llama-vocab.h
+@@ -188,7 +188,8 @@
+     std::vector<llama_token> tokenize(
+             const std::string & raw_text,
+                          bool   add_special,
+-                         bool   parse_special = false) const;
++                         bool   parse_special = false,
++            const std::vector<llama_tokenize_input_range> * input_ranges = nullptr) const;
+ 
+     // does not write null-terminator to buf
+     int32_t token_to_piece(
+--- a/src/llama-vocab.cpp
++++ b/src/llama-vocab.cpp
+@@ -2181,7 +2181,8 @@
+ 
+     void init_tokenizer(enum llama_vocab_type type);
+ 
+-    void tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special) const;
++    void tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special,
++                                const std::vector<llama_tokenize_input_range> * input_ranges) const;
+ 
+     std::string token_to_piece_for_cache(
+                   llama_token   token,
+@@ -2191,7 +2192,8 @@
+     std::vector<llama_token> tokenize(
+             const std::string & raw_text,
+                          bool   add_special,
+-                         bool   parse_special = false) const;
++                         bool   parse_special = false,
++            const std::vector<llama_tokenize_input_range> * input_ranges = nullptr) const;
+ 
+     int32_t tokenize(
+                    const char * text,
+@@ -3628,7 +3630,8 @@
+ 
+ // #define PRETOKENIZERDEBUG
+ 
+-void llama_vocab::impl::tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special) const {
++void llama_vocab::impl::tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special,
++                                               const std::vector<llama_tokenize_input_range> * input_ranges) const {
+     // for each special token
+     for (const llama_token special_id : cache_special_tokens) {
+         const auto & data = vocab.get_token_data(special_id);
+@@ -3654,16 +3657,28 @@
+                 auto raw_text_base_offset = fragment.offset;
+                 auto raw_text_base_length = fragment.length;
+ 
++                // A rejected literal match must not split the ordinary-text fragment.
++                auto search_offset = raw_text_base_offset;
+                 // loop over the text
+                 while (true) {
+                     // find the first occurrence of a given special token in this fragment
+                     //  passing offset argument only limit the "search area" but match coordinates
+                     //  are still relative to the source full raw_text
+                     //  string_view begins at pos 0 for the same reason
+-                    auto match = std::string_view(raw_text.data(), raw_text_base_offset + raw_text_base_length).find(text, raw_text_base_offset);
++                    auto match = std::string_view(raw_text.data(), raw_text_base_offset + raw_text_base_length).find(text, search_offset);
+ 
+                     // no occurrences found, stop processing this fragment for a given special token
+                     if (match == std::string::npos) break;
++                    if (input_ranges && (data.attr & (LLAMA_TOKEN_ATTR_CONTROL | LLAMA_TOKEN_ATTR_UNKNOWN))) {
++                        const auto range = std::lower_bound(input_ranges->begin(), input_ranges->end(), match,
++                            [](const llama_tokenize_input_range & span, size_t byte) {
++                                return uint64_t(span.offset) + span.length <= byte;
++                            });
++                        if (range != input_ranges->end() && range->offset < match + text.length()) {
++                            search_offset = match + 1;
++                            continue;
++                        }
++                    }
+ 
+ #ifdef PRETOKENIZERDEBUG
+                     LLAMA_LOG_WARN("FF: (%ld %ld %ld) '%s'\n", raw_text->length(), raw_text_base_offset, raw_text_base_length, raw_text->substr(raw_text_base_offset, raw_text_base_length).c_str());
+@@ -3727,6 +3742,7 @@
+                         // repeat for the right side
+                         raw_text_base_offset = right_reminder_offset;
+                         raw_text_base_length = right_reminder_length;
++                        search_offset = raw_text_base_offset;
+ 
+ #ifdef PRETOKENIZERDEBUG
+                         LLAMA_LOG_WARN("RR: (%ld %ld) '%s'\n", raw_text_base_offset, raw_text_base_length, raw_text->substr(raw_text_base_offset, raw_text_base_length).c_str());
+@@ -3795,7 +3811,8 @@
+ std::vector<llama_token> llama_vocab::impl::tokenize(
+         const std::string & raw_text,
+         bool add_special,
+-        bool parse_special) const {
++        bool parse_special,
++        const std::vector<llama_tokenize_input_range> * input_ranges) const {
+     GGML_ASSERT(tokenizer && "Tokenizer not initialized. Call llama_vocab::init_tokenizer() first.");
+ 
+     std::vector<llama_token> output;
+@@ -3803,7 +3820,7 @@
+ 
+     if (!raw_text.empty()) {
+         fragment_buffer.emplace_front(raw_text, 0, raw_text.length());
+-        tokenizer_st_partition(fragment_buffer, parse_special);
++        tokenizer_st_partition(fragment_buffer, parse_special, input_ranges);
+     }
+ 
+     switch (get_type()) {
+@@ -4656,8 +4673,9 @@
+ std::vector<llama_token> llama_vocab::tokenize(
+         const std::string & raw_text,
+         bool add_special,
+-        bool parse_special) const {
+-    return pimpl->tokenize(raw_text, add_special, parse_special);
++        bool parse_special,
++        const std::vector<llama_tokenize_input_range> * input_ranges) const {
++    return pimpl->tokenize(raw_text, add_special, parse_special, input_ranges);
+ }
+ 
+ const std::string & llama_vocab::token_to_piece(llama_token token) const {
+@@ -4928,6 +4946,29 @@
+     return vocab->tokenize(text, text_len, tokens, n_tokens_max, add_special, parse_special);
+ }
+ 
++int32_t llama_tokenize_with_input_ranges(
++    const struct llama_vocab * vocab, const char * text, int32_t text_len,
++    llama_token * tokens, int32_t n_tokens_max, bool add_special,
++    const struct llama_tokenize_input_range * ranges, int32_t n_ranges) {
++    if (!vocab || !text || text_len < 0 || n_tokens_max < 0 ||
++        (n_tokens_max > 0 && !tokens) || n_ranges < 0 || n_ranges > 4096 || (n_ranges > 0 && !ranges))
++        throw std::invalid_argument("Invalid input-range tokenizer arguments");
++    std::vector<llama_tokenize_input_range> spans;
++    uint64_t end = 0;
++    for (int32_t i = 0; i < n_ranges; ++i) {
++        const auto span = ranges[i];
++        if (!span.length || span.offset < end || uint64_t(span.offset) + span.length > uint64_t(text_len))
++            throw std::invalid_argument("Invalid or overlapping chat input range");
++        end = uint64_t(span.offset) + span.length;
++        spans.push_back(span);
++    }
++    const auto output = vocab->tokenize(std::string(text, text_len), add_special, true, &spans);
++    if (output.size() >= size_t(std::numeric_limits<int32_t>::max())) return std::numeric_limits<int32_t>::min();
++    if (size_t(n_tokens_max) < output.size()) return -int32_t(output.size());
++    std::copy(output.begin(), output.end(), tokens);
++    return int32_t(output.size());
++}
++
+ int32_t llama_token_to_piece(
+     const struct llama_vocab * vocab,
+                  llama_token   token,

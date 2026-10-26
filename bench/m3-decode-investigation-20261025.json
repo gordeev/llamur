@@ -1,0 +1,211 @@
+{
+  "status": "checkpoint_complete_quality_passed_speed_unqualified_default4_retained",
+  "apk_sha256": "24be50e13a9b9f05d4538b7c5cf4e34b1cac187279df87a534c0c9f0ba677f76",
+  "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+  "framework": "bench/results/runtime-tests-20261025T210014Z/report.json",
+  "host_lifecycle_passed": true,
+  "pristine_host_lifecycle_passed": true,
+  "python_tests": 66,
+  "screen": "bench/results/decode-screen-20261025T210054Z/report.json",
+  "profiles": "bench/decode-profiles-20261025.json",
+  "default_promoted": false,
+  "milestone_accepted": false,
+  "scope": "Optional per-context separate decode/batch threadpools and exact CPU group affinity; numerical libraries and original weights unchanged. One-pair screening is descriptive and cannot accept speed. Finalists need five paired trials, longer contexts/task quality and sustained validation.",
+  "rejected_or_interrupted": [
+    {
+      "report": "bench/results/decode-screen-20261025T205852Z/report.json",
+      "reason": "Source review found running-pool caller-mask re-application missing; interrupted before scheduling speed pairs. Fixed in distinct APK, shared-pool repeated tests added."
+    }
+  ],
+  "refinement_profiles": "bench/decode-refinement-20261025.json",
+  "refinement_reason": "t6-auto comparable screening gain1.064 vs original4-thread implicit pool. Check explicit4 pool control and nearby5/7 plus8-worker oversubscription; do not infer thread-count-only cause before that control.",
+  "extra_framework_pending": false,
+  "exploratory_summary": {
+    "report_sha256": "0d4aba3844fd09b40e1358ed418da41d3ba734e9ed3968f6ad3716c189696d9b",
+    "passed": true,
+    "quality_checks": 16,
+    "trials": 44,
+    "paired_generation_checks": 14,
+    "all_nll_errors_zero": true,
+    "all_generated_ids_match": true,
+    "rows": {
+      "t1-auto": {
+        "emission_ratio": 0.29401754203204983,
+        "conditions_passed": true,
+        "timing_qualified": false
+      },
+      "t2-auto": {
+        "emission_ratio": 0.5023592410564728,
+        "conditions_passed": true,
+        "timing_qualified": false
+      },
+      "t3-auto": {
+        "emission_ratio": 0.8538928920992022,
+        "conditions_passed": false,
+        "timing_qualified": false
+      },
+      "t6-auto": {
+        "emission_ratio": 1.0640260282523188,
+        "conditions_passed": true,
+        "timing_qualified": false
+      },
+      "t4-big": {
+        "emission_ratio": 1.0066937025795122,
+        "conditions_passed": true,
+        "timing_qualified": false
+      },
+      "t2-big": {
+        "emission_ratio": 0.536346021978677,
+        "conditions_passed": true,
+        "timing_qualified": false
+      },
+      "t3-big": {
+        "emission_ratio": 0.7643021312853914,
+        "conditions_passed": true,
+        "timing_qualified": false
+      }
+    }
+  },
+  "extended_framework": "bench/results/runtime-tests-20261025T212441Z/report.json",
+  "extended_framework_scope": "Passed30 cycles plus11 exact scheduling requests; shared/distinct pools, rejected load preserves model, context overflow and mid-decode cancellation restore caller mask, identical recovery.",
+  "range_refinement": "bench/results/decode-screen-20261025T212510Z/report.json",
+  "prospective_finalist_protocol": {
+    "selection": "Best candidate with comparable measured screen, considering explicit4 pool control; do not select confounded speed.",
+    "fixture": "decode128-short-v1",
+    "warmup_pairs": 1,
+    "measured_pairs": 5,
+    "strict_conditions": true,
+    "required_practical_median_gain": 0.05,
+    "require_bootstrap_median_ci_above_unity": true,
+    "scope": "Bounded loaded-model decode screening only. TTFT/prefill/RAM shown separately; long contexts, sustained/battery and combined transient profile remain separate."
+  },
+  "exploratory_apk_sha256": "59280e7a02b8da046bf384408f5d44e5f468dae68faa2bc69eb7c798c2c4b3b3",
+  "oversubscription_rejection": {
+    "artifact": "bench/results/app-service-ornith-20261025T213508Z-84200c4d",
+    "manual_stop": "bench/results/app-service-ornith-20261025T213508Z-84200c4d/manual-early-stop.json",
+    "completed_quality": false,
+    "hypothesis": "Oversubscription interacts badly with pinned CPU barrier/polling; cause not independently isolated.",
+    "runtime_fix": "Reject decode or batch worker count above current caller allowed CPU count before replacing a model; recheck before each request."
+  },
+  "range_refinement_status": "failed overall because8-thread scored request was manually stopped for severe slowdown. Valid completed t4-pool/t5/t7 pairs retained; no8-thread numeric or speed acceptance.",
+  "selected_finalist": {
+    "id": "t7-auto",
+    "threads": 7,
+    "threads_batch": 4,
+    "cpu_affinity": [],
+    "transient_repack": false,
+    "screen_ratio": 1.1407187802818635,
+    "screen_scope": "One comparable64-output pair on prior5928 APK; selection only. Current guarded APK requires fresh quality and five128-output pairs."
+  },
+  "guarded_framework": "bench/results/runtime-tests-20261025T214037Z/report.json",
+  "guarded_source_snapshot": "54396ed07df4fd5499f822be696c5357986583d0fcf0eef6f49a278977574f89",
+  "strict_finalist_report": "bench/results/decode-screen-20261025T214105Z/report.json",
+  "final_guarded_host_tests": {
+    "patched_lifecycle_passed": true,
+    "pristine_api_lifecycle_passed": true,
+    "python_test_count": 66,
+    "python_tests_passed": true
+  },
+  "first_strict_attempt": {
+    "report": "bench/results/decode-screen-20261025T214105Z/report.json",
+    "passed": false,
+    "reason": "Measured pair3 candidate policy0 cap1459200\u21921228800; baseline thereafter1228800. All quality/tokens passed; first two comparable ratios1.13661/1.13762 do not constitute a five-pair acceptance.",
+    "retained_unqualified_ratio": 1.1078847982393012
+  },
+  "retry_protocol": {
+    "maximum_fresh_retries": 1,
+    "preconditioning": "Full public lower_bound task to EOG on7/4, also mandatory completed-code quality check. Excluded from any speed statistics; no power/governor changes.",
+    "warmup_pairs": 1,
+    "fresh_measured_pairs": 5,
+    "no_combining_or_pruning_first_attempt": true,
+    "stop_if_new_measured_conditions_fail": true,
+    "executed": false,
+    "not_executed_reason": "Completed-task exact trajectory check failed, so quality gate prevented another speed series."
+  },
+  "pool_lifecycle": "bench/results/runtime-tests-20261025T220058Z/report.json",
+  "pool_lifecycle_scope": "30 explicit7/4 cycles plus default30; pool threads return14 and FD118\u2192117, all outputs/recovery/masks pass.",
+  "threaded_attention_diagnostics": {
+    "host": "bench/results/decode-attention-thread-diagnostic-20261025/report.json",
+    "phone": "bench/results/decode-attention-phone-thread-diagnostic-20261025/report.json",
+    "result": "Exact same1841/3668/1824 changed values4\u21927 on K512, max5.96e-8; K32 exact. Independent F64 gates pass. This isolates thread-dependent grouping; long-trajectory branch causality still needs fixed-group model control."
+  },
+  "rejected_attention_prototype": {
+    "variant": "f32-recurrent-stable-attention-chunks",
+    "patch": "patches/cpu-numeric/0012-thread-independent-f32-attention-chunks.patch",
+    "host_report": "bench/results/stable-attention-host-prototype-20261025/report.json",
+    "installed_on_phone": false,
+    "reason": "Independent reference caught invalid partial buffer indexing: one_chunk already adds query-head stride. Corrected candidate uses chunk-base pointer and keeps the original failed prototype immutable."
+  },
+  "attention_candidate": "f32-recurrent-stable-attention-v2",
+  "current_apk_sha256": "24be50e13a9b9f05d4538b7c5cf4e34b1cac187279df87a534c0c9f0ba677f76",
+  "attention_patch": "patches/cpu-numeric/0013-stable-f32-attention-chunks.patch",
+  "attention_variant": "f32-recurrent-stable-attention-v2",
+  "attention_operator_gate": "bench/results/attention-thread-check-20261025T221114Z/report.json",
+  "attention_operator_scope": "128 host/phone independent F64 replay runs across16 cases: new4 preserves installed3a4 bits; all tested1\u20137 decode workers preserve4. Includes K8192, padded257/512, odd513,128 heads and unequal DK/DV. Prefill4 unchanged; cross-thread prefill determinism not claimed.",
+  "source_snapshot": "b5f36935ca7fab788ee309c56707ff861eeab9839f3086825fe07a064287c67f",
+  "previous_guarded_apk_sha256": "3a853c98225fca30f966c6b8aabd3cb54edecdd1305399f2539dd7deb25a8f09",
+  "pre_fix_completed_task": {
+    "report": "bench/results/decode-task-20261025T215110Z/report.json",
+    "trajectory_passed": false,
+    "functional_cases_passed": 134,
+    "diagnostic": "bench/results/decode-task-20261025T215110Z/trajectory-diagnostic.json",
+    "reference_tokens": 1096,
+    "candidate_tokens": 1215,
+    "common_prefix_tokens": 179,
+    "first_different_ids": [
+      279,
+      1510
+    ],
+    "prompt_tokens": 82,
+    "hypothesis": "KV cache padding reaches512 at context>256; split-KV uses nth chunks, so4\u21927 changes reduction grouping. Isolated host attention K512 confirms <=5.96e-8 differences, while K32 exact. Phone confirmation and fixed4-chunk prototype pending."
+  },
+  "completed_task": {
+    "baseline4": "bench/results/decode-task-20261025T221547Z/report.json",
+    "candidate7": "bench/results/decode-task-20261025T222200Z/report.json",
+    "passed": true,
+    "exact_generated_ids": 1096,
+    "first_top8_error": 0,
+    "functional_cases": 134,
+    "scope": "Fresh same-APK4/7 whole coding task plus old4 baseline compatibility, not whole-model/context certification."
+  },
+  "controller": "bench/results/stable-decode-validation-20261025T221517Z/report.json",
+  "current_framework": "bench/results/runtime-tests-20261025T221519Z/report.json",
+  "current_apk_identity": "bench/m3-stable-attention-v2-apk-identity-20261025.json",
+  "summary": "bench/m3-decode-screening-20261025.json",
+  "active_phone_workload": false,
+  "final_health": "bench/m3-decode-final-health-20261025.json",
+  "current_strict_speed": {
+    "report": "bench/results/decode-screen-20261025T222930Z/report.json",
+    "report_sha256": "a35487bc0cc438baf96385c6373bc866580d9e3e99336bad2591547f61dca69a",
+    "passed": false,
+    "measured_pairs_attempted": 3,
+    "comparable_pairs": 2,
+    "comparable_emission_ratios": [
+      1.0420332800116117,
+      1.0534532576741198
+    ],
+    "baseline_emission_tok_s": [
+      2.8717176803946907,
+      2.87454592076923
+    ],
+    "candidate_emission_tok_s": [
+      2.9924253937690164,
+      3.028199764568198
+    ],
+    "rejected_third_ratio": 1.1376977588625676,
+    "reason": "Candidate policy3 ceiling changed1286400\u21921171200; following baseline used1171200. Failed pair and excluded warmup kept; no pruning/combination/retry. Boundary caps do not measure actual running clock residency.",
+    "confidence_interval": null
+  },
+  "selected_default": {
+    "threads": 4,
+    "threads_batch": 0,
+    "cpu_affinity": [],
+    "weight_buffers": "native",
+    "transient_repack": false
+  },
+  "next": "Predeclare matched-start sustained profile4/7 A/B and B/A runs (>=15min, last5min separately, natural OEM adaptation, no frequency forcing) before accepting a tuning profile. Then combine bounded prefill with separately qualified decode and test context/battery/backends. UI/API later.",
+  "pre_attention_kernel_identity": "bench/m3-decode-kernel-identity-20261025.json",
+  "pre_attention_apk_identity": "bench/m3-decode-apk-identity-20261025.json",
+  "final_pristine_api_lifecycle_passed": true,
+  "final_python_tests_passed": 66
+}

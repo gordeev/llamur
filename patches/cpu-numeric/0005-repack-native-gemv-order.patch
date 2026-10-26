@@ -1,0 +1,62 @@
+--- a/ggml/src/ggml-cpu/arch/arm/repack.cpp
++++ b/ggml/src/ggml-cpu/arch/arm/repack.cpp
+@@ -773,6 +773,10 @@
+ 
+             // interleaved bias_acc: [0]->r0 0123, [1]->r0 4567
+             int32x4_t bias_acc[2] = { vdupq_n_s32(0), vdupq_n_s32(0) };
++            // Match native Q4_K: exact integer sum within the entire K block,
++            // then bias-first FMA, once per block. Subblock FP32 accumulation
++            // perturbs activations before the next quantized layer.
++            int32x4_t scaled_acc[2] = { vdupq_n_s32(0), vdupq_n_s32(0) };
+             // 2 sb each iteration
+             int32x4_t acc_lo[col_pairs];
+             int32x4_t acc_hi[col_pairs];
+@@ -838,16 +842,10 @@
+                 for (int i = 0, p = 0; p < col_pairs; i++, p += 2) {
+                     int16x4_t   group_scales_lo = p == 0 ? vget_low_s16(q4sb_scales[0]) : vget_high_s16(q4sb_scales[0]);
+                     int16x4_t   group_scales_hi = p == 0 ? vget_low_s16(q4sb_scales[1]) : vget_high_s16(q4sb_scales[1]);
+-                    float32x4_t sb_scale        = p == 0 ? sb_scale_0 : sb_scale_1;
+-
+-                    // 0123 or 4567
+-                    float32x4_t sumf_0 =
+-                        vcvtq_f32_s32(vmulq_s32(vmovl_s16(group_scales_lo), vpaddq_s32(acc_lo[p], acc_lo[p + 1])));
+-                    acc_f32[i] = vfmaq_f32(acc_f32[i], sb_scale, sumf_0);
+-
+-                    float32x4_t sumf_1 =
+-                        vcvtq_f32_s32(vmulq_s32(vmovl_s16(group_scales_hi), vpaddq_s32(acc_hi[p], acc_hi[p + 1])));
+-                    acc_f32[i] = vfmaq_f32(acc_f32[i], sb_scale, sumf_1);
++                    scaled_acc[i] = vaddq_s32(scaled_acc[i],
++                        vmulq_s32(vmovl_s16(group_scales_lo), vpaddq_s32(acc_lo[p], acc_lo[p + 1])));
++                    scaled_acc[i] = vaddq_s32(scaled_acc[i],
++                        vmulq_s32(vmovl_s16(group_scales_hi), vpaddq_s32(acc_hi[p], acc_hi[p + 1])));
+                 }
+ 
+                 // Multiply Acc bsum + mins
+@@ -867,6 +865,8 @@
+ 
+             acc_f32[0] = vmlsq_f32(acc_f32[0], vcvtq_f32_s32(bias_acc[0]), sb_min_0);
+             acc_f32[1] = vmlsq_f32(acc_f32[1], vcvtq_f32_s32(bias_acc[1]), sb_min_1);
++            acc_f32[0] = vfmaq_f32(acc_f32[0], sb_scale_0, vcvtq_f32_s32(scaled_acc[0]));
++            acc_f32[1] = vfmaq_f32(acc_f32[1], sb_scale_1, vcvtq_f32_s32(scaled_acc[1]));
+         }  // for b
+ 
+         int base = x * ncols_interleaved;
+@@ -1696,13 +1696,11 @@
+ 
+             // Apply superblock scale (no mins for q6_K)
+             // acc[cp] has [c0, c1]
+-            float32x2_t w_01 = vmul_f32(vcvt_f32_s32(acc[0]), vget_low_f32(sb_scale_0));
+-            float32x2_t w_23 = vmul_f32(vcvt_f32_s32(acc[1]), vget_high_f32(sb_scale_0));
+-            float32x2_t w_45 = vmul_f32(vcvt_f32_s32(acc[2]), vget_low_f32(sb_scale_1));
+-            float32x2_t w_67 = vmul_f32(vcvt_f32_s32(acc[3]), vget_high_f32(sb_scale_1));
+-
+-            acc_f32[0] = vaddq_f32(acc_f32[0], vcombine_f32(w_01, w_23));
+-            acc_f32[1] = vaddq_f32(acc_f32[1], vcombine_f32(w_45, w_67));
++            // Native Q6_K fuses the per-K-block contribution into its sum.
++            acc_f32[0] = vfmaq_f32(acc_f32[0],
++                vcvtq_f32_s32(vcombine_s32(acc[0], acc[1])), sb_scale_0);
++            acc_f32[1] = vfmaq_f32(acc_f32[1],
++                vcvtq_f32_s32(vcombine_s32(acc[2], acc[3])), sb_scale_1);
+         }  // for b
+ 
+         int base = x * ncols_interleaved;

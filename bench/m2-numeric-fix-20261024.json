@@ -1,0 +1,224 @@
+{
+  "scope": "Bounded M2 corrected CPU reference investigation; harness/correctness milestone accepted within the explicit scope in m2-acceptance-20261025.json. No whole-model, maximum-context, product or sustained/speed acceptance. Original failures and partial variants retained.",
+  "milestone_accepted": true,
+  "patch_series": "patches/cpu-numeric/series.json",
+  "gates_sha256": "f875bbad6c158074d1a0ee17f08551d00596f4317310ef172d63ee5a16f541c2",
+  "causal_attention_exp": "bench/results/attention-exp-control-20261024/control.json",
+  "upstream_f32_attention_capture": "bench/results/attention-replay-20261024T203523Z/comparison.json",
+  "conv_assembly": "bench/results/conv-fma-assembly-20261024/report.json",
+  "mapped_weight_spans": "bench/mapped-weight-window-20261024.json",
+  "standalone_corpus": [
+    {
+      "artifact": "bench/results/cpu-variant-score-gemma-code-20261024T205732Z/comparison.json",
+      "passed": true,
+      "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+      "tokens": 27,
+      "mean_nll_error": 2.800992525656646e-07,
+      "max_nll_error": 1.901924431280122e-06,
+      "top8_error": 1.9073486328125e-06
+    },
+    {
+      "artifact": "bench/results/cpu-variant-score-gemma-ru-20261024T205755Z/comparison.json",
+      "passed": true,
+      "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+      "tokens": 29,
+      "mean_nll_error": 3.3351252708194835e-07,
+      "max_nll_error": 1.9090480947170363e-06,
+      "top8_error": 1.9073486328125e-06
+    },
+    {
+      "artifact": "bench/results/cpu-variant-score-ornith-code-20261024T205615Z/comparison.json",
+      "passed": true,
+      "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+      "tokens": 26,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    },
+    {
+      "artifact": "bench/results/cpu-variant-score-ornith-ru-20261024T205656Z/comparison.json",
+      "passed": true,
+      "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+      "tokens": 27,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    }
+  ],
+  "apk_corpus": [
+    {
+      "artifact": "bench/results/score-gemma-teacher-forcing-code-v1-20261024T212058Z/comparison.json",
+      "model": "gemma",
+      "fixture": "teacher-forcing-code-v1",
+      "passed": true,
+      "apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+      "load_mode": "mmap",
+      "context": 8192,
+      "mean_nll_error": 2.800992525656646e-07,
+      "max_nll_error": 1.901924431280122e-06,
+      "top8_error": 1.9073486328125e-06
+    },
+    {
+      "artifact": "bench/results/score-gemma-teacher-forcing-ru-v1-20261024T212118Z/comparison.json",
+      "model": "gemma",
+      "fixture": "teacher-forcing-ru-v1",
+      "passed": true,
+      "apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+      "load_mode": "mmap",
+      "context": 8192,
+      "mean_nll_error": 3.3351252708194835e-07,
+      "max_nll_error": 1.9090480947170363e-06,
+      "top8_error": 1.9073486328125e-06
+    },
+    {
+      "artifact": "bench/results/score-ornith-teacher-forcing-code-v1-20261024T212007Z/comparison.json",
+      "model": "ornith",
+      "fixture": "teacher-forcing-code-v1",
+      "passed": true,
+      "apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+      "load_mode": "mmap",
+      "context": 8192,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    },
+    {
+      "artifact": "bench/results/score-ornith-teacher-forcing-ru-v1-20261024T212036Z/comparison.json",
+      "model": "ornith",
+      "fixture": "teacher-forcing-ru-v1",
+      "passed": true,
+      "apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+      "load_mode": "mmap",
+      "context": 8192,
+      "mean_nll_error": 0.0,
+      "max_nll_error": 0.0,
+      "top8_error": 0.0
+    }
+  ],
+  "attention_matrices": [
+    {
+      "artifact": "bench/results/attention-variant-matrix-20261024T205513Z/report.json",
+      "passed": true,
+      "cases": 24,
+      "apk_sha256": null,
+      "max_nmse": 3.1785973826871657e-13,
+      "max_relative_to_peak": 1.0958003729565702e-06
+    },
+    {
+      "artifact": "bench/results/attention-variant-matrix-20261024T205935Z/report.json",
+      "passed": true,
+      "cases": 24,
+      "apk_sha256": null,
+      "max_nmse": 3.459131612352794e-13,
+      "max_relative_to_peak": 1.1948334469732419e-06
+    },
+    {
+      "artifact": "bench/results/attention-variant-matrix-20261024T211942Z/report.json",
+      "passed": true,
+      "cases": 24,
+      "apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+      "max_nmse": 3.459131612352794e-13,
+      "max_relative_to_peak": 1.1948334469732419e-06
+    }
+  ],
+  "bounded_cross_cpu_numeric_gate_passed": true,
+  "current_candidate_apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "runtime_tests": "bench/results/runtime-tests-20261024T220801Z/report.json",
+  "storage_tests": "bench/results/storage-tests-20261024T211942Z/report.json",
+  "mapped_load_tests": "bench/results/load-matrix-ornith-code-20261024T212144Z/report.json",
+  "power_audit": "bench/low-battery-audit-20261024.json",
+  "long_run_interruption": "bench/ornith-long-system-exit-20261024.json",
+  "generated_quality": [
+    {
+      "artifact": "bench/results/series-gemma-add-quality-mmap-v1-20261024T212506Z/summary.json",
+      "model": "gemma",
+      "fixture": "add-quality-mmap-v1",
+      "accepted": true,
+      "failure": null
+    },
+    {
+      "artifact": "bench/results/series-ornith-add-quality-mmap-v1-20261024T212328Z/summary.json",
+      "model": "ornith",
+      "fixture": "add-quality-mmap-v1",
+      "accepted": true,
+      "failure": null
+    },
+    {
+      "artifact": "bench/results/series-ornith-binary-search-quality-4096-mmap-v1-20261024T212552Z/summary.json",
+      "model": "ornith",
+      "fixture": "binary-search-quality-4096-mmap-v1",
+      "accepted": false,
+      "failure": "process_died: Inference process 15664 exited; observed replacement None. Request is not replayed."
+    },
+    {
+      "artifact": "bench/results/series-ornith-binary-search-quality-4096-mmap-v1-20261024T220825Z/summary.json",
+      "model": "ornith",
+      "fixture": "binary-search-quality-4096-mmap-v1",
+      "accepted": true,
+      "failure": null
+    },
+    {
+      "artifact": "bench/results/series-gemma-binary-search-quality-4096-mmap-v1-20261024T221551Z/summary.json",
+      "model": "gemma",
+      "fixture": "binary-search-quality-4096-mmap-v1",
+      "accepted": true,
+      "failure": null
+    }
+  ],
+  "native_identity_proof": "bench/one-shot-build-20261024.json",
+  "generated_cross_cpu_controls": [
+    "bench/results/host-quality-ornith-20261024T221348Z/phone-comparison.json",
+    "bench/results/host-quality-gemma-20261024T221511Z/phone-comparison.json",
+    "bench/results/host-generated-gelu-control-20261024T222747Z/comparison.json"
+  ],
+  "previous_device_block": "Android system services disappeared and ADB disconnected after4% battery/non-charging; exact cause unconfirmed. Charge/recover before more phone work. No M3 speed acceptance.",
+  "current_device_blocked": false,
+  "recovery_note": "Bounded M2 benchmark/correctness gate accepted; M3 metadata and weight-layout screening begun. No speed candidate enabled in the APK.",
+  "phone_filled_context": {
+    "artifact": "bench/results/series-gemma-pp8064-full-mmap-v1-20261024T222645Z/summary.json",
+    "model": "gemma",
+    "prompt_tokens": 8064,
+    "generated_tokens": 128,
+    "finite_scans": 128,
+    "passed": true,
+    "scope": "One corrected APK mechanical boundary pass; no retrieval, interactive speed or endurance acceptance"
+  },
+  "long_context_numeric": {
+    "comparison": "bench/results/host-filled8k-gemma-20261024T222346Z/phone-comparison.json",
+    "passed": false,
+    "maximum_first_top8_error": 0.4090690612792969,
+    "limit": 0.1,
+    "note": "All128 emitted IDs equal, mechanical gate passed; numeric gate failed, GELU causal control pending."
+  },
+  "long_context_gelu_control": {
+    "artifact": "bench/results/host-filled8k-gelu-control-20261024T224925Z/comparison.json",
+    "passed": true,
+    "maximum_first_top8_error": 1.9073486328125e-06,
+    "limit": 0.1,
+    "scope": "Host-only same Android GELU semantics control; original long comparison remains failed, no APK change."
+  },
+  "long_context_ornith_retrieval": {
+    "artifact": "bench/results/series-ornith-needle-7680-exact-mmap-v2-20261024T224458Z/summary.json",
+    "comparison": "bench/results/host-retrieval8k-v2-ornith-20261024T223941Z/phone-comparison.json",
+    "passed": true,
+    "prompt_tokens": 7680,
+    "output_tokens": 39,
+    "finite_scans": 40,
+    "first_top8_max_error": 0.0,
+    "all_generated_ids_equal": true,
+    "scope": "One beginning-fact exact-answer point, not a broad8K matrix."
+  },
+  "reference_lock": "bench/cpu-reference.lock.json",
+  "long_attention_matrix": {
+    "artifact": "bench/results/attention-variant-matrix-20261024T230939Z/report.json",
+    "passed": true,
+    "configurations": 8,
+    "executions": 16,
+    "max_nmse": 4.89246110388707e-12,
+    "max_relative_to_peak": 4.445580664647673e-06,
+    "scope": "8192 keys,1/64 queries,F16 KV,DK/DV256/512,1/4threads, original F64 gates."
+  },
+  "power_audit_recovery": "bench/recovery-power-audit-20261025.json",
+  "milestone_acceptance_report": "bench/m2-acceptance-20261025.json",
+  "corrected_reference_baseline": "bench/m2-cpu-reference-baseline-20261025.json"
+}

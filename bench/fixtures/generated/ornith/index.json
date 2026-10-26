@@ -1,0 +1,289 @@
+[
+  {
+    "id": "short-code",
+    "kind": "performance",
+    "request": "bench/fixtures/generated/ornith/short-code.json",
+    "sha256": "31ca56840d578886880b81d32613e731823adbf13558e7b8c95f1a2fbab7e9c1",
+    "prompt_tokens": 30
+  },
+  {
+    "id": "unicode-code",
+    "kind": "template",
+    "request": "bench/fixtures/generated/ornith/unicode-code.json",
+    "sha256": "600242c93ff33444414a3ea3667b73d2db9cf9a462cbfb6094f96804e1a83328",
+    "prompt_tokens": 63
+  },
+  {
+    "id": "multi-turn",
+    "kind": "template",
+    "request": "bench/fixtures/generated/ornith/multi-turn.json",
+    "sha256": "0f090c787e5ad817aac54cee6b70abe36b439efd8414b2339cf9a4f92a080e0f",
+    "prompt_tokens": 60
+  },
+  {
+    "id": "literal-control",
+    "kind": "expected_rejection",
+    "request": "bench/fixtures/generated/ornith/literal-control.json",
+    "sha256": "7aab546d74f6949fc7c4f7b484093f8e075f2269bf56cf7105c2868419a4295a",
+    "prompt_tokens": 0
+  },
+  {
+    "id": "add-quality",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/add-quality.json",
+    "sha256": "ceb4b4f62a201ac9a2e8bb1255e279b95cdf4b4c5489da806efdd1894a201b49",
+    "prompt_tokens": 53
+  },
+  {
+    "id": "binary-search-quality",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/binary-search-quality.json",
+    "sha256": "80c7b2972cd77871bdcdf80a96693c9559ac7b0f9adfa4b305e7203a01b17530",
+    "prompt_tokens": 82
+  },
+  {
+    "id": "pp128",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp128.json",
+    "sha256": "19a795a9f1a40abd50516c07f2b9482e714f30469f8e4f35a9aeaf09b2e017d7",
+    "prompt_tokens": 128
+  },
+  {
+    "id": "pp512",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp512.json",
+    "sha256": "3ecc5126d5d77641883b549eaa155880b630b1c025bba0f99c99a07f7e7eefe9",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "pp2048",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp2048.json",
+    "sha256": "000917da4e988d7163c3104f4847c38c87176ef3c5af83fce412802dec1a769d",
+    "prompt_tokens": 2048
+  },
+  {
+    "id": "pp4096",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp4096.json",
+    "sha256": "5cd2045700c02b6c661521e1211d00e1be6edbf82aef42ec079365c6324838a0",
+    "prompt_tokens": 4096
+  },
+  {
+    "id": "pp8064",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp8064.json",
+    "sha256": "da28389c8a0675a68ec1deeadad7e0f42ebcbb72d5a1e3d47dac4e169dc7ef19",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "needle-7680",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/needle-7680.json",
+    "sha256": "608435c338a64629b3cba12c95784f445d99da14acb38544ead7316c608f11c0",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "binary-search-quality-2048",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/binary-search-quality-2048.json",
+    "sha256": "a084994a216a49f4b8a65189ee5947f88482e31c85525f8025d20375b98eb3e9",
+    "prompt_tokens": 82
+  },
+  {
+    "id": "binary-search-quality-4096",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/binary-search-quality-4096.json",
+    "sha256": "1f802748996dc6d60e62cb837ff23f4348b68e35c9b62e1a8b34be71dab046fe",
+    "prompt_tokens": 82
+  },
+  {
+    "id": "pp128-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp128-diag.json",
+    "sha256": "8acc821871c74d0b765be1d5ce167858f7203f3e3dcabd150ecf2c3c28945bea",
+    "prompt_tokens": 128
+  },
+  {
+    "id": "pp512-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp512-diag.json",
+    "sha256": "efcc394846f3a4ccc752d0c5f3d88ae93669eced8cbcf26fa5c2bd1a3f5f1419",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "pp2048-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp2048-diag.json",
+    "sha256": "9964e2669ab2c103ecb76392640b08a23ac4b610fca975b27d149633e089fdbc",
+    "prompt_tokens": 2048
+  },
+  {
+    "id": "pp4096-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp4096-diag.json",
+    "sha256": "efa0bba22708eaa52afe3f04d862ab8d59d6547c4e603c6921b4c7f6cbe68ce5",
+    "prompt_tokens": 4096
+  },
+  {
+    "id": "pp8064-diag",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp8064-diag.json",
+    "sha256": "3d01369be92949ff00bedcc82ea789d77f81e2043e00cf9657241c6461d58e96",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "teacher-forcing-code-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-code-v1.json",
+    "sha256": "3b7327126b521dcecd3fcff698c03617e73221850ac263bbcba7fb9e6a5dda2d",
+    "prompt_tokens": 4
+  },
+  {
+    "id": "teacher-forcing-ru-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-ru-v1.json",
+    "sha256": "613195fd8aa2638af552f6a651e9797f07a8b8679c297580553a6542f29c7d32",
+    "prompt_tokens": 5
+  },
+  {
+    "id": "teacher-forcing-code-probe-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-code-probe-v1.json",
+    "sha256": "154ea3cf4045c30dca8610c7a390eeb6ac2d972c027d3072eb85731df21b3ee5",
+    "prompt_tokens": 4
+  },
+  {
+    "id": "teacher-forcing-code-mmap-v1",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-code-mmap-v1.json",
+    "sha256": "50a93be975c5de05fd058bf51e3b90f6819711b13f7ed670a847203452aad40d",
+    "prompt_tokens": 4
+  },
+  {
+    "id": "needle-7680-diag",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/needle-7680-diag.json",
+    "sha256": "5291673204a64f4dba1769e507b7b28483e0a2b1851a38a994812c6128b2a7f8",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "add-quality-mmap-v1",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/add-quality-mmap-v1.json",
+    "sha256": "ff2fcc9c01f630cb1f6045860f8a065a9572b15406a34ff613732b98e71c4b08",
+    "prompt_tokens": 53
+  },
+  {
+    "id": "binary-search-quality-4096-mmap-v1",
+    "kind": "quality",
+    "request": "bench/fixtures/generated/ornith/binary-search-quality-4096-mmap-v1.json",
+    "sha256": "baf207b816ebde4d61e784d2dc0e7544b787c9d9776e5afd8f1ebc2d43d97d87",
+    "prompt_tokens": 82
+  },
+  {
+    "id": "needle-7680-mmap-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/needle-7680-mmap-v1.json",
+    "sha256": "e11da29d138ad61f6cefa664ccd08c1ba23ed4594001b4e031f8c564e6e80a23",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "pp8064-full-mmap-v1",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp8064-full-mmap-v1.json",
+    "sha256": "c025c97573d4057dfbcaf36ca49e3df009e886df4b32a29ddd3c8b01895a9f8f",
+    "prompt_tokens": 8064
+  },
+  {
+    "id": "needle-7680-exact-mmap-v2",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/needle-7680-exact-mmap-v2.json",
+    "sha256": "ca4354377ffb5c616577146d6c884bed1420689a48d44a28d38ee8d5cc194f71",
+    "prompt_tokens": 7680
+  },
+  {
+    "id": "short-code-mmap-v1",
+    "kind": "performance",
+    "request": "bench/fixtures/generated/ornith/short-code-mmap-v1.json",
+    "sha256": "737f49b60847e5a3a761006b1de5c70e3c68193143c182e1624896649a8384a9",
+    "prompt_tokens": 30
+  },
+  {
+    "id": "pp512-prefill-speed-v1",
+    "kind": "prefill_performance",
+    "request": "bench/fixtures/generated/ornith/pp512-prefill-speed-v1.json",
+    "sha256": "8ed16d12644a93c840eaed35f994644f0039a9398eaaf163b493555f6d225ddb",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "teacher-forcing-code-prefill-v2",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-code-prefill-v2.json",
+    "sha256": "8bd2fbbdb2ed437034313e198a6fdd01dd66efced51b27fd67303896687a08f1",
+    "prompt_tokens": 29
+  },
+  {
+    "id": "teacher-forcing-ru-prefill-v2",
+    "kind": "teacher_forcing",
+    "request": "bench/fixtures/generated/ornith/teacher-forcing-ru-prefill-v2.json",
+    "sha256": "60ddc62c7b605c923f9fb19f39e962d6c59cd7d7d6c3d6a95c25d78733ff132a",
+    "prompt_tokens": 43
+  },
+  {
+    "id": "pp151-threshold-boundary-v1",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp151-threshold-boundary-v1.json",
+    "sha256": "d958a1ecfe6acc058478539afbd8fca84e3ba679d1b31c94a37b39756cc55880",
+    "prompt_tokens": 151
+  },
+  {
+    "id": "pp152-threshold-boundary-v1",
+    "kind": "synthetic_prefill",
+    "request": "bench/fixtures/generated/ornith/pp152-threshold-boundary-v1.json",
+    "sha256": "1424b11af884d6035e58f835f476ef0e28d5ec467847d0c50dec57b8db571790",
+    "prompt_tokens": 152
+  },
+  {
+    "id": "decode64-short-v1",
+    "kind": "decode_performance",
+    "request": "bench/fixtures/generated/ornith/decode64-short-v1.json",
+    "sha256": "4822a904d942481fa9c93729e400e691d11d3910b5eee75dde8ecfc3b3162d79",
+    "prompt_tokens": 30
+  },
+  {
+    "id": "decode128-short-v1",
+    "kind": "decode_performance",
+    "request": "bench/fixtures/generated/ornith/decode128-short-v1.json",
+    "sha256": "caef5772916ad0812f7589e78cfc009057e5c627a2c6c5b600d622bc9172d181",
+    "prompt_tokens": 30
+  },
+  {
+    "id": "decode128-pp512-v1",
+    "kind": "decode_performance",
+    "request": "bench/fixtures/generated/ornith/decode128-pp512-v1.json",
+    "sha256": "784a7864f59060ad28485c19956d821af1b3852fffc8f966f09d32390ee1d47b",
+    "prompt_tokens": 512
+  },
+  {
+    "id": "context-16384-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/context-16384-three-depth-v1.json",
+    "sha256": "a456264491c86ad5eaabe391d265c95f4bb75480adda286663959cfab352a9b1",
+    "prompt_tokens": 15872
+  },
+  {
+    "id": "context-32768-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/context-32768-three-depth-v1.json",
+    "sha256": "4ace8949d2d90961b80e706f65b71a61e6e8954ba2d6533aba573cf2b606ef90",
+    "prompt_tokens": 32256
+  },
+  {
+    "id": "context-4096-three-depth-v1",
+    "kind": "context_quality",
+    "request": "bench/fixtures/generated/ornith/context-4096-three-depth-v1.json",
+    "sha256": "d0c46a1b84660011c8044504fc387b04d96a3c04022527266c543f2cd2b1d862",
+    "prompt_tokens": 3584
+  }
+]

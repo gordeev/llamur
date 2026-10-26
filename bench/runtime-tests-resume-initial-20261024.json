@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "error": "java.lang.IllegalStateException: Service event timed out; last=null",
+  "apk_sha256": "f22ba27fd660bd8bc96b574fbaf06e1d7cfec5c717a51cc9cf0ec3ed934b5af9",
+  "investigation": "Timed out awaiting OS-only service reconnection after own process kill; explicit user restart recovery will be tested separately."
+}

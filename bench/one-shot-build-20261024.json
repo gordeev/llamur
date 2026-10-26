@@ -1,0 +1,29 @@
+{
+  "last_phone_tested_apk_sha256": "43bd53a972fc617dcdc267f7c931d1542c33d9bbdaac7d7f39c9def3cf0e2be5",
+  "new_local_apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "native_libraries_identical": true,
+  "native_libraries": {
+    "lib/arm64-v8a/libggml-base.so": "4bd15cba6315d7f7d878460e0e18a99a882a687fb10145f4d00ea6a2349fa388",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so": "4b6d5aadde84b0198afcfc9ec01a0db61777db72275f9646e06a2544d86f2020",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so": "f39742c4b2df231dc6617962f691ed809db7eec79279a0c95e384ff4e67c2ad4",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so": "dd3a831179e9116c4943f22b47f56fc81fa3dac74e3e6c9962471432014f7940",
+    "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so": "2f6fddadb765d3c07946b20ead8549d3d60bc002826ab7685a782e2a50d8c367",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so": "01839329ed5ea6fdd1fd98378c272b6a9ffcfed0d29e7935133f4a26bbb78d56",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so": "ec0dc1d5e7118bddf8741ef89a79c20e85612b6b6e71db6689161e2f4da797a5",
+    "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so": "bedf859e47d09c5840257de8a5b1a11392e62b2fd0ace81ebcfcc4d866b8cb4f",
+    "lib/arm64-v8a/libggml.so": "9ec30197d957f4da7392e828540db69b1f77f14ebf4d1280444ff3d4e19c3879",
+    "lib/arm64-v8a/libllama-common.so": "87d4805842ec515cc3e38cda6cfc99125833d276d30dba73bf3c7b916f33d3af",
+    "lib/arm64-v8a/libllama.so": "f13a4e87c597bde1567aab19e1566411e4a3e2ba9262634a862e3d431f785cf4",
+    "lib/arm64-v8a/libmotoai-probe.so": "ba5e3dc24ab9ea71ac013206e8a641aa18ea43d0133473d2369f458f30030cc3",
+    "lib/arm64-v8a/libmotoai-runtime.so": "0f29e4fefc7427dd3ac17ea1fa96ad168e68c1677d3d0078ec31dc404330859f"
+  },
+  "new_changes": "Fsynced one-shot debug marker, including legacy progress/result files; local build and recovered-phone framework validation passed.",
+  "phone_validation_pending": false,
+  "phone_validation": {
+    "artifact": "bench/results/runtime-tests-20261024T220801Z/report.json",
+    "passed": true,
+    "debug_run_reuse_passed": true,
+    "cycles": 30,
+    "note": "Owner confirmed boot and charging; read-only check observed 48%, charging status2, boot completed. Native library hashes unchanged."
+  }
+}

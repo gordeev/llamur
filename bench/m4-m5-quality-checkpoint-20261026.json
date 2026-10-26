@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "scope": "Completed bounded numeric/filled-context checkpoint at explicit owner pause. Not final product/profile/UI/Aider/release acceptance.",
+  "paused_by_owner": true,
+  "recorded_utc": "2026-10-26T07:43:32.652244+00:00",
+  "release_apk_sha256": "3af31ad02535f1a4e08516d64f5715b1c1c5623dcca8fbf41f8fac3faf065c30",
+  "native_identical_test_apk_sha256": "d281a711f30249cbd0282393a313cbb222fd366ab03f4597b389553fa4e23980",
+  "default4k": {
+    "cpu_threads": 4,
+    "kv": "F16",
+    "weights": "unchanged original GGUF",
+    "load": "native mmap/no full prefault",
+    "swa_full": true,
+    "transient_repack": false,
+    "prefix_cache_mib": 0,
+    "prompt_tokens_each": 3584,
+    "exact_three_depth_retrieval_each": true,
+    "eog_each": true
+  },
+  "numeric": {
+    "short_attention_bit_controls": 12,
+    "long_attention_configurations": 12,
+    "long_runs": 20,
+    "matmul_pass_cases": 240,
+    "repack_bit_comparisons": 120,
+    "repack_nonidentical": 0
+  },
+  "long_context_scope": "16K/32K were single slow experimental retrieval points on731a/transientON/cacheOFF/fullSWA, original GGUF/F16KV, not arbitrary QA quality or a current default-speed comparison.",
+  "evidence": {
+    "attention": {
+      "path": "bench/results/attention-long-phone-20261026T071652537070Z/report.json",
+      "sha256": "17654f5462b99ebe5b2282117eca654af5d494fbead7446e9dc7469c2dfffc26"
+    },
+    "matmul": {
+      "path": "bench/results/numeric-20261026T072246Z/report.json",
+      "sha256": "d78e7432ea36ce20cc19d6fd2520857c90652dc37558fa0d3257b5dff49088c2"
+    },
+    "ornith4k": {
+      "path": "bench/results/context-ornith-4096-20261026T072252Z/report.json",
+      "sha256": "7df4769fdd493f2997e159ce0ad9d0f79636f40ae1c072b07da740402ce3082d"
+    },
+    "gemma4k": {
+      "path": "bench/results/context-gemma-4096-20261026T073309Z/report.json",
+      "sha256": "27e160c99e598018bcacb2904e129a62cee4c744eaa546705cb15ec685f36126"
+    },
+    "ornith16k": {
+      "path": "bench/results/context-ornith-16384-20261026T021721Z/report.json",
+      "sha256": "3222151a2d02a2e8bf1f421e5d0985916ab432088b19c0dbc4cc2f64017fe474"
+    },
+    "gemma16k": {
+      "path": "bench/results/context-gemma-16384-20261026T030548Z/report.json",
+      "sha256": "158efb25955a31585084a91f6fa0e2226ce3e474d87a015d084f9ec293826057"
+    },
+    "ornith32k": {
+      "path": "bench/results/context-ornith-32768-20261026T040306Z/report.json",
+      "sha256": "d23df05c5e2dfd6cd153e09bea18d6516accc945d66626e096e43dd12f3131cb"
+    },
+    "gemma32k": {
+      "path": "bench/results/context-gemma-32768-20261026T055945Z/report.json",
+      "sha256": "1274f023e3c1877792cef9228580949a497fb887f2380ae2106adb1ad3800f68"
+    },
+    "final_native_bridge": {
+      "path": "bench/results/linux-url-copy-native-bridge-20261026/report.json",
+      "sha256": "388ab149f1a67f4c416807ff55f607e826d9c84002257db245698508b5664ddb"
+    },
+    "phone_pause": {
+      "path": "bench/results/owner-pause-20261026T074236Z/report.json",
+      "sha256": "bf182f102330f6be3ecf1ab98453da1b30233d0a524c7df6eafbd14b28ce8c49"
+    }
+  },
+  "remaining": [
+    "Actual final-kernel phone background grant/deny",
+    "UI overhead B/P/P/B both main models",
+    "Repeat real Aider on final Linux kernels",
+    "Owned tiny fixture cleanup",
+    "Actual non-debug phone main-model screen-off completion+notification tap",
+    "Final acceptance/source package/checksums/docs; publication not authorized"
+  ]
+}

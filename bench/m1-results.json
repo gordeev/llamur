@@ -1,0 +1,238 @@
+{
+  "date": "2026-10-24",
+  "device": "Motorola Edge 40 Pro / SM8550 / Android 16",
+  "upstream": {
+    "repository": "https://github.com/ggml-org/llama.cpp.git",
+    "commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+    "path": "third_party/llama.cpp",
+    "patches": []
+  },
+  "scope": "Preliminary mechanical compatibility only. Short outputs are reasoning, not completed coding or sustained quality/performance tests. Configured 8192 is not filled-context validation.",
+  "runs": [
+    {
+      "artifact": "bench/results/b0-gemma-20261024T110723Z-2366227d/result.json",
+      "variant": null,
+      "model": "gemma",
+      "passed": false,
+      "report": {},
+      "failure": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "artifact": "bench/results/b0-gemma-20261024T111158Z-ab2cb2fc/result.json",
+      "variant": "B1-jinja",
+      "model": "gemma",
+      "passed": false,
+      "report": {},
+      "failure": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "artifact": "bench/results/b0-gemma-20261024T111608Z-0eee0ce8/result.json",
+      "variant": "B1-jinja",
+      "model": "gemma",
+      "passed": true,
+      "report": {
+        "run_id": "0eee0ce82c73427b86f3afaaa8294c60",
+        "variant": "B1-jinja",
+        "scope": "B1-jinja native JNI instrumentation; no UI/Flow",
+        "context": 8192,
+        "model": "gemma-4-E4B-it-Q4_K_M.gguf",
+        "prompt": "Write a Python function that adds two integers.",
+        "output_token_limit": 32,
+        "sampling": "upstream default temperature 0.3, default random seed",
+        "foreground_activity": true,
+        "system_info": "CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | OPENMP = 1 | KLEIDIAI = 1 | REPACK = 1 | ",
+        "last_stage": "decoded",
+        "pid": 18879,
+        "pss_kib": 6512063,
+        "process_importance": 100,
+        "model_and_context_load_ms": 10616.767288,
+        "system_and_user_prefill_ms": 1432.544582,
+        "decode_ms": 5676.064842,
+        "ready_ttft_ms": 1651.902082,
+        "non_eog_tokens": 32,
+        "native_returned_null": false,
+        "output": "<|channel>thought\nHere's a thinking process that leads to the suggested response:\n\n1.  **Understand the Goal:** The user wants a Python function that",
+        "passed": true,
+        "elapsed_ms": 19744.219263
+      },
+      "failure": null
+    },
+    {
+      "artifact": "bench/results/b0-ornith-20261024T112357Z-a71d539f/result.json",
+      "variant": "B1-jinja",
+      "model": "ornith",
+      "passed": false,
+      "report": {},
+      "failure": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "artifact": "bench/results/b0-ornith-20261024T113344Z-77382d0f/result.json",
+      "variant": "B1-jinja-no-mmap",
+      "model": "ornith",
+      "passed": true,
+      "report": {
+        "run_id": "77382d0f4aef4649a6c2ccb328627f2a",
+        "variant": "B1-jinja-no-mmap",
+        "scope": "B1-jinja-no-mmap native JNI instrumentation; no UI/Flow",
+        "context": 8192,
+        "model": "Ornith-1.5-9B-Q4_K_M.gguf",
+        "prompt": "Write a Python function that adds two integers.",
+        "output_token_limit": 32,
+        "sampling": "upstream default temperature 0.3, default random seed",
+        "foreground_activity": true,
+        "system_info": "CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | OPENMP = 1 | KLEIDIAI = 1 | REPACK = 1 | ",
+        "last_stage": "decoded",
+        "pid": 28545,
+        "pss_kib": 6416199,
+        "process_importance": 100,
+        "model_and_context_load_ms": 24141.726762,
+        "system_and_user_prefill_ms": 2090.88927,
+        "decode_ms": 6477.665987,
+        "ready_ttft_ms": 2273.050103,
+        "non_eog_tokens": 32,
+        "native_returned_null": false,
+        "output": "The user wants a simple Python function that adds two integers. This is a straightforward request. Let me write a clean, well-documented function.\n\nI'll",
+        "passed": true,
+        "elapsed_ms": 34620.584101
+      }
+    },
+    {
+      "artifact": "bench/results/app-service-smoke-20261024T114045Z-27faadc0/result.json",
+      "variant": "MotoAI service CPU/read/OpenMP-off",
+      "apk_sha256": "4c4011c6ebb27416958f52bb5598be289d2b64f5b5f6abb2f07402a21a856d9f",
+      "model": "smoke",
+      "passed": true,
+      "config": {
+        "context": 128,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read"
+      },
+      "load": {
+        "ok": true,
+        "load_us": 7597,
+        "context": 128,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read",
+        "kv_type": "f16"
+      },
+      "metrics": {
+        "ok": true,
+        "prompt_tokens": 5,
+        "generated_tokens": 16,
+        "prepare_us": 88,
+        "prefill_us": 31961,
+        "decode_us": 188223,
+        "first_target_token_us": 32082,
+        "finish_reason": "length"
+      }
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T114122Z-b5e3eb8a/result.json",
+      "variant": "MotoAI service CPU/read/OpenMP-off",
+      "apk_sha256": "4c4011c6ebb27416958f52bb5598be289d2b64f5b5f6abb2f07402a21a856d9f",
+      "model": "gemma",
+      "passed": true,
+      "config": {
+        "context": 8192,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read"
+      },
+      "load": {
+        "ok": true,
+        "load_us": 11054150,
+        "context": 8192,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read",
+        "kv_type": "f16"
+      },
+      "metrics": {
+        "ok": true,
+        "prompt_tokens": 31,
+        "generated_tokens": 32,
+        "prepare_us": 22605,
+        "prefill_us": 1330037,
+        "decode_us": 4137518,
+        "first_target_token_us": 1354378,
+        "finish_reason": "length"
+      }
+    },
+    {
+      "artifact": "bench/results/app-service-ornith-20261024T114600Z-ba54d3c1/result.json",
+      "variant": "MotoAI service CPU/read/OpenMP-off",
+      "apk_sha256": "445ef13cfe3328f73904e7fe4beed3773cb4c91c83bd90db9419d956440a4190",
+      "model": "ornith",
+      "passed": true,
+      "config": {
+        "context": 8192,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read"
+      },
+      "load": {
+        "ok": true,
+        "load_us": 25051366,
+        "context": 8192,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read",
+        "kv_type": "f16"
+      },
+      "metrics": {
+        "ok": true,
+        "prompt_tokens": 30,
+        "generated_tokens": 32,
+        "prepare_us": 18475,
+        "prefill_us": 1750617,
+        "decode_us": 5882623,
+        "first_target_token_us": 1770482,
+        "finish_reason": "length"
+      },
+      "completed_pss_kib": 6316149
+    },
+    {
+      "artifact": "bench/results/app-service-gemma-20261024T115617Z-62fada6b/result.json",
+      "variant": "MotoAI service CPU/read/OpenMP-off; HOME + screen off",
+      "apk_sha256": "df7f3686543052771329dfd7f701f40e11025116056347f4f371b48b3cd60aa1",
+      "model": "gemma",
+      "passed": true,
+      "config": {
+        "context": 8192,
+        "threads": 4,
+        "batch": 512,
+        "micro_batch": 128,
+        "load_mode": "read"
+      },
+      "metrics": {
+        "ok": true,
+        "prompt_tokens": 31,
+        "generated_tokens": 128,
+        "prepare_us": 21199,
+        "prefill_us": 1729034,
+        "decode_us": 14748996,
+        "first_target_token_us": 1757272,
+        "finish_reason": "length"
+      },
+      "completed_interactive": false,
+      "completed_importance": 125,
+      "completed_pss_kib": 5907879
+    }
+  ],
+  "android_tests": "bench/runtime-tests-20261024.json",
+  "saf_import": {
+    "method": "actual ACTION_OPEN_DOCUMENT picker -> Downloads -> MotoAI-stories260K.gguf",
+    "bytes": 1185376,
+    "sha256": "270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d",
+    "result": "SHA-256/size matched; imported file loaded and generated through normal app UI"
+  },
+  "service_tests": "bench/runtime-service-tests-20261024.json"
+}

@@ -1,0 +1,55 @@
+{
+  "milestone": "M3",
+  "milestone_accepted": false,
+  "preflight_passed": true,
+  "scope": "Initial CPU_REPACK metadata/representation feasibility only. No optimized GGUF model load/generation, product-profile, RSS peak, speedup or endurance acceptance.",
+  "host_inverse_audit": "bench/results/repack-audit-host-20261024T232627Z/report.json",
+  "phone_preflight": "bench/results/repack-preflight-phone-20261024T232631Z/report.json",
+  "metadata_host": "bench/results/load-plan-host-20261024T231825Z/report.json",
+  "phone_apk_sha256": "bfc9cab0229525076aec6541b16dbc30b2600ff8a48e8e9b242c5238cacf2866",
+  "inverse_cases_per_cpu": 22,
+  "inverse_total_cases": 44,
+  "models": {
+    "gemma": {
+      "native_apk_plan_matches_measured_budget": true,
+      "native_planned_bytes": [
+        5338832192,
+        469762048,
+        150478848
+      ],
+      "packed_model_bytes": 2746060800,
+      "largest_native_tensor_bytes": 1937768448,
+      "largest_packed_source_tensor_bytes": 377487360,
+      "mapped_phase_budget_before_headroom_hypothesis": 5304070144,
+      "packed_tensor_types": {
+        "q4_K": 253,
+        "q6_K": 42
+      }
+    },
+    "ornith": {
+      "native_apk_plan_matches_measured_budget": true,
+      "native_planned_bytes": [
+        5618141184,
+        321126400,
+        141826592
+      ],
+      "packed_model_bytes": 5041766400,
+      "largest_native_tensor_bytes": 572129280,
+      "largest_packed_source_tensor_bytes": 834355200,
+      "mapped_phase_budget_before_headroom_hypothesis": 6076848672,
+      "packed_tensor_types": {
+        "q6_K": 33,
+        "q4_K": 216
+      }
+    }
+  },
+  "failed_tool_attempts": [
+    "bench/results/load-plan-host-20261024T231740Z/report.json",
+    "bench/results/repack-audit-host-20261024T232335Z/report.json"
+  ],
+  "next": [
+    "Build experimental APK with KleidiAI disabled and explicit CPU_REPACK-only policy; keep native default and old B0/B1/current reference distinct.",
+    "Validate matching no_alloc geometry and conservative committed/transient budgets in app, never reuse native-mmap window as the whole repack budget.",
+    "Run unchanged numeric/NLL/task/context gates before paired same-APK native/repack speed measurements. No silent context/output changes."
+  ]
+}
