@@ -1,0 +1,1 @@
+Linux release preparation for F-Droid: reproducible build metadata, normalized source/NDK paths and the same release signing certificate as 0.6.5. Original model weights and inference code are unchanged. Updated English/Russian catalog copy and real UI screenshots. Android 9+, ARM64; no models bundled.

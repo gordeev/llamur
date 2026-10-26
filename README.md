@@ -17,7 +17,7 @@ F-Droid preparation is included; the app is not listed in F-Droid yet.
 
 ## Download and install
 
-[Download the ARM64 APK — 0.6.5 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.5/llamur-0.6.5-arm64-v8a.apk) · [Release notes and checksums](https://github.com/gordeev/llamur/releases/tag/v0.6.5)
+[Download the ARM64 APK — 0.6.6 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.6/llamur-0.6.6-arm64-v8a.apk) · [Release notes and checksums](https://github.com/gordeev/llamur/releases/tag/v0.6.6)
 
 Requires Android 9+ with a 64-bit ARM64 OS. Open the downloaded APK to install;
 model weights are downloaded separately. This is an early public preview.

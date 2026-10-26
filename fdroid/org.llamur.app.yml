@@ -1,0 +1,84 @@
+AntiFeatures:
+  NonFreeNet:
+    en-US: Optional presets connect to OpenRouter, OpenAI and Anthropic proprietary
+      services; local GGUF chat works offline.
+Categories:
+  - Writing
+License: Apache-2.0
+SourceCode: https://github.com/gordeev/llamur
+IssueTracker: https://github.com/gordeev/llamur/issues
+Changelog: https://github.com/gordeev/llamur/releases
+
+RepoType: git
+Repo: https://github.com/gordeev/llamur.git
+
+Builds:
+  - versionName: 0.6.5
+    versionCode: 13
+    disable: Published APK contains different VCS metadata; next reproducible release
+      required
+    commit: 6cfc0d2d011fa1680e3905a2da82eaa58f902421
+    subdir: app
+    sudo:
+      - apt-get update
+      - apt-get install -y python3 git
+    gradle:
+      - yes
+    binary: https://github.com/gordeev/llamur/releases/download/v0.6.5/llamur-0.6.5-arm64-v8a.apk
+    srclibs:
+      - llamacpp@701fd25b3a55a90297dec0d925204b29084054c8
+    prebuild:
+      - $$SDK$$/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.1.0"
+        "cmake;3.31.6"
+      - echo "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a  $$SDK$$/platforms/android-36/android.jar"
+        | sha256sum -c -
+      - mkdir -p ../third_party/llama.cpp && git -C "$$llamacpp$$" archive 701fd25b3a55a90297dec0d925204b29084054c8
+        | tar -x -C ../third_party/llama.cpp
+      - (cd .. && python3 scripts/prepare-cpu-variant.py f32-recurrent-long-attention-v2)
+      - rm -f ../third_party/llama.cpp/docs/development/llama-star/idea-arch.key ../.tools/llama-long-attention-v2/docs/development/llama-star/idea-arch.key
+    ndk: r28c
+    gradleprops:
+      - motoaiCpuVariant=f32-recurrent-long-attention-v2
+      - motoaiCpuKleidiAI=false
+
+  - versionName: 0.6.6
+    versionCode: 14
+    commit: v0.6.6
+    subdir: app
+    sudo:
+      - apt-get update
+      - apt-get install -y python3 git
+    gradle:
+      - yes
+    binary: https://github.com/gordeev/llamur/releases/download/v0.6.6/llamur-0.6.6-arm64-v8a.apk
+    srclibs:
+      - llamacpp@701fd25b3a55a90297dec0d925204b29084054c8
+    prebuild:
+      - $$SDK$$/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.1.0"
+        "cmake;3.31.6"
+      - echo "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a  $$SDK$$/platforms/android-36/android.jar"
+        | sha256sum -c -
+      - mkdir -p ../third_party/llama.cpp && git -C "$$llamacpp$$" archive 701fd25b3a55a90297dec0d925204b29084054c8
+        | tar -x -C ../third_party/llama.cpp
+      - (cd .. && python3 scripts/prepare-cpu-variant.py f32-recurrent-long-attention-v2)
+      - rm -f ../third_party/llama.cpp/docs/development/llama-star/idea-arch.key ../.tools/llama-long-attention-v2/docs/development/llama-star/idea-arch.key
+    ndk: r28c
+    gradleprops:
+      - motoaiCpuVariant=f32-recurrent-long-attention-v2
+      - motoaiCpuKleidiAI=false
+
+AllowedAPKSigningKeys: ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85
+
+MaintainerNotes: |
+  Upstream-signature-only workflow: never fall back to another signing key.
+  The0.6.5 build stays disabled because its checkout metadata and native paths
+  differ from public-source Linux builds. Compile with build-tools36.1.0, but
+  sign the GitHub APK using apksigner34.0.0 and the existing release key.
+  The immutable v0.6.6 source tag is replaced by its full commit in the final
+  packaging update after local cross-path Linux reproduction passes.
+  No F-Droid submission has been made. See docs/fdroid.md for scope.
+
+AutoUpdateMode: None
+UpdateCheckMode: None
+CurrentVersion: 0.6.6
+CurrentVersionCode: 14

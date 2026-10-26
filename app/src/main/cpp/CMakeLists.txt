@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.31.6)
 project(motoai-probe LANGUAGES CXX)
+# Keep __FILE__ and debug paths independent of the checkout location.
+get_filename_component(MOTOAI_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../.." ABSOLUTE)
+add_compile_options("-ffile-prefix-map=${MOTOAI_SOURCE_ROOT}=."
+                    "-ffile-prefix-map=${CMAKE_ANDROID_NDK}=/android-ndk")
 add_library(motoai-probe SHARED probe.cpp)
 target_compile_features(motoai-probe PRIVATE cxx_std_17)
 target_compile_options(motoai-probe PRIVATE -Wall -Wextra -Werror)

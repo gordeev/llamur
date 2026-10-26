@@ -18,7 +18,7 @@
 
 ## Скачать и установить
 
-[Скачать ARM64 APK — 0.6.5 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.5/llamur-0.6.5-arm64-v8a.apk) · [Описание релиза и контрольные суммы](https://github.com/gordeev/llamur/releases/tag/v0.6.5)
+[Скачать ARM64 APK — 0.6.6 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.6/llamur-0.6.6-arm64-v8a.apk) · [Описание релиза и контрольные суммы](https://github.com/gordeev/llamur/releases/tag/v0.6.6)
 
 Нужны Android 9+ и 64-битная ARM64 ОС. Откройте скачанный APK для установки;
 веса моделей скачиваются отдельно. Это первая публичная предварительная версия.

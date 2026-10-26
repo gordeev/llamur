@@ -1,141 +1,127 @@
 # F-Droid preparation
 
-Current release-candidate results are recorded below. The M0/M1 sections are
-historical design checkpoints, not a statement that their completed checks are
-still outstanding. Privacy policy: [privacy-policy.md](privacy-policy.md).
+This is local packaging work, not a submitted or accepted F-Droid application.
+No GitLab issue/MR, store upload or signing-key transfer has been made.
 
-## Initial distribution decisions (M0)
+## Recipe and catalog
 
-- Main build: FLOSS source-built runtime, portable ARM64 CPU, optional GPU.
-- Do not bundle Qualcomm QNN/QAIRT SDK binaries or Hexagon skels in the main build.
-  Hexagon remains a separate feasibility experiment until toolchain, permissions,
-  licensing and full model operation coverage are verified.
-- The upstream Android B0 currently requires beta NDK r29. Keep this experimental
-  baseline separate from the stable-NDK product build; do not reuse its release
-  recipe as the F-Droid recipe.
-- OEM OpenCL/Vulkan drivers stay on the device. Optional access must fail cleanly
-  to CPU. Final inclusion suitability still requires an actual dependency audit.
-- No models bundled in APK, no telemetry, mandatory account, Play Services or
-  executable plugin download. Weights require their own provenance and licenses.
-- Model catalog license declarations: Ornith MIT; selected Gemma Apache-2.0.
-  These metadata declarations must be checked against the pinned license files
-  before distribution. New app code uses Apache-2.0 (root LICENSE); signing remains open until release.
+`fdroid/org.llamur.app.yml` replaces the old unresolved template. It pins the
+0.6.6 source tag `v0.6.6` (versionCode 14), APK download and release
+certificate. The final packaging update pins the full source commit after
+local cross-path Linux verification. Copy it to
+`metadata/org.llamur.app.yml` in fdroiddata; its companion `fdroid/llamacpp.yml`
+belongs in `srclibs/llamacpp.yml`. Do not submit the disabled historical build
+as a working release.
 
-Policy: https://f-droid.org/en/docs/Inclusion_Policy/
+The recipe fetches pinned llama.cpp as a srclib, archives its exact revision and
+applies the hash-locked CPU patches. Upstream remains pristine. It removes only
+the unused executable-bit upstream Keynote presentation `idea-arch.key` from
+the temporary build copies, after source verification. This is not a signing
+key. No blanket scanner exclusions or proprietary accelerator SDKs are used.
 
-The M1 foreground service uses `specialUse`, a documented subtype for explicit
-local model loading/generation, and a Stop/unload notification. See the
-[Android service type requirements](https://developer.android.com/develop/background-work/services/fgs/service-types#special-use).
-This is an implementation choice, not evidence of store acceptance.
+Tool versions: JDK 17, Gradle 8.14.3, AGP 8.13.2, Kotlin 2.3.0, Android 36,
+build-tools 36.1.0, NDK r28c (`28.2.13676358`), CMake 3.31.6. SDK packages are
+explicitly installed in the recipe; android.jar SHA-256 is checked against the
+locked platform archive to reject silently changed SDK revisions. Local offline validation uses pre-provisioned,
+hash-locked tools rather than running networked sdkmanager inside the container.
+SDK licenses must be accepted in the build environment.
 
-Historical outstanding release work (superseded by the final candidate evidence): offline dependency/source recipe (including KleidiAI
-1.32.0), complete license notices/SBOM, deterministic release builds and signing,
-16K ELF/ZIP alignment and emulator/device launch, architecture parser admission,
-model license provenance, accessibility/localization and sustained validation.
-Do not submit the current debug harness to F-Droid as a finished release.
+Both `fastlane/metadata/android/en-US` and `ru-RU` now include current catalog
+copy, icon, versionCode 14 changelog and eight real English UI screenshots,
+covering both themes. See [asset provenance](../fastlane/README.md). No models,
+private chats, tokens or fabricated device screenshots are bundled. These
+assets are included in the 0.6.6 source revision. Changing the working tree does
+not change an existing public tag.
 
-## Release preparation evidence (26 October)
+## Preserve GitHub signing identity
 
-The current source/component notice inventory is `licenses/runtime-components.json`;
-verbatim notices are packaged under `app/src/main/assets/licenses/`. The actual
-release runtime Maven graph contains only Kotlin stdlib2.3.0 and JetBrains
-annotations13.0. Their cached POM license declarations and JAR/POM SHA-256 are
-recorded. Native notices cover the pinned llama.cpp/GGML and bundled common
-helpers, JSON, hashes, subprocess header, and official NDK LLVM runtime notices.
-This inventory is still a candidate: final APK contents and every transitive
-build dependency must be checked again after the product UI/API is complete.
+The recipe deliberately uses **upstream-signature-only** publication: per-build
+`binary` and `AllowedAPKSigningKeys`. Certificate SHA-256:
 
-The CPU release disables KleidiAI, GPU and Hexagon backends and optional Rust
-llguidance. It does not need a Qualcomm SDK, proprietary shader binary, model,
-API credential or executable runtime download. User model data is separate from
-the app distribution; metadata license claims are not proof of model provenance.
+```text
+ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85
+```
 
-F-Droid requires functional applications, public source and a FLOSS build chain.
-Its current policy also normally requires three months of active development,
-with listed exceptions for established users, existing maintainers or events.
-The final public application ID, repository/tag, maintenance eligibility and
-signing strategy therefore remain owner/reviewer release decisions; this task
-prepares artifacts and never submits/publishes them. [Inclusion policy](https://f-droid.org/en/docs/Inclusion_Policy/).
+F-Droid rebuilds unsigned source and verifies it against the GitHub APK using
+signature copying. It publishes only a matching APK. The private keystore and
+password stay with the owner. This workflow preserves normal updates between
+GitHub and F-Droid; installing an APK with a different signer cannot do that.
+[Official reproducible-build workflow](https://f-droid.org/docs/Reproducible_Builds/).
 
-Native build outputs can vary across host toolchains even at the same NDK
-version. Final reproducibility must compare two clean Linux builds under the
-recorded environment; an offline incremental rebuild alone is insufficient.
-[Reproducible builds](https://f-droid.org/en/docs/Reproducible_Builds/).
+The published 0.6.5 APK contains an app Git revision from the earlier local
+checkout in `META-INF/version-control-info.textproto`, rather than the public
+tag's revision. That alone prevents byte-for-byte reproduction. The actual comparison also
+found host/path differences in all 14 native libraries; other APK payload
+entries matched. Native diagnostic strings contain checkout paths, which the
+pending compiler prefix-map removes. The existing
+GitHub APK/tag is preserved, and its historical recipe entry is disabled.
+`apksigcopier 1.1.1` successfully stripped/copied the actual APK signatures back
+into a byte-identical APK. That round trip alone did not prove that the original
+unsigned APK was compatible: signing a fresh Linux APK with 36.1 failed the real
+unsigned comparison. Signing those same bytes with 34.0 passed. Future releases
+must use apksigner 34, while compilation stays on 36.1. See [signing](signing.md).
 
-## Product release candidate preparation
+The 0.6.6 source disables release VCS metadata and pins llama build identity
+to `upstream.lock.json` and normalizes compiler source/NDK/debug paths. Native
+source archives cannot inherit the enclosing app's Git hash or clone depth. These changes concern build metadata, not model
+weights, numerical kernels or generation settings. Runtime sources/patches are
+otherwise unchanged. Release 0.6.6 uses versionCode 14 and a new source tag;
+do not replace 0.6.5 in place or activate its disabled recipe.
 
-The launcher is now the standalone chat/model-manager app; OpenAI-compatible API
-and HF downloader are implemented. See app-description.md and api.md. CPU is the
-main build, GPU/Hexagon/KleidiAI disabled. No model or proprietary accelerator
-binary is bundled. `fastlane/metadata/android/{en-US,ru-RU}` supplies catalog copy;
-`fdroid/org.llamur.app.yml.in` is an explicitly unresolved review template,
-not a submitted or automatically publishable recipe. Public source/issues URLs
-and an immutable application commit cannot be fabricated from this private,
-uncommitted workspace. Do not use blanket scanner exclusions to approve an
-unknown binary: the reviewer must audit the pinned upstream tree and remove any
-non-build fixtures flagged by the actual F-Droid scanner. The template alone implies no scanner result or catalog acceptance; actual
-scanner and executed-prebuild results are recorded below.
+## Earlier local preparation checks
 
-`gradle/verification-metadata.xml` locks resolved Maven SHA-256 values.
-`scripts/audit-maven-dependencies.py` inventories226 build/test components from
-cached Maven POMs, including inherited licenses. Every binary component has a
-license declaration and all cached artifacts match their recorded hashes;
-metadata-only parent POMs are distinguished. These hashes were bootstrapped
-from the existing dependency cache, not independently authenticated upstream
-signatures. Packaged runtime is only Kotlin stdlib/JetBrains annotations plus
-source-built native libraries and platform APIs. Full notices are in APK assets.
+The working artifacts and full logs are under ignored
+`build/fdroid-preparation-20261026/`. See the
+[curated result](releases/fdroid-preparation-20261026.json) for hashes and scopes.
 
-Two isolated Linux builds use the same metadata-free source snapshot, pinned
-amd64 builder, stable NDK r28c and no network. Their final comparison and actual
-APK16KiB ELF/ZIP/notice/manifest audit are recorded in progress.md and the release
-artifacts. Read those reports before calling reproducibility complete.
+- Official fdroidserver 2.4.5 parser and metadata lint passed on the concrete
+  certificate-pinned recipe.
+- Official fastlane ingestion and image processing passed for both locales;
+  descriptions, summaries and changelogs fit their limits, with 8 screenshots
+  and an icon per locale. Catalog PNGs match their original captures exactly.
+- The actual source prebuild commands ran, with the SDK installation step
+  replaced by the recorded pre-provisioned tools. Official source scanner:
+  zero fatal findings, warnings or errors; no scanignore/scandelete.
+- Clean offline Linux release+lint passed for both the exact public 0.6.5 source
+  and the pending fixed source. Their outputs are compared explicitly; neither
+  build reused project/native outputs from the other.
+- The fixed APK contains no checkout VCS metadata or absolute project/NDK/home
+  paths in its 14 packaged native libraries. ELF 16 KiB/alignment/notice audit and
+  official binary scanner passed.
+- Signing that APK with the existing release key using apksigner 34 and copying
+  its signature onto the actual Gradle unsigned APK passed. No key was mounted
+  in the builder or uploaded. This is not an independent server rebuild.
+- 80 repository Python tests and shell syntax checks passed.
 
-Signing: locally installable development APKs use a development certificate;
-**it is not an owner production signing identity**. Preserve the published
-application ID/version/update-key strategy before any real release. F-Droid
-normally signs its own built APK; a developer-signature/reproducible-upstream
-workflow needs its explicit corresponding setup. This task creates no production
-key, tag, commit, submission, upload or store publication.
+These are local checks, not a run on F-Droid's official build server. The exact
+source snapshot, APK hashes, binary scans, Linux build/lint and comparison
+outcomes are in the curated result; historical 0.1 Linux equality is not used as
+proof that the published 0.6.5 matches.
 
-The template fetches pinned llama.cpp as an F-Droid **srclib** using its companion
-`fdroid/llamacpp.yml`, then copies source into the expected vendor location and
-applies hash-locked patches. It has no blanket scanignore and performs no Git
-network fetch in prebuild. Use the actual F-Droid scanner before submission;
-SDK/CMake availability and the public application revision still need resolution.
-[Build metadata reference](https://f-droid.org/en/docs/Build_Metadata_Reference/).
+## Release 0.6.6 verification
 
-Official fdroidserver2.4.5 source scanner ran with freshly downloaded SUSS
-(SHA256 `34c673dcc1a44dde8e3a9a2bc2d16abd0fc969acfc3f6836dd0a83d7de17f959`)
-and no scanignore/scandelete: zero fatal findings. One warning identifies an
-unused executable-bit upstream **Keynote presentation** `idea-arch.key` (ZIP of
-presentation assets, not a signing key). The draft prebuild removes this exact
-non-build document from the two prepared source copies. The pristine repository
-is unchanged. The binary scanner also found zero signatures in Linux pilot APK;
-the final E product APK was subsequently scanned with zero findings
-(`fdroid-binary-scan-linux-e-20261026`).
+Two fresh offline Linux builds from the exact source commit must agree across
+different project/SDK/NDK paths, then the signed GitHub APK must verify against
+both unsigned APKs using apksigcopier. The result and exact immutable revision
+are added to `docs/releases/0.6.6-verification.json` on the public main branch
+after verification. The source freeze itself is not a claim that those checks
+have already passed. No submission is authorized by this release task.
 
-The final template also passed the actual fdroidserver2.4.5 metadata parser and
-source scanner **using its own Build settings**, not a default empty Build:
-`bench/results/fdroid-recipe-validation-20261026/report.json`. No scanignore or
-scandelete is used. The initially drafted scandelete entries for root models and
-bench/results were removed: neither path exists in the clean source export, and
-F-Droid treats unused scanner exceptions as errors. Unresolved public URLs and
-application commit remain explicit placeholders; this does not validate remote
-fetches, maintainer eligibility, a build-server run or submission.
+## Before submitting
 
-The joined prebuild shell script was then executed **as written, from app/**,
-with the real local pinned Git srclib substituted, before scanning with its Build:
-`bench/results/fdroid-prebuild-executed-20261026/report.json`. Parser, preparation
-and scanner passed with zero warnings/errors. The Python preparation step uses a
-subshell so its cd cannot affect the following exact-path document removal.
-Original vendor checkout remains unchanged. This local execution still does not
-resolve the future public app repository/tag or count as a F-Droid server build.
+1. Publish a new release from the fixed public source, with a fresh versionCode,
+   immutable commit and Linux-built APK signed by the existing release key.
+2. Add that exact revision/version/APK to the recipe and reproduce it with
+   apksigcopier. Keep a mismatch disabled; do not switch to an unrelated signer.
+3. Repeat the actual recipe/scanner/build checks with the final public checkout
+   and F-Droid build environment. Review dependencies, notices and artwork
+   provenance. Model licenses remain separate; no model is redistributed.
+4. Confirm maintainer eligibility. Current policy normally requests three
+   months of active development, with specified exceptions; this short public
+   history does not itself prove an exception. Optional proprietary cloud
+   presets are conservatively declared `NonFreeNet`; reviewers decide the label.
+5. Only after the owner's instruction, open a metadata MR in fdroiddata.
 
-## Обновление0.2.0-dev
-
-Добавлены необязательные пресеты OpenRouter/OpenAI/Anthropic и свой endpoint.
-В шаблон метаданных внесён `NonFreeNet`: [определение F-Droid](https://f-droid.org/docs/Anti-Features/#Non-Free-Network-Services)
-охватывает продвижение proprietary network services. Это консервативная маркировка
-шаблона, окончательное решение принимает каталог. Локальный чат по-прежнему offline;
-проприетарный SDK не добавлялся. Старые source/binary-scans и воспроизводимая пара
-относятся к0.1.0; новая версия требует своей приёмки. Ничего не подано/опубликовано.
+[Submission guide](https://f-droid.org/docs/Submitting_to_F-Droid_Quick_Start_Guide/),
+[inclusion policy](https://f-droid.org/en/docs/Inclusion_Policy/),
+[metadata reference](https://f-droid.org/en/docs/Build_Metadata_Reference/).

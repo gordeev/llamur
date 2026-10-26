@@ -1,14 +1,15 @@
-<p>Run text language models locally on your Android phone. Import your own compatible single-file GGUF or download one from Hugging Face. Models are not bundled.</p>
+<p>Run compatible GGUF language models on your Android phone, or connect a remote provider. Import a model from storage or download it from Hugging Face, with an optional access token. No models are bundled.</p>
 <ul>
-<li>A messenger home with search and folders, Dialogs / Local API / Settings tabs, model selection for new chats, message search and pins, and Send/Stop.</li>
-<li>Optional OpenRouter/OpenAI/Claude/custom HTTPS connections, streaming, model catalogs and optional encrypted key storage.</li>
-<li>Temporary RAM-only or opt-in encrypted permanent dialogs, with separate reasoning and answer display.</li>
-<li>Background generation and a private completion notification that opens the live dialog.</li>
-<li>Model profiles, fixed context choices, separate answer budget, explicit overflow errors, and light/dark themes.</li>
-<li>Verified imports, optional no-copy file references, resumable HF downloads, and optional encrypted token storage.</li>
-<li>An optional OpenAI-compatible HTTP/SSE API shares the same loaded model. LAN connections require TLS and a bearer token; loopback also requires a token.</li>
+<li>Messenger-style chats with folders, search, pinned messages and a model information card.</li>
+<li>Local CPU inference, adjustable context and answer budgets, and per-model profiles. The original model weights are preserved.</li>
+<li>Optional OpenRouter, OpenAI, Anthropic Claude and custom OpenAI-compatible endpoints, with streaming replies and model catalogs.</li>
+<li>HTTP endpoints require explicit consent and remain visibly marked as unencrypted. Use HTTPS for confidential traffic.</li>
+<li>Manual context compaction and optional automatic compaction, off by default. Inspect or undo the summary; the original history follows the chat's storage mode.</li>
+<li>Temporary chats, opt-in encrypted persistent history, retention settings and automatic deletion. Android may delay scheduled cleanup.</li>
+<li>Background replies with completion notifications. Android power management may interrupt background work.</li>
+<li>An optional OpenAI-compatible local API with streaming. Loopback requires a bearer token; LAN access requires both TLS and a token.</li>
+<li>Model-supported image/PDF attachments and downloadable provider outputs. Support depends on the selected model and provider.</li>
+<li>English and Russian UI, light and dark themes. Conversation languages depend on the model.</li>
 </ul>
-<p>History defaults to Never save. Explicit permanent chats use encrypted storage with AndroidKeyStore, optional auto-delete and deletion controls. Android may delay background cleanup. Android power management can pause background execution. CPU inference preserves the selected model weights; GPU experiments are not enabled in this build.</p>
-<p>Requires Android9 or later and a64-bit ARM64 OS. Tested physically on Motorola Edge40Pro with12GB RAM using two pinned models. Other devices and arbitrary GGUFs are not guaranteed. Large-context processing can take many minutes;16K is experimental and32K qualification must be checked in the release notes.</p>
-<p>No telemetry, mandatory account, Play Services, root or computer is needed for offline chat. Internet is used for user-requested downloads, explicitly selected remote providers and the enabled local API. Remote dialogs follow the selected provider's terms and storage policy. Model licenses and access rights remain separate from the application.</p>
-<p>The current application interface is in Russian. Model conversation languages depend on the selected model.</p>
+<p>Local chat works offline after downloading a model. No telemetry, mandatory account, root or Google Play Services. Remote requests and attachments are sent to the provider you select; its terms, charges and retention policy apply. Model licenses and access rights are separate from the app.</p>
+<p>Requires Android 9 or later and a 64-bit ARM64 OS. Physically tested on Motorola Edge 40 Pro with 12 GB RAM using pinned Ornith and Gemma GGUF files; see the repository for exact models and measurements. Other devices and arbitrary GGUF files are not guaranteed. Large models and contexts can be slow or exceed available memory. GPU experiments are disabled in this build.</p>

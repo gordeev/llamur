@@ -1,0 +1,1 @@
+Public preview: local GGUF chat, Hugging Face downloads, optional remote providers and local API. English/Russian UI, light/dark themes, folders, pins, background notifications and encrypted opt-in history. Manual context compaction and optional automatic compaction with summary preview/undo. HTTP endpoints require explicit consent. ARM64, Android 9+. No models bundled.

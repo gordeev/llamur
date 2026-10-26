@@ -1,4 +1,11 @@
-# Rebuilding the standalone release candidate
+# Rebuilding the standalone release
+
+Release 0.6.6 uses versionCode 14, package `org.llamur.app`, ARM64/API28+.
+Compilation uses the pinned Linux toolchain below and signing uses apksigner 34
+with the same public certificate as 0.6.5. The 0.6.6 verification report is added
+on the public main branch after its clean Linux builds finish; the source freeze
+does not predeclare that result. F-Droid submission remains separate.
+
 
 The first public preview is0.6.5, versionCode13, application ID
 `org.llamur.app`, ARM64/API28+. GitHub release assets contain a dedicated-key
@@ -14,7 +21,7 @@ unchanged from the accepted engine; packaging/version/signing are checked anew.
 ## Toolchain
 
 Use Linux x86_64, JDK17, Gradle8.14.3, AGP8.13.2, Kotlin2.3.0, SDK platform36,
-build-tools36.1.0, stable NDK28.2.13676358/r28c and CMake3.31.6. The Gradle wrapper
+build-tools 36.1.0, stable NDK28.2.13676358/r28c and CMake3.31.6. The Gradle wrapper
 pins its distribution SHA. `toolchain.lock.json`, `bench/linux-tools.lock.json`
 and `bench/linux-platform.lock.json` provide exact versions/archive hashes;
 the platform archive's android.jar matches the actual release JAR SHA.
@@ -79,7 +86,7 @@ its origin. Building that Dockerfile later can resolve newer apt packages;
 only the recorded image/tool environment and canonical path were tested for
 byte reproducibility. Cross-host/path/toolchain equality is not implied.
 F-Droid builds/signing are a separate pipeline, not a claimed upstream-signature
-match. The draft recipe has no Binaries verification promise or submission.
+match. The current recipe pins the upstream signing certificate and APK, with the non-reproducible historical 0.6.5 build disabled. See [current F-Droid preparation](fdroid.md).
 
 ## Signing and installation
 
@@ -108,7 +115,7 @@ contract checks use the native-identical test-enabled build. Real main-model,
 context, Aider and performance evidence with exact APK/model hashes is listed in
 progress.md. Tiny developer fixtures are not bundled or distributed as models.
 Known limitations: large contexts are slow/experimental, arbitrary GGUFs/devices
-are unqualified, the current app UI is Russian, and valid gated/private HF access
+are unqualified, the app UI supports Russian and English, and valid gated/private HF access
 was not exercised without an authorized account token.
 
 
@@ -128,3 +135,8 @@ preserved. Source package includes build-input manifest and curated evidence
 under `release-review/`, not raw device dumps or local model weights. The supplied
 SHA256SUMS identifies the delivered files. External-provider M9 is documentation
 only in this candidate and requires its own implementation/build/acceptance.
+
+For future F-Droid-compatible releases, compile with36.1.0 but sign with
+**apksigner 34.0.0** using the existing release key. The actual Linux proof passed
+signature copying with34 and failed with36.1 on the same unsigned APK. See
+[signing instructions and tool hashes](signing.md#signing-future-f-droid-compatible-releases).

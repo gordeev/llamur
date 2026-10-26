@@ -1,0 +1,9 @@
+{
+  "package": "build-tools;34.0.0",
+  "url": "https://dl.google.com/android/repository/build-tools_r34-linux.zip",
+  "bytes": 61224257,
+  "official_sha1": "d6d58e0c6925a9e4d9a541e84cd1f405c2f9d2a9",
+  "sha256": "e858c4b60069d0431051b225d384413b1643e1289b00a4825aed347f25bd510f",
+  "apksigner_jar_sha256": "eefdd6aed9db9fb849e4c98a50d8741e19d1b674ba6547220bcb9c3ed152123a",
+  "scope": "Official Google build-tools34 apksigner JAR; signing only. Android compilation remains build-tools36.1.0. Never bundled in app."
+}

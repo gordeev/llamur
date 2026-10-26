@@ -1,0 +1,279 @@
+{
+  "local_preparation_passed": true,
+  "ready_to_submit": false,
+  "new_public_release_required": true,
+  "submitted": false,
+  "official_fdroid_build_server_tested": false,
+  "completed_utc": "2026-10-26T23:18:26.783703+00:00",
+  "scope": "Local F-Droid packaging preparation only. Published0.6.5 fails upstream reproducibility; fixed working-tree proof builds successfully but is not a new public release or official server verification.",
+  "recipe": {
+    "path": "fdroid/org.llamur.app.yml",
+    "sha256": "e63c2254dd790e7154cb1ced79e696bab77e64188000cd0100c44201fe464af9",
+    "fdroidserver_version": "2.4.5",
+    "metadata_lint_including_format_passed": true,
+    "historical0.6.5_disabled": true,
+    "upstream_signature_only": true,
+    "private_key_uploaded": false
+  },
+  "catalog": {
+    "passed": true,
+    "scope": "Official fdroidserver2.4.5 fastlane ingestion and image processing, both locales; local preview only",
+    "locales": {
+      "en-US": {
+        "summary_characters": 64,
+        "description_characters": 2202,
+        "changelog_characters": 373,
+        "screenshots": 8,
+        "icon": true
+      },
+      "ru-RU": {
+        "summary_characters": 54,
+        "description_characters": 2166,
+        "changelog_characters": 364,
+        "screenshots": 8,
+        "icon": true
+      }
+    }
+  },
+  "source_scanner": {
+    "passed": true,
+    "scope": "Actual recipe source prebuild and official fdroidserver2.4.5 scanner on pending working-tree source. SDK installation step pre-provisioned with hash-locked tools, not executed by sdkmanager. Not remote F-Droid build-server acceptance.",
+    "recipe_sha256": "e63c2254dd790e7154cb1ced79e696bab77e64188000cd0100c44201fe464af9",
+    "suss_sha256": "285e6464967fa55c471957193afd2f5d7b5040b9576a394661cacc43948d1620",
+    "fatal_count": 0,
+    "messages": {
+      "infos": [
+        [
+          "Removing gradlew at gradlew",
+          "gradlew"
+        ],
+        [
+          "Removing gradle-wrapper.jar at gradle/wrapper/gradle-wrapper.jar",
+          "gradle/wrapper/gradle-wrapper.jar"
+        ],
+        [
+          "Removing gradlew at third_party/llama.cpp/examples/llama.android/gradlew",
+          "third_party/llama.cpp/examples/llama.android/gradlew"
+        ],
+        [
+          "Removing gradle-wrapper.jar at third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+          "third_party/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+        ],
+        [
+          "Removing gradlew at .tools/llama-long-attention-v2/examples/llama.android/gradlew",
+          ".tools/llama-long-attention-v2/examples/llama.android/gradlew"
+        ],
+        [
+          "Removing gradle-wrapper.jar at .tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+          ".tools/llama-long-attention-v2/examples/llama.android/gradle/wrapper/gradle-wrapper.jar"
+        ]
+      ],
+      "warnings": [],
+      "errors": []
+    },
+    "public_app_commit": "6cfc0d2d011fa1680e3905a2da82eaa58f902421",
+    "pending_source_manifest": "build/fdroid-final-source-scan-manifest.json"
+  },
+  "github_binary_scanner": {
+    "passed": true,
+    "scope": "Official F-Droid2.4.5 APK scan with existing validated cached SUSS, offline. Not source/build/metadata/inclusion certification.",
+    "apk_sha256": "1c157adb40dec902843b61eb6b3490b263c736d3baa2fc5af8c2e6621f7c3568",
+    "signature_sha256": "285e6464967fa55c471957193afd2f5d7b5040b9576a394661cacc43948d1620",
+    "error_code_signature_count": 444,
+    "fatal_count": 0
+  },
+  "linux0.6.5_binary_scanner": {
+    "passed": true,
+    "scope": "Official F-Droid2.4.5 APK scan with existing validated cached SUSS, offline. Not source/build/metadata/inclusion certification.",
+    "apk_sha256": "3c774d74c6557f0a8e11c2d9c01a44dc1391b4e8da603c39354d5b10a3cc0469",
+    "signature_sha256": "285e6464967fa55c471957193afd2f5d7b5040b9576a394661cacc43948d1620",
+    "error_code_signature_count": 444,
+    "fatal_count": 0
+  },
+  "published0.6.5_comparison": {
+    "scope": "Clean Linux offline release+lint from exact public0.6.5 commit versus published signed GitHub APK. Expected historical reproducibility failure, not inclusion acceptance.",
+    "public_commit": "6cfc0d2d011fa1680e3905a2da82eaa58f902421",
+    "linux_build_passed": true,
+    "github_sha256": "1c157adb40dec902843b61eb6b3490b263c736d3baa2fc5af8c2e6621f7c3568",
+    "linux_unsigned_sha256": "3c774d74c6557f0a8e11c2d9c01a44dc1391b4e8da603c39354d5b10a3cc0469",
+    "only_in_github": [],
+    "only_in_linux": [],
+    "changed_content": [
+      "META-INF/version-control-info.textproto",
+      "lib/arm64-v8a/libggml-base.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+      "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+      "lib/arm64-v8a/libggml.so",
+      "lib/arm64-v8a/libllama-common.so",
+      "lib/arm64-v8a/libllama.so",
+      "lib/arm64-v8a/libmotoai-checks.so",
+      "lib/arm64-v8a/libmotoai-probe.so",
+      "lib/arm64-v8a/libmotoai-runtime.so"
+    ],
+    "native_count": 14,
+    "native_identical": false,
+    "published_signature_reproduced": false,
+    "signature_copy_error": "APK Signature Scheme v3 content digest mismatch (expected for historical0.6.5)",
+    "github_native_embedded_paths": {
+      "work_path_libraries": [],
+      "home_path_libraries": [
+        "lib/arm64-v8a/libggml-base.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+        "lib/arm64-v8a/libggml.so",
+        "lib/arm64-v8a/libllama-common.so",
+        "lib/arm64-v8a/libllama.so"
+      ]
+    },
+    "linux_native_embedded_paths": {
+      "work_path_libraries": [
+        "lib/arm64-v8a/libggml-base.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.0_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.2_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.2_2.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv8.6_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.0_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.2_1.so",
+        "lib/arm64-v8a/libggml-cpu-android_armv9.2_2.so",
+        "lib/arm64-v8a/libggml.so",
+        "lib/arm64-v8a/libllama-common.so",
+        "lib/arm64-v8a/libllama.so"
+      ],
+      "home_path_libraries": []
+    }
+  },
+  "published_signature_copy_roundtrip": {
+    "scope": "apksigcopier1.1.1 round trip of published APK; signature files stripped then copied, not a rebuild",
+    "passed": true,
+    "sha256": "1c157adb40dec902843b61eb6b3490b263c736d3baa2fc5af8c2e6621f7c3568"
+  },
+  "pending_linux": {
+    "passed": true,
+    "scope": "Fresh offline Linux working-tree release+lint, path/identity audit, local same-key signing and apksigcopier verification against its actual Gradle unsigned APK. Proof build still versionCode13: not a new public release, not whole-APK reproduction on F-Droid server.",
+    "signer_build_tools": "34.0.0",
+    "unsigned_sha256": "d7085761dab033014d5a2ec3dc7bb770693cbd7a994f11b1136117f8c3a78c87",
+    "signed_proof_sha256": "05b506205346c648f8ec8c850ceafb5792d41b1226c3d95448473d475b1ae6bb",
+    "signing_certificate_sha256": "ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85",
+    "native_library_count": 14,
+    "no_checkout_vcs_metadata": true,
+    "no_project_ndk_or_home_paths_in_packaged_native_libraries": true,
+    "signature_copy_to_actual_unsigned_apk_verified": true,
+    "production_source_identity_verified": true,
+    "private_key_mounted_in_builder": false,
+    "published": false,
+    "installed_on_phone": false
+  },
+  "signing_tool_lock": {
+    "package": "build-tools;34.0.0",
+    "url": "https://dl.google.com/android/repository/build-tools_r34-linux.zip",
+    "bytes": 61224257,
+    "official_sha1": "d6d58e0c6925a9e4d9a541e84cd1f405c2f9d2a9",
+    "sha256": "e858c4b60069d0431051b225d384413b1643e1289b00a4825aed347f25bd510f",
+    "apksigner_jar_sha256": "eefdd6aed9db9fb849e4c98a50d8741e19d1b674ba6547220bcb9c3ed152123a",
+    "scope": "Official Google build-tools34 apksigner JAR; signing only. Android compilation remains build-tools36.1.0. Never bundled in app."
+  },
+  "retained_signer36_failure": {
+    "scope": "Same clean Linux unsigned APK, signed using build-tools36.1.0; Android signature verifies but apksigcopier cannot reconstruct a verifying APK from the actual unsigned bytes. Retained failure, resolved with signer34.0.0.",
+    "signature_copy_passed": false,
+    "signer": "36.1.0",
+    "unsigned_sha256": "d7085761dab033014d5a2ec3dc7bb770693cbd7a994f11b1136117f8c3a78c87",
+    "signed_sha256": "89cf8f71a982b724f2d20ee23bc3e3286b2381ec1962dce68933fe12e271ff72"
+  },
+  "pending_binary_scanner": {
+    "passed": true,
+    "scope": "Official F-Droid2.4.5 APK scan with existing validated cached SUSS, offline. Not source/build/metadata/inclusion certification.",
+    "apk_sha256": "05b506205346c648f8ec8c850ceafb5792d41b1226c3d95448473d475b1ae6bb",
+    "signature_sha256": "285e6464967fa55c471957193afd2f5d7b5040b9576a394661cacc43948d1620",
+    "error_code_signature_count": 444,
+    "fatal_count": 0
+  },
+  "pending_apk_audit": {
+    "passed": true,
+    "native_libraries": 14,
+    "permissions": [
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.WAKE_LOCK",
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.FOREGROUND_SERVICE_DATA_SYNC"
+    ]
+  },
+  "native_configuration": {
+    "passed": true,
+    "scope": "Actual pending Linux CMake configuration, with public application .git mounted read-only",
+    "prefix_mapped_compile_commands": 258,
+    "locked_upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+    "build_info_sha256": "76c50945f4eb88829df41b6d8ae957b2ac3fb97858cf15cfed7c8eb82ea76f1e",
+    "ndk_paths_normalized": true
+  },
+  "project_path_compiler_probe": {
+    "passed": true,
+    "scope": "Linux NDK r28c clang AArch64 object __FILE__ prefix-map probe, two different source roots. This is a small compiler check, not whole-APK cross-path reproduction.",
+    "object_sha256": "84c417539228799b9c0388d505615527c01d2931812c1bccf0ab3aa3da3ac39b",
+    "log_sha256": "f4e615b583f949d5273fc8d5b97a5a68323614562ba4e5d9f07e158ea8613bc4"
+  },
+  "project_and_ndk_path_compiler_probe": {
+    "passed": true,
+    "scope": "Linux NDK r28c C++ AArch64 object with std::vector and -g, two different project and SDK roots; exact object equality, not a whole-APK rebuild",
+    "object_sha256": "7d8278e74d6ad0995b84215e4a0eea162268920037ecb6ac83bbe8e9567e370d"
+  },
+  "git_parent_discovery": {
+    "passed": true,
+    "scope": "Native exported sources cannot discover the enclosing private app checkout via Git",
+    "git_parent_discovery_blocked": true
+  },
+  "production_changes": [
+    "app/build.gradle.kts",
+    "app/src/main/cpp/CMakeLists.txt",
+    "native-runtime/CMakeLists.txt"
+  ],
+  "all_other_production_inputs_identical": true,
+  "python_tests": 80,
+  "shell_syntax_passed": true,
+  "builder": {
+    "image_id": "sha256:aca8e32761619c66f030d3092b42bf9a91fcb0ba212561ef83fce3825bd6c8f8",
+    "platform": "linux/amd64",
+    "network": "none",
+    "cpus": 4,
+    "memory_gib": 6,
+    "key_mounted": false,
+    "fresh_project_and_native_outputs": true,
+    "shared_downloaded_tools_and_dependencies_only": true
+  },
+  "phone": {
+    "published0.6.5_installed": true,
+    "versionCode": 13,
+    "signed_proof_installed": false
+  },
+  "retained_attempts": [
+    {
+      "log": "next-config-cache-contention.log",
+      "result": "Gradle startup failed on a shared cache lock in concurrent containers; final builds ran sequentially."
+    },
+    {
+      "log": "linux-next-before-ndk-map.log",
+      "result": "Stopped intentionally before completion to add NDK debug-path normalization; project/native outputs deleted before final clean build."
+    }
+  ],
+  "local_evidence_directory": "build/fdroid-preparation-20261026",
+  "log_sha256": {
+    "linux-0.6.5.log": "bb31191940b550ae92e4c3ab412bd87ca2ec175f76b6462862a0b2dd3aa51d12",
+    "linux-next.log": "86b60af2108395307a352bf185bc34a478c979f8687ff06f3cd354dcd03cf884",
+    "metadata-lint.log": "3782c4dff0efe500254f2540b2a82262d6719abd3fe23609d7ca9a2cd1d5d86c",
+    "python-tests.log": "76d68d7d7b4cddb29e6b1590f0ff4303b4f74f1de0899b463136ab6e0757a7dc",
+    "prefix-map-probe.log": "f4e615b583f949d5273fc8d5b97a5a68323614562ba4e5d9f07e158ea8613bc4",
+    "ndk-prefix-map-probe.log": "3ea1d09fef8ad7f5246194df99e4e5544a55949b10665cf2d110b669398b7ab5"
+  }
+}
