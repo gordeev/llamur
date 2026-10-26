@@ -35,6 +35,7 @@ SKILL.md
 verify-logs/
 
 # Editor state, credentials and signing material.
+.private/
 .idea/
 .vscode/
 .env*

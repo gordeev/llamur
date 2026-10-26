@@ -37,7 +37,7 @@ try:
   result=subprocess.run(command,capture_output=True,text=True,timeout=60);(a.out/(label+'.txt')).write_text(result.stdout+result.stderr)
   if result.returncode:raise RuntimeError(label+' failed')
   if label=='badging':
-   if "package: name='org.motoai.runtime'" not in result.stdout or "native-code: 'arm64-v8a'" not in result.stdout:raise RuntimeError('Package/ABI differs')
+   if "package: name='org.llamur.app'" not in result.stdout or "native-code: 'arm64-v8a'" not in result.stdout:raise RuntimeError('Package/ABI differs')
    if "launchable-activity: name='org.motoai.runtime.ChatActivity'" not in result.stdout:raise RuntimeError('Chat launcher missing')
    if "application-debuggable" in result.stdout:raise RuntimeError('Release is debuggable')
    r['permissions']=[line.split("'")[1] for line in result.stdout.splitlines() if line.startswith('uses-permission:')]

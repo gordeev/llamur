@@ -52,8 +52,8 @@ android {
         applicationId = "org.llamur.app"
         minSdk = 28
         targetSdk = 36
-        versionCode = 12
-        versionName = "0.6.4-dev"
+        versionCode = 13
+        versionName = "0.6.5"
         buildConfigField("boolean", "EXACT_STATE_LAYOUT", (cpuVariant in listOf("f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2")).toString())
         buildConfigField("String", "GPU_BACKEND", "\"$gpuBackend\"")
         buildConfigField("boolean", "TRANSIENT_REPACK", (cpuVariant in listOf("f32-recurrent-transient-model", "f32-recurrent-transient-threshold", "f32-recurrent-stable-attention-v2", "f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only", "f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2")).toString())

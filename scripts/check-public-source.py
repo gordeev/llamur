@@ -7,7 +7,7 @@ import shutil
 import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PRIVATE_DIRS = {'.agents', '.agent-context', '.agent-handoff', '.ai', '.claude', '.codex',
+PRIVATE_DIRS = {'.private', '.agents', '.agent-context', '.agent-handoff', '.ai', '.claude', '.codex',
                 '.cursor', '.continue', '.skills', 'skills', '.idea', '.vscode', '.aws', '.ssh', '.android',
                 '.tools', '.gradle', '.kotlin', '.cxx', '__pycache__', 'models', 'build', 'verify-logs'}
 PRIVATE_NAMES = {'agents.md', 'claude.md', 'gemini.md', 'skill.md', '.mcp.json', '.mcp.toml',

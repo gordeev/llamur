@@ -1,14 +1,15 @@
 # Rebuilding the standalone release candidate
 
-The current application version is 0.3.0-dev, versionCode3, application ID
-`org.motoai.runtime`, ARM64/API28+. No model, token, signing key or local `.tools/`
-cache is needed in the source package. Original upstream files and hash-locked
-patches are included; do not modify the pristine vendor copy.
+The first public preview is0.6.5, versionCode13, application ID
+`org.llamur.app`, ARM64/API28+. GitHub release assets contain a dedicated-key
+signed, non-debug APK, `SHA256SUMS` and the public signing-certificate fingerprint.
+See [signing and update channels](signing.md). Models, credentials, private signing
+keys and downloaded toolchains are excluded from the public repository.
 
-Current 0.3 evidence lives in `docs/progress.md` and
-`build/release-candidate-0.3.0-20261026`. The older reproducibility/0.1 artifact
-sections below describe the frozen native baseline. The 0.3 Linux build reuses
-verified caches; it is not claimed as another clean reproducibility pair.
+Source changes and current checks are in `docs/progress.md`. The older Linux
+reproducibility and0.1 artifact sections below describe their frozen baseline;
+they are not a new byte-reproducibility claim for0.6.5. Native libraries remain
+unchanged from the accepted engine; packaging/version/signing are checked anew.
 
 ## Toolchain
 
@@ -82,18 +83,21 @@ match. The draft recipe has no Binaries verification promise or submission.
 
 ## Signing and installation
 
-Unsigned APKs cannot be installed. The delivered local development-signed release
-uses the existing Android development certificate, **not a production identity**.
-Its Android debuggable flag is false. The separate Linux test-enabled APK is for
-instrumentation only; all14 native libraries match the actual release byte for
-byte, including JNI. The test-enabled E UI lacks only the later5-line base URL
-copy button; that button was checked in the actual G release. Do not distribute that test-enabled APK as a release.
+Unsigned APKs cannot be installed. The public GitHub APK is signed with the
+owner's dedicated release key; the private key/password stay outside Git and
+uploads. Build from source with your own signing identity, or use the attached
+public APK and verify its SHA-256/certificate as described in [signing.md](signing.md).
+The signature must be preserved for normal updates within this channel. Earlier
+local development APKs used another certificate and were not production identities.
 
-Before publication choose an owner-controlled application ID/version/update-key
-strategy or the normal F-Droid signing workflow. No production key, tag, commit,
-upload or catalog submission was created. Never put private signing keys or HF/
-API tokens into sources. Changing signing keys normally prevents an in-place
-update; plan migration before a public release.
+Before signing, align the unsigned APK with `zipalign -P 16 4`; after signing,
+verify with `apksigner verify --verbose --print-certs --min-sdk-version 28` and
+`zipalign -c -P 16 4`. The release APK must have `debuggable=false`, ARM64-only
+native libraries, no instrumentation classes, no model/key assets and the exact
+version/package intended for its source tag. Keep all dependency notices.
+
+No private signing material, HF/API token or local assistant state belongs in
+sources. F-Droid builds/signing and submission remain a separate pipeline.
 
 ## Evidence and scope
 

@@ -15,6 +15,18 @@ and memory corrections, cancellable inference, and optional bounded prefill pack
 Development preview · Android 9+ · ARM64 · English / Русский · Apache-2.0 application.
 F-Droid preparation is included; the app is not listed in F-Droid yet.
 
+## Download and install
+
+[Download the ARM64 APK — 0.6.5 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.5/llamur-0.6.5-arm64-v8a.apk) · [Release notes and checksums](https://github.com/gordeev/llamur/releases/tag/v0.6.5)
+
+Requires Android 9+ with a 64-bit ARM64 OS. Open the downloaded APK to install;
+model weights are downloaded separately. This is an early public preview.
+Public GitHub builds use a dedicated release certificate. Earlier local test
+builds and future F-Droid builds may use different signers and cannot necessarily
+be updated in place. Keep an existing installation's data until you have chosen
+your update channel. [Signing and verification](docs/signing.md).
+
+
 ## A real Android app
 
 <table>

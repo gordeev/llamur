@@ -12,7 +12,7 @@ spec.loader.exec_module(module)
 class PublicSourceTests(unittest.TestCase):
     def test_private_paths(self):
         for name in ['AGENTS.md', '.agents/rules/generic.md', 'CLAUDE.md', 'TASK.md',
-                     'PLAN.md', '.env', '.envrc', '.netrc', '.aws/credentials', 'app/.env.local', 'release.jks', 'signing.key',
+                     '.private/signing/password.txt', 'PLAN.md', '.env', '.envrc', '.netrc', '.aws/credentials', 'app/.env.local', 'release.jks', 'signing.key',
                      'app/build/outputs/app.apk', 'models/model.gguf', '.codex/config.toml',
                      'skills/local/SKILL.md', 'bench/results/phone/report.json']:
             self.assertTrue(module.private_path(name), name)

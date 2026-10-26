@@ -1,5 +1,33 @@
 # Progress and evidence —2026-10-26
 
+## 0.6.5 first public APK — verified release preparation
+
+Version0.6.5/versionCode13 keeps the0.6.4 application behaviour and all14 native
+libraries. The public APK is signed by a newly created dedicated3072-bit RSA
+release identity; owner-only private files stay in an ignored directory and are
+never copied to source snapshots or uploads. This first public signer differs
+from earlier local Android Debug builds. The owner's existing phone app/data are
+not changed. README and signing documentation explain this update boundary and
+the potentially separate future F-Droid signer.
+
+APK `llamur-0.6.5-arm64-v8a.apk` SHA256
+`1c157adb40dec902843b61eb6b3490b263c736d3baa2fc5af8c2e6621f7c3568`.
+Public certificate SHA256
+`ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85`.
+Android apksigner verification covers API28+; package/ARM64/ELF16KiB/ZIP/notices/
+permissions and non-debug/no-fixtures/no-model/key-assets audit PASS. Updated
+only the release auditor's stale pre-rename package expectation.
+
+API36 ARM64 public emulator: actual signed APK clean-installed, launched to home
+and About with0.6.5 and exact GitHub URL; installed hash matched. The separate debug
+APK `bench/results/localization-20261026T222730Z` passed1686 checks, both themes and
+locale/draft retention. Python80 tests and release build/lint PASS. No new native
+speed/semantic model benchmark is implied by this packaging/signing release.
+
+Source commit/tag and release assets are checked separately during publication;
+local immutable metadata: `build/llamur-0.6.5/`. F-Droid submission remains a later task.
+
+
 ## 0.6.4 public README, English screenshots and project link — verified
 
 English README and Russian README.ru describe the app, the pinned Android sample
