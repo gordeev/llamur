@@ -78,7 +78,8 @@ MaintainerNotes: |
   Compile with build-tools36.1.0; sign upstream APKs with apksigner34.0.0.
   The existing release certificate is preserved. No private key is uploaded.
   This is local container validation, not official F-Droid server acceptance.
-  No submission has been made. See docs/releases/0.6.6-verification.json.
+  Packaging request: https://gitlab.com/fdroid/rfp/-/work_items/4674
+  See docs/releases/0.6.6-verification.json.
 
 AutoUpdateMode: None
 UpdateCheckMode: None

@@ -1,8 +1,9 @@
 # F-Droid preparation
 
-Release **0.6.6 / versionCode 14** has local reproducibility evidence. No GitLab
-issue, merge request, F-Droid submission or private-key upload has been made.
-The official F-Droid build server has not run this recipe yet.
+Release **0.6.6 / versionCode 14** has local reproducibility evidence.
+[Packaging request #4674](https://gitlab.com/fdroid/rfp/-/work_items/4674) was
+submitted on 2026-10-27. Inclusion and official build-server verification are
+pending. No private signing key/password was uploaded.
 
 ## Recipe and source
 
@@ -78,7 +79,7 @@ Both locales include current descriptions, icons, versionCode 14 changelogs and
 Earlier preparation evidence remains in
 [the dated report](releases/fdroid-preparation-20261026.json).
 
-## Before submitting
+## Remaining review gates
 
 1. Run the exact final recipe in F-Droid's official environment and reproduce
    the GitHub APK there. Keep any failing build disabled.
@@ -88,7 +89,8 @@ Earlier preparation evidence remains in
    not itself establish one. Optional proprietary provider presets are
    conservatively declared `NonFreeNet`; reviewers decide the final label.
 3. Model licenses remain separate; the APK does not redistribute model weights.
-4. Submit only after the owner's explicit instruction.
+4. The owner authorized the packaging request; final inclusion remains subject
+   to F-Droid review and successful verification with the existing certificate.
 
 [Submission guide](https://f-droid.org/docs/Submitting_to_F-Droid_Quick_Start_Guide/),
 [inclusion policy](https://f-droid.org/en/docs/Inclusion_Policy/),
