@@ -1,3 +1,11 @@
+# Current release 0.6.7
+
+VersionCode 15, ARM64, Android9+, same release certificate. See the
+[release notes](releases/0.6.7.md) and [verification report](releases/0.6.7-verification.json).
+One local Linux release+lint build and signature-copy comparison passed;
+this update has no new two-clean-build reproducibility result. Native libraries
+are byte-identical to0.6.6. The sections below retain the historical evidence.
+
 # Rebuilding the standalone release
 
 Release 0.6.6 uses versionCode 14, package `org.llamur.app`, ARM64/API28+.

@@ -50,7 +50,7 @@ try:
  assert 'INSTRUMENTATION_CODE: -1' in log and r['app'].get('passed') is True,r['app'].get('error','Provider instrumentation failed')
  r['passed']=True
  if not a.phone:
-  for name in ['empty','drawer','answer','settings','api']:
+  for name in ['empty','drawer','answer','settings','api','output-limit']:
    png=subprocess.run(['adb',*target,'exec-out','run-as',app_package,'cat','files/provider-ui-'+name+'.png'],capture_output=True,check=True).stdout
    (out/(name+'.png')).write_bytes(png)
 except Exception as e:

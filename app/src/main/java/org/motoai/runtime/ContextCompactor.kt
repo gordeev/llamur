@@ -56,11 +56,15 @@ internal class ContextCompactor(val chat:JSONObject,val window:Int,val through:I
             if(compact!=null)input.put(JSONObject().put("role","user").put("content",memory(compact.getString("text")))).put(JSONObject().put("role","assistant").put("content","I will use this conversation summary as context, with the recent messages below."))
             val a=chat?.optJSONArray("messages")?:JSONArray()
             for(i in (compact?.optInt("through")?:0) until a.length()){val m=a.getJSONObject(i);val same=m.optString("context_epoch")==epoch
-                input.put(JSONObject().put("role",m.getString("role")).put("content",if(remote)m.getString("content")else ChatFiles.text(m.getString("content"),m.optJSONArray("attachments"))).put("reasoning_content",if(same)m.optString("reasoning_content")else "").also {v->if(same && m.has("remote_payload"))v.put("remote_payload",m.get("remote_payload"));if(remote && m.getString("role")=="user" && m.has("attachments"))v.put("attachments",m.getJSONArray("attachments"))})}
+                val incomplete=remote && m.getString("role")=="assistant" && m.optString("status") !in listOf("eog","blocked")
+                val content=if(remote)m.getString("content").ifBlank {if(incomplete)"[Previous response ended before any answer text was produced.]"else ""}else ChatFiles.text(m.getString("content"),m.optJSONArray("attachments"))
+                // Incomplete signed/encrypted reasoning is not a replayable assistant response.
+                input.put(JSONObject().put("role",m.getString("role")).put("content",content).put("reasoning_content",if(same && !incomplete)m.optString("reasoning_content")else "").also {v->if(same && !incomplete && m.has("remote_payload"))v.put("remote_payload",m.get("remote_payload"));if(remote && m.getString("role")=="user" && m.has("attachments"))v.put("attachments",m.getJSONArray("attachments"))})}
             return input.put(JSONObject().put("role","user").put("content",if(remote)prompt else ChatFiles.text(prompt,files)).also {if(remote && files.length()>0)it.put("attachments",files)})
         }
         fun estimate(messages:JSONArray):Long {var bytes=0L;for(i in 0 until messages.length()){val m=messages.getJSONObject(i);bytes+=m.optString("content").toByteArray().size+32;val a=m.optJSONArray("attachments")?:continue;for(n in 0 until a.length()){val f=a.getJSONObject(n);bytes+=if(f.has("text"))f.getString("text").toByteArray().size else 4096}};return bytes}
         fun remoteWindow(chat:JSONObject)=chat.optInt("compact_window").takeIf {it>0}?:chat.optJSONObject("remote")?.optJSONObject("capabilities")?.optInt("context")?:0
+        fun remoteOutput(chat:JSONObject)=chat.optInt("remote_max_output").takeIf {it>0}?:chat.getJSONObject("remote").getInt("max_output")
         fun remoteTokens(chat:JSONObject,preview:JSONArray):Long {
             val a=chat.getJSONArray("messages");val epoch=chat.optJSONObject("compaction")?.optString("id").orEmpty()
             if(a.length()>0){val last=a.getJSONObject(a.length()-1);val u=last.optJSONObject("remote_usage");if(u!=null && last.optString("context_epoch")==epoch){val input=u.optLong("prompt_tokens",u.optLong("input_tokens",-1));val output=u.optLong("completion_tokens",u.optLong("output_tokens",0));if(input>=0)return input+output+estimate(JSONArray().put(preview.getJSONObject(preview.length()-1)))}}

@@ -1,6 +1,8 @@
 # F-Droid preparation
 
-Release **0.6.6 / versionCode 14** has local reproducibility evidence.
+Release **0.6.7 / versionCode 15** is the current package candidate. It has a
+local Linux build/signature check; the two-clean-build evidence below belongs
+to **0.6.6 / versionCode 14**, not0.6.7.
 [Packaging request #4674](https://gitlab.com/fdroid/rfp/-/work_items/4674) was
 submitted on 2026-10-27. Inclusion and official build-server verification are
 pending. No private signing key/password was uploaded.
@@ -8,10 +10,10 @@ pending. No private signing key/password was uploaded.
 ## Recipe and source
 
 Copy `fdroid/org.llamur.app.yml` to `metadata/org.llamur.app.yml` in fdroiddata,
-and `fdroid/llamacpp.yml` to `srclibs/llamacpp.yml`. The active 0.6.6 build pins:
+and `fdroid/llamacpp.yml` to `srclibs/llamacpp.yml`. The latest 0.6.7 build pins:
 
-- Source commit `2313c2b39552595568934a3038069c0f7d860210` (tag `v0.6.6`).
-- GitHub binary `llamur-0.6.6-arm64-v8a.apk`.
+- Source tag `v0.6.7` (the main recipe will pin its immutable commit).
+- GitHub binary `llamur-0.6.7-arm64-v8a.apk`.
 - The existing GitHub release certificate through `AllowedAPKSigningKeys`.
 - llama.cpp commit `701fd25b3a55a90297dec0d925204b29084054c8`, archived from a srclib
   and prepared with hash-locked numerical/runtime patches.
@@ -50,7 +52,15 @@ normalizes source and NDK paths and pins native build identity. Model weights,
 inference source, numerical patches and generation defaults are unchanged.
 The published 0.6.5 APK/tag is preserved.
 
-## Actual local results
+## Current0.6.7 checks
+
+[Version0.6.7 verification](releases/0.6.7-verification.json) records the Linux
+build, signature-copy check, UI/API/compaction tests and release installation.
+The existing signing certificate is unchanged. The request scanner rechecked
+main on2026-10-27 and the wrapper mismatch is gone; official package building
+and inclusion remain separate gates.
+
+## Historical0.6.6 local results
 
 [Version 0.6.6 verification](releases/0.6.6-verification.json) records source,
 artifact, environment, scanner and signature evidence. Full local logs are in

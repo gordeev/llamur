@@ -1,0 +1,36 @@
+{
+  "version": "0.6.7",
+  "versionCode": 15,
+  "applicationId": "org.llamur.app",
+  "source_ref": "refs/tags/v0.6.7",
+  "apk": "llamur-0.6.7-arm64-v8a.apk",
+  "apk_sha256": "bc0611f9b8764648a3736ae93bfdc20ff24baf3653d46886b7d26dca1871b31a",
+  "signing_certificate_sha256": "ff394b76589fd401784d319c9534db37412240b27301e6b878bd05fd1106cf85",
+  "linux_release_and_lint_passed": true,
+  "build_scope": "One offline Linux build using existing build/tool/dependency caches, followed by an incremental final UI correction. Not a new two-clean-build reproducibility result.",
+  "signature_verified_against_actual_linux_unsigned_apk": true,
+  "native_libraries_byte_identical_to_0_6_6": 14,
+  "python_tests_passed": 81,
+  "api_checks_per_theme": 131,
+  "api_themes": [
+    "light",
+    "dark"
+  ],
+  "compaction_checks_passed": 59,
+  "apk_manifest_notices_elf_16k_audit_passed": true,
+  "fdroid_apk_scan": {
+    "passed": true,
+    "scope": "Official fdroidserver 2.4.5 APK scan with freshly downloaded and validated SUSS; not F-Droid inclusion certification.",
+    "apk_sha256": "bc0611f9b8764648a3736ae93bfdc20ff24baf3653d46886b7d26dca1871b31a",
+    "fatal_count": 0,
+    "error_patterns": 444,
+    "suss_download_sha256": "34c673dcc1a44dde8e3a9a2bc2d16abd0fc969acfc3f6836dd0a83d7de17f959"
+  },
+  "source_and_apk_credential_scan": "No matching credentials, signing material or local assistant artifacts. Release excludes Android instrumentation. Pattern checks do not prove absence of arbitrary encoded secrets.",
+  "emulator_release_upgrade": "0.6.6 to 0.6.7 on API36 ARM64/16KiB; same UID, no uninstall/data reset; launcher started.",
+  "physical_phone_installation": "Installed the same non-debug APK over the existing app without uninstall/data reset; installed bytes and signer verified. No new cloud request, test chat or model benchmark on the physical phone.",
+  "paid_cloud_account_inference_tested": false,
+  "new_native_numerical_or_performance_qualification": false,
+  "two_independent_clean_builds_checked": false,
+  "official_fdroid_server_accepted": false
+}

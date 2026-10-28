@@ -34,6 +34,7 @@ internal class ChatStore(private var disk:HistoryDisk?=null,private val now:()->
             .put("pinned",chat.optJSONArray("pinned")?:JSONArray()).put("message_count",a.length()).put("preview",last?.optString("content")?.replace('\n',' ')?.take(160)?.ifEmpty {last.optJSONArray("attachments")?.optJSONObject(0)?.optString("name").orEmpty()}?:"")
             .put("view_revision",chat.optLong("view_revision")).put("save_error",chat.optString("save_error")).put("answer_id",chat.optString("answer_id"))
         chat.optJSONObject("remote")?.let {r->m.put("remote",JSONObject().also {v->for(k in listOf("id","name","model","protocol"))v.put(k,r.optString(k))})}
+        m.put("remote_max_output",chat.optInt("remote_max_output"))
         m.put("compacting",chat.optBoolean("compacting")).put("compaction_error",chat.optString("compaction_error")).put("compact_auto_paused",chat.optBoolean("compact_auto_paused")).put("compact_window",chat.optInt("compact_window"))
         m.put("compaction_active",chat.has("compaction")).put("compaction_pending",chat.has("compact_preview"))
         m.put("compaction_through",chat.optJSONObject("compaction")?.optInt("through")?:0)
@@ -162,6 +163,19 @@ internal class ChatStore(private var disk:HistoryDisk?=null,private val now:()->
         c.put("compaction",p);c.remove("compact_preview");c.remove("compaction_error");refresh(c);return c
     }
     fun compactUndo(id:String):JSONObject {val c=get(id);check(!c.optBoolean("active"));c.remove("compaction");c.remove("compact_preview");c.remove("compaction_error");c.put("compact_auto_paused",true);refresh(c);return c}
+    fun compactEdit(id:String,preview:Boolean,expected:String,text:String):JSONObject {
+        val c=get(id);check(!c.optBoolean("active"));val field=if(preview)"compact_preview"else "compaction";val old=c.getJSONObject(field)
+        require(old.getString("id")==expected){UiText.get(R.string.ui_summary_changed_reopen)}
+        val value=text.trim();require(value.isNotEmpty() && value.length<=65536){UiText.get(R.string.ui_summary_edit_limit)}
+        val next=JSONObject(old.toString()).put("text",value).put("id",UUID.randomUUID().toString()).put("edited",true)
+        val delta=next.toString().toByteArray().size-old.toString().toByteArray().size;room(delta,id)
+        require(sizes.getValue(id)+delta+4096<=perChatBytes){UiText.get(R.string.ui_not_enough_memory_for_summary_original_history)}
+        c.put(field,next);if(!preview)c.remove("compact_preview");c.remove("compaction_error");refresh(c);return c
+    }
+    fun remoteOutput(id:String,limit:Int):JSONObject {
+        require(limit in 0..131072);val c=get(id);check(!c.optBoolean("active") && c.has("remote"))
+        c.put("remote_max_output",limit);refresh(c);return c
+    }
     fun compactDiscard(id:String):JSONObject {val c=get(id);check(!c.optBoolean("active"));c.remove("compact_preview");refresh(c);return c}
     fun compactWindow(id:String,window:Int):JSONObject {require(window==0 || window in 1024..2097152);val c=get(id);check(!c.optBoolean("active"));c.put("compact_window",window);c.remove("compact_auto_paused");refresh(c);return c}
     fun compactResume(id:String):JSONObject {val c=get(id);check(!c.optBoolean("active"));c.remove("compact_auto_paused");refresh(c);return c}

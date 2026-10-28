@@ -52,11 +52,21 @@ internal class ProviderChecks(private val test:Instrumentation) {
         responses.event("","""{"type":"response.completed","response":{"status":"completed","output":[{"type":"reasoning","id":"rs_fixture","encrypted_content":"fixture-cipher","summary":[]},{"type":"message","role":"assistant","content":[{"type":"output_text","text":"Ответ"}]}],"usage":{"input_tokens":9,"output_tokens":10}}}""")
         profile.put("protocol","responses");history.put(2,responses.result().getJSONObject("assistant"));val rr=RemoteProtocol.request(profile,"fixture",history)
         verify(!rr.getBoolean("store"));verify(rr.getJSONArray("input").getJSONObject(1).getString("encrypted_content")=="fixture-cipher")
+        for(protocol in listOf("chat","responses","anthropic"))for(status in listOf("interrupted","length"))for(text in listOf("partial visible answer","")) {
+            val store=ChatStore();val c=store.create("fixture",JSONObject().put("protocol",protocol).put("max_output",2048));val id=c.getString("id")
+            store.begin(id,"fixture-stop","question")
+            store.finish(id,JSONObject().put("content",text).put("reasoning_content","UNFINISHED-THOUGHT").put("remote_payload",JSONObject().put("signature","UNFINISHED-SIGNATURE")),status,UUID.randomUUID().toString())
+            val messages=store.preview(id,"continue");val previous=messages.getJSONObject(2)
+            verify(previous.getString("content").isNotBlank() && (text.isEmpty() || previous.getString("content")==text))
+            verify(!previous.has("remote_payload") && previous.getString("reasoning_content").isEmpty())
+            val body=RemoteProtocol.request(JSONObject().put("protocol",protocol).put("options","{}").put("max_output",8192),"fixture",messages).toString()
+            verify(!body.contains("UNFINISHED-THOUGHT") && !body.contains("UNFINISHED-SIGNATURE"))
+        }
         val partial=RemoteProtocol.Stream("chat");partial.event("","""{"choices":[{"delta":{"content":"partial"}}]}""");reject{partial.event("","""{"error":{"message":"fixture error"}}""")};verify(partial.message().getString("content")=="partial");reject{partial.result()}
     }
     private class Server:Closeable {
         val socket=ServerSocket(0,8,InetAddress.getByName("127.0.0.1"));val port get()=socket.localPort
-        val requests=AtomicInteger();@Volatile var protocol="chat";@Volatile var json=false;@Volatile var status=200;@Volatile var abortBeforeHeaders=false;@Volatile var broken=false;@Volatile var malformed=false;@Volatile var delayMillis=0L;@Volatile var slow=false;@Volatile var redirect="";@Volatile var failure:Throwable?=null
+        val requests=AtomicInteger();@Volatile var reasoningOnly=false;@Volatile var protocol="chat";@Volatile var json=false;@Volatile var status=200;@Volatile var abortBeforeHeaders=false;@Volatile var broken=false;@Volatile var malformed=false;@Volatile var delayMillis=0L;@Volatile var slow=false;@Volatile var redirect="";@Volatile var failure:Throwable?=null
         val bodies=CopyOnWriteArrayList<JSONObject>();private val pool=Executors.newCachedThreadPool();private val sockets=CopyOnWriteArrayList<Socket>()
         init {pool.execute {while(!socket.isClosed)try {val c=socket.accept();sockets.add(c);pool.execute {try {serve(c)}catch(f:Throwable){if(!slow && !socket.isClosed)failure=f}finally{sockets.remove(c);c.close()}}}catch(_:IOException){break}}}
         private fun serve(c:Socket){c.soTimeout=10000;val input=c.getInputStream();fun line():String {val b=ByteArrayOutputStream();while(true){val v=input.read();check(v>=0);if(v==10)break;check(b.size()<16384);b.write(v)};return String(b.toByteArray(),Charsets.US_ASCII).removeSuffix("\r")};val first=line();val h=mutableMapOf<String,String>();while(true){val l=line();if(l.isEmpty())break;h[l.substringBefore(':').lowercase()]=l.substringAfter(':').trim()};check(if(protocol=="anthropic")h["x-api-key"]=="motoai-fixture-key" && h["anthropic-version"]=="2023-06-01" && h["authorization"]==null else h["authorization"]=="Bearer motoai-fixture-key");requests.incrementAndGet()
@@ -68,7 +78,7 @@ internal class ProviderChecks(private val test:Instrumentation) {
             val complete=when(protocol){
                 "anthropic"->"""{"type":"message","role":"assistant","content":[{"type":"thinking","thinking":"Fixture thought","signature":"fixture-signature"},{"type":"text","text":"Привет 🌍"}],"stop_reason":"end_turn","usage":{"input_tokens":7,"output_tokens":3}}"""
                 "responses"->"""{"status":"completed","output":[{"type":"reasoning","id":"rs_fixture","encrypted_content":"fixture-cipher","summary":[{"type":"summary_text","text":"Fixture thought"}]},{"type":"message","role":"assistant","content":[{"type":"output_text","text":"Привет 🌍"}]}],"usage":{"input_tokens":7,"output_tokens":3}}"""
-                else->"""{"choices":[{"message":{"role":"assistant","content":"Привет 🌍"},"finish_reason":"stop"}],"usage":{"prompt_tokens":7,"completion_tokens":3}}"""}
+                else->if(reasoningOnly)"""{"choices":[{"message":{"role":"assistant","content":null,"reasoning_content":"PUBLIC INCOMPLETE THOUGHT"},"finish_reason":"length"}],"usage":{"prompt_tokens":37,"completion_tokens":8192,"completion_tokens_details":{"reasoning_tokens":8192}}}""" else """{"choices":[{"message":{"role":"assistant","content":"Привет 🌍"},"finish_reason":"stop"}],"usage":{"prompt_tokens":7,"completion_tokens":3}}"""}
             if(json){val b=complete.toByteArray(Charsets.UTF_8);out.write("HTTP/1.1 200 OK\r\nContent-Type:application/json\r\nContent-Length:${b.size}\r\nConnection:close\r\n\r\n".toByteArray());out.write(b);return}
             if(protocol!="chat") {
                 out.write("HTTP/1.1 200 OK\r\nContent-Type:text/event-stream\r\nConnection:close\r\n\r\n".toByteArray())
@@ -160,7 +170,15 @@ data: {"choices":[{"index":0,"delta":{"content":"Привет 🌍"}}]}
             test.runOnMainSync {button("К закреплённому сообщению").performClick()};test.runOnMainSync {button("Открепить сообщение").performClick()};waitFor {get(ui).getJSONArray("pinned").length()==0};verify(true)
             clickText("Поиск в диалоге");test.runOnMainSync {views(activity.window.decorView).filterIsInstance<EditText>().single {it.hint.toString()=="Поиск в диалоге"}.setText("Привет")}
             waitFor {var found=false;test.runOnMainSync {found=views(activity.window.decorView).filterIsInstance<TextView>().any {it.text.toString()=="1/1"}};found};verify(true);clickText("Закрыть поиск в диалоге")
-            clickText("О модели");waitFor {test.uiAutomation.rootInActiveWindow?.findAccessibilityNodeInfosByText("По API · $providerName")?.isNotEmpty()==true};verify(true);clickText("Готово")
+            clickText("О модели");waitFor {test.uiAutomation.rootInActiveWindow?.findAccessibilityNodeInfosByText("По API · $providerName")?.isNotEmpty()==true};verify(true)
+            clickText("Лимит ответа для этого чата")
+            waitFor {test.uiAutomation.rootInActiveWindow?.findAccessibilityNodeInfosByText("Лимит ответа для этого чата")?.any {it.className=="android.widget.EditText"}==true}
+            val budget=test.uiAutomation.rootInActiveWindow.findAccessibilityNodeInfosByText("Лимит ответа для этого чата").single {it.className=="android.widget.EditText"}
+            verify(budget.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_TEXT,Bundle().apply {putCharSequence(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE,"8192")}));capture("output-limit")
+            clickText("Сохранить");waitFor {get(ui).optInt("remote_max_output")==8192}
+            waitFor {test.uiAutomation.rootInActiveWindow?.findAccessibilityNodeInfosByText("Лимит ответа: 8192")?.isNotEmpty()==true};verify(true)
+            clickText("Готово");waitFor {test.uiAutomation.rootInActiveWindow?.findAccessibilityNodeInfosByText(UiText.get(R.string.ui_api_limit,8192))?.isNotEmpty()==true};verify(true)
+            call(JSONObject().put("action","chat_output_limit").put("chat_id",ui).put("max_output",0))
             clickText("Назад к диалогам");waitFor {var shown=false;test.runOnMainSync {shown=views(activity.window.decorView).filterIsInstance<TextView>().any {it.isShown && it.text.toString()=="UI Enter fixture ☕"}};shown};capture("drawer");clickText("Поиск по диалогам")
             test.runOnMainSync {views(activity.window.decorView).filterIsInstance<EditText>().single {it.hint.toString()=="Поиск по диалогам"}.setText("UI Enter fixture")}
             waitFor {var count=0;test.runOnMainSync {count=views(activity.window.decorView).filterIsInstance<ListView>().filter {it.isShown}.sumOf {it.count}};count==1};verify(true);clickText("Закрыть поиск")
@@ -191,7 +209,22 @@ data: {"choices":[{"index":0,"delta":{"content":"Привет 🌍"}}]}
             server.slow=true;val cancel=call(JSONObject().put("action","remote_new").put("provider_id",pid).put("model","fixture-model")).getJSONObject("chat").getString("id");chats.add(cancel);val before=server.requests.get()
             send(cancel,"Fixture cancellation");waitFor {get(cancel).getJSONArray("messages").getJSONObject(1).getString("content").isNotEmpty()}
             remote.send(Message.obtain(null,RuntimeService.STOP));waitFor(5){!get(cancel).getBoolean("active")};verify(server.requests.get()==before+1);verify(get(cancel).getJSONArray("messages").getJSONObject(1).getString("status")=="interrupted")
-            val refused=call(JSONObject().put("action","remote_send").put("chat_id",cancel).put("request_id",UUID.randomUUID().toString()).put("text","No hidden partial reasoning replay"),false);verify(!refused.getBoolean("ok"));server.slow=false
+            server.slow=false
+            call(JSONObject().put("action","chat_output_limit").put("chat_id",cancel).put("max_output",8192))
+            send(cancel,"Continue after cancellation");waitFor {!get(cancel).getBoolean("active")}
+            verify(get(cancel).getJSONArray("messages").length()==4 && server.bodies.last().getInt("max_tokens")==8192)
+            verify(!server.bodies.last().getJSONArray("messages").getJSONObject(2).has("reasoning_details"))
+            server.json=true;server.reasoningOnly=true
+            send(cancel,"Reasoning-only output limit");waitFor {!get(cancel).getBoolean("active")}
+            val limited=get(cancel).getJSONArray("messages").getJSONObject(5)
+            verify(limited.getString("status")=="length" && limited.getString("content").isEmpty() && limited.getJSONObject("remote_usage").getInt("completion_tokens")==8192)
+            server.reasoningOnly=false;server.json=false
+            send(cancel,"Continue after the output limit");waitFor {!get(cancel).getBoolean("active")}
+            verify(get(cancel).getJSONArray("messages").length()==8 && get(cancel).getJSONArray("messages").getJSONObject(7).getString("status")=="eog")
+            val sentAfterLimit=server.bodies.last().getJSONArray("messages").getJSONObject(6)
+            verify(sentAfterLimit.getString("content").isNotBlank() && !sentAfterLimit.has("reasoning_content"))
+            call(JSONObject().put("action","chat_output_limit").put("chat_id",cancel).put("max_output",0))
+            send(cancel,"Connection default restored");waitFor {!get(cancel).getBoolean("active")};verify(server.bodies.last().getInt("max_tokens")==spec.getInt("max_output"))
             val beforeRename=call(JSONObject().put("action","providers")).getJSONArray("providers").let {a->(0 until a.length()).map {a.getJSONObject(it)}.single {it.getString("id")==pid}.getString("revision")}
             spec.put("id",pid).put("name",providerName+" renamed");val renamed=call(JSONObject().put("action","provider_save").put("profile",spec)).getJSONObject("provider");verify(renamed.getString("revision")==beforeRename)
             spec.put("id",pid).put("name","Fixture changed").put("options","{\"temperature\":0.1}");call(JSONObject().put("action","provider_save").put("profile",spec));val refusedOld=call(JSONObject().put("action","remote_send").put("chat_id",cid).put("request_id",UUID.randomUUID().toString()).put("text","No stale destination"),false);verify(!refusedOld.getBoolean("ok"))
@@ -267,6 +300,6 @@ data: {"choices":[{"index":0,"delta":{"content":"Привет 🌍"}}]}
             if(restoreNever)runCatching {check(call(JSONObject().put("action","history")).getJSONObject("history").getInt("saved_count")==0);call(JSONObject().put("action","history_policy").put("mode","never").put("confirm_clear",true))}
             if(background)runCatching {ParcelFileDescriptor.AutoCloseInputStream(test.uiAutomation.executeShellCommand("input keyevent KEYCODE_WAKEUP")).use {it.readBytes()};ParcelFileDescriptor.AutoCloseInputStream(test.uiAutomation.executeShellCommand("cmd statusbar collapse")).use {it.readBytes()}};context.unbindService(connection);test.runOnMainSync {activity.finish()};if(theme!=null){val e=prefs.edit();if(oldTheme==null)e.remove("theme")else e.putInt("theme",oldTheme);e.commit()}
         }
-        return JSONObject().put("passed",true).put("checks",checks).put("background",background).put("screen_off_completed",screenOff).put("notification_tap",notificationTap).put("theme",theme?:JSONObject.NULL).put("scope","Messenger home/settings/API, new temporary model picker, search and pin, Enter/ShiftEnter/arrow→Stop UI; public loopback fixtures: endpoint/SSE Unicode+CRLF/CR, three protocol adapters, signed/encrypted reasoning replay, encrypted keys, catalog, real two-turn remote service without GGUF, cancellation/no retry, stale endpoint and partial-state rejection. Not real cloud account/provider inference acceptance.")
+        return JSONObject().put("passed",true).put("checks",checks).put("background",background).put("screen_off_completed",screenOff).put("notification_tap",notificationTap).put("theme",theme?:JSONObject.NULL).put("scope","Messenger home/settings/API, new temporary model picker, search and pin, Enter/ShiftEnter/arrow→Stop UI; public loopback fixtures: endpoint/SSE Unicode+CRLF/CR, three protocol adapters, signed/encrypted reasoning replay, encrypted keys, catalog, real two-turn remote service without GGUF, cancellation/no retry, stale endpoint rejection, continuation after cancellation and reasoning-only output limits, per-chat output budgets, no incomplete opaque reasoning replay. Not real cloud account/provider inference acceptance.")
     }
 }

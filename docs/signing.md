@@ -73,3 +73,7 @@ unsigned APK**; a strip/copy round trip of one signed APK alone is insufficient.
 The earlier versionCode13 proof is historical and was not published. Release
 0.6.6 uses versionCode 14 and the existing certificate; its two-build/signature
 and in-place upgrade results are in [the verification report](releases/0.6.6-verification.json).
+
+0.6.7 uses versionCode15 and the same certificate. Its Linux build, signature-copy
+check and installed-APK verification are in [the report](releases/0.6.7-verification.json).
+No new two-clean-build reproducibility result is claimed for this version.

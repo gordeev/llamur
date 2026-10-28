@@ -221,10 +221,10 @@
     <string name="ui_active_summary" formatted="false">"Активная сводка"</string>
     <string name="ui_undo_compaction" formatted="false">"Отменить сжатие"</string>
     <string name="ui_resume_auto_compaction" formatted="false">"Возобновить автокомпакт"</string>
-    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Окно из каталога: %1$s. Для API заполнение оценивается по usage и размеру текста; изображения и PDF могут занимать больше. Укажите фактическое окно модели, если каталог его не сообщил."</string>
+    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Контекст из каталога: %1$s. Нужен для оценки момента компактизации; настройка не расширяет контекст модели и не сохраняет чаты."</string>
     <string name="ui_unknown" formatted="false">"неизвестно"</string>
-    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"Окно API в токенах · 0 = каталог"</string>
-    <string name="ui_save_api_window" formatted="false">"Сохранить окно API"</string>
+    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"Контекст модели, токенов (0 = каталог)"</string>
+    <string name="ui_save_api_window" formatted="false">"Сохранить размер контекста"</string>
     <string name="ui_enter_0_or_1024_2097152" formatted="false">"Введите 0 или 1024–2097152"</string>
     <string name="ui_operation_in_progress" formatted="false">"Операция выполняется…"</string>
     <string name="ui_compact_context" formatted="false">"Сжать контекст"</string>
@@ -237,7 +237,7 @@
     <string name="ui_refresh" formatted="false">"Обновить"</string>
     <string name="ui_on_device_original_gguf" formatted="false">"На телефоне · исходный GGUF"</string>
     <string name="ui_api_256236">"По API · %1$s"</string>
-    <string name="ui_response_reserve_context_and_usage_are_determined">"Резерв ответа: %1$s\nКонтекст и usage определяет провайдер"</string>
+    <string name="ui_response_reserve_context_and_usage_are_determined">"Лимит ответа: %1$s токенов на запрос (thinking + ответ).\nРазмер контекста и фактический расход определяет провайдер."</string>
     <string name="ui_api_units" formatted="false">"ед.API"</string>
     <string name="ui_reported_cost_responses">"Сообщённая стоимость: %1$s %2$s · %3$s ответов"</string>
     <string name="ui_api_did_not_report_comparable_cost" formatted="false">"API не сообщил сопоставимую стоимость"</string>
@@ -298,7 +298,7 @@
     <string name="ui_long_input_takes_several_minutes_to_process" formatted="false">"Длинный ввод обрабатывается несколько минут."</string>
     <string name="ui_cpu_f16_kv_original_weights_no_history" formatted="false">"CPU · F16 KV · исходные веса · без сокращения истории."</string>
     <string name="ui_context_size" formatted="false">"Размер контекста"</string>
-    <string name="ui_response_reserve_tokens" formatted="false">"Резерв ответа, токенов"</string>
+    <string name="ui_response_reserve_tokens" formatted="false">"Лимит ответа, токенов"</string>
     <string name="ui_experimental_prefill_acceleration_two_verified_models" formatted="false">"Экспериментальное ускорение prefill (две проверенные модели)"</string>
     <string name="ui_chat_prefix_cache_in_ram_128_mib" formatted="false">"Кэш начала диалога в RAM: 128 МиБ (до 8K)"</string>
     <string name="ui_load" formatted="false">"Загрузить"</string>
@@ -400,7 +400,7 @@
     <string name="ui_you" formatted="false">"Вы"</string>
     <string name="ui_model_is_reasoning" formatted="false">"Модель рассуждает…"</string>
     <string name="ui_preparing_response" formatted="false">"Готовит ответ…"</string>
-    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"Лимит ответа закончился до текстового ответа"</string>
+    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"Лимит выходных токенов исчерпан до текста ответа. Бюджет мог уйти на thinking. Увеличьте лимит ответа в карточке модели и отправьте новое сообщение."</string>
     <string name="ui_model_completed_without_response_text" formatted="false">"Модель завершила ответ без текста"</string>
     <string name="ui_response_interrupted" formatted="false">"Ответ прерван"</string>
     <string name="ui_save_file">"Сохранить файл %1$s"</string>
@@ -826,4 +826,13 @@
     <string name="ui_about_llamur" formatted="false">"О llamur"</string>
     <string name="ui_source_code_on_github" formatted="false">"Исходный код на GitHub"</string>
     <string name="ui_about_llamur_description" formatted="false">"Запускайте GGUF-модели на телефоне, подключайте свои API-провайдеры и раздавайте локальную модель через API. Исходные веса моделей остаются неизменными."</string>
+    <string name="ui_summary_changed_reopen" formatted="false">"Сводка изменилась. Откройте её заново перед редактированием."</string>
+    <string name="ui_summary_edit_limit" formatted="false">"Введите сводку длиной 1–65536 символов"</string>
+    <string name="ui_summary_manually_edited" formatted="false">"Изменено вручную. Прежняя оценка токенов больше не актуальна."</string>
+    <string name="ui_copy_all" formatted="false">"Скопировать всё"</string>
+    <string name="ui_edit_summary" formatted="false">"Редактировать сводку"</string>
+    <string name="ui_summary" formatted="false">"Сводка"</string>
+    <string name="ui_edit_summary_help" formatted="false">"Изменяется только рабочая сводка. Оригиналы сообщений остаются по режиму хранения чата. Отмена компактизации возвращает их в контекст."</string>
+    <string name="ui_api_response_limit" formatted="false">"Лимит ответа для этого чата"</string>
+    <string name="ui_api_response_limit_help" formatted="false">"Максимум выходных токенов на один запрос. У большинства провайдеров сюда входят thinking и видимый ответ. 0 — настройка подключения. Для рассуждающих моделей попробуйте 8192 или 16384, если модель поддерживает. Больший лимит может увеличить стоимость, но не размер контекста модели."</string>
 </resources>

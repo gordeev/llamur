@@ -204,3 +204,25 @@ OpenRouter на Android, большие JSON/SSE, ошибки без утечк
 зашифрованное повторное открытие, отправка/получение файлов через сервис и реальное
 сохранение через DocumentsUI. Область и APK-хэши — в `docs/progress.md`.
 Платная генерация и успешный inference конкретного облачного аккаунта не проверены.
+
+## Response budget and continuation (0.6.7)
+
+The API response limit is the maximum output tokens per request, not a daily
+quota and not the conversation context size. Many reasoning providers count
+thinking and visible text against the same budget. A `length` completion can
+therefore contain no visible answer. No automatic paid retry is performed.
+The model card offers a per-chat response limit (0 inherits the connection
+setting), so an existing chat can use a larger limit without changing its
+provider identity. The provider/model still decides which limits it accepts.
+
+After Stop or a network interruption, the same chat accepts another message.
+Visible partial text remains in history. Incomplete signed/encrypted reasoning
+is not replayed as a completed provider message. An empty incomplete assistant
+turn gets an explicit context marker, not a fabricated model answer.
+
+“Save context limit” in the compaction page saves the model context size used
+for compaction estimates. It does not enlarge the model window or save chats.
+Summary previews and active summaries can be copied or edited. Editing an active
+summary starts a new context epoch so prior opaque reasoning is not replayed
+under changed memory. Original messages follow the chat retention policy and
+remain available through Undo compaction.

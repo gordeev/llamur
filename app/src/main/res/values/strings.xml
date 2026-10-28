@@ -221,10 +221,10 @@
     <string name="ui_active_summary" formatted="false">"Active summary"</string>
     <string name="ui_undo_compaction" formatted="false">"Undo compaction"</string>
     <string name="ui_resume_auto_compaction" formatted="false">"Resume auto-compaction"</string>
-    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Catalogue window: %1$s. API usage is estimated from reported usage and text size; images and PDFs may use more. Enter the model\'s actual window if the catalogue did not provide it."</string>
+    <string name="ui_catalogue_window_api_usage_is_estimated_from">"Catalogue context: %1$s. Used to estimate when compaction is needed; this setting does not enlarge the model context or save chats."</string>
     <string name="ui_unknown" formatted="false">"unknown"</string>
-    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"API window in tokens · 0 = catalogue"</string>
-    <string name="ui_save_api_window" formatted="false">"Save API window"</string>
+    <string name="ui_api_window_in_tokens_0_catalogue" formatted="false">"Model context, tokens (0 = catalogue)"</string>
+    <string name="ui_save_api_window" formatted="false">"Save context limit"</string>
     <string name="ui_enter_0_or_1024_2097152" formatted="false">"Enter 0 or 1024–2097152"</string>
     <string name="ui_operation_in_progress" formatted="false">"Operation in progress…"</string>
     <string name="ui_compact_context" formatted="false">"Compact context"</string>
@@ -237,7 +237,7 @@
     <string name="ui_refresh" formatted="false">"Refresh"</string>
     <string name="ui_on_device_original_gguf" formatted="false">"On device · original GGUF"</string>
     <string name="ui_api_256236">"API · %1$s"</string>
-    <string name="ui_response_reserve_context_and_usage_are_determined">"Response reserve: %1$s\nContext and usage are determined by the provider"</string>
+    <string name="ui_response_reserve_context_and_usage_are_determined">"Response limit: %1$s tokens per request (thinking + answer).\nContext size and actual usage are determined by the provider."</string>
     <string name="ui_api_units" formatted="false">"API units"</string>
     <string name="ui_reported_cost_responses">"Reported cost: %1$s %2$s · %3$s responses"</string>
     <string name="ui_api_did_not_report_comparable_cost" formatted="false">"API did not report comparable cost"</string>
@@ -298,7 +298,7 @@
     <string name="ui_long_input_takes_several_minutes_to_process" formatted="false">"Long input takes several minutes to process."</string>
     <string name="ui_cpu_f16_kv_original_weights_no_history" formatted="false">"CPU · F16 KV · original weights · no history truncation."</string>
     <string name="ui_context_size" formatted="false">"Context size"</string>
-    <string name="ui_response_reserve_tokens" formatted="false">"Response reserve, tokens"</string>
+    <string name="ui_response_reserve_tokens" formatted="false">"Response limit, tokens"</string>
     <string name="ui_experimental_prefill_acceleration_two_verified_models" formatted="false">"Experimental prefill acceleration (two verified models)"</string>
     <string name="ui_chat_prefix_cache_in_ram_128_mib" formatted="false">"Chat prefix cache in RAM: 128 MiB (up to 8K)"</string>
     <string name="ui_load" formatted="false">"Load"</string>
@@ -400,7 +400,7 @@
     <string name="ui_you" formatted="false">"You"</string>
     <string name="ui_model_is_reasoning" formatted="false">"Model is reasoning…"</string>
     <string name="ui_preparing_response" formatted="false">"Preparing response…"</string>
-    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"Output limit reached before any response text"</string>
+    <string name="ui_output_limit_reached_before_any_response_text" formatted="false">"The output token limit was reached before any answer text. Thinking may have used the budget. Increase the response limit in the model card, then send another message."</string>
     <string name="ui_model_completed_without_response_text" formatted="false">"Model completed without response text"</string>
     <string name="ui_response_interrupted" formatted="false">"Response interrupted"</string>
     <string name="ui_save_file">"Save file %1$s"</string>
@@ -826,4 +826,13 @@
     <string name="ui_about_llamur" formatted="false">"About llamur"</string>
     <string name="ui_source_code_on_github" formatted="false">"Source code on GitHub"</string>
     <string name="ui_about_llamur_description" formatted="false">"Run GGUF models on your phone, connect your own AI providers, and share a local model through the API. Original model weights stay unchanged."</string>
+    <string name="ui_summary_changed_reopen" formatted="false">"The summary changed. Reopen it before editing."</string>
+    <string name="ui_summary_edit_limit" formatted="false">"Enter a summary of 1–65536 characters"</string>
+    <string name="ui_summary_manually_edited" formatted="false">"Edited manually. Previous token estimates no longer apply."</string>
+    <string name="ui_copy_all" formatted="false">"Copy all"</string>
+    <string name="ui_edit_summary" formatted="false">"Edit summary"</string>
+    <string name="ui_summary" formatted="false">"Summary"</string>
+    <string name="ui_edit_summary_help" formatted="false">"Only the working summary changes. Original messages remain under the chat retention policy. Undo compaction restores them."</string>
+    <string name="ui_api_response_limit" formatted="false">"Response limit for this chat"</string>
+    <string name="ui_api_response_limit_help" formatted="false">"Maximum output tokens per request. On most providers this includes thinking and the visible answer. 0 uses the connection setting. For reasoning models, try 8192 or 16384 if the model supports it. Larger limits can increase cost; they do not increase the model context."</string>
 </resources>

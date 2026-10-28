@@ -234,6 +234,8 @@ class RuntimeService : Service() {
                     "compact_start" -> {startCompaction(input,null);JSONObject().put("chat",chats.get(chatId))}
                     "compact_info" -> JSONObject().put("chat",chats.get(chatId))
                     "compact_apply" -> {check(!busy);chats.get(chatId).optJSONObject("remote")?.let {check(providers.public(it.getString("id")).getString("revision")==it.getString("revision")){UiText.get(R.string.ui_connection_changed_summary_not_applied)}};JSONObject().put("chat",chats.compactApply(chatId))}
+                    "compact_edit" -> {check(!busy);JSONObject().put("chat",chats.compactEdit(chatId,input.getBoolean("preview"),input.getString("summary_id"),input.getString("text")))}
+                    "chat_output_limit" -> {check(!busy);JSONObject().put("chat",chats.remoteOutput(chatId,input.getInt("max_output")))}
                     "compact_undo" -> {check(!busy);JSONObject().put("chat",chats.compactUndo(chatId))}
                     "compact_discard" -> JSONObject().put("chat",chats.compactDiscard(chatId))
                     "compact_window" -> JSONObject().put("chat",chats.compactWindow(chatId,input.getInt("context")))
@@ -263,7 +265,7 @@ class RuntimeService : Service() {
         val source=chat.optJSONObject("remote")?:return null;val p=providers.resolve(source.getString("id"))
         check(p.getString("revision")==source.getString("revision")){UiText.get(R.string.ui_connection_changed_compaction_was_not_sent_to)}
         providers.model(source.getString("id"),source.getString("model")).optJSONObject("capabilities")?.let {p.put("capabilities",it);source.put("capabilities",it)}
-        return p
+        p.put("max_output",ContextCompactor.remoteOutput(chat));return p
     }
     private fun admitChatSend(input:JSONObject,reply:(JSONObject)->Unit) {
         val id=input.getString("chat_id");val duplicate=chats.duplicate(input.getString("request_id"))
@@ -273,7 +275,7 @@ class RuntimeService : Service() {
         val files=ChatFiles.validate(input.optJSONArray("attachments")?:JSONArray(),c.optJSONObject("remote"));val view=chats.preview(id,input.getString("text"),files)
         val automatic=input.optBoolean("auto_compact") && !c.optBoolean("compact_auto_paused") && c.getJSONArray("messages").length()>=2
         if(c.has("remote")) {
-            compactProfile(c);val window=ContextCompactor.remoteWindow(c);val reserve=c.getJSONObject("remote").getInt("max_output")
+            compactProfile(c);val window=ContextCompactor.remoteWindow(c);val reserve=ContextCompactor.remoteOutput(c)
             if(automatic && window>0 && (ContextCompactor.remoteTokens(c,view)+reserve>=window*0.8 || view.toString().toByteArray().size>=ChatFiles.REQUEST_BYTES*0.8)){startCompaction(input,reply);return}
             reply(sendChatDirect(input).put("ok",true));return
         }
@@ -366,9 +368,8 @@ class RuntimeService : Service() {
                         val duplicate=chats.duplicate(input.getString("request_id"))
                         if(duplicate!=null)JSONObject().put("chat",chats.get(duplicate))else {
                             check(!busy && !closing) {UiText.get(R.string.ui_wait_for_the_current_operation_to_finish)}
-                            val chat=chats.get(chatId);val source=chat.getJSONObject("remote");val p=providers.resolve(source.getString("id"));providers.model(source.getString("id"),source.getString("model")).optJSONObject("capabilities")?.let {p.put("capabilities",it);source.put("capabilities",it)}
+                            val chat=chats.get(chatId);val source=chat.getJSONObject("remote");val p=providers.resolve(source.getString("id")).put("max_output",ContextCompactor.remoteOutput(chat));providers.model(source.getString("id"),source.getString("model")).optJSONObject("capabilities")?.let {p.put("capabilities",it);source.put("capabilities",it)}
                             check(p.getString("revision")==source.getString("revision")) {UiText.get(R.string.ui_connection_changed_start_a_new_chat_history)}
-                            val prior=chat.getJSONArray("messages");check(prior.length()==0 || prior.getJSONObject(prior.length()-1).optString("status") in listOf("eog","length","blocked") || (chat.optJSONObject("compaction")?.optInt("through")?:0)>=prior.length()) {UiText.get(R.string.ui_previous_response_was_interrupted_start_a_new)}
                             val files=ChatFiles.validate(input.optJSONArray("attachments")?:JSONArray(),source)
                             val history=chats.preview(chatId,input.getString("text"),files);RemoteProtocol.request(p,source.getString("model"),history)
                             val network=RemoteNetwork();val answerId=UUID.randomUUID().toString();var lastMessage:JSONObject?=null

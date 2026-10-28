@@ -324,7 +324,7 @@ class ChatActivity : Activity() {
     private fun countDraft() {
         val prompt=input.text.toString()
         if(prompt.toByteArray().size>512*1024) { budget.text=UiText.get(R.string.ui_message_exceeds_512_kib_all_text_is);sendButton.isEnabled=composeBusy() && current.optBoolean("active");return }
-        if(remote()!=null){syncSource();budget.text=UiText.get(R.string.ui_response_limit_provider_counts_tokens_context_history, (remote()!!.optInt("max_output",2048)));return}
+        if(remote()!=null){syncSource();budget.text=UiText.get(R.string.ui_response_limit_provider_counts_tokens_context_history, (ContextCompactor.remoteOutput(current)));return}
         if(counting || runtimeState!="ready" || prompt.isBlank() && pendingFiles().length()==0)return
         counting=true;val selectedChat=chatId
         product(JSONObject().put("action","count").put("chat_id",selectedChat).put("text",prompt).put("attachments",pendingFiles()).put("max_tokens",prefs.getInt("output:$model",2048)).put("thinking",prefs.getBoolean("thinking",true))) {r->
@@ -437,7 +437,7 @@ class ChatActivity : Activity() {
         if(!::timeline.isInitialized)return
         timeline.render(chat);if(chat.getJSONArray("messages").length()==0)welcome();syncSource();syncPins()
         val result=if(remote()==null)lastSnapshot.optJSONObject("result")else null
-        budget.text=when {current.optString("save_error").isNotEmpty()->current.optString("save_error");result!=null && lastSnapshot.optString("chat_id")==chatId->UiText.get(R.string.ui_input_response_context, (result.optInt("prompt_tokens")), (result.optInt("generated_tokens")), (lastSnapshot.optJSONObject("config")?.optInt("context")));remote()!=null->UiText.get(R.string.ui_api_limit, (remote()!!.optInt("max_output",2048)))+if(current.optBoolean("permanent"))UiText.get(R.string.ui_permanent)else UiText.get(R.string.ui_temporary);else->if(current.optBoolean("permanent"))UiText.get(R.string.ui_permanent_encrypted_storage)else UiText.get(R.string.ui_temporary_no_saved_history)}
+        budget.text=when {current.optString("save_error").isNotEmpty()->current.optString("save_error");result!=null && lastSnapshot.optString("chat_id")==chatId->UiText.get(R.string.ui_input_response_context, (result.optInt("prompt_tokens")), (result.optInt("generated_tokens")), (lastSnapshot.optJSONObject("config")?.optInt("context")));remote()!=null->UiText.get(R.string.ui_api_limit, (ContextCompactor.remoteOutput(current)))+if(current.optBoolean("permanent"))UiText.get(R.string.ui_permanent)else UiText.get(R.string.ui_temporary);else->if(current.optBoolean("permanent"))UiText.get(R.string.ui_permanent_encrypted_storage)else UiText.get(R.string.ui_temporary_no_saved_history)}
     }
     private fun openChat(id:String) {
         saveDraft.run();val request=++navigationRequest
@@ -634,6 +634,20 @@ class ChatActivity : Activity() {
         compactBar.text=when {current.optBoolean("compacting")->UiText.get(R.string.ui_compacting_context_stop_with);pending->UiText.get(R.string.ui_summary_ready_view_and_apply);current.optString("compaction_error").isNotEmpty()->UiText.get(R.string.ui_compaction_incomplete_details);active->UiText.get(R.string.ui_context_compacted_view_summary_undo);else->""}
         compactBar.visibility=if(compactBar.text.isEmpty())View.GONE else View.VISIBLE
     }
+    private fun editSummary(id:String,preview:Boolean,value:JSONObject) {
+        val box=panel();box.addView(text(UiText.get(R.string.ui_edit_summary_help),14f))
+        val edit=field(UiText.get(R.string.ui_summary),value.getString("text")).apply {isSingleLine=false;inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE;minLines=8;gravity=Gravity.TOP};box.addView(edit)
+        box.addView(button(UiText.get(R.string.ui_copy_all)){copyText(UiText.get(R.string.ui_summary),edit.text.toString(),true)})
+        box.addView(button(UiText.get(R.string.ui_save)){
+            if(edit.text.isBlank() || edit.text.length>65536){edit.error=UiText.get(R.string.ui_summary_edit_limit);return@button}
+            val revision=pages.revision
+            product(JSONObject().put("action","compact_edit").put("chat_id",id).put("preview",preview).put("summary_id",value.getString("id")).put("text",edit.text.toString())){a->checked(a){
+                if(id==chatId){current=a.getJSONObject("chat");render(current)};refreshCatalog(true)
+                if(pages.revision==revision){pages.back();showCompaction(id,true)}
+            }}
+        })
+        pages.open(UiText.get(R.string.ui_edit_summary),ScrollView(this).apply {addView(box)})
+    }
     private fun showCompaction(id:String,replace:Boolean=false) {
         if(id.isEmpty() || replace && !pages.showing)return
         val pageRevision=pages.revision
@@ -647,9 +661,15 @@ class ChatActivity : Activity() {
             fun action(name:String,command:String,extra:JSONObject=JSONObject()) {
                 box.addView(button(name){val revision=pages.revision;extra.put("action",command).put("chat_id",id);product(extra){a->checked(a){if(id==chatId){current=a.getJSONObject("chat");render(current)};refreshCatalog(true);if(pages.revision==revision)showCompaction(id,true)}}}.apply {isEnabled=!running})
             }
-            fun summary(title:String,value:JSONObject){box.addView(text(title,18f));box.addView(text(UiText.get(R.string.ui_steps_messages_summarized, (if(remote==null)UiText.get(R.string.ui_tokens)else UiText.get(R.string.ui_estimated_api_tokens)), (value.optLong("before_tokens")), (value.optLong("after_tokens")), (value.optInt("calls")), (value.optInt("through"))),12f).apply {setTextColor(mutedColor)});box.addView(text(value.getString("text"),15f).apply {setTextIsSelectable(true)})}
-            if(pending!=null){summary(UiText.get(R.string.ui_preview_not_applied_yet),pending);action(UiText.get(R.string.ui_apply_summary),"compact_apply");action(UiText.get(R.string.ui_discard_preview),"compact_discard")}
-            if(working!=null){summary(UiText.get(R.string.ui_active_summary),working);action(UiText.get(R.string.ui_undo_compaction),"compact_undo")}
+            fun summary(title:String,value:JSONObject,preview:Boolean){
+                box.addView(text(title,18f))
+                box.addView(text(if(value.optBoolean("edited"))UiText.get(R.string.ui_summary_manually_edited)else UiText.get(R.string.ui_steps_messages_summarized, (if(remote==null)UiText.get(R.string.ui_tokens)else UiText.get(R.string.ui_estimated_api_tokens)), (value.optLong("before_tokens")), (value.optLong("after_tokens")), (value.optInt("calls")), (value.optInt("through"))),12f).apply {setTextColor(mutedColor)})
+                box.addView(text(value.getString("text"),15f).apply {setTextIsSelectable(true)})
+                box.addView(button(UiText.get(R.string.ui_copy_all)){copyText(title,value.getString("text"),true)})
+                box.addView(button(UiText.get(R.string.ui_edit_summary)){editSummary(id,preview,value)}.apply {isEnabled=!running})
+            }
+            if(pending!=null){summary(UiText.get(R.string.ui_preview_not_applied_yet),pending,true);action(UiText.get(R.string.ui_apply_summary),"compact_apply");action(UiText.get(R.string.ui_discard_preview),"compact_discard")}
+            if(working!=null){summary(UiText.get(R.string.ui_active_summary),working,false);action(UiText.get(R.string.ui_undo_compaction),"compact_undo")}
             if(c.optBoolean("compact_auto_paused"))action(UiText.get(R.string.ui_resume_auto_compaction),"compact_resume")
             if(remote!=null){val known=remote.optJSONObject("capabilities")?.optInt("context")?:0;box.addView(text(UiText.get(R.string.ui_catalogue_window_api_usage_is_estimated_from, (if(known>0)known.toString()else UiText.get(R.string.ui_unknown))),13f))
                 val f=field(UiText.get(R.string.ui_api_window_in_tokens_0_catalogue),c.optInt("compact_window").toString()).apply {inputType=2};box.addView(f)
@@ -668,7 +688,16 @@ class ChatActivity : Activity() {
         val box=panel();val source=remote();box.addView(text(sourceName(),22f).apply {typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL)})
         box.addView(text(if(source==null)UiText.get(R.string.ui_on_device_original_gguf)else UiText.get(R.string.ui_api_256236, (source.optString("name"))),14f).apply {setTextColor(accent)})
         box.addView(text("ID: "+if(source==null)current.getString("model")else source.getString("model"),13f).apply {setTextIsSelectable(true)})
-        if(source!=null){box.addView(text("${source.optString("protocol")}\n${source.optString("base_url")}",13f));box.addView(text(UiText.get(R.string.ui_response_reserve_context_and_usage_are_determined, (source.optInt("max_output",2048))),13f))
+        if(source!=null){box.addView(text("${source.optString("protocol")}\n${source.optString("base_url")}",13f));val limitInfo=text(UiText.get(R.string.ui_response_reserve_context_and_usage_are_determined,ContextCompactor.remoteOutput(current)),13f);box.addView(limitInfo)
+            box.addView(button(UiText.get(R.string.ui_api_response_limit)){
+                val id=current.getString("id");val settings=panel();settings.addView(text(UiText.get(R.string.ui_api_response_limit_help),14f))
+                val edit=field(UiText.get(R.string.ui_api_response_limit),current.optInt("remote_max_output").toString()).apply {inputType=2};settings.addView(edit)
+                val dialog=AlertDialog.Builder(this).setTitle(UiText.get(R.string.ui_api_response_limit)).setView(settings).setPositiveButton(UiText.get(R.string.ui_save),null).setNegativeButton(UiText.get(R.string.ui_cancel),null).create()
+                dialog.setOnShowListener {dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                    val limit=edit.text.toString().toIntOrNull();if(limit==null || limit !in 0..131072){edit.error="0–131072";return@setOnClickListener}
+                    product(JSONObject().put("action","chat_output_limit").put("chat_id",id).put("max_output",limit)){a->checked(a){val c=a.getJSONObject("chat");if(id==chatId){current=c;render(current)};limitInfo.text=UiText.get(R.string.ui_response_reserve_context_and_usage_are_determined,ContextCompactor.remoteOutput(c));dialog.dismiss()}}
+                }};dialog.show()
+            }.apply {isEnabled=!composeBusy()})
             val a=current.getJSONArray("messages");var total=0.0;var count=0;val units=mutableSetOf<String>();for(i in 0 until a.length()){val usage=a.getJSONObject(i).optJSONObject("remote_usage")?:continue;val cost=usage.opt("cost");if(cost is Number && cost.toDouble().isFinite() && cost.toDouble()>=0){total+=cost.toDouble();count++;units.add(usage.optString("currency").ifBlank {UiText.get(R.string.ui_api_units)})}}
             box.addView(text(if(count>0 && units.size==1 && total.isFinite())UiText.get(R.string.ui_reported_cost_responses, ("%.6f".format(java.util.Locale.ROOT,total)), (units.single()), (count))else UiText.get(R.string.ui_api_did_not_report_comparable_cost),13f));box.addView(button(UiText.get(R.string.ui_api_connections)){providerUi().show()})
         }else {val id=current.getString("model");val context=if(model==id)lastSnapshot.optJSONObject("config")?.optInt("context")?:prefs.getInt("context:$id",4096)else prefs.getInt("context:$id",4096);box.addView(text(UiText.get(R.string.ui_context_response_cpu_f16_kv_weights_unchanged, (context), (prefs.getInt("output:$id",2048))),13f));ModelStore.entries(this).firstOrNull {it.id==id}?.let {entry->box.addView(button(if(model==id && runtimeState=="ready")UiText.get(R.string.ui_model_profile)else UiText.get(R.string.ui_load_model_profile)){configure(entry)})}}

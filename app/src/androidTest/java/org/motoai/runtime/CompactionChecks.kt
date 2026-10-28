@@ -21,6 +21,23 @@ internal class CompactionChecks(private val test:Instrumentation) {
     private fun rejects(why:String,block:()->Unit)=verify(runCatching(block).isFailure,why)
     private fun answer(text:String=MEMORY,reason:String="eog")=JSONObject().put("assistant",JSONObject().put("role","assistant").put("content",text)).put("finish_reason",reason)
     private fun fill(store:ChatStore,id:String,turns:Int=6) {repeat(turns){n->store.begin(id,"$id-$n","Project PRJ-731; port 19091; keep original files. "+"Public fact $n. ".repeat(130));store.finish(id,JSONObject().put("role","assistant").put("content","Decision $n: preserve exact weights. "+"Fixture discussion. ".repeat(40)).put("reasoning_content","PRIVATE-THOUGHT").put("remote_payload",JSONObject().put("type","opaque-reasoning")),"eog",UUID.randomUUID().toString())}}
+    private fun editingChecks() {
+        val store=ChatStore();val c=store.create("fixture");val id=c.getString("id");fill(store,id,3)
+        val original=c.getJSONArray("messages").toString();val e=ContextCompactor(c,8192,2);e.next {_,_->true};e.accept(answer())
+        store.compactStart(id);store.compactEnd(id,e.candidate(6000,1800));val first=c.getJSONObject("compact_preview").getString("id")
+        store.compactEdit(id,true,first,"Edited preview with PRJ-731 and port 19091.")
+        verify(c.getJSONObject("compact_preview").optBoolean("edited") && !c.has("compaction"),"Editing preview must not apply it")
+        rejects("Stale summary edit must fail"){store.compactEdit(id,true,first,"Stale edit")}
+        val preview=c.getJSONObject("compact_preview").getString("id")
+        rejects("Empty edit must fail"){store.compactEdit(id,true,preview,"   ")}
+        rejects("Oversized edit must fail"){store.compactEdit(id,true,preview,"x".repeat(65537))}
+        store.compactApply(id);store.begin(id,"after-edited-preview","new question");store.finish(id,JSONObject().put("content","Visible answer").put("remote_payload",JSONObject().put("signature","OLD-EDIT-EPOCH")),"eog",UUID.randomUUID().toString())
+        val retained=c.getJSONArray("messages").toString();store.compactEdit(id,false,preview,"Updated active memory: preserve PRJ-731.")
+        verify(c.getJSONArray("messages").toString()==retained && retained.startsWith(original.dropLast(1)),"Editing must preserve every original and later message")
+        verify(!store.preview(id,"continue").toString().contains("OLD-EDIT-EPOCH"),"Editing active memory must invalidate opaque reasoning from its previous epoch")
+        store.compactStart(id);rejects("Active request must reject editing"){store.compactEdit(id,false,c.getJSONObject("compaction").getString("id"),"Busy edit")};store.compactEnd(id,null)
+        store.compactUndo(id);verify(c.getJSONArray("messages").toString()==retained && !c.has("compaction"),"Undo edited compaction must retain original history")
+    }
     private fun storeChecks() {
         val store=ChatStore();val c=store.create("fixture");val id=c.getString("id");fill(store,id);val original=c.getJSONArray("messages").toString();val engine=ContextCompactor(c,8192,8)
         var count=0
@@ -42,9 +59,9 @@ internal class CompactionChecks(private val test:Instrumentation) {
         store.compactStart(id);store.compactEnd(id,candidate);store.begin(id,"stale","new question");store.finish(id,null,"eog",UUID.randomUUID().toString());rejects("Sending a new question invalidates pending preview"){store.compactApply(id)}
         verify(c.getJSONArray("messages").length()==16,"Stale preview rejection must keep all messages")
         val name="fixture-compact-${UUID.randomUUID()}";var disk=HistoryDisk(context,"$name.db",name)
-        try {val saved=ChatStore(disk);saved.policy("keep",86400000);val p=saved.create("fixture",permanent=true);val pid=p.getString("id");fill(saved,pid,2);val e=ContextCompactor(p,8192,2);e.next {_,_->true};e.accept(answer());saved.compactStart(pid);saved.compactEnd(pid,e.candidate(4000,1500));saved.compactApply(pid);val bytes=p.getJSONArray("messages").toString()
+        try {val saved=ChatStore(disk);saved.policy("keep",86400000);val p=saved.create("fixture",permanent=true);val pid=p.getString("id");fill(saved,pid,2);val e=ContextCompactor(p,8192,2);e.next {_,_->true};e.accept(answer());saved.compactStart(pid);saved.compactEnd(pid,e.candidate(4000,1500));saved.compactApply(pid);saved.compactEdit(pid,false,p.getJSONObject("compaction").getString("id"),MEMORY+" Manually edited.");val bytes=p.getJSONArray("messages").toString()
             val temp=saved.create("fixture");val tid=temp.getString("id");fill(saved,tid,1);disk.close();disk=HistoryDisk(context,"$name.db",name);val reopened=ChatStore(disk);val body=reopened.get(pid)
-            verify(body.getJSONArray("messages").toString()==bytes && body.getJSONObject("compaction").getString("text")==MEMORY,"Encrypted permanent reopen must preserve original and summary")
+            verify(body.getJSONArray("messages").toString()==bytes && body.getJSONObject("compaction").getString("text")==MEMORY+" Manually edited.","Encrypted permanent reopen must preserve original and summary")
             rejects("Temporary originals and summary must not reach disk"){reopened.get(tid)};reopened.compactUndo(pid);verify(reopened.preview(pid,"hi").length()==6,"Undo after reopen restores full original context")
             reopened.compactStart(pid);disk.close();disk=HistoryDisk(context,"$name.db",name);val interrupted=ChatStore(disk).get(pid);verify(!interrupted.optBoolean("active") && !interrupted.optBoolean("compacting") && interrupted.optBoolean("compact_auto_paused"),"Process death must end compaction without replay or loss")
         }finally{disk.erase()}
@@ -76,7 +93,7 @@ internal class CompactionChecks(private val test:Instrumentation) {
     private fun waitFor(seconds:Int=40,condition:()->Boolean){val end=SystemClock.elapsedRealtime()+seconds*1000;while(!condition()){check(SystemClock.elapsedRealtime()<end){"Compaction deadline: $progress"};Thread.sleep(80)}}
     fun run():JSONObject {
         verify(context.packageName.endsWith(".debug"),"Separate debug package required")
-        storeChecks();progress.put("stage","service")
+        storeChecks();editingChecks();progress.put("stage","service")
         val prefs=context.getSharedPreferences("preferences",Context.MODE_PRIVATE);val previous=prefs.all["auto_compact"];prefs.edit().remove("auto_compact").commit();verify(!prefs.getBoolean("auto_compact",false),"Automatic compaction must default off")
         val activity=test.startActivitySync(Intent(context,ChatActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));val ready=CountDownLatch(1)
         val connection=object:ServiceConnection{override fun onServiceConnected(n:ComponentName,b:IBinder){endpoint=Messenger(b);ready.countDown()};override fun onServiceDisconnected(n:ComponentName){}}
@@ -122,10 +139,15 @@ internal class CompactionChecks(private val test:Instrumentation) {
     private fun ui(activity:Activity,id:String) {
         fun invoke(method:String,vararg args:Any){test.runOnMainSync {val f=ChatActivity::class.java.declaredMethods.first {it.name==method && it.parameterTypes.size==args.size};f.isAccessible=true;f.invoke(activity,*args)}}
         fun views():List<View> {val a=mutableListOf<View>();fun walk(v:View){if(v.visibility!=View.VISIBLE)return;a.add(v);if(v is ViewGroup)for(i in 0 until v.childCount)walk(v.getChildAt(i))};if(Looper.myLooper()==Looper.getMainLooper())walk(activity.window.decorView)else test.runOnMainSync {walk(activity.window.decorView)};return a}
-        fun tap(name:String){test.runOnMainSync {val v=views().first {(it as? TextView)?.text?.toString()==name || it.contentDescription?.toString()==name};check(v.performClick())};test.waitForIdleSync()}
+        fun tap(name:String){progress.put("ui_action",name);waitFor {views().any {(it as? TextView)?.text?.toString()==name || it.contentDescription?.toString()==name}};test.runOnMainSync {val v=views().first {(it as? TextView)?.text?.toString()==name || it.contentDescription?.toString()==name};check(v.performClick())};test.waitForIdleSync()}
         fun capture(name:String){test.waitForIdleSync();Thread.sleep(200);test.uiAutomation.takeScreenshot()?.let {b->File(context.filesDir,"compaction-$name.png").outputStream().use {b.compress(Bitmap.CompressFormat.PNG,100,it)};b.recycle()}}
         invoke("selectChat",get(id));invoke("showCompaction",id,false);waitFor {views().filterIsInstance<TextView>().any {it.text.toString()=="Предпросмотр · ещё не применяется"}};capture("preview")
         verify(views().filterIsInstance<TextView>().any {it.text.toString()==MEMORY && it.isTextSelectable},"Summary preview must be visible and selectable")
+        tap("Скопировать всё")
+        verify(test.run { var copied="";runOnMainSync {copied=context.getSystemService(android.content.ClipboardManager::class.java).primaryClip?.getItemAt(0)?.text?.toString().orEmpty()};copied }==MEMORY,"Copy all must copy the complete summary")
+        tap("Редактировать сводку");waitFor {views().filterIsInstance<EditText>().any {it.text.toString()==MEMORY}}
+        test.runOnMainSync {views().filterIsInstance<EditText>().first {it.text.toString()==MEMORY}.setText(MEMORY+" User correction.")}
+        tap("Сохранить");waitFor {get(id).getJSONObject("compact_preview").getString("text").endsWith("User correction.")}
         tap("Применить сводку");waitFor {get(id).has("compaction")};waitFor {views().filterIsInstance<TextView>().any {it.text.toString()=="Активная сводка"}};capture("active")
         tap("Отменить сжатие");invoke("showTab",2);waitFor {!get(id).has("compaction")};verify(get(id).optBoolean("compact_auto_paused"),"UI undo must pause this chat's auto compact")
         invoke("showTab",2);val pagesField=ChatActivity::class.java.getDeclaredField("pages").apply {isAccessible=true};test.runOnMainSync {(pagesField.get(activity) as SettingsPages).clear()}
