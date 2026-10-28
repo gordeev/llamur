@@ -32,5 +32,6 @@
   "paid_cloud_account_inference_tested": false,
   "new_native_numerical_or_performance_qualification": false,
   "two_independent_clean_builds_checked": false,
-  "official_fdroid_server_accepted": false
+  "official_fdroid_server_accepted": false,
+  "source_commit": "b7144c80f89e2b3b73d2ca3dea6fc1267ba3dd8c"
 }

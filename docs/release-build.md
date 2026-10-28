@@ -1,4 +1,4 @@
-# Current release 0.6.7
+# Prepared release 0.6.7
 
 VersionCode 15, ARM64, Android9+, same release certificate. See the
 [release notes](releases/0.6.7.md) and [verification report](releases/0.6.7-verification.json).

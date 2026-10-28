@@ -7,12 +7,15 @@ to **0.6.6 / versionCode 14**, not0.6.7.
 submitted on 2026-10-27. Inclusion and official build-server verification are
 pending. No private signing key/password was uploaded.
 
+The0.6.7 build is disabled until the signed APK is uploaded to the upstream
+release;0.6.6 remains the latest downloadable candidate.
+
 ## Recipe and source
 
 Copy `fdroid/org.llamur.app.yml` to `metadata/org.llamur.app.yml` in fdroiddata,
-and `fdroid/llamacpp.yml` to `srclibs/llamacpp.yml`. The latest 0.6.7 build pins:
+and `fdroid/llamacpp.yml` to `srclibs/llamacpp.yml`. The prepared 0.6.7 build pins:
 
-- Source tag `v0.6.7` (the main recipe will pin its immutable commit).
+- Source commit `b7144c80f89e2b3b73d2ca3dea6fc1267ba3dd8c` (tag `v0.6.7`).
 - GitHub binary `llamur-0.6.7-arm64-v8a.apk`.
 - The existing GitHub release certificate through `AllowedAPKSigningKeys`.
 - llama.cpp commit `701fd25b3a55a90297dec0d925204b29084054c8`, archived from a srclib
