@@ -69,7 +69,6 @@ Builds:
 
   - versionName: 0.6.7
     versionCode: 15
-    disable: Upstream APK upload pending; prepared recipe only
     commit: b7144c80f89e2b3b73d2ca3dea6fc1267ba3dd8c
     subdir: app
     sudo:
@@ -112,5 +111,5 @@ MaintainerNotes: |
 
 AutoUpdateMode: None
 UpdateCheckMode: None
-CurrentVersion: 0.6.6
-CurrentVersionCode: 14
+CurrentVersion: 0.6.7
+CurrentVersionCode: 15
