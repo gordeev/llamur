@@ -1,0 +1,1548 @@
+--- a/ggml/include/ggml-backend.h
++++ b/ggml/include/ggml-backend.h
+@@ -273,6 +273,9 @@
+     // Unload a backend if loaded dynamically and unregister it
+     GGML_API void               ggml_backend_unload(ggml_backend_reg_t reg);
+     // Load all known backends from dynamic libraries
++    // Load only the requested backend (including CPU ISA scoring), not every GPU driver.
++    GGML_API ggml_backend_reg_t ggml_backend_load_by_name(const char * name, const char * dir_path);
++#define GGML_MOTOAI_SELECTIVE_BACKEND_LOAD 1
+     GGML_API void               ggml_backend_load_all(void);
+     GGML_API void               ggml_backend_load_all_from_path(const char * dir_path);
+ 
+--- a/ggml/include/ggml-cpu.h
++++ b/ggml/include/ggml-cpu.h
+@@ -2,6 +2,11 @@
+ 
+ #include "ggml.h"
+ #include "ggml-backend.h"
++
++// Experimental: retain the accepted4-worker F32 attention reduction grouping.
++#define GGML_MOTOAI_F32_KV_CHUNKS 4
++// Local F64 accumulation only for long F32 attention; tensor storage unchanged.
++#define GGML_MOTOAI_LONG_F32_ACC 1
+ 
+ #ifdef  __cplusplus
+ extern "C" {
+--- a/ggml/src/ggml-backend-reg.cpp
++++ b/ggml/src/ggml-backend-reg.cpp
+@@ -562,6 +562,13 @@
+     }
+ 
+     return get_reg().load_backend(best_path, silent);
++}
++
++ggml_backend_reg_t ggml_backend_load_by_name(const char * name, const char * dir_path) {
++    if (!name || (strcmp(name, "cpu") != 0 && strcmp(name, "vulkan") != 0 && strcmp(name, "opencl") != 0)) {
++        return nullptr;
++    }
++    return ggml_backend_load_best(name, true, dir_path);
+ }
+ 
+ void ggml_backend_load_all() {
+--- a/ggml/src/ggml-cpu/arch/arm/repack.cpp
++++ b/ggml/src/ggml-cpu/arch/arm/repack.cpp
+@@ -827,6 +827,10 @@
+ 
+             // interleaved bias_acc: [0]->r0 0123, [1]->r0 4567
+             int32x4_t bias_acc[2] = { vdupq_n_s32(0), vdupq_n_s32(0) };
++            // Match native Q4_K: exact integer sum within the entire K block,
++            // then bias-first FMA, once per block. Subblock FP32 accumulation
++            // perturbs activations before the next quantized layer.
++            int32x4_t scaled_acc[2] = { vdupq_n_s32(0), vdupq_n_s32(0) };
+             // 2 sb each iteration
+             int32x4_t acc_lo[col_pairs];
+             int32x4_t acc_hi[col_pairs];
+@@ -892,16 +896,10 @@
+                 for (int i = 0, p = 0; p < col_pairs; i++, p += 2) {
+                     int16x4_t   group_scales_lo = p == 0 ? vget_low_s16(q4sb_scales[0]) : vget_high_s16(q4sb_scales[0]);
+                     int16x4_t   group_scales_hi = p == 0 ? vget_low_s16(q4sb_scales[1]) : vget_high_s16(q4sb_scales[1]);
+-                    float32x4_t sb_scale        = p == 0 ? sb_scale_0 : sb_scale_1;
+-
+-                    // 0123 or 4567
+-                    float32x4_t sumf_0 =
+-                        vcvtq_f32_s32(vmulq_s32(vmovl_s16(group_scales_lo), vpaddq_s32(acc_lo[p], acc_lo[p + 1])));
+-                    acc_f32[i] = vfmaq_f32(acc_f32[i], sb_scale, sumf_0);
+-
+-                    float32x4_t sumf_1 =
+-                        vcvtq_f32_s32(vmulq_s32(vmovl_s16(group_scales_hi), vpaddq_s32(acc_hi[p], acc_hi[p + 1])));
+-                    acc_f32[i] = vfmaq_f32(acc_f32[i], sb_scale, sumf_1);
++                    scaled_acc[i] = vaddq_s32(scaled_acc[i],
++                        vmulq_s32(vmovl_s16(group_scales_lo), vpaddq_s32(acc_lo[p], acc_lo[p + 1])));
++                    scaled_acc[i] = vaddq_s32(scaled_acc[i],
++                        vmulq_s32(vmovl_s16(group_scales_hi), vpaddq_s32(acc_hi[p], acc_hi[p + 1])));
+                 }
+ 
+                 // Multiply Acc bsum + mins
+@@ -921,6 +919,8 @@
+ 
+             acc_f32[0] = vmlsq_f32(acc_f32[0], vcvtq_f32_s32(bias_acc[0]), sb_min_0);
+             acc_f32[1] = vmlsq_f32(acc_f32[1], vcvtq_f32_s32(bias_acc[1]), sb_min_1);
++            acc_f32[0] = vfmaq_f32(acc_f32[0], sb_scale_0, vcvtq_f32_s32(scaled_acc[0]));
++            acc_f32[1] = vfmaq_f32(acc_f32[1], sb_scale_1, vcvtq_f32_s32(scaled_acc[1]));
+         }  // for b
+ 
+         int base = x * ncols_interleaved;
+@@ -1750,13 +1750,11 @@
+ 
+             // Apply superblock scale (no mins for q6_K)
+             // acc[cp] has [c0, c1]
+-            float32x2_t w_01 = vmul_f32(vcvt_f32_s32(acc[0]), vget_low_f32(sb_scale_0));
+-            float32x2_t w_23 = vmul_f32(vcvt_f32_s32(acc[1]), vget_high_f32(sb_scale_0));
+-            float32x2_t w_45 = vmul_f32(vcvt_f32_s32(acc[2]), vget_low_f32(sb_scale_1));
+-            float32x2_t w_67 = vmul_f32(vcvt_f32_s32(acc[3]), vget_high_f32(sb_scale_1));
+-
+-            acc_f32[0] = vaddq_f32(acc_f32[0], vcombine_f32(w_01, w_23));
+-            acc_f32[1] = vaddq_f32(acc_f32[1], vcombine_f32(w_45, w_67));
++            // Native Q6_K fuses the per-K-block contribution into its sum.
++            acc_f32[0] = vfmaq_f32(acc_f32[0],
++                vcvtq_f32_s32(vcombine_s32(acc[0], acc[1])), sb_scale_0);
++            acc_f32[1] = vfmaq_f32(acc_f32[1],
++                vcvtq_f32_s32(vcombine_s32(acc[2], acc[3])), sb_scale_1);
+         }  // for b
+ 
+         int base = x * ncols_interleaved;
+--- a/ggml/src/ggml-cpu/ggml-cpu.c
++++ b/ggml/src/ggml-cpu/ggml-cpu.c
+@@ -3015,7 +3015,7 @@
+ 
+                         // Decode path: n_kv_chunks = n_tasks (one chunk per thread)
+                         // Per-thread: VKQ accmulator (DV), partial M, partial S + intra-thread scratch for V, Q and VKQ
+-                        size_t n_chunks = n_tasks;
++                        size_t n_chunks = MAX(n_tasks, GGML_MOTOAI_F32_KV_CHUNKS);
+                         size_t decode   = sizeof(float)*(neq2*n_chunks*(2+DV) + n_tasks*(DK + 2*DV));
+ 
+                         cur += MAX(prefill, decode);
+--- a/ggml/src/ggml-cpu/ggml-cpu.cpp
++++ b/ggml/src/ggml-cpu/ggml-cpu.cpp
+@@ -655,7 +655,23 @@
+     GGML_UNUSED(reg);
+ }
+ 
++static size_t ggml_backend_cpu_workspace_size(ggml_backend_t backend) {
++    GGML_ASSERT(ggml_backend_is_cpu(backend));
++    return ((ggml_backend_cpu_context *) backend->context)->work_size;
++}
++
+ static void * ggml_backend_cpu_get_proc_address(ggml_backend_reg_t reg, const char * name) {
++#ifdef GGML_USE_CPU_REPACK
++    if (strcmp(name, "ggml_backend_cpu_workspace_size") == 0) {
++        return (void *)ggml_backend_cpu_workspace_size;
++    }
++    if (strcmp(name, "ggml_backend_cpu_mark_transient_repack") == 0) {
++        return (void *)ggml_backend_cpu_mark_transient_repack;
++    }
++    if (strcmp(name, "ggml_backend_cpu_transient_repack_size") == 0) {
++        return (void *)ggml_backend_cpu_transient_repack_size;
++    }
++#endif
+     if (strcmp(name, "ggml_backend_set_n_threads") == 0) {
+         ggml_backend_set_n_threads_t fct = ggml_backend_cpu_set_n_threads;
+         return (void *)fct;
+--- a/ggml/src/ggml-cpu/ops.cpp
++++ b/ggml/src/ggml-cpu/ops.cpp
+@@ -11,6 +11,16 @@
+ #include <algorithm>
+ #include <cfloat>
+ #include <cmath>
++#include <vector>
++
++#ifndef MOTOAI_SCALAR_MATH_HELPERS
++#define MOTOAI_SCALAR_MATH_HELPERS
++// Experimental reproducible scalar math; SIMD approximations unchanged.
++#include <math.h>
++static inline float motoai_expf(float x) { return (float) exp((double) x); }
++static inline float motoai_sinf(float x) { return (float) sin((double) x); }
++static inline float motoai_cosf(float x) { return (float) cos((double) x); }
++#endif
+ 
+ // ggml_compute_forward_dup
+ 
+@@ -3437,7 +3447,7 @@
+         for (int k = 0; k < nc; k++) {
+             const float x = std::min(src0_p[k], limit);
+             const float y = std::clamp(src1_p[k], -limit, limit);
+-            const float out_glu = x / (1.f + expf(alpha * (-x)));
++            const float out_glu = x / (1.f + motoai_expf(alpha * (-x)));
+             dst_p[k] = out_glu * (y + 1.f);
+         }
+ 
+@@ -3504,7 +3514,7 @@
+         for (int k = 0; k < nc; k++) {
+             const float x = std::min(GGML_CPU_FP16_TO_FP32(src0_p[k]), limit);
+             const float y = std::clamp(GGML_CPU_FP16_TO_FP32(src1_p[k]), -limit, limit);
+-            const float out_glu = x / (1.f + expf(alpha * (-x)));
++            const float out_glu = x / (1.f + motoai_expf(alpha * (-x)));
+             dst_p[k] = GGML_CPU_FP32_TO_FP16(out_glu * (y + 1.f));
+         }
+ 
+@@ -3588,7 +3598,7 @@
+         for (int k = 0; k < nc; k++) {
+             const float gate = std::min(src0_p[k], limit);
+             const float up   = std::clamp(src1_p[k], -limit, limit);
+-            dst_p[k]         = gate / (1.f + expf(-gate)) * up;
++            dst_p[k]         = gate / (1.f + motoai_expf(-gate)) * up;
+         }
+ 
+ #ifndef NDEBUG
+@@ -3647,7 +3657,7 @@
+         for (int k = 0; k < nc; k++) {
+             const float gate = std::min(GGML_FP16_TO_FP32(src0_p[k]), limit);
+             const float up   = std::clamp(GGML_FP16_TO_FP32(src1_p[k]), -limit, limit);
+-            dst_p[k]         = GGML_FP32_TO_FP16(gate / (1.f + expf(-gate)) * up);
++            dst_p[k]         = GGML_FP32_TO_FP16(gate / (1.f + motoai_expf(-gate)) * up);
+         }
+ 
+ #ifndef NDEBUG
+@@ -5889,7 +5899,7 @@
+                 assert(sum > 0.0);
+ 
+                 if (sk) {
+-                    sum += (ggml_float) expf(sk[i02] - max);
++                    sum += (ggml_float) motoai_expf(sk[i02] - max);
+                 }
+ 
+                 sum = 1.0/sum;
+@@ -6181,8 +6191,8 @@
+         // Get n-d magnitude scaling corrected for interpolation
+         mscale *= 1.0f + 0.1f * logf(1.0f / freq_scale);
+     }
+-    *cos_theta = cosf(theta) * mscale;
+-    *sin_theta = sinf(theta) * mscale;
++    *cos_theta = motoai_cosf(theta) * mscale;
++    *sin_theta = motoai_sinf(theta) * mscale;
+ }
+ 
+ static void ggml_rope_cache_init(
+@@ -8663,10 +8673,10 @@
+         float * embed_data = (float *)((char *)  dst->data +  i*nb1);
+         for (int64_t j = ith; j < half; j += nth) {
+             float timestep = ((float *)src0->data)[i];
+-            float freq = (float)expf(-logf(max_period) * j / half);
++            float freq = (float)motoai_expf(-logf(max_period) * j / half);
+             float arg = timestep * freq;
+-            embed_data[j] = cosf(arg);
+-            embed_data[j + half] = sinf(arg);
++            embed_data[j] = motoai_cosf(arg);
++            embed_data[j + half] = motoai_sinf(arg);
+         }
+         if (dim % 2 != 0 && ith == 0) {
+             embed_data[2 * half] = 0.f;
+@@ -8839,6 +8849,7 @@
+         float * partials, int64_t partial_stride) {
+ 
+     const bool write_partials = (partials != nullptr);
++    const bool f32_acc = ggml_prec_get_acc(dst) == GGML_PREC_F32;
+     const ggml_tensor * q     = dst->src[0];
+     const ggml_tensor * k     = dst->src[1];
+     const ggml_tensor * v     = dst->src[2];
+@@ -8914,6 +8925,11 @@
+     GGML_ASSERT((                            q_to_vec_dot) && "fattn: unsupported K-type");
+     GGML_ASSERT((v->type == GGML_TYPE_F32 || v_to_float  ) && "fattn: unsupported V-type");
+ 
++    // A long unsplit tail can accumulate tens of thousands of F32 terms.
++    // Wider local accumulation avoids drift without changing KV/Q storage or
++    // the previously qualified <=8192-key arithmetic. Decode chunks stay native.
++    const bool wide_acc = f32_acc && ic_end - ic_start > 8192;
++    std::vector<double> VKQ64(wide_acc ? DV : 0);
+     int ith = params->ith;
+ 
+     for (int ir = ir0; ir < ir1; ++ir) {
+@@ -8925,6 +8941,8 @@
+         const uint32_t h = iq2; // head index
+         const float slope = (max_bias > 0.0f) ? h < n_head_log2 ? powf(m0, h + 1) : powf(m1, 2*(h - n_head_log2) + 1) : 1.0f;
+ 
++        double S64 = 0.0;
++        if (wide_acc) std::fill(VKQ64.begin(), VKQ64.end(), 0.0);
+         float S = 0.0f;      // sum
+         float M = -INFINITY; // maximum KQ value
+ 
+@@ -8933,7 +8951,7 @@
+         ggml_fp16_t * VKQ16 = (ggml_fp16_t *) (VKQ32 + 1*DV); // (temporary) FP16 VKQ accumulator
+         ggml_fp16_t * Q_q   = (ggml_fp16_t *) (VKQ32 + 2*DV); // (temporary) buffer for Q converted to quantized/FP16
+ 
+-        if (v->type == GGML_TYPE_F16) {
++        if (v->type == GGML_TYPE_F16 && !f32_acc) {
+             memset(VKQ16, 0, DV*sizeof(ggml_fp16_t));
+         } else {
+             memset(VKQ32, 0, DV*sizeof(float));
+@@ -8950,7 +8968,7 @@
+         const int iv2 = iq2 / rv2;
+ 
+         const float * pq = (const float *) ((char *) q->data + (iq1*nbq1 + iq2*nbq2 + iq3*nbq3));
+-        q_to_vec_dot(pq, Q_q, DK);
++        if (!(f32_acc && k->type == GGML_TYPE_F16)) q_to_vec_dot(pq, Q_q, DK);
+ 
+         const int32_t * rows = kv_rows ? (const int32_t *) ((const char *) kv_rows->data + iq3*kv_rows->nb[1]) : nullptr;
+ 
+@@ -8972,7 +8990,14 @@
+             float s; // KQ value
+ 
+             const char * k_data = (const char *) k->data + (ik1*nbk1 + ik2*nbk2 + ik3*nbk3);
+-            kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
++            if (f32_acc && k->type == GGML_TYPE_F16) {
++                // Preserve F32 Q for indexed KV rows as well as contiguous KV.
++                float * K32 = reinterpret_cast<float *>(Q_q);
++                ggml_cpu_fp16_to_fp32(reinterpret_cast<const ggml_fp16_t *>(k_data), K32, DK);
++                ggml_vec_dot_f32(DK, &s, 0, K32, 0, pq, 0, 1);
++            } else {
++                kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
++            }
+ 
+             s = s*scale; // scale KQ value
+ 
+@@ -8985,39 +9010,50 @@
+             const float Mold = M;
+ 
+             float ms = 1.0f; // upon new higher max val, scale VKQ and KQ sum with this value
+-            float vs = 1.0f; // post-softmax KQ value, expf(s - M)
++            float vs = 1.0f; // post-softmax KQ value, motoai_expf(s - M)
+ 
+             const char * v_data = ((const char *) v->data + (ik1*nbv1 + iv2*nbv2 + iv3*nbv3));
+ 
+-            if (v->type == GGML_TYPE_F16) {
++            if (wide_acc) {
+                 if (s > M) {
+-                    // s is new maximum, ms < 1.0f, vs == expf(s - s) == 1.0f
+                     M = s;
+-                    ms = expf(Mold - M);
+-
+-                    // V = V*expf(Mold - M)
++                    ms = motoai_expf(Mold - M);
++                    for (int64_t d = 0; d < DV; ++d) VKQ64[d] *= ms;
++                } else {
++                    vs = motoai_expf(s - M);
++                }
++                const float * values = reinterpret_cast<const float *>(v_data);
++                if (v_to_float) { v_to_float(v_data, V32, DV); values = V32; }
++                for (int64_t d = 0; d < DV; ++d) VKQ64[d] += double(values[d]) * vs;
++            } else if (v->type == GGML_TYPE_F16 && !f32_acc) {
++                if (s > M) {
++                    // s is new maximum, ms < 1.0f, vs == motoai_expf(s - s) == 1.0f
++                    M = s;
++                    ms = motoai_expf(Mold - M);
++
++                    // V = V*motoai_expf(Mold - M)
+                     ggml_vec_scale_f16(DV, VKQ16, ms);
+                 } else {
+                     // no new maximum, ms == 1.0f, vs != 1.0f
+-                    vs = expf(s - M);
+-                }
+-
+-                // V += v*expf(s - M)
++                    vs = motoai_expf(s - M);
++                }
++
++                // V += v*motoai_expf(s - M)
+                 ggml_vec_mad_f16(DV, VKQ16, (const ggml_fp16_t *) v_data, vs);
+             } else {
+                 if (s > M) {
+-                    // s is new maximum, ms < 1.0f, vs == expf(s - s) == 1.0f
++                    // s is new maximum, ms < 1.0f, vs == motoai_expf(s - s) == 1.0f
+                     M = s;
+-                    ms = expf(Mold - M);
+-
+-                    // V = V*expf(Mold - M)
++                    ms = motoai_expf(Mold - M);
++
++                    // V = V*motoai_expf(Mold - M)
+                     ggml_vec_scale_f32(DV, VKQ32, ms);
+                 } else {
+                     // no new maximum, ms == 1.0f, vs != 1.0f
+-                    vs = expf(s - M);
+-                }
+-
+-                // V += v*expf(s - M)
++                    vs = motoai_expf(s - M);
++                }
++
++                // V += v*motoai_expf(s - M)
+                 if (v_to_float) {
+                     v_to_float(v_data, V32, DV);
+                     ggml_vec_mad_f32(DV, VKQ32, V32, vs);
+@@ -9027,10 +9063,15 @@
+                 }
+             }
+ 
+-            S = S*ms + vs; // scale and increment sum with partial sum
+-        }
+-
+-        if (v->type == GGML_TYPE_F16) {
++            if (wide_acc) S64 = S64*ms + vs;
++            else S = S*ms + vs; // scale and increment sum with partial sum
++        }
++
++        if (wide_acc) {
++            S = static_cast<float>(S64);
++            for (int64_t d = 0; d < DV; ++d) VKQ32[d] = static_cast<float>(VKQ64[d]);
++        }
++        if (v->type == GGML_TYPE_F16 && !f32_acc) {
+             for (int64_t d = 0; d < DV; ++d) {
+                 VKQ32[d] = GGML_CPU_FP16_TO_FP32(VKQ16[d]);
+             }
+@@ -9044,11 +9085,11 @@
+             float vs = 1.0f;
+ 
+             if (s > M) {
+-                ms = expf(M - s);
++                ms = motoai_expf(M - s);
+                 M = s;
+                 ggml_vec_scale_f32(DV, VKQ32, ms);
+             } else {
+-                vs = expf(s - M);
++                vs = motoai_expf(s - M);
+             }
+ 
+             S = S*ms + vs;
+@@ -9158,6 +9199,9 @@
+     const ggml_tensor * kv_rows = dst->src[5];
+     const int64_t n_kv_cols = kv_rows ? kv_rows->ne[0] : nek1;
+ 
++    const bool wide_acc = ggml_prec_get_acc(dst) == GGML_PREC_F32 && nek1 > 8192;
++    std::vector<double> VKQ64(wide_acc ? Q_TILE_SZ * DV : 0);
++    double S64[Q_TILE_SZ] = {};
+     int ir = ir0;
+     while (ir < ir1) {
+         // q indices for the start of this tile
+@@ -9181,6 +9225,10 @@
+ 
+         float S[Q_TILE_SZ];
+         float M[Q_TILE_SZ];
++        if (wide_acc) {
++            std::fill(VKQ64.begin(), VKQ64.end(), 0.0);
++            std::fill(S64, S64 + Q_TILE_SZ, 0.0);
++        }
+ 
+         for (int i = 0 ; i < Q_TILE_SZ; ++i) {
+             S[i] = 0.;
+@@ -9308,14 +9356,21 @@
+                 const float Mnew = fmaxf(Mold, tile_max);
+ 
+                 if (Mnew > Mold) {
+-                    const float ms = expf(Mold - Mnew);
+-                    ggml_vec_scale_f32(DV, VKQ32 + tq * DV, ms);
+-                    S[tq] *= ms;
++                    const float ms = motoai_expf(Mold - Mnew);
++                    if (wide_acc) {
++                        for (int64_t d = 0; d < DV; ++d) VKQ64[tq * DV + d] *= ms;
++                        S64[tq] *= ms;
++                    } else {
++                        ggml_vec_scale_f32(DV, VKQ32 + tq * DV, ms);
++                        S[tq] *= ms;
++                    }
+                 }
+                 M[tq] = Mnew;
+ 
+ 
+-                S[tq] += ggml_vec_soft_max_f32(KV_TILE_SZ, kq_row, kq_row, Mnew);
++                const auto tile_sum = ggml_vec_soft_max_f32(KV_TILE_SZ, kq_row, kq_row, Mnew);
++                if (wide_acc) S64[tq] += tile_sum;
++                else S[tq] += tile_sum;
+             }
+ 
+             // V accumulation: VKQ32 += softmax(KQ) * V
+@@ -9333,7 +9388,15 @@
+                     memset(KQ + tq * KV_TILE_SZ, 0, KV_TILE_SZ * sizeof(float));
+                 }
+             }
++            // Retain SIMD F32 products within each small tile, then combine
++            // tile results in F64 for long contexts instead of one long F32 sum.
++            if (wide_acc) memset(VKQ32, 0, Q_TILE_SZ * DV * sizeof(float));
+             simd_gemm(VKQ32, KQ, V32, Q_TILE_SZ, KV_TILE_SZ, DV);
++            if (wide_acc) for (int64_t i = 0; i < Q_TILE_SZ * DV; ++i) VKQ64[i] += VKQ32[i];
++        }
++        if (wide_acc) {
++            for (int tq = 0; tq < tile_rows; ++tq) S[tq] = static_cast<float>(S64[tq]);
++            for (int64_t i = 0; i < Q_TILE_SZ * DV; ++i) VKQ32[i] = static_cast<float>(VKQ64[i]);
+         }
+ 
+         // sinks (apply only to valid rows in the tile)
+@@ -9345,10 +9408,10 @@
+                 float vs = 1.0f;
+ 
+                 if (s > M[tq]) {
+-                    ms = expf(M[tq] - s);
++                    ms = motoai_expf(M[tq] - s);
+                     ggml_vec_scale_f32(DV, VKQ32 + tq * DV, ms);
+                 } else {
+-                    vs = expf(s - M[tq]);
++                    vs = motoai_expf(s - M[tq]);
+                 }
+ 
+                 S[tq] = S[tq] * ms + vs;
+@@ -9425,8 +9488,8 @@
+             if (S_chunk == 0.0f) continue;
+ 
+             const float M_new     = fmaxf(M_final, M_chunk);
+-            const float scale_old = expf(M_final - M_new);
+-            const float scale_new = expf(M_chunk - M_new);
++            const float scale_old = motoai_expf(M_final - M_new);
++            const float scale_new = motoai_expf(M_chunk - M_new);
+ 
+             for (int64_t d = 0; d < DV; ++d) {
+                 VKQ_final[d] = VKQ_final[d] * scale_old + VKQ_chunk[d] * scale_new;
+@@ -9501,34 +9564,32 @@
+     const bool use_split_kv_path = !use_ref && !kv_rows && (neq1 == 1 && neq3 == 1) && kv_is_f32_or_f16 && (k->type == v->type) && q->type == GGML_TYPE_F32 && nek1 >= 512;
+ 
+     if (use_split_kv_path) {
+-        const int64_t chunk_size = (nek1 + nth - 1) / nth;
+-
+-        // Partials buffer layout: [q_head][kv_chunk][M, S, VKQ]
+-        const int64_t partial_size  = 2 + DV;
+-        float *       partials_base = (float *) params->wdata + nth * (DK + 2*DV + CACHE_LINE_SIZE_F32);
+-
+-        const int64_t ic_start = ith * chunk_size;
+-        const int64_t ic_end   = std::min(ic_start + chunk_size, nek1);
+-
+-        const int64_t partial_stride = nth * partial_size;
+-        float *       chunk_partials = partials_base + ith * partial_size;
+-
+-        if (ic_start < nek1) {
+-            for (int64_t q_head = 0; q_head < neq2; q_head++) {
++        // Worker count is a scheduling choice, not a change to F32 arithmetic.
++        // Keep the accepted4-worker KV partitions and ascending reduction order;
++        // distribute independent (query head, KV chunk) jobs across all workers.
++        const int64_t n_chunks = ggml_prec_get_acc(dst) == GGML_PREC_F32 ? GGML_MOTOAI_F32_KV_CHUNKS : nth;
++        const int64_t chunk_size = (nek1 + n_chunks - 1) / n_chunks;
++        const int64_t partial_size = 2 + DV;
++        float * partials_base = (float *) params->wdata + nth * (DK + 2*DV + CACHE_LINE_SIZE_F32);
++        const int64_t partial_stride = n_chunks * partial_size;
++
++        for (int64_t job = ith; job < neq2 * n_chunks; job += nth) {
++            const int64_t q_head = job / n_chunks;
++            const int64_t chunk = job % n_chunks;
++            const int64_t ic_start = chunk * chunk_size;
++            const int64_t ic_end = std::min(ic_start + chunk_size, nek1);
++            float * partial = partials_base + job * partial_size;
++            if (ic_start < nek1) {
+                 ggml_compute_forward_flash_attn_ext_f16_one_chunk(
+                     params, dst, q_head, q_head + 1, ic_start, ic_end,
+-                    chunk_partials, partial_stride);
+-            }
+-        } else {
+-            for (int64_t q_head = 0; q_head < neq2; q_head++) {
+-                float * q_partials = chunk_partials + q_head * partial_stride;
+-                q_partials[0] = -INFINITY;  // M
+-                q_partials[1] = 0.0f;       // S
+-            }
+-        }
+-
++                    partials_base + chunk * partial_size, partial_stride);
++            } else {
++                partial[0] = -INFINITY;
++                partial[1] = 0.0f;
++            }
++        }
+         ggml_barrier(params->threadpool);
+-        ggml_flash_attn_ext_reduce_partials(params, dst, nth, chunk_size);
++        ggml_flash_attn_ext_reduce_partials(params, dst, n_chunks, chunk_size);
+     } else {
+ 
+         // total rows in q
+@@ -9985,7 +10046,7 @@
+ 
+                 // d_conv
+                 for (int i0 = 0; i0 < nc; ++i0) {
+-                    sumf += s[i0 + i1*ncs] * c[i0 + i1*nc];
++                    sumf = fmaf(s[i0 + i1*ncs], c[i0 + i1*nc], sumf);
+                 }
+                 x[i1] = sumf;
+             }
+@@ -10075,7 +10136,7 @@
+                 for (int h = ih0; h < ih1; ++h) {
+                     // ref: https://github.com/state-spaces/mamba/blob/62db608da60f6fc790b8ed9f4b3225e95ca15fde/mamba_ssm/ops/triton/softplus.py#L16
+                     const float dt_soft_plus = ggml_compute_softplus_f32(dt[h]);
+-                    const float dA = expf(dt_soft_plus * A[h]);
++                    const float dA = motoai_expf(dt_soft_plus * A[h]);
+                     const int g = h / (nh / ng); // repeat_interleave
+ 
+                     // dim
+@@ -10210,7 +10271,7 @@
+                             const int i = i0 + ii*nc;
+                             const int ig = i0 + g*nc;
+                             // state = prev_state * dA + dB * x
+-                            const float state = (s0[i] * expf(dt_soft_plus * A[i0 + h*nc])) + (B[ig] * x_dt);
++                            const float state = (s0[i] * motoai_expf(dt_soft_plus * A[i0 + h*nc])) + (B[ig] * x_dt);
+                             // y = rowwise_dotprod(state, C)
+                             sumf += state * C[ig];
+                             s[i] = state;
+@@ -11242,14 +11303,14 @@
+             if (kda) {
+                 // precompute exp(g) into delta scratch (reused below)
+                 for (int64_t i = 0; i < S_v; ++i) {
+-                    delta[i] = expf(g_d[i]);
++                    delta[i] = motoai_expf(g_d[i]);
+                 }
+                 // S[i][:] *= exp(g[i]) => for each row j of M: M[j][i] *= exp(g[i])
+                 for (int64_t j = 0; j < S_v; ++j) {
+                     ggml_vec_mul_f32(S_v, &s_out[j * S_v], &s_out[j * S_v], delta);
+                 }
+             } else {
+-                ggml_vec_scale_f32(S_v * S_v, s_out, expf(g_d[0]));
++                ggml_vec_scale_f32(S_v * S_v, s_out, motoai_expf(g_d[0]));
+             }
+ 
+             // delta[j] = sum_i S[i][j] * k[i] = dot(row j of M, k)
+@@ -11439,7 +11500,7 @@
+             float sum = 0.0f;
+             for (int64_t idst = 0; idst < hc; ++idst) {
+                 const int64_t idx = idst + hc*isrc;
+-                const float v = expf(comb[idx] - max);
++                const float v = motoai_expf(comb[idx] - max);
+                 comb[idx] = v;
+                 sum += v;
+             }
+@@ -11535,7 +11596,7 @@
+             float wv;
+             if (gated) {
+                 const float gv = *(const float *) ((const char *) weights->data + i0*nbw0 + ih*nbw1 + it*nbw2);
+-                wv = 1.0f / (1.0f + expf(-gv));
++                wv = 1.0f / (1.0f + motoai_expf(-gv));
+             } else {
+                 wv = *(const float *) ((const char *) weights->data + ih*nbw0 + it*nbw1);
+             }
+--- a/ggml/src/ggml-cpu/repack.cpp
++++ b/ggml/src/ggml-cpu/repack.cpp
+@@ -5191,7 +5191,79 @@
+     GGML_UNUSED(buft);
+ }
+ 
++// One shared CPU graph workspace, never a persistent model-weight allocation.
++// Last op-parameter word is private to this experimental CPU MUL_MAT path;
++// precision remains in word0. No global switch or mutation of source metadata.
++static constexpr uint32_t transient_repack_tag = 0x4d545250;
++static bool transient_repack_marked(const ggml_tensor * op) {
++    uint32_t tag = 0;
++    memcpy(&tag, (const char *) op->op_params + GGML_MAX_OP_PARAMS - sizeof(tag), sizeof(tag));
++    return op->op == GGML_OP_MUL_MAT && tag == transient_repack_tag;
++}
++static bool transient_repack_eligible(const ggml_tensor * op) {
++    if (op->op != GGML_OP_MUL_MAT || !ggml_cpu_has_neon() || !ggml_cpu_has_matmul_int8()) return false;
++    const auto * w = op->src[0];
++    const auto * x = op->src[1];
++    if (!w || !x || (w->type != GGML_TYPE_Q4_K && w->type != GGML_TYPE_Q6_K) ||
++        ggml_n_dims(w) != 2 || ggml_n_dims(x) != 2 || !ggml_is_contiguous(w) ||
++        !ggml_is_contiguous(x) || x->type != GGML_TYPE_F32 || op->type != GGML_TYPE_F32 ||
++        w->ne[0] != x->ne[0] || w->ne[0] > 16384 || w->ne[1] > 16384 ||
++        w->ne[0] % QK_K || w->ne[1] % 8 || x->ne[1] < 4 || x->ne[1] > 512 ||
++        ggml_nbytes(w) > 64*1024*1024 || !ggml_repack_get_optimal_repack_type(w)) return false;
++    for (const auto * t : {w, x}) {
++        if (t->buffer && !ggml_backend_buft_is_host(t->buffer->buft)) return false;
++    }
++    const size_t size = GGML_PAD(ggml_nbytes(w), 64) + ggml_row_size(GGML_TYPE_Q8_K, ggml_nelements(x));
++    return size <= 80*1024*1024;
++}
++bool ggml_backend_cpu_mark_transient_repack(ggml_tensor * op) {
++    if (!transient_repack_eligible(op)) return false;
++    memcpy((char *) op->op_params + GGML_MAX_OP_PARAMS - sizeof(transient_repack_tag),
++           &transient_repack_tag, sizeof(transient_repack_tag));
++    return true;
++}
++size_t ggml_backend_cpu_transient_repack_size(const ggml_tensor * op) {
++    if (!transient_repack_marked(op)) return 0;
++    GGML_ASSERT(transient_repack_eligible(op));
++    return GGML_PAD(ggml_nbytes(op->src[0]), 64) + ggml_row_size(GGML_TYPE_Q8_K, ggml_nelements(op->src[1]));
++}
+ namespace ggml::cpu::repack {
++class transient_tensor_traits : public ggml::cpu::tensor_traits {
++    bool work_size(int, const ggml_tensor * op, size_t & size) override {
++        size = ggml_backend_cpu_transient_repack_size(op);
++        return true;
++    }
++    bool compute_forward(ggml_compute_params * params, ggml_tensor * op) override {
++        const auto * original = op->src[0];
++        const size_t offset = GGML_PAD(ggml_nbytes(original), 64);
++        GGML_ASSERT(params->wsize >= ggml_backend_cpu_transient_repack_size(op));
++        auto * traits = (tensor_traits_base *) ggml_repack_get_optimal_repack_type(original);
++        GGML_ASSERT(traits);
++        // Partition complete eight-row groups: disjoint writes and unchanged
++        // original scales/quants. Only stack-local tensor metadata is modified.
++        const int64_t groups = original->ne[1] / 8;
++        const int64_t first = groups * params->ith / params->nth * 8;
++        const int64_t end = groups * (params->ith + 1) / params->nth * 8;
++        if (end > first) {
++            ggml_tensor slice = *original;
++            slice.ne[1] = end - first;
++            slice.nb[2] = slice.nb[1] * slice.ne[1];
++            slice.nb[3] = slice.nb[2];
++            slice.data = (char *) params->wdata + first * original->nb[1];
++            GGML_ASSERT(traits->repack(&slice, (const char *) original->data + first * original->nb[1], ggml_nbytes(&slice)) == 0);
++        }
++        ggml_barrier(params->threadpool);
++        ggml_tensor packed = *original;
++        packed.data = params->wdata;
++        ggml_tensor local_op = *op;
++        local_op.src[0] = &packed;
++        ggml_compute_params local_params = *params;
++        local_params.wdata = (char *) params->wdata + offset;
++        local_params.wsize -= offset;
++        GGML_ASSERT(traits->compute_forward(&local_params, &local_op));
++        return true;
++    }
++};
+ class extra_buffer_type : ggml::cpu::extra_buffer_type {
+     bool supports_op(ggml_backend_dev_t, const struct ggml_tensor * op) override {
+         if (    op->op == GGML_OP_MUL_MAT &&
+@@ -5230,6 +5302,11 @@
+     }
+ 
+     ggml::cpu::tensor_traits * get_tensor_traits(const struct ggml_tensor * op) override {
++        if (transient_repack_marked(op)) {
++            GGML_ASSERT(transient_repack_eligible(op));
++            static transient_tensor_traits transient;
++            return &transient;
++        }
+         if (op->op == GGML_OP_MUL_MAT || op->op == GGML_OP_MUL_MAT_ID) {
+             if (op->src[0]->buffer && op->src[0]->buffer->buft == ggml_backend_cpu_repack_buffer_type()) {
+                 return (ggml::cpu::tensor_traits *) op->src[0]->extra;
+--- a/ggml/src/ggml-cpu/repack.h
++++ b/ggml/src/ggml-cpu/repack.h
+@@ -9,6 +9,11 @@
+ // GGML internal header
+ 
+ ggml_backend_buffer_type_t ggml_backend_cpu_repack_buffer_type(void);
++
++// Experimental explicit per-op opt-in. Default graph and model buffers stay native.
++bool ggml_backend_cpu_mark_transient_repack(struct ggml_tensor * op);
++size_t ggml_backend_cpu_transient_repack_size(const struct ggml_tensor * op);
++
+ 
+ template <int K> constexpr int QK_0() {
+     if constexpr (K == 1) {
+--- a/ggml/src/ggml-cpu/unary-ops.cpp
++++ b/ggml/src/ggml-cpu/unary-ops.cpp
+@@ -1,4 +1,12 @@
+ #include "unary-ops.h"
++
++// Experimental scalar libm control for hybrid-model gates.
++#include <math.h>
++static inline float motoai_expf(float x) { return (float) exp((double) x); }
++static inline float motoai_sinf(float x) { return (float) sin((double) x); }
++static inline float motoai_cosf(float x) { return (float) cos((double) x); }
++static inline float motoai_logf(float x) { return (float) log((double) x); }
++static inline float motoai_log1pf(float x) { return (float) log1p((double) x); }
+ 
+ static inline float op_abs(float x) {
+     return fabsf(x);
+@@ -29,7 +37,7 @@
+ }
+ 
+ static inline float op_sigmoid(float x) {
+-    return 1.f / (1.f + expf(-x));
++    return 1.f / (1.f + motoai_expf(-x));
+ }
+ 
+ static inline float op_hardsigmoid(float x) {
+@@ -37,7 +45,7 @@
+ }
+ 
+ static inline float op_exp(float x) {
+-    return expf(x);
++    return motoai_expf(x);
+ }
+ 
+ static inline float op_hardswish(float x) {
+@@ -62,23 +70,23 @@
+ }
+ 
+ static inline float op_sin(float x) {
+-    return sinf(x);
++    return motoai_sinf(x);
+ }
+ 
+ static inline float op_cos(float x) {
+-    return cosf(x);
++    return motoai_cosf(x);
+ }
+ 
+ static inline float op_log(float x) {
+-    return logf(x);
++    return motoai_logf(x);
+ }
+ 
+ static inline float op_expm1(float x) {
+-    return expf(x) - 1.0f;
++    return motoai_expf(x) - 1.0f;
+ }
+ 
+ static inline float op_softplus(float x) {
+-    return (x > 20.0f) ? x : log1pf(expf(x));
++    return (x > 20.0f) ? x : motoai_log1pf(motoai_expf(x));
+ }
+ 
+ static inline float op_floor(float x) {
+--- a/ggml/src/ggml-cpu/vec.h
++++ b/ggml/src/ggml-cpu/vec.h
+@@ -6,6 +6,15 @@
+ #include "simd-mappings.h"
+ #include "ggml.h"
+ #include "ggml-cpu.h"
++
++#ifndef MOTOAI_SCALAR_MATH_HELPERS
++#define MOTOAI_SCALAR_MATH_HELPERS
++// Experimental reproducible scalar math; SIMD approximations unchanged.
++#include <math.h>
++static inline float motoai_expf(float x) { return (float) exp((double) x); }
++static inline float motoai_sinf(float x) { return (float) sin((double) x); }
++static inline float motoai_cosf(float x) { return (float) cos((double) x); }
++#endif
+ 
+ #if defined(GGML_USE_ACCELERATE)
+ #include <Accelerate/Accelerate.h>
+@@ -874,16 +883,16 @@
+         y[i] = GGML_CPU_FP32_TO_FP16(logf(GGML_CPU_FP16_TO_FP32(x[i])));
+     }
+ }
+-inline static void ggml_vec_sin_f32  (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = sinf(x[i]);  }
++inline static void ggml_vec_sin_f32  (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = motoai_sinf(x[i]);  }
+ inline static void ggml_vec_sin_f16 (const int n, ggml_fp16_t * y, const ggml_fp16_t * x) {
+     for (int i = 0; i < n; ++i) {
+-        y[i] = GGML_CPU_FP32_TO_FP16(sinf(GGML_CPU_FP16_TO_FP32(x[i])));
+-    }
+-}
+-inline static void ggml_vec_cos_f32  (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = cosf(x[i]);  }
++        y[i] = GGML_CPU_FP32_TO_FP16(motoai_sinf(GGML_CPU_FP16_TO_FP32(x[i])));
++    }
++}
++inline static void ggml_vec_cos_f32  (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = motoai_cosf(x[i]);  }
+ inline static void ggml_vec_cos_f16 (const int n, ggml_fp16_t * y, const ggml_fp16_t * x) {
+     for (int i = 0; i < n; ++i) {
+-        y[i] = GGML_CPU_FP32_TO_FP16(cosf(GGML_CPU_FP16_TO_FP32(x[i])));
++        y[i] = GGML_CPU_FP32_TO_FP16(motoai_cosf(GGML_CPU_FP16_TO_FP32(x[i])));
+     }
+ }
+ inline static void ggml_vec_abs_f32  (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = fabsf(x[i]); }
+@@ -932,10 +941,10 @@
+         y[i] = GGML_CPU_FP32_TO_FP16(((v > 0.f) ? v : 0.f) + ns * ((v < 0.0f) ? v : 0.f));
+     }
+ }
+-inline static void ggml_vec_sigmoid_f32 (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = 1.f / (1.f + expf(-x[i])); }
++inline static void ggml_vec_sigmoid_f32 (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = 1.f / (1.f + motoai_expf(-x[i])); }
+ inline static void ggml_vec_sigmoid_f16 (const int n, ggml_fp16_t * y, const ggml_fp16_t * x) {
+     for (int i = 0; i < n; ++i) {
+-        y[i] = GGML_CPU_FP32_TO_FP16(1.f / (1.f + expf(-GGML_CPU_FP16_TO_FP32(x[i]))));
++        y[i] = GGML_CPU_FP32_TO_FP16(1.f / (1.f + motoai_expf(-GGML_CPU_FP16_TO_FP32(x[i]))));
+     }
+ }
+ // TODO: optimize performance
+@@ -952,10 +961,10 @@
+         y[i] = GGML_CPU_FP32_TO_FP16(fminf(1.0f, fmaxf(0.0f, (GGML_CPU_FP16_TO_FP32(x[i]) + 3.0f) / 6.0f)));
+     }
+ }
+-inline static void ggml_vec_exp_f32 (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = expf(x[i]); }
++inline static void ggml_vec_exp_f32 (const int n, float * y, const float * x) { for (int i = 0; i < n; ++i) y[i] = motoai_expf(x[i]); }
+ inline static void ggml_vec_exp_f16 (const int n, ggml_fp16_t * y, const ggml_fp16_t * x) {
+     for (int i = 0; i < n; ++i) {
+-        y[i] = GGML_CPU_FP32_TO_FP16(expf(GGML_CPU_FP16_TO_FP32(x[i])));
++        y[i] = GGML_CPU_FP32_TO_FP16(motoai_expf(GGML_CPU_FP16_TO_FP32(x[i])));
+     }
+ }
+ 
+@@ -1027,7 +1036,7 @@
+ }
+ 
+ inline static float ggml_gelu_quick_f32(float x) {
+-    return x*(1.0f/(1.0f+expf(GELU_QUICK_COEF*x)));
++    return x*(1.0f/(1.0f+motoai_expf(GELU_QUICK_COEF*x)));
+ }
+ 
+ inline static void ggml_vec_gelu_quick_f16(const int n, ggml_fp16_t * y, const ggml_fp16_t * x) {
+@@ -1058,11 +1067,11 @@
+ 
+ // Sigmoid Linear Unit (SiLU) function
+ inline static float ggml_silu_f32(float x) {
+-    return x/(1.0f + expf(-x));
++    return x/(1.0f + motoai_expf(-x));
+ }
+ inline static ggml_fp16_t ggml_silu_f16(ggml_fp16_t x) {
+     float v = GGML_CPU_FP16_TO_FP32(x);
+-    return GGML_CPU_FP32_TO_FP16(v/(1.0f + expf(-v)));
++    return GGML_CPU_FP32_TO_FP16(v/(1.0f + motoai_expf(-v)));
+ }
+ 
+ #if __FINITE_MATH_ONLY__
+@@ -1484,13 +1493,13 @@
+ }
+ 
+ inline static float ggml_silu_backward_f32(float x, float dy) {
+-    const float s = 1.0f/(1.0f + expf(-x));
++    const float s = 1.0f/(1.0f + motoai_expf(-x));
+     return dy*s*(1.0f + x*(1.0f - s));
+ }
+ 
+ inline static ggml_fp16_t ggml_silu_backward_f16(ggml_fp16_t x, ggml_fp16_t dy) {
+     const float v = GGML_CPU_FP16_TO_FP32(x);
+-    const float s = 1.0f/(1.0f + expf(-v));
++    const float s = 1.0f/(1.0f + motoai_expf(-v));
+     return GGML_CPU_FP32_TO_FP16(GGML_CPU_FP16_TO_FP32(dy)*s*(1.0f + v*(1.0f - s)));
+ }
+ 
+@@ -1569,7 +1578,7 @@
+     for (int i = 0; i < n; ++i) {
+         float xi = GGML_CPU_FP16_TO_FP32(x[i]);
+         float gi = GGML_CPU_FP16_TO_FP32(g[i]);
+-        y[i] = GGML_CPU_FP32_TO_FP16((xi/(1.0f + expf(-xi))) * gi);
++        y[i] = GGML_CPU_FP32_TO_FP16((xi/(1.0f + motoai_expf(-xi))) * gi);
+     }
+ }
+ 
+@@ -1577,7 +1586,7 @@
+     for (int i = 0; i < n; ++i) {
+         float xi = GGML_BF16_TO_FP32(x[i]);
+         float gi = GGML_BF16_TO_FP32(g[i]);
+-        y[i] = GGML_FP32_TO_BF16((xi/(1.0f + expf(-xi))) * gi);
++        y[i] = GGML_FP32_TO_BF16((xi/(1.0f + motoai_expf(-xi))) * gi);
+     }
+ }
+ 
+--- a/include/llama.h
++++ b/include/llama.h
+@@ -1,5 +1,8 @@
+ #ifndef LLAMA_H
+ #define LLAMA_H
++
++#define LLAMA_MOTOAI_REPACK_FILTER 1
++#define LLAMA_MOTOAI_MMAP_PREFAULT_CONTROL 1
+ 
+ #include "ggml.h"
+ #include "ggml-cpu.h"
+@@ -348,10 +351,14 @@
+         // override key-value pairs of the model meta data
+         const struct llama_model_kv_override * kv_overrides;
+ 
++        // Experimental lossless CPU_REPACK type allowlist; zero permits all types.
++        uint64_t cpu_repack_type_mask;
++
+         // Keep the booleans together to avoid misalignment during copy-by-value.
+         bool vocab_only;      // only load the vocabulary, no weights
+         bool check_tensors;   // validate model tensor data
+         bool use_extra_bufts; // use extra buffer types (used for weight repacking)
++        bool mmap_prefault;   // prefetch/populate source mappings; false leaves demand paging
+         bool no_host;         // bypass host buffer allowing extra buffers to be used
+         bool no_alloc;        // only load metadata and simulate memory allocations
+         bool load_mtp;        // whether to load MTP layers
+@@ -410,6 +417,7 @@
+         bool offload_kqv; // offload the KQV ops (including the KV cache) to GPU
+         bool no_perf;     // measure performance timings
+         bool op_offload;  // offload host tensor operations to device
++        bool cpu_transient_repack; // Explicit CPU/I8MM bounded prefill experiment; default false
+         bool swa_full;    // use full-size SWA cache (https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+                           // NOTE: setting to false when n_seq_max > 1 can cause bad performance in some cases
+                           //       ref: https://github.com/ggml-org/llama.cpp/pull/13845#issuecomment-2924800573
+@@ -481,6 +489,14 @@
+     // Helpers for getting default parameters
+     // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+     LLAMA_API struct llama_model_params          llama_model_default_params(void);
++    #define LLAMA_MOTOAI_TRANSIENT_REPACK 1
++    #define LLAMA_MOTOAI_TRANSIENT_MIN_ROWS 24
++    struct llama_motoai_transient_stats {
++        uint64_t graph_nodes_marked; // includes reservation/rebuilt graphs, not executed-node count
++        uint64_t maximum_requested_bytes;
++        uint64_t allocated_cpu_workspace_bytes;
++    };
++    LLAMA_API struct llama_motoai_transient_stats llama_motoai_get_transient_stats(const struct llama_context * ctx);
+     LLAMA_API struct llama_context_params        llama_context_default_params(void);
+     LLAMA_API struct llama_sampler_chain_params  llama_sampler_chain_default_params(void);
+     LLAMA_API struct llama_model_quantize_params llama_model_quantize_default_params(void);
+@@ -931,6 +947,11 @@
+ // Keeps the tensor data on device buffers (i.e. not accessible in host memory, but faster save/load).
+ // Getting the state for a seq_id with this flag invalidates all prior states gotten for that seq_id with this flag.
+ #define LLAMA_STATE_SEQ_FLAGS_ON_DEVICE 2
++
++// Experimental exact physical KV slots/head for one CPU sequence. RAM snapshots
++// must use the same flag on get/set; incompatible with PARTIAL_ONLY/ON_DEVICE.
++#define LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT 4
++#define LLAMA_MOTOAI_KEEP_KV_LAYOUT 1
+ 
+     typedef uint32_t llama_state_seq_flags;
+ 
+@@ -1276,6 +1297,16 @@
+     /// @param add_special Allow to add BOS and EOS tokens if model is configured to do so.
+     /// @param parse_special Allow tokenizing special and/or control tokens which otherwise are not exposed and treated
+     ///                      as plaintext. Does not insert a leading space.
++    // Byte ranges originating in chat message contents. Control/unknown token
++    // spellings overlapping these ranges remain ordinary text. Regular text is
++    // tokenized as one span between trusted specials, preserving BPE boundaries.
++    struct llama_tokenize_input_range { uint32_t offset; uint32_t length; };
++#define LLAMA_MOTOAI_INPUT_RANGES 1
++    LLAMA_API int32_t llama_tokenize_with_input_ranges(
++        const struct llama_vocab * vocab, const char * text, int32_t text_len,
++        llama_token * tokens, int32_t n_tokens_max, bool add_special,
++        const struct llama_tokenize_input_range * ranges, int32_t n_ranges);
++
+     LLAMA_API int32_t llama_tokenize(
+         const struct llama_vocab * vocab,
+                       const char * text,
+--- a/src/llama-context.cpp
++++ b/src/llama-context.cpp
+@@ -390,6 +390,7 @@
+     }
+ 
+     cparams.op_offload     = params.op_offload;
++    cparams.cpu_transient_repack = params.cpu_transient_repack;
+     cparams.kv_unified     = params.kv_unified;
+     cparams.moe_cache_size = params.moe_cache_size;
+ 
+@@ -747,6 +748,41 @@
+         resolve(llm_fused_op_top_k_mask_probe, cparams.fused_top_k_mask);
+         cparams.auto_ftkm = false;
+     }
++}
++
++ggml_cgraph * llama_context::build_graph_with_cpu_workspace(const llm_graph_params & params) {
++    auto * gf = model.build_graph(params);
++    if (!gf || !cparams.cpu_transient_repack) return gf;
++    auto reg = ggml_backend_dev_backend_reg(ggml_backend_get_device(backend_cpu));
++    using mark_fn = bool (*)(ggml_tensor *);
++    using size_fn = size_t (*)(const ggml_tensor *);
++    auto mark = (mark_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_mark_transient_repack");
++    auto size = (size_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_transient_repack_size");
++    if (!mark || !size) throw std::runtime_error("Explicit transient repack API unavailable");
++    for (int i = 0; i < ggml_graph_n_nodes(gf); ++i) {
++        auto * node = ggml_graph_node(gf, i);
++        // Large matrices at4/8 rows lose more to packing than they gain from
++        // GEMM. The pinned phone curve has a stable margin at24 rows for both
++        // Q4_K and Q6_K. Keep short requests on their original native path.
++        if (node->op == GGML_OP_MUL_MAT && node->src[1] &&
++            node->src[1]->ne[1] < LLAMA_MOTOAI_TRANSIENT_MIN_ROWS) continue;
++        if (mark(node)) {
++            ++transient_graph_nodes_marked;
++            transient_maximum_requested_bytes = std::max<uint64_t>(transient_maximum_requested_bytes, size(node));
++        }
++    }
++    return gf;
++}
++
++llama_motoai_transient_stats llama_context::get_transient_stats() const {
++    using size_fn = size_t (*)(ggml_backend_t);
++    auto reg = ggml_backend_dev_backend_reg(ggml_backend_get_device(backend_cpu));
++    auto size = (size_fn) ggml_backend_reg_get_proc_address(reg, "ggml_backend_cpu_workspace_size");
++    return {transient_graph_nodes_marked, transient_maximum_requested_bytes, size ? size(backend_cpu) : 0};
++}
++
++llama_motoai_transient_stats llama_motoai_get_transient_stats(const llama_context * ctx) {
++    return ctx->get_transient_stats();
+ }
+ 
+ static int llama_graph_n_input_tensors(ggml_cgraph * gf) {
+@@ -1708,7 +1744,7 @@
+ 
+         //const auto t_start_us = ggml_time_us();
+ 
+-        gf = model.build_graph(gparams);
++        gf = build_graph_with_cpu_workspace(gparams);
+ 
+         //LLAMA_LOG_INFO("graph build time: %.3f ms\n", (ggml_time_us() - t_start_us)/1000.0);
+ 
+@@ -2876,7 +2912,7 @@
+ 
+     res->reset();
+ 
+-    auto * gf = model.build_graph(gparams);
++    auto * gf = build_graph_with_cpu_workspace(gparams);
+ 
+     // check the graph before scheduling: cross-backend copies break the producer chain that the check follows
+     if (!hadamard_verified && gf && (!model.hdmd.rot.empty() || !model.hdmd.inv.empty())) {
+@@ -3666,11 +3702,18 @@
+ }
+ 
+ static constexpr uint32_t io_magic = 0xaf143cd8;
++// Exact-layout snapshots are intentionally incompatible with compact states.
++// Reject a flag mismatch before any cache metadata/data is interpreted.
++static constexpr uint32_t io_magic_keep_layout = 0xaf143cd9;
+ 
+ size_t llama_context::state_seq_get_size(llama_seq_id seq_id, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     llama_io_write_dummy io(flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE);
+     try {
+-        io.write(&io_magic, sizeof(io_magic));
++        io.write(&expected_magic, sizeof(expected_magic));
+         io.write(&seq_id, sizeof(seq_id));
+ 
+         return state_seq_write_data(io, seq_id, flags);
+@@ -3681,6 +3724,10 @@
+ }
+ 
+ size_t llama_context::state_seq_get_data(llama_seq_id seq_id, uint8_t * dst, size_t size, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     std::unique_ptr<llama_io_write_i> io;
+     if (flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE) {
+         io = std::make_unique<llama_io_write_device>(dst, size, mem_storage[seq_id]);
+@@ -3689,7 +3736,7 @@
+     }
+ 
+     try {
+-        io->write(&io_magic, sizeof(io_magic));
++        io->write(&expected_magic, sizeof(expected_magic));
+         io->write(&seq_id, sizeof(seq_id));
+ 
+         return state_seq_write_data(*io, seq_id, flags);
+@@ -3700,6 +3747,10 @@
+ }
+ 
+ size_t llama_context::state_seq_set_data(llama_seq_id seq_id, const uint8_t * src, size_t size, llama_state_seq_flags flags) {
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) return 0;
++    const uint32_t expected_magic = keep_layout ? io_magic_keep_layout : io_magic;
++
+     std::unique_ptr<llama_io_read_i> io;
+     if (flags & LLAMA_STATE_SEQ_FLAGS_ON_DEVICE) {
+         // create a temporary io to read the magic and the src seq_id
+@@ -3707,7 +3758,7 @@
+ 
+         uint32_t magic_read;
+         io->read(&magic_read, sizeof(magic_read));
+-        if (io_magic != magic_read) {
++        if (expected_magic != magic_read) {
+             throw std::runtime_error("wrong sequence state magic");
+         }
+ 
+@@ -3724,7 +3775,7 @@
+     try {
+         uint32_t magic_read;
+         io->read(&magic_read, sizeof(magic_read));
+-        if (io_magic != magic_read) {
++        if (expected_magic != magic_read) {
+             throw std::runtime_error("wrong sequence state magic");
+         }
+ 
+@@ -4149,7 +4200,7 @@
+             gf_res_prev_active = nullptr;
+             res->reset();
+ 
+-            auto * gf = model.build_graph(gparams);
++            auto * gf = build_graph_with_cpu_workspace(gparams);
+ 
+             struct ggml_context * ctx_compute_opt;
+             {
+@@ -4276,6 +4327,7 @@
+         /*.offload_kqv                 =*/ true,
+         /*.no_perf                     =*/ true,
+         /*.op_offload                  =*/ true,
++        /*.cpu_transient_repack         =*/ false,
+         /*.swa_full                    =*/ true,
+         /*.kv_unified                  =*/ false,
+         /*.sampler                     =*/ nullptr,
+--- a/src/llama-context.h
++++ b/src/llama-context.h
+@@ -62,6 +62,7 @@
+ 
+     const llama_model   & get_model()   const;
+     const llama_cparams & get_cparams() const;
++    llama_motoai_transient_stats get_transient_stats() const;
+ 
+     ggml_backend_sched_t get_sched() const;
+ 
+@@ -268,6 +269,10 @@
+     ggml_status graph_compute(ggml_cgraph * gf, bool batched);
+ 
+     // reserve a graph with a dummy ubatch of the specified size
++    ggml_cgraph * build_graph_with_cpu_workspace(const llm_graph_params & params);
++    uint64_t transient_graph_nodes_marked = 0;
++    uint64_t transient_maximum_requested_bytes = 0;
++
+     ggml_cgraph * graph_reserve(
+         uint32_t n_tokens, uint32_t n_seqs, uint32_t n_outputs, const llama_memory_context_i * mctx, bool split_only = false, size_t * sizes = nullptr);
+ 
+--- a/src/llama-cparams.h
++++ b/src/llama-cparams.h
+@@ -55,6 +55,7 @@
+     bool no_perf;
+     bool warmup;             // TODO: remove [TAG_LLAMA_GRAPH_NO_WARMUP]
+     bool op_offload;
++    bool cpu_transient_repack;
+     bool kv_unified;
+     bool pipeline_parallel;
+     bool training;           // set by llama_opt_init()
+--- a/src/llama-kv-cache.cpp
++++ b/src/llama-kv-cache.cpp
+@@ -2214,6 +2214,11 @@
+         return;
+     }
+ 
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && (flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT || seq_id != 0 || n_stream != 1 || n_seq_max != 1)) {
++        throw std::runtime_error("exact-layout snapshots require one full host sequence0 and no other flags");
++    }
++
+     if ((flags & LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY) && swa_type == LLAMA_SWA_TYPE_NONE) {
+         return;
+     }
+@@ -2238,7 +2243,7 @@
+             add_cell = add_cell && (seq_id == -1 || cells.seq_has(i, seq_id));
+ 
+             // check the cell is not SWA-masked
+-            if (add_cell && seq_id != -1) {
++            if (add_cell && seq_id != -1 && !keep_layout) {
+                 const bool is_masked = llama_hparams::is_masked_swa(n_swa, swa_type, cells.pos_get(i), cells.seq_pos_max(seq_id));
+ 
+                 add_cell = !is_masked;
+@@ -2269,6 +2274,17 @@
+         GGML_ASSERT(cell_count == cell_count_check);
+ 
+         io.write(&cell_count, sizeof(cell_count));
++
++        if (keep_layout) {
++            const uint32_t capacity = cells.size();
++            io.write(&capacity, sizeof(capacity));
++            io.write(&v_heads[s], sizeof(v_heads[s]));
++            for (const auto & range : cr.data) {
++                for (uint32_t i = range.first; i < range.second; ++i) {
++                    io.write(&i, sizeof(i));
++                }
++            }
++        }
+ 
+         // skip empty streams
+         if (cell_count == 0) {
+@@ -2295,6 +2311,11 @@
+         return;
+     }
+ 
++    const bool keep_layout = (flags & LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT) != 0;
++    if (keep_layout && (flags != LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT || seq_id != 0 || n_stream != 1 || n_seq_max != 1)) {
++        throw std::runtime_error("exact-layout snapshots require one full host sequence0 and no other flags");
++    }
++
+     if ((flags & LLAMA_STATE_SEQ_FLAGS_PARTIAL_ONLY) && swa_type == LLAMA_SWA_TYPE_NONE) {
+         return;
+     }
+@@ -2308,6 +2329,10 @@
+ 
+     if (sinfos_in && sinfos_in->size() != n_stream) {
+         throw std::runtime_error("failed to restore kv cache: mirrored slot layout has the wrong stream count");
++    }
++
++    if (keep_layout && sinfos_in) {
++        throw std::runtime_error("exact-layout restore does not support mirrored external caches");
+     }
+ 
+     uint32_t n_stream_cur;
+@@ -2326,6 +2351,35 @@
+         uint32_t cell_count;
+         io.read(&cell_count, sizeof(cell_count));
+ 
++        uint32_t saved_head = 0;
++        slot_info saved_layout;
++        if (keep_layout) {
++            uint32_t capacity;
++            io.read(&capacity, sizeof(capacity));
++            io.read(&saved_head, sizeof(saved_head));
++            if (capacity != v_cells[s].size() || saved_head > capacity || cell_count > capacity) {
++                throw std::runtime_error("exact-layout cache capacity/head/count mismatch");
++            }
++            saved_layout.s0 = s;
++            saved_layout.s1 = s;
++            saved_layout.resize(1);
++            saved_layout.strm[0] = s;
++            saved_layout.idxs[0].resize(cell_count);
++            for (uint32_t i = 0; i < cell_count; ++i) {
++                uint32_t index;
++                io.read(&index, sizeof(index));
++                if (index >= capacity || (i && index <= saved_layout.idxs[0][i - 1])) {
++                    throw std::runtime_error("invalid exact-layout cell indices");
++                }
++                saved_layout.idxs[0][i] = index;
++            }
++            if (!cell_count) {
++                // Empty exact-layout states must also discard the current sequence.
++                seq_rm(seq_id, -1, -1);
++                v_heads[s] = saved_head;
++            }
++        }
++
+         if (cell_count == 0) {
+             // a mirrored cache must be empty here as well, or the two no longer agree cell for cell
+             if (sinfos_in && !(*sinfos_in)[s].empty()) {
+@@ -2339,7 +2393,7 @@
+         slot_info sinfo;
+ 
+         bool res = true;
+-        res = res && state_read_meta(io, strm, cell_count, sinfo, seq_id, sinfos_in ? &(*sinfos_in)[s] : nullptr);
++        res = res && state_read_meta(io, strm, cell_count, sinfo, seq_id, keep_layout ? &saved_layout : (sinfos_in ? &(*sinfos_in)[s] : nullptr));
+ 
+         try {
+             res = res && state_read_data(io, strm, cell_count, sinfo);
+@@ -2350,6 +2404,10 @@
+         if (!res) {
+             state_clear(seq_id, strm, sinfo);
+             throw std::runtime_error("failed to restore kv cache");
++        }
++
++        if (keep_layout) {
++            v_heads[strm] = saved_head;
+         }
+ 
+         if (sinfos_out) {
+--- a/src/llama-model-loader.cpp
++++ b/src/llama-model-loader.cpp
+@@ -14,6 +14,10 @@
+ #include <future>
+ #include <regex>
+ #include <unordered_set>
++#if defined(__ANDROID__)
++#include <sys/mman.h>
++#include <unistd.h>
++#endif
+ 
+ static const size_t kiB = 1024;
+ static const size_t MiB = 1024*kiB;
+@@ -1077,11 +1081,15 @@
+ }
+ 
+ // find the first buffer type in the list that can use the tensor
+-static ggml_backend_buffer_type_t select_weight_buft(const llama_hparams & hparams, ggml_tensor * tensor, ggml_op op, const buft_list_t * buft_list) {
++static ggml_backend_buffer_type_t select_weight_buft(const llama_hparams & hparams, ggml_tensor * tensor, ggml_op op, const buft_list_t * buft_list, uint64_t repack_mask) {
+     GGML_ASSERT(!buft_list->empty());
+     for (const auto & cur : *buft_list) {
+         ggml_backend_dev_t cur_dev = cur.first;
+         ggml_backend_buffer_type_t cur_buft = cur.second;
++        if (repack_mask && strcmp(ggml_backend_buft_name(cur_buft), "CPU_REPACK") == 0 &&
++            (static_cast<unsigned>(tensor->type) >= 64 || !(repack_mask & (uint64_t(1) << tensor->type)))) {
++            continue;
++        }
+         if (weight_buft_supported(hparams, tensor, op, cur_buft, cur_dev)) {
+             return cur_buft;
+         }
+@@ -1252,7 +1260,7 @@
+                 if (std::regex_search(tensor_name, pattern)) {
+                     if (overrides->buft == ggml_backend_cpu_buffer_type()) {
+                         // when overriding to a CPU buffer, consider the extra buffer types
+-                        buft = select_weight_buft(hparams, t_meta, op, buft_list_cpu);
++                        buft = select_weight_buft(hparams, t_meta, op, buft_list_cpu, cpu_repack_type_mask);
+                         if (use_mmap) {
+                             static std::once_flag once;
+                             std::call_once(once, [] {
+@@ -1273,7 +1281,7 @@
+         }
+ 
+         if (!buft) {
+-            buft = select_weight_buft(hparams, t_meta, op, buft_list);
++            buft = select_weight_buft(hparams, t_meta, op, buft_list, cpu_repack_type_mask);
+             if (!buft) {
+                 throw std::runtime_error(format("failed to find a compatible buffer type for tensor %s", tn.str().c_str()));
+             }
+@@ -1747,6 +1755,22 @@
+                 mmap_used.second = std::max(mmap_used.second, weight->offs + n_size);
+             } else {
+                 ggml_backend_tensor_set(cur, data, 0, n_size);
++#if defined(__ANDROID__)
++                // CPU packing is synchronous. Drop only clean source PTEs,
++                // never the mapping or the packed weights. Tied/aliased tensors
++                // can refault the same original bytes later. Leave boundary
++                // pages intact and use the actual OS page size (4K or 16K).
++                if (strcmp(ggml_backend_buffer_name(cur->buffer), "CPU_REPACK") == 0) {
++                    const long page = sysconf(_SC_PAGESIZE);
++                    if (page > 0) {
++                        const size_t first = weight->offs + (page - weight->offs % page) % page;
++                        const size_t last = (weight->offs + n_size) / page * page;
++                        if (last > first && madvise((uint8_t *) mapping->addr() + first, last - first, MADV_DONTNEED) != 0) {
++                            throw std::runtime_error("CPU_REPACK source-page discard failed");
++                        }
++                    }
++                }
++#endif
+             }
+         } else {
+             const auto & file = files.at(weight->idx);
+--- a/src/llama-model-loader.h
++++ b/src/llama-model-loader.h
+@@ -124,6 +124,7 @@
+     std::map<std::string, llama_tensor_weight, weight_name_comparer> weights_map;
+     std::unordered_map<std::string, llama_model_kv_override> kv_overrides;
+     const llama_model_tensor_buft_override * tensor_buft_overrides;
++    uint64_t cpu_repack_type_mask = 0;
+ 
+     gguf_context_ptr metadata_ptr;
+     struct gguf_context * metadata; // either metadata_ptr.get() or externally set
+--- a/src/llama-model.cpp
++++ b/src/llama-model.cpp
+@@ -1667,6 +1667,7 @@
+ }
+ 
+ bool llama_model_base::load_tensors(llama_model_loader & ml) {
++    ml.cpu_repack_type_mask = params.cpu_repack_type_mask;
+     const auto & split_mode   = params.split_mode;
+     const bool use_mlock      = params.load_mode == LLAMA_LOAD_MODE_MLOCK || params.load_mode == LLAMA_LOAD_MODE_MMAP_MLOCK;
+     const auto & tensor_split = params.tensor_split;
+@@ -1979,7 +1980,18 @@
+     // per-tensor activation precision policy
+     prec_policy.load(ml, *this);
+ 
+-    ml.init_mappings(true, use_mlock ? &pimpl->mlock_mmaps : nullptr);
++    // CPU_REPACK keeps committed weights. Faulting the complete source mmap
++    // first retains an unnecessary resident copy while packing on Android.
++    bool prefetch_sources = params.mmap_prefault;
++#if defined(__ANDROID__)
++    for (const auto & entry : ml.ctx_map) {
++        if (strcmp(ggml_backend_buft_name(entry.first.buft), "CPU_REPACK") == 0) {
++            prefetch_sources = false;
++            break;
++        }
++    }
++#endif
++    ml.init_mappings(prefetch_sources, use_mlock ? &pimpl->mlock_mmaps : nullptr);
+     pimpl->mappings.reserve(ml.mappings.size());
+ 
+     // create the backend buffers
+@@ -3489,9 +3501,11 @@
+         /*.progress_callback           =*/ nullptr,
+         /*.progress_callback_user_data =*/ nullptr,
+         /*.kv_overrides                =*/ nullptr,
++        /*.cpu_repack_type_mask        =*/ 0,
+         /*.vocab_only                  =*/ false,
+         /*.check_tensors               =*/ false,
+         /*.use_extra_bufts             =*/ true,
++        /*.mmap_prefault               =*/ true,
+         /*.no_host                     =*/ false,
+         /*.no_alloc                    =*/ false,
+         /*.load_mtp                    =*/ false,
+--- a/src/llama-vocab.cpp
++++ b/src/llama-vocab.cpp
+@@ -2189,7 +2189,8 @@
+ 
+     void init_tokenizer(enum llama_vocab_type type);
+ 
+-    void tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special) const;
++    void tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special,
++                                const std::vector<llama_tokenize_input_range> * input_ranges) const;
+ 
+     std::string token_to_piece_for_cache(
+                   llama_token   token,
+@@ -2199,7 +2200,8 @@
+     std::vector<llama_token> tokenize(
+             const std::string & raw_text,
+                          bool   add_special,
+-                         bool   parse_special = false) const;
++                         bool   parse_special = false,
++            const std::vector<llama_tokenize_input_range> * input_ranges = nullptr) const;
+ 
+     int32_t tokenize(
+                    const char * text,
+@@ -3642,7 +3644,8 @@
+ 
+ // #define PRETOKENIZERDEBUG
+ 
+-void llama_vocab::impl::tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special) const {
++void llama_vocab::impl::tokenizer_st_partition(std::forward_list<fragment_buffer_variant> & buffer, bool parse_special,
++                                               const std::vector<llama_tokenize_input_range> * input_ranges) const {
+     // for each special token
+     for (const llama_token special_id : cache_special_tokens) {
+         const auto & data = vocab.get_token_data(special_id);
+@@ -3668,16 +3671,28 @@
+                 auto raw_text_base_offset = fragment.offset;
+                 auto raw_text_base_length = fragment.length;
+ 
++                // A rejected literal match must not split the ordinary-text fragment.
++                auto search_offset = raw_text_base_offset;
+                 // loop over the text
+                 while (true) {
+                     // find the first occurrence of a given special token in this fragment
+                     //  passing offset argument only limit the "search area" but match coordinates
+                     //  are still relative to the source full raw_text
+                     //  string_view begins at pos 0 for the same reason
+-                    auto match = std::string_view(raw_text.data(), raw_text_base_offset + raw_text_base_length).find(text, raw_text_base_offset);
++                    auto match = std::string_view(raw_text.data(), raw_text_base_offset + raw_text_base_length).find(text, search_offset);
+ 
+                     // no occurrences found, stop processing this fragment for a given special token
+                     if (match == std::string::npos) break;
++                    if (input_ranges && (data.attr & (LLAMA_TOKEN_ATTR_CONTROL | LLAMA_TOKEN_ATTR_UNKNOWN))) {
++                        const auto range = std::lower_bound(input_ranges->begin(), input_ranges->end(), match,
++                            [](const llama_tokenize_input_range & span, size_t byte) {
++                                return uint64_t(span.offset) + span.length <= byte;
++                            });
++                        if (range != input_ranges->end() && range->offset < match + text.length()) {
++                            search_offset = match + 1;
++                            continue;
++                        }
++                    }
+ 
+ #ifdef PRETOKENIZERDEBUG
+                     LLAMA_LOG_WARN("FF: (%ld %ld %ld) '%s'\n", raw_text->length(), raw_text_base_offset, raw_text_base_length, raw_text->substr(raw_text_base_offset, raw_text_base_length).c_str());
+@@ -3741,6 +3756,7 @@
+                         // repeat for the right side
+                         raw_text_base_offset = right_reminder_offset;
+                         raw_text_base_length = right_reminder_length;
++                        search_offset = raw_text_base_offset;
+ 
+ #ifdef PRETOKENIZERDEBUG
+                         LLAMA_LOG_WARN("RR: (%ld %ld) '%s'\n", raw_text_base_offset, raw_text_base_length, raw_text->substr(raw_text_base_offset, raw_text_base_length).c_str());
+@@ -3809,7 +3825,8 @@
+ std::vector<llama_token> llama_vocab::impl::tokenize(
+         const std::string & raw_text,
+         bool add_special,
+-        bool parse_special) const {
++        bool parse_special,
++        const std::vector<llama_tokenize_input_range> * input_ranges) const {
+     GGML_ASSERT(tokenizer && "Tokenizer not initialized. Call llama_vocab::init_tokenizer() first.");
+ 
+     std::vector<llama_token> output;
+@@ -3817,7 +3834,7 @@
+ 
+     if (!raw_text.empty()) {
+         fragment_buffer.emplace_front(raw_text, 0, raw_text.length());
+-        tokenizer_st_partition(fragment_buffer, parse_special);
++        tokenizer_st_partition(fragment_buffer, parse_special, input_ranges);
+     }
+ 
+     switch (get_type()) {
+@@ -4670,8 +4687,9 @@
+ std::vector<llama_token> llama_vocab::tokenize(
+         const std::string & raw_text,
+         bool add_special,
+-        bool parse_special) const {
+-    return pimpl->tokenize(raw_text, add_special, parse_special);
++        bool parse_special,
++        const std::vector<llama_tokenize_input_range> * input_ranges) const {
++    return pimpl->tokenize(raw_text, add_special, parse_special, input_ranges);
+ }
+ 
+ const std::string & llama_vocab::token_to_piece(llama_token token) const {
+@@ -4942,6 +4960,29 @@
+     return vocab->tokenize(text, text_len, tokens, n_tokens_max, add_special, parse_special);
+ }
+ 
++int32_t llama_tokenize_with_input_ranges(
++    const struct llama_vocab * vocab, const char * text, int32_t text_len,
++    llama_token * tokens, int32_t n_tokens_max, bool add_special,
++    const struct llama_tokenize_input_range * ranges, int32_t n_ranges) {
++    if (!vocab || !text || text_len < 0 || n_tokens_max < 0 ||
++        (n_tokens_max > 0 && !tokens) || n_ranges < 0 || n_ranges > 4096 || (n_ranges > 0 && !ranges))
++        throw std::invalid_argument("Invalid input-range tokenizer arguments");
++    std::vector<llama_tokenize_input_range> spans;
++    uint64_t end = 0;
++    for (int32_t i = 0; i < n_ranges; ++i) {
++        const auto span = ranges[i];
++        if (!span.length || span.offset < end || uint64_t(span.offset) + span.length > uint64_t(text_len))
++            throw std::invalid_argument("Invalid or overlapping chat input range");
++        end = uint64_t(span.offset) + span.length;
++        spans.push_back(span);
++    }
++    const auto output = vocab->tokenize(std::string(text, text_len), add_special, true, &spans);
++    if (output.size() >= size_t(std::numeric_limits<int32_t>::max())) return std::numeric_limits<int32_t>::min();
++    if (size_t(n_tokens_max) < output.size()) return -int32_t(output.size());
++    std::copy(output.begin(), output.end(), tokens);
++    return int32_t(output.size());
++}
++
+ int32_t llama_token_to_piece(
+     const struct llama_vocab * vocab,
+                  llama_token   token,
+--- a/src/llama-vocab.h
++++ b/src/llama-vocab.h
+@@ -189,7 +189,8 @@
+     std::vector<llama_token> tokenize(
+             const std::string & raw_text,
+                          bool   add_special,
+-                         bool   parse_special = false) const;
++                         bool   parse_special = false,
++            const std::vector<llama_tokenize_input_range> * input_ranges = nullptr) const;
+ 
+     // does not write null-terminator to buf
+     int32_t token_to_piece(

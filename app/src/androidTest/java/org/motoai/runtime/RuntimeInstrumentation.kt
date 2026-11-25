@@ -86,6 +86,7 @@ class RuntimeInstrumentation : Instrumentation() {
                 require(backend in listOf("cpu", "opencl", "vulkan"))
                 report.put("initialization", NativeRuntime.initialize(targetContext, backend))
                 val plans = org.json.JSONArray()
+                val entry = ModelStore.entries(targetContext).first { it.id == model }
                 val sizes = if (backend == "cpu") listOf(4096, 8192, 16384, 32768) else listOf(4096)
                 val layerCounts = if (backend == "cpu") listOf(0) else listOf(4, 8, 16, 24, 128)
                 for (size in sizes) for (layers in layerCounts) {
@@ -93,6 +94,7 @@ class RuntimeInstrumentation : Instrumentation() {
                         .put("context", size).put("threads", 4).put("batch", 512).put("micro_batch", 128)
                         .put("load_mode", "mmap").put("mmap_prefault", false).put("swa_full", args.getString("swaFull") != "false")
                     val result = ModelStore.open(targetContext, model).use { NativeRuntime.plan(it.path, config, NativeRuntime.ticket()) }
+                    if (backend == "cpu") result.put("admission_check", CpuAdmissionChecks.actualPlan(result, entry.bytes, entry.sha256, size))
                     plans.put(JSONObject().put("config", config).put("plan", result))
                 }
                 report.put("plans", plans).put("passed", true)
@@ -251,6 +253,7 @@ class RuntimeInstrumentation : Instrumentation() {
         }
         try {
             report.put("ephemeral", EphemeralChecks.run(this))
+            report.put("cpu_admission", CpuAdmissionChecks.run())
             val ornithSha = "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6"
             fun admission(available: Long, low: Boolean = false, size: Int = 8192) = LoadAdmission.evaluate(
                 5780090816, ornithSha, size, 512, 128, 11843080192, available, 226492416, low)

@@ -781,6 +781,9 @@
     <string name="ui_stop_and_unload" formatted="false">"Остановить и выгрузить"</string>
     <string name="ui_runtime_is_closing" formatted="false">"Runtime закрывается"</string>
     <string name="ui_estimating_memory_for_selected_gpu_profile" formatted="false">"Оценка памяти выбранного GPU-профиля…"</string>
+    <string name="ui_estimating_model_memory" formatted="false">"Оценка памяти модели…"</string>
+    <string name="ui_memory_plan_not_loaded">"Модель не загружена: %1$s"</string>
+    <string name="ui_not_enough_memory_to_plan_model" formatted="false">"Недостаточно памяти для оценки модели. Сначала выгрузите текущую модель."</string>
     <string name="ui_estimation_cancelled" formatted="false">"Оценка отменена"</string>
     <string name="ui_gpu_profile_not_loaded">"GPU-профиль не загружен: %1$s"</string>
     <string name="ui_no_model_selected" formatted="false">"Не выбрана модель"</string>
@@ -835,4 +838,6 @@
     <string name="ui_edit_summary_help" formatted="false">"Изменяется только рабочая сводка. Оригиналы сообщений остаются по режиму хранения чата. Отмена компактизации возвращает их в контекст."</string>
     <string name="ui_api_response_limit" formatted="false">"Лимит ответа для этого чата"</string>
     <string name="ui_api_response_limit_help" formatted="false">"Максимум выходных токенов на один запрос. У большинства провайдеров сюда входят thinking и видимый ответ. 0 — настройка подключения. Для рассуждающих моделей попробуйте 8192 или 16384, если модель поддерживает. Больший лимит может увеличить стоимость, но не размер контекста модели."</string>
+    <string name="ui_nightly_signing_change" formatted="false">"В nightly 0.7.0a изменён ключ подписи. Для перехода со старых релизов 0.6.x сначала удалите прежнее приложение, иначе Android выдаст ошибку установки. При удалении теряются локальные чаты, настройки и приватные модели. Заранее сохраните важное. Общие GGUF-файлы в Downloads остаются."</string>
+    <string name="ui_engine_experiments_pending" formatted="false">"Кэш префикса и экспериментальная упаковка prefill ожидают проверок на моделях с обновлённым движком и временно недоступны. Обычный контекст диалога и исходные веса моделей сохраняются."</string>
 </resources>

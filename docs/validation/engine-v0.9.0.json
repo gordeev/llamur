@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "title": "llama.cpp v0.9.0 runtime validation",
+  "scope": "Bounded native CPU validation on one ARM64 host and one ARM64 Android phone. Successful same-engine checks and failed cross-engine arithmetic diagnostics are reported separately. This does not establish broad model quality, all-context correctness, sustained performance, or APK UI integration.",
+  "engine": {
+    "legacy_upstream_commit": "701fd25b3a55a90297dec0d925204b29084054c8",
+    "upstream_ref": "v0.9.0",
+    "upstream_commit": "cd959bae99ff4bed22bef2604f45241c09bbb8c8",
+    "upstream_tree": "1a2271a5bca9add580b7f942c71f7bb5e7cd030f",
+    "runtime_variant": "llamur-v0.9.0",
+    "patched_tree": "c617e084dd80e82983459ac4c1185c882a910c03",
+    "runtime_patch_sha256": "0e9b209fadc514c433cdffdfbd63046981a1150d78c99807dd8dc6c2486c133e"
+  },
+  "unchanged_logit_gates": {
+    "source": "bench/logit-gates.json",
+    "sha256": "f875bbad6c158074d1a0ee17f08551d00596f4317310ef172d63ee5a16f541c2",
+    "finite_raw_logits_required": true,
+    "mean_absolute_token_nll_error_max": 0.02,
+    "maximum_absolute_token_nll_error_max": 0.1,
+    "first_top8_max_shared_logit_absolute_error": 0.1,
+    "first_top8_set_must_match": true,
+    "interpretation": "These pre-existing limits screen matched model, engine, prompt and teacher-forced IDs across CPU executions. Applying them to different upstream revisions or arithmetic policies is a diagnostic of numerical disagreement, not proof of better or worse general task quality. No limits were relaxed."
+  },
+  "weight_and_storage_policy": {
+    "original_model_files_retained": true,
+    "weight_buffers": "native",
+    "extra_weight_buffers_disabled": true,
+    "kv_storage": "F16",
+    "gpu_layers": 0,
+    "transient_repack": false,
+    "lfm3_prefix_cache_enabled": false
+  },
+  "host_regressions": {
+    "passed": true,
+    "fixture": {
+      "name": "stories260K.gguf",
+      "sha256": "270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d",
+      "role": "Tiny smoke/state fixture; not main-model quality or speed evidence."
+    },
+    "lifecycle": {
+      "passed": true,
+      "coverage": [
+        "load/generate/unload and reload",
+        "prompt/output-budget overflow and recovery",
+        "queued and decode cancellation",
+        "read/mmap greedy-output consistency",
+        "metadata-only planning preserves the active model",
+        "empty exact-layout snapshot replaces populated destination cells and reserializes exactly"
+      ]
+    },
+    "matrix_operators": {
+      "passed": true,
+      "baseline_passed": true,
+      "cases": 108,
+      "passed_cases": 81,
+      "unsupported_cases": 27,
+      "native_cpu_passed_cases": 54,
+      "experimental_cpu_repack_passed_cases": 27,
+      "scope": "54 native CPU cases pass across F32/F16/BF16/Q4_K/Q5_K/Q6_K represented-activation references. An additional 27 CPU_REPACK diagnostic cases pass; 27 unsupported extra-buffer cases are skipped. Repack is not the production native-buffer policy."
+    },
+    "attention": {
+      "passed": true,
+      "cases": 16,
+      "coverage": [
+        "F16 and F32 represented K/V",
+        "original F32 queries",
+        "contiguous and indexed KV row lists",
+        "negative row padding and masks",
+        "one and eight query positions",
+        "one and four worker threads"
+      ],
+      "reference": "Independent scalar double-precision softmax over original F32 queries and represented K/V values.",
+      "maximum_absolute_error": 8.672515766638966e-08,
+      "maximum_absolute_error_limit": 2e-06
+    },
+    "tokenizer": {
+      "passed": true,
+      "properties": 112,
+      "frozen_fixtures": 0
+    },
+    "state_roundtrips": {
+      "passed": true,
+      "prompt_tokens": 802,
+      "snapshot_boundary_tokens": 512,
+      "teacher_forced_tokens": 3,
+      "modes": [
+        {
+          "mode": "prefix-keep-layout",
+          "passed": true,
+          "snapshot_bytes": 336032,
+          "snapshot_byte_exact": true,
+          "maximum_token_nll_difference": 0.0,
+          "maximum_raw_logit_difference": 0.0
+        },
+        {
+          "mode": "prefix-sequence",
+          "passed": true,
+          "snapshot_bytes": 333976,
+          "snapshot_byte_exact": true,
+          "maximum_token_nll_difference": 0.0,
+          "maximum_raw_logit_difference": 0.0
+        },
+        {
+          "mode": "prefix-whole-context",
+          "passed": true,
+          "snapshot_bytes": 333977,
+          "snapshot_byte_exact": true,
+          "maximum_token_nll_difference": 0.0,
+          "maximum_raw_logit_difference": 0.0
+        }
+      ],
+      "scope": "Tiny non-recurrent model only. This does not qualify LFM3 recurrent snapshots or production prefix caching."
+    },
+    "legacy_runtime_plan_and_lifecycle_syntax_checks_passed": true
+  },
+  "lfm3": {
+    "model": {
+      "repo": "LiquidAI/LFM3-1.7B-GGUF",
+      "revision": "cd0c74c575b5c416f3011b5b4c298077f26ca8c2",
+      "filename": "LFM3-1.7B-Q4_K_M.gguf",
+      "bytes": 1099627808,
+      "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",
+      "quantization": "Q4_K_M",
+      "architecture": "lfm3"
+    },
+    "configuration": {
+      "context": 4096,
+      "threads": 4,
+      "threads_batch": 4,
+      "batch": 512,
+      "micro_batch": 128,
+      "load_mode": "read",
+      "mmap_prefault": true,
+      "prefix_cache_mib": 0,
+      "transient_repack": false,
+      "weight_buffers": "native",
+      "kv_storage": "F16",
+      "host_and_android_llamafile": false
+    },
+    "same_engine_host_android": {
+      "passed": true,
+      "scope": "Standalone Android native adapter compared with the same patched engine on the host. No APK UI or foreground-service claim.",
+      "all_checked_logits_finite": true,
+      "corpora": [
+        {
+          "corpus": "code",
+          "request_sha256": "4b1edf36586c6c8082cee12ff99ffda5134492abbee9a6e4ecde5322ca8d3d89",
+          "host_result_sha256": "d2024a970b3af50aed243a1ac8947948c25f2e624333ad6d324af66e06ebbcc6",
+          "android_result_sha256": "d626b2fe2ba2c7336156d3fe583dde5481b9e755d42b886f9d88d017871d71f6",
+          "prompt_tokens": 3,
+          "scored_tokens": 24,
+          "same_prompt_and_teacher_forced_ids": true,
+          "finite_logits_checks_per_execution": 24,
+          "host_mean_nll": 1.7438097755847555,
+          "android_mean_nll": 1.7438097755847555,
+          "mean_absolute_token_nll_error": 0.0,
+          "maximum_absolute_token_nll_error": 0.0,
+          "first_top8_set_matches": true,
+          "first_top8_max_shared_logit_absolute_error": 0.0,
+          "passed": true
+        },
+        {
+          "corpus": "ru",
+          "request_sha256": "90d2b12018b6ba77257b525f4a384ccb6b113ebd27dc43e92b31a0079411356c",
+          "host_result_sha256": "3472f49923c67315cf321ccf2347004a43e83d53b29f09178dd08f5bc82326e1",
+          "android_result_sha256": "aeacb094e6ebb17a674879cf4ae985890e2d13270172c74e6374a330b0a46b52",
+          "prompt_tokens": 6,
+          "scored_tokens": 33,
+          "same_prompt_and_teacher_forced_ids": true,
+          "finite_logits_checks_per_execution": 33,
+          "host_mean_nll": 4.509472398584632,
+          "android_mean_nll": 4.509472398584632,
+          "mean_absolute_token_nll_error": 0.0,
+          "maximum_absolute_token_nll_error": 0.0,
+          "first_top8_set_matches": true,
+          "first_top8_max_shared_logit_absolute_error": 0.0,
+          "passed": true
+        }
+      ]
+    },
+    "functional": {
+      "scope": "Standalone native adapter on host and Android. Completion requires EOG and nonempty parsed final text; reaching an output length limit is not counted as success.",
+      "trials": [
+        {
+          "case": "arithmetic-thinking-false",
+          "host_and_android_parsed_reply_match": true,
+          "finish_reason": "eog",
+          "generated_tokens": 9,
+          "output_limit": 256,
+          "final_text": "8 + 5 = 13\n\n13",
+          "separate_reasoning_present": false,
+          "expected_answer_present": true,
+          "strict_requested_format": false
+        },
+        {
+          "case": "arithmetic-thinking-true",
+          "host_and_android_parsed_reply_match": true,
+          "finish_reason": "eog",
+          "generated_tokens": 70,
+          "output_limit": 512,
+          "final_text": "13",
+          "separate_reasoning_present": true,
+          "expected_answer_present": true,
+          "strict_requested_format": true
+        },
+        {
+          "case": "multi-turn",
+          "host_and_android_parsed_reply_match": true,
+          "finish_reason": "eog",
+          "generated_tokens": 12,
+          "output_limit": 256,
+          "final_text": "The exact identifier you gave me is **counter_17**.",
+          "separate_reasoning_present": false,
+          "expected_answer_present": true,
+          "strict_requested_format": false
+        }
+      ],
+      "thinking_template_toggle_verified": true,
+      "literal_control_tokenizer_properties": {
+        "passed": true,
+        "properties": 1156,
+        "frozen_fixtures": 0
+      },
+      "real_model_prefix_cache_rejected": true,
+      "new_engine_production_prefix_cache_qualified": false
+    }
+  },
+  "failed_cross_engine_diagnostics": {
+    "scope": "Retained failures against the unchanged numerical limits. These comparisons deliberately change engine revision or arithmetic policy. Similar mean NLL does not cancel failed per-token or raw-logit checks; these small corpora do not establish general quality improvement or regression.",
+    "legacy_vs_v090_same_phone": [
+      {
+        "model": "gemma",
+        "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+        "corpus": "code",
+        "source_report_sha256": "5d399d7bed9a31e7bfff94e7920f430fe25653683d165032060eabded00a475d",
+        "context": 8192,
+        "load_mode": "mmap",
+        "mmap_prefault": false,
+        "scored_tokens": 27,
+        "same_prompt_ids": true,
+        "same_teacher_forced_ids": true,
+        "legacy_mean_nll": 1.863091017840691,
+        "v090_mean_nll": 1.851352184882836,
+        "mean_absolute_token_nll_error": 0.0613279348594673,
+        "maximum_absolute_token_nll_error": 0.5110350883454977,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.3993988037109375,
+        "passed": false,
+        "failed_checks": [
+          "mean_absolute_token_nll_error",
+          "maximum_absolute_token_nll_error",
+          "first_top8_max_shared_logit_absolute_error"
+        ]
+      },
+      {
+        "model": "gemma",
+        "model_sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+        "corpus": "ru",
+        "source_report_sha256": "562649e7357cb09ae14c5f6db84788352521fd066259b8eb8982b5ab59c7cf01",
+        "context": 8192,
+        "load_mode": "mmap",
+        "mmap_prefault": false,
+        "scored_tokens": 29,
+        "same_prompt_ids": true,
+        "same_teacher_forced_ids": true,
+        "legacy_mean_nll": 3.45900155097048,
+        "v090_mean_nll": 3.4843637836070864,
+        "mean_absolute_token_nll_error": 0.12465049775548699,
+        "maximum_absolute_token_nll_error": 0.5846022802212971,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.33287620544433594,
+        "passed": false,
+        "failed_checks": [
+          "mean_absolute_token_nll_error",
+          "maximum_absolute_token_nll_error",
+          "first_top8_max_shared_logit_absolute_error"
+        ]
+      },
+      {
+        "model": "ornith",
+        "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+        "corpus": "code",
+        "source_report_sha256": "4f6a2c7137c3f8438be50edeeb9a75c4a2a85d29b7ef0df69470e752254baaff",
+        "context": 8192,
+        "load_mode": "mmap",
+        "mmap_prefault": false,
+        "scored_tokens": 26,
+        "same_prompt_ids": true,
+        "same_teacher_forced_ids": true,
+        "legacy_mean_nll": 1.338058215348435,
+        "v090_mean_nll": 1.3394908569599635,
+        "mean_absolute_token_nll_error": 0.016922732672023395,
+        "maximum_absolute_token_nll_error": 0.08975201864144111,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.2549324035644531,
+        "passed": false,
+        "failed_checks": [
+          "first_top8_max_shared_logit_absolute_error"
+        ]
+      },
+      {
+        "model": "ornith",
+        "model_sha256": "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6",
+        "corpus": "ru",
+        "source_report_sha256": "5ad44443c79cad42317ec297b8b8bd393e5fac084a6d121e1cb2bdeda8692427",
+        "context": 8192,
+        "load_mode": "mmap",
+        "mmap_prefault": false,
+        "scored_tokens": 27,
+        "same_prompt_ids": true,
+        "same_teacher_forced_ids": true,
+        "legacy_mean_nll": 3.427662847762563,
+        "v090_mean_nll": 3.4289259474213085,
+        "mean_absolute_token_nll_error": 0.06764039402364534,
+        "maximum_absolute_token_nll_error": 0.35488091034278213,
+        "first_top8_set_matches": false,
+        "first_top8_max_shared_logit_absolute_error": 0.10817241668701172,
+        "passed": false,
+        "failed_checks": [
+          "mean_absolute_token_nll_error",
+          "maximum_absolute_token_nll_error",
+          "first_top8_max_shared_logit_absolute_error",
+          "first_top8_set_match"
+        ]
+      }
+    ],
+    "stock_v090_vs_ported_v090_lfm3_host": [
+      {
+        "corpus": "code",
+        "prompt_tokens": 3,
+        "scored_tokens": 24,
+        "stock_mean_nll": 1.7260979127613985,
+        "optimized_mean_nll": 1.7438097755847555,
+        "mean_absolute_token_nll_error": 0.07270013576275962,
+        "maximum_absolute_token_nll_error": 0.3410717070428042,
+        "first_top8_set_matches": true,
+        "first_top8_max_shared_logit_absolute_error": 0.8308286666870117,
+        "passed": false,
+        "failed_checks": [
+          "mean_absolute_token_nll_error",
+          "maximum_absolute_token_nll_error",
+          "first_top8_max_shared_logit_absolute_error"
+        ]
+      },
+      {
+        "corpus": "ru",
+        "prompt_tokens": 6,
+        "scored_tokens": 33,
+        "stock_mean_nll": 4.502915631376989,
+        "optimized_mean_nll": 4.509472398584632,
+        "mean_absolute_token_nll_error": 0.11076190196132286,
+        "maximum_absolute_token_nll_error": 0.2961096483026946,
+        "first_top8_set_matches": false,
+        "first_top8_max_shared_logit_absolute_error": 0.40024280548095703,
+        "passed": false,
+        "failed_checks": [
+          "mean_absolute_token_nll_error",
+          "maximum_absolute_token_nll_error",
+          "first_top8_max_shared_logit_absolute_error",
+          "first_top8_set_match"
+        ]
+      }
+    ]
+  },
+  "precision_isolation": {
+    "scope": "Ignored host diagnostic builds; production weights and F16 cache storage unchanged. These experiments explain arithmetic differences without replacing the matched-engine host/Android acceptance test.",
+    "independent_reference": "Pristine stock v0.9.0 with represented F16 K/V widened to F32 only at flash-attention operation inputs. Q, masks, indexed-row maps, scale and cache storage remain unchanged. This exercises stock F32 attention independently of the ported F16-input path.",
+    "attention_only_reference_matches": [
+      {
+        "corpus": "code",
+        "candidate": "attention-only",
+        "mean_absolute_token_nll_error": 0.0,
+        "maximum_absolute_token_nll_error": 0.0,
+        "first_top8_max_shared_logit_absolute_error": 0.0,
+        "first_top8_set_matches": true,
+        "token_nll_exactly_equal": true,
+        "within_unchanged_diagnostic_limits": true
+      },
+      {
+        "corpus": "ru",
+        "candidate": "attention-only",
+        "mean_absolute_token_nll_error": 0.0,
+        "maximum_absolute_token_nll_error": 0.0,
+        "first_top8_max_shared_logit_absolute_error": 0.0,
+        "first_top8_set_matches": true,
+        "token_nll_exactly_equal": true,
+        "within_unchanged_diagnostic_limits": true
+      }
+    ],
+    "full_port_reference_matches": [
+      {
+        "corpus": "code",
+        "candidate": "optimized",
+        "mean_absolute_token_nll_error": 0.03345098340132472,
+        "maximum_absolute_token_nll_error": 0.14657972420532417,
+        "first_top8_max_shared_logit_absolute_error": 0.4677095413208008,
+        "first_top8_set_matches": true,
+        "token_nll_exactly_equal": false,
+        "within_unchanged_diagnostic_limits": false
+      },
+      {
+        "corpus": "ru",
+        "candidate": "optimized",
+        "mean_absolute_token_nll_error": 0.09430123901281914,
+        "maximum_absolute_token_nll_error": 0.36541754868155607,
+        "first_top8_max_shared_logit_absolute_error": 0.2954864501953125,
+        "first_top8_set_matches": true,
+        "token_nll_exactly_equal": false,
+        "within_unchanged_diagnostic_limits": false
+      }
+    ],
+    "findings": [
+      "The shared upstream graph requests GGML_PREC_F32 for flash attention. Stock F16-input CPU attention still narrows Q and accumulates V in F16; the retained port honors F32 arithmetic while retaining F16 K/V storage.",
+      "The attention-only port exactly matches independent stock F32 attention for all 57 scored token NLL values and first-token top-eight logits in these two corpora. This supports the tested attention arithmetic and indexing; it is not a whole-model precision proof.",
+      "The full port also retains scalar transcendental and recurrent-convolution arithmetic policies. Their combination changes the model trajectory relative to stock arithmetic.",
+      "Removing only explicit recurrent-convolution FMA does not remove the initial logit discrepancy, although it changes later token NLL. Restoring only the two stock RoPE trigonometric calls also does not restore full numerical agreement.",
+      "The observed first full-port/stock mismatch on the short code prefill is after attention layer 2; the preceding layer 0 and 1 output fingerprints match."
+    ],
+    "host_llamafile_on_off_same_fixture_results_exactly_equal": true
+  },
+  "limitations": [
+    "The owned code/Russian corpora contain 57 scored LFM3 tokens; larger corpora and task-quality benchmarks remain separate.",
+    "Functional arithmetic and identifier replies demonstrate completed final text, not strict formatting reliability.",
+    "No long-context LFM3 quality, exact recurrent-state snapshot, production prefix-cache, GPU, prolonged-session or thermal qualification follows.",
+    "Performance measurements and APK delivery verification are outside this summary.",
+    "Metadata planning and supplied-budget admission checks at 4K/8K/16K/32K do not certify real-model generation or peak-memory safety at those contexts."
+  ],
+  "android_app_reference_and_planning_checks": {
+    "passed": true,
+    "scope": "Actual current APK native-reference and metadata-planning test entry points. This is separate from conversation-service/UI and end-to-end large-context generation.",
+    "reference": {
+      "source_report_sha256": "38a88e01dc05ce42ecb413d41f1477a45ad59be85158e8db0488481d2493c050",
+      "tiny_model_sha256": "270cba1bd5109f42d03350f60406024560464db173c0e387d91f0426d3bd256d",
+      "private_copy_created": false,
+      "mmap_generation_passed": true,
+      "source_preserved": true,
+      "coverage": "Owned MediaStore regular-file descriptor registration without copying; SHA/reread/mmap lifetime; source-deletion refusal and disconnect preservation. External-provider grant UI/reboot coverage is separate."
+    },
+    "lfm3_planning": {
+      "source_report_sha256": "f370ace6854946146a120541b7eeaa2d1106ad0f5c586095be8a30e1cb4f64dc",
+      "scope": "Metadata-only current-engine context/compute geometry with admission contract checks at four requested contexts. Admission uses a supplied test budget; accepted does not assert physical-phone free memory or successful generation at that context.",
+      "plans": [
+        {
+          "context_tokens": 4096,
+          "no_alloc": true,
+          "context_bytes": 92913664,
+          "compute_bytes": 72883232,
+          "planned_native_model_bytes": 1091380480,
+          "admission_required_bytes": 2352879936,
+          "current_engine_metadata_required": true,
+          "admission_contract_accepted": true,
+          "profile_qualified": false
+        },
+        {
+          "context_tokens": 8192,
+          "no_alloc": true,
+          "context_bytes": 185188352,
+          "compute_bytes": 74980384,
+          "planned_native_model_bytes": 1091380480,
+          "admission_required_bytes": 2447251776,
+          "current_engine_metadata_required": true,
+          "admission_contract_accepted": true,
+          "profile_qualified": false
+        },
+        {
+          "context_tokens": 16384,
+          "no_alloc": true,
+          "context_bytes": 369737728,
+          "compute_bytes": 79174688,
+          "planned_native_model_bytes": 1091380480,
+          "admission_required_bytes": 2635995456,
+          "current_engine_metadata_required": true,
+          "admission_contract_accepted": true,
+          "profile_qualified": false
+        },
+        {
+          "context_tokens": 32768,
+          "no_alloc": true,
+          "context_bytes": 738836480,
+          "compute_bytes": 87563296,
+          "planned_native_model_bytes": 1091380480,
+          "admission_required_bytes": 3013482816,
+          "current_engine_metadata_required": true,
+          "admission_contract_accepted": true,
+          "profile_qualified": false
+        }
+      ]
+    }
+  },
+  "lfm3_phone_performance_screening": {
+    "passed_workload": true,
+    "comparison": "Pristine v0.9.0 vs llamur v0.9.0; different arithmetic policies, no weight changes",
+    "profile": {
+      "context": 4096,
+      "threads": 4,
+      "threads_batch": 4,
+      "batch": 512,
+      "micro_batch": 128,
+      "load_mode": "read",
+      "weight_buffers": "native",
+      "prefix_cache_mib": 0,
+      "transient_repack": false,
+      "mmap_prefault": true
+    },
+    "prompt_tokens": 384,
+    "generated_tokens": 64,
+    "measurement_order": [
+      "stock",
+      "new",
+      "new",
+      "stock"
+    ],
+    "warmups_per_engine": 1,
+    "trials_per_engine": 2,
+    "median_tokens_per_second": {
+      "stock": {
+        "prefill_tps": 49.47090682146715,
+        "decode_tps": 22.52383926883803
+      },
+      "new": {
+        "prefill_tps": 49.34809749441365,
+        "decode_tps": 21.165783811772847
+      }
+    },
+    "scope": "One Motorola Edge 40 Pro, standalone shell CPU, two measured runs per engine; not sustained, app UID or model-quality acceptance. Prefill essentially unchanged; new decode about6% lower, no LFM3 speedup claimed."
+  },
+  "lfm3_android_service": {
+    "passed": true,
+    "profile": {
+      "context": 4096,
+      "threads": 4,
+      "batch": 512,
+      "micro_batch": 128,
+      "load_mode": "mmap",
+      "mmap_prefault": false,
+      "weight_buffers": "native",
+      "prefix_cache_mib": 0,
+      "transient_repack": false
+    },
+    "current_cpu_plan_required": true,
+    "admission_accepted": true,
+    "generated_tokens": 9,
+    "finish_reason": "eog",
+    "reply": "8 + 5 = 13\n\n13",
+    "scope": "Physical Motorola, current debug APK foreground-service IPC/planning/load/chat path, temporary private test model copy. Confirms completed response, not exact instruction compliance, release-UI or long-context qualification."
+  },
+  "android_app_regressions": {
+    "passed": true,
+    "scope": "Current debug APK and test APK, physical Motorola, tiny public stories model; notification permission granted. No large-model cancellation, release-screen-off or long-context claim.",
+    "checks": [
+      "30 load/generate/unload cycles with identical greedy bytes",
+      "CPU affinity and thread-pool lifecycle; invalid placement preserves model",
+      "unknown/upgraded CPU metadata admission contract",
+      "IPC output over1MiB stays belowBinderstatusbudget",
+      "load/generate via isolated Messenger service",
+      "repeated Stop and exact recovery",
+      "prompt/output overflow and output budget1536",
+      "debug budget refusal preserves live model/PID/output",
+      "planner rejects invalid config before model replacement",
+      "notification PendingIntent Stop",
+      "process death and explicit reload through visible UI"
+    ],
+    "large_model_cancellation": "not run: large fixtures not registered in test app",
+    "saf_import_ui": "not run: SAF fixture not imported"
+  }
+}

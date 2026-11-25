@@ -30,11 +30,18 @@ internal object LoadAdmission {
         // rows remain clean mapped pages. No optimistic1GiB window here.
         "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6" to Repack(3202744320, 2048 * MIB, 28311552)
     )
+    fun needsCpuPlan(sha: String?, upgradedEngine: Boolean): Boolean = upgradedEngine || sha !in profiles
+
+    fun cpuPlanSupported(context: Int, batch: Int, microBatch: Int, threads: Int, weightBuffers: String): Boolean =
+        context in 128..32768 && batch in 1..512 && microBatch in 1..128 && microBatch <= batch &&
+            threads in 1..4 && weightBuffers == "native"
+
     fun evaluate(bytes: Long, sha: String?, context: Int, batch: Int, microBatch: Int,
                  total: Long, available: Long, threshold: Long, lowMemory: Boolean,
                  reclaimableAnonymous: Long = 0, threads: Int = 4, loadMode: String = "read", weightBuffers: String = "native",
                  streamedRepackSources: Boolean = false, transientRepack: Boolean = false,
-                 transientRepackCompiled: Boolean = false, transientMinRows: Int = 4, prefixCacheMiB: Int = 0, exactStateLayout: Boolean = false, swaFull: Boolean = true): JSONObject {
+                 transientRepackCompiled: Boolean = false, transientMinRows: Int = 4, prefixCacheMiB: Int = 0, exactStateLayout: Boolean = false, swaFull: Boolean = true,
+                 upgradedEngine: Boolean = false, cpuPlan: JSONObject? = null): JSONObject {
         require(prefixCacheMiB == 0 || prefixCacheMiB in 64..256) { "Invalid prefix-cache budget" }
         require(weightBuffers in listOf("native", "cpu_repack", "cpu_repack_q6", "cpu_repack_q4")) { "Unknown weight buffer policy" }
         val repack = when (weightBuffers) { "cpu_repack" -> repackProfiles[sha]; "cpu_repack_q6" -> q6RepackProfiles[sha]; "cpu_repack_q4" -> q4RepackProfiles[sha]; else -> null }
@@ -47,8 +54,8 @@ internal object LoadAdmission {
         // request (2026-10-25). MemAvailable admission alone did not protect it.
         val excludedQ4Ornith = weightBuffers == "cpu_repack_q4" && sha == "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6"
         val transientGeometry = profile != null && context in 128..32768 && batch in 1..512 && microBatch in 1..128 && threads in 1..4
-        val transientSupported = !transientRepack || (transientRepackCompiled && transientGeometry && microBatch >= transientMinRows && weightBuffers == "native" && loadMode == "mmap" && sha in profiles.keys)
-        val prefixSupported = prefixCacheMiB == 0 || (geometry && batch == 512 && microBatch == 128 &&
+        val transientSupported = !transientRepack || (!upgradedEngine && transientRepackCompiled && transientGeometry && microBatch >= transientMinRows && weightBuffers == "native" && loadMode == "mmap" && sha in profiles.keys)
+        val prefixSupported = prefixCacheMiB == 0 || (!upgradedEngine && geometry && batch == 512 && microBatch == 128 &&
             weightBuffers == "native" && (sha == "70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6" ||
                 (exactStateLayout && sha == "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87")))
         // The pinned compact route failed the fixed Gemma NLL/top8 gates.
@@ -82,7 +89,7 @@ internal object LoadAdmission {
         val required = workspace + headroom + cpuWorkspaceReserve + prefixReserve
         val effective = available + reclaimableAnonymous.coerceAtLeast(0)
         val accepted = policySupported && !lowMemory && bytes < total - 512 * MIB && effective >= required
-        return JSONObject().put("accepted", accepted).put("available_bytes", available)
+        val result = JSONObject().put("accepted", accepted).put("available_bytes", available)
             .put("reclaimable_anonymous_bytes", reclaimableAnonymous.coerceAtLeast(0))
             .put("effective_available_bytes", effective).put("required_bytes", required).put("headroom_bytes", headroom)
             .put("model_file_bytes", bytes).put("low_memory", lowMemory)
@@ -101,5 +108,40 @@ internal object LoadAdmission {
             .put("profile_qualified", qualified)
             .put("profile", if (prefixCacheMiB > 0) "experimental-full-sequence-prefix-v1" else if (transientRepack) "experimental-bounded-cpu-workspace-v1" else if (phased && weightBuffers == "cpu_repack_q4") "experimental-streamed-repack-q4-budget-v1" else if (phased && weightBuffers == "cpu_repack_q6") "experimental-streamed-repack-q6-budget-v1" else if (phased) "experimental-streamed-repack-phase-budget-v2" else if (weightBuffers != "native") "experimental-repack-additive-budget-v1" else if (qualified) "padded-cpu-context-budget-v2" else if (profile != null) "conservative-unqualified-extrapolation" else "file-size-lower-bound-only")
             .put("scope", "CPU/F16 KV. Native disables extras. Patched streaming builds budget committed weights plus max(source packing,native/context/compute); other repack builds add windows. Headroom unchanged. Repack is not a qualified RSS bound; concurrent system pressure can still cause LMKD.")
+        if (!needsCpuPlan(sha, upgradedEngine)) return result
+        // A matching GGUF does not carry allocation qualification across engine
+        // revisions. Unknown models also need their actual state/graph geometry.
+        val supported = policySupported && cpuPlanSupported(context, batch, microBatch, threads, weightBuffers)
+        result.put("accepted", false).put("profile_qualified", false).put("cpu_plan_required", true)
+            .put("weight_policy_supported", supported).put("profile", "unqualified-cpu-metadata-budget-v1")
+            .put("rejection_reason", if (!policySupported) result.get("rejection_reason") else if (!supported) "unsupported_cpu_metadata_geometry" else "cpu_metadata_plan_required")
+        if (!supported || cpuPlan == null) return result
+        require(cpuPlan.optBoolean("no_alloc") && cpuPlan.optString("backend_profile") == "cpu" &&
+            cpuPlan.optLong("gpu_model_bytes", -1) == 0L) { "Invalid native CPU memory plan" }
+        fun size(value: Long): Long = value.also { require(it in 0..64L * 1024 * MIB) { "Invalid native CPU plan size" } }
+        val plannedContext = size(cpuPlan.getLong("context_bytes"))
+        val plannedCompute = size(cpuPlan.getLong("compute_bytes"))
+        val largestTensor = size(cpuPlan.getLong("largest_cpu_tensor_bytes"))
+        val buffers = cpuPlan.getJSONArray("buffers")
+        var plannedModel = 0L
+        for (i in 0 until buffers.length()) plannedModel = size(plannedModel + size(buffers.getJSONObject(i).getLong("model_bytes")))
+        require(plannedModel > 0 && plannedContext > 0 && plannedCompute > 0 && largestTensor in 1..plannedModel) { "Incomplete native CPU memory plan" }
+        val nativeModel = maxOf(bytes, plannedModel)
+        // Mapped weights are clean/reclaimable. Keep the old known-model window
+        // as a conservative floor, without claiming its old measurement applies
+        // to this engine. Unknown models retain the full native/file footprint.
+        val weightBudget = if (loadMode == "mmap" && profile != null) minOf(nativeModel, maxOf(largestTensor, profile.mappedWindow)) else nativeModel
+        val metadataReserve = 64 * MIB
+        val scratchReserve = maxOf(81 * MIB, largestTensor, size(cpuPlan.optLong("cpu_workspace_bytes", 0)))
+        val plannedWorkspace = weightBudget + plannedContext + plannedCompute + metadataReserve
+        val plannedRequired = plannedWorkspace + scratchReserve + headroom + prefixReserve
+        val plannedAccepted = !lowMemory && bytes < total - 512 * MIB && effective >= plannedRequired
+        return result.put("accepted", plannedAccepted).put("required_bytes", plannedRequired)
+            .put("estimated_context_bytes", plannedContext).put("estimated_compute_bytes", plannedCompute)
+            .put("weight_budget_bytes", weightBudget).put("planned_native_model_bytes", plannedModel)
+            .put("metadata_reserve_bytes", metadataReserve).put("cpu_workspace_reserve_bytes", scratchReserve)
+            .put("phase_budget_before_headroom_bytes", plannedWorkspace).put("mapped_weight_window", loadMode == "mmap" && profile != null)
+            .put("cpu_plan", cpuPlan).put("rejection_reason", if (plannedAccepted) JSONObject.NULL else "memory_pressure_or_budget")
+            .put("scope", "Current-engine no_alloc context/compute and native weight geometry; known mapped weight window or full weights for unknown/read models;64MiB metadata; CPU scratch upper reserve at least max(81MiB,largest tensor); unchanged system headroom. Unqualified allocation estimate, not measured RSS; concurrent pressure can still cause LMKD.")
     }
 }

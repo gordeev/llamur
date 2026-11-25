@@ -781,6 +781,9 @@
     <string name="ui_stop_and_unload" formatted="false">"Stop and unload"</string>
     <string name="ui_runtime_is_closing" formatted="false">"Runtime is closing"</string>
     <string name="ui_estimating_memory_for_selected_gpu_profile" formatted="false">"Estimating memory for selected GPU profile…"</string>
+    <string name="ui_estimating_model_memory" formatted="false">"Estimating model memory…"</string>
+    <string name="ui_memory_plan_not_loaded">"Model not loaded: %1$s"</string>
+    <string name="ui_not_enough_memory_to_plan_model" formatted="false">"Not enough memory to estimate the model. Unload the current model first."</string>
     <string name="ui_estimation_cancelled" formatted="false">"Estimation cancelled"</string>
     <string name="ui_gpu_profile_not_loaded">"GPU profile not loaded: %1$s"</string>
     <string name="ui_no_model_selected" formatted="false">"No model selected"</string>
@@ -835,4 +838,6 @@
     <string name="ui_edit_summary_help" formatted="false">"Only the working summary changes. Original messages remain under the chat retention policy. Undo compaction restores them."</string>
     <string name="ui_api_response_limit" formatted="false">"Response limit for this chat"</string>
     <string name="ui_api_response_limit_help" formatted="false">"Maximum output tokens per request. On most providers this includes thinking and the visible answer. 0 uses the connection setting. For reasoning models, try 8192 or 16384 if the model supports it. Larger limits can increase cost; they do not increase the model context."</string>
+    <string name="ui_nightly_signing_change" formatted="false">"Nightly 0.7.0a uses a new signing key. Updating from the earlier 0.6.x releases requires uninstalling the old app first; otherwise Android rejects the installation. Uninstalling deletes local chats, settings and private models. Save anything important before reinstalling. Shared GGUF files in Downloads remain."</string>
+    <string name="ui_engine_experiments_pending" formatted="false">"Prefix caching and experimental prefill packing await model-level checks on the updated engine. They are temporarily unavailable; normal chat context and original model weights are preserved."</string>
 </resources>

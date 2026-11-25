@@ -1,6 +1,7 @@
 // Metadata-only M3 feasibility tool. It must never allocate or run model weights.
 #include "protocol.h"
 #include "llama-model.h" // Pinned staging internals, contained in this diagnostic.
+#include "llama-compat.h"
 #include "llama-ext.h"
 #include <algorithm>
 #include <fstream>
@@ -52,7 +53,7 @@ int main(int argc, char ** argv) {
         std::unique_ptr<llama_model, decltype(&llama_model_free)> model(
             llama_model_load_from_file(argv[1], params), llama_model_free);
         if (!model) throw std::runtime_error("Metadata plan failed");
-        if (!model->hparams.no_alloc) throw std::runtime_error("Metadata-only invariant failed");
+        if (!model_no_alloc(model.get(),0)) throw std::runtime_error("Metadata-only invariant failed");
         if (config.context > static_cast<uint32_t>(llama_model_n_ctx_train(model.get()))) {
             throw std::invalid_argument("Context exceeds model training limit");
         }

@@ -2,8 +2,23 @@
 
 ## Pinned source
 
-`upstream.lock.json` identifies the exact llama.cpp commit. Restore with
-`bash scripts/fetch-upstream.sh`. The checkout is disposable only when clean;
+`upstream-v0.9.0.lock.json` pins the product's llama.cpp 0.9.0 source at
+`cd959bae99ff4bed22bef2604f45241c09bbb8c8`, kept in
+`third_party/llama.cpp-v0.9.0`. Prepare the product sources with:
+
+```sh
+bash scripts/fetch-upstream.sh upstream-v0.9.0.lock.json
+python3 scripts/prepare-cpu-variant.py llamur-v0.9.0
+```
+
+`upstream.lock.json` retains the historical B0 and experimental source pin at
+`701fd25b3a55a90297dec0d925204b29084054c8`, in `third_party/llama.cpp`.
+Restore it with `bash scripts/fetch-upstream.sh`. Each CPU variant selects its
+own lock; historical variants continue to use the original lock by default.
+`export-build-source.py` includes both locked pristine trees and lock files so
+both product and historical variants can be prepared from source exports offline.
+
+Each checkout is disposable only when clean;
 the script refuses to overwrite local patches. Project code and any later patch
 series live outside that checkout. Application changes are separate from the pinned upstream checkout.
 
@@ -54,14 +69,16 @@ and limitations are described in docs/compatibility.md.
 
 The root project builds the chat/model-manager/API application with an isolated
 foreground inference service. Diagnostic MainActivity is retained for public
-benchmark fixtures. Default CPU variant is f32-recurrent-long-attention-v2,
-KleidiAI/GPU off. Final release acceptance is recorded in progress.md. With verified tools:
+benchmark fixtures. Default CPU variant is `llamur-v0.9.0`, using the pinned llama.cpp 0.9.0 tree,
+KleidiAI/GPU off. Set `MOTOAI_CPU_VARIANT` to select a historical CPU variant;
+GPU experiments retain their explicit source variants. Final release acceptance is recorded in progress.md. With verified tools:
 
 ```sh
 export JAVA_HOME="$PWD/.tools/jdk17/Contents/Home"
 export ANDROID_HOME="$PWD/.tools/android-sdk"
 export ANDROID_NDK_ROOT="$PWD/.tools/android-ndk-r28c"
 export MOTOAI_CMAKE_DIR="$PWD/.tools/cmake-3.31.6"
+bash scripts/fetch-upstream.sh upstream-v0.9.0.lock.json
 bash scripts/build-app.sh
 adb -d install -r app/build/outputs/apk/debug/app-debug.apk
 adb -d shell am start -n org.llamur.app.debug/org.motoai.runtime.ChatActivity
@@ -140,7 +157,13 @@ JNI directly. These are different scopes and must remain labeled.
 Host core tests (the tiny fixture must exist):
 
 ```sh
-cmake -S native-runtime -B build/core-host -G Ninja -DGGML_METAL=OFF -DGGML_BLAS=OFF -DBUILD_SHARED_LIBS=ON
+python3 scripts/prepare-cpu-variant.py llamur-v0.9.0
+cmake -S native-runtime -B build/core-host -G Ninja \
+  -DMOTOAI_LLAMA_SOURCE="$PWD/.tools/llamur-v0.9.0" \
+  -DMOTOAI_RUNTIME_VARIANT=llamur-v0.9.0 \
+  -DGGML_NATIVE=OFF -DGGML_METAL=OFF -DGGML_ACCELERATE=OFF \
+  -DGGML_BLAS=OFF -DGGML_LLAMAFILE=OFF -DGGML_CPU_KLEIDIAI=OFF \
+  -DGGML_OPENMP=OFF -DBUILD_SHARED_LIBS=ON
 cmake --build build/core-host --target runtime-test -j4
 ctest --test-dir build/core-host --output-on-failure
 ```

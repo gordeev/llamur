@@ -67,6 +67,21 @@
       "role": "smoke-only; never performance evidence for main models",
       "verified_local": true,
       "metadata_status": "full download SHA-256 verified; GGUF header inspected"
+    },
+    {
+      "id": "lfm3",
+      "repo": "LiquidAI/LFM3-1.7B-GGUF",
+      "revision": "cd0c74c575b5c416f3011b5b4c298077f26ca8c2",
+      "filename": "LFM3-1.7B-Q4_K_M.gguf",
+      "bytes": 1099627808,
+      "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",
+      "license": "lfm1.0",
+      "quantization": "Q4_K_M",
+      "architecture": "lfm3",
+      "role": "llama.cpp v0.9.0 upgrade verification; text model only",
+      "verified_local": true,
+      "metadata_status": "Full file size and SHA-256 verified against official repository LFS object; no weight conversion",
+      "weights_bundled_in_app": false
     }
   ]
 }

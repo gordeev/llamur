@@ -562,20 +562,24 @@ class RuntimeService : Service() {
         if (activeWake === wake) activeWake = null
     }
 
-    private fun planGpuLoad(data: Bundle, entry: ModelStore.Entry, candidate: JSONObject, commandStarted: Long) {
+    private fun planLoad(data: Bundle, entry: ModelStore.Entry, candidate: JSONObject, commandStarted: Long) {
         busy = true; planning = true; planningStopped = false
         val op = ++operation
         val ticket = NativeRuntime.ticket()
-        promote(); update("loading", UiText.get(R.string.ui_estimating_memory_for_selected_gpu_profile))
+        val cpu = candidate.optString("backend", "cpu") == "cpu"
+        promote(); update("loading", UiText.get(if (cpu) R.string.ui_estimating_model_memory else R.string.ui_estimating_memory_for_selected_gpu_profile))
         worker.execute {
             var wake: InferenceWakeLease? = null
             try {
                 wake = awake()
                 val backendStarted = SystemClock.elapsedRealtimeNanos()
-                NativeRuntime.initialize(this, candidate.getString("backend"))
+                NativeRuntime.initialize(this, candidate.optString("backend", "cpu"))
                 val initializeUs = (SystemClock.elapsedRealtimeNanos() - backendStarted) / 1000
                 val planStarted = SystemClock.elapsedRealtimeNanos()
-                val plan = ModelStore.open(this, entry.id).use { NativeRuntime.plan(it.path, candidate, ticket) }
+                // Transient workspace/cache reserves are added by admission;
+                // the planner measures the unchanged native model/state graph.
+                val plannedConfig = if (cpu) JSONObject(candidate.toString()).put("transient_repack", false).put("prefix_cache_mib", 0) else candidate
+                val plan = ModelStore.open(this, entry.id).use { NativeRuntime.plan(it.path, plannedConfig, ticket) }
                     .put("first_backend_initialize_us", initializeUs)
                     .put("planning_wall_us", (SystemClock.elapsedRealtimeNanos() - planStarted) / 1000)
                 main.post { if (op == operation && !closing) {
@@ -591,8 +595,8 @@ class RuntimeService : Service() {
                 main.post { if (op == operation && !closing) {
                     busy = false; planning = false
                     snapshot.put("attempted_model", entry.id)
-                        .put("error_kind", if (failure is NativeRuntime.Failure) failure.kind else "gpu_planning")
-                    update(if (loaded) "ready" else "unloaded", UiText.get(R.string.ui_gpu_profile_not_loaded, (failure.message)))
+                        .put("error_kind", if (failure is NativeRuntime.Failure) failure.kind else if (cpu) "cpu_planning" else "gpu_planning")
+                    update(if (loaded) "ready" else "unloaded", UiText.get(if (cpu) R.string.ui_memory_plan_not_loaded else R.string.ui_gpu_profile_not_loaded, (failure.message)))
                     saveDebugReport(data.getString("report_id")?.takeIf { it.matches(Regex("[a-zA-Z0-9_-]{1,80}")) }, false)
                     if (!loaded) releaseForeground()
                 } }
@@ -600,7 +604,7 @@ class RuntimeService : Service() {
         }
     }
 
-    private fun load(data: Bundle, gpuPlan: JSONObject? = null, commandStarted: Long = SystemClock.elapsedRealtimeNanos()) {
+    private fun load(data: Bundle, memoryPlan: JSONObject? = null, commandStarted: Long = SystemClock.elapsedRealtimeNanos()) {
         if (busy || closing) return
         val name = data.getString("model") ?: error(UiText.get(R.string.ui_no_model_selected))
         require(validName(name) && name.endsWith(".gguf")) { UiText.get(R.string.ui_invalid_model_file) }
@@ -611,15 +615,20 @@ class RuntimeService : Service() {
         require(candidate.optInt("threads", 4) in 1..64) { UiText.get(R.string.ui_invalid_thread_count) }
         val batchThreads = candidate.optInt("threads_batch", 0)
         require(batchThreads in 0..64) { UiText.get(R.string.ui_invalid_prefill_thread_count) }
-        if (candidate.optString("backend", "cpu") != "cpu" && gpuPlan == null) {
+        val cpu = candidate.optString("backend", "cpu") == "cpu"
+        val cpuPlanRequired = cpu && LoadAdmission.needsCpuPlan(entry.sha256, BuildConfig.UPGRADED_ENGINE)
+        val cpuPlanSupported = LoadAdmission.cpuPlanSupported(context, candidate.optInt("batch", 512), candidate.optInt("micro_batch", 128),
+            maxOf(candidate.optInt("threads", 4), batchThreads), candidate.optString("weight_buffers", "native")) &&
+            (!BuildConfig.UPGRADED_ENGINE || !candidate.optBoolean("transient_repack", false) && candidate.optInt("prefix_cache_mib", 0) == 0)
+        if ((!cpu || cpuPlanRequired && cpuPlanSupported) && memoryPlan == null) {
             val free = ActivityManager.MemoryInfo().also { getSystemService(ActivityManager::class.java).getMemoryInfo(it) }
             if (free.lowMemory || free.availMem < maxOf(1536L * 1024 * 1024, free.threshold * 2)) {
                 snapshot.put("error_kind", "memory_admission").put("attempted_model", name)
-                update(if (loaded) "ready" else "unloaded", UiText.get(R.string.ui_not_enough_memory_to_check_gpu_profile))
+                update(if (loaded) "ready" else "unloaded", UiText.get(if (cpu) R.string.ui_not_enough_memory_to_plan_model else R.string.ui_not_enough_memory_to_check_gpu_profile))
                 saveDebugReport(data.getString("report_id")?.takeIf { it.matches(Regex("[a-zA-Z0-9_-]{1,80}")) }, false)
                 return
             }
-            planGpuLoad(Bundle(data), entry, candidate, commandStarted); return
+            planLoad(Bundle(data), entry, candidate, commandStarted); return
         }
         val memory = ActivityManager.MemoryInfo().also { getSystemService(ActivityManager::class.java).getMemoryInfo(it) }
         val available = if ((applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0 && candidate.has("_test_memory_budget_bytes"))
@@ -639,8 +648,9 @@ class RuntimeService : Service() {
             candidate.optInt("micro_batch", 128), memory.totalMem, available, memory.threshold, memory.lowMemory, reclaimable,
             maxOf(candidate.optInt("threads", 4), batchThreads), candidate.optString("load_mode", "auto"), candidate.optString("weight_buffers", "native"),
             BuildConfig.STREAMED_REPACK_SOURCES, candidate.optBoolean("transient_repack", false), BuildConfig.TRANSIENT_REPACK, BuildConfig.TRANSIENT_MIN_ROWS,
-            candidate.optInt("prefix_cache_mib", 0), BuildConfig.EXACT_STATE_LAYOUT, candidate.optBoolean("swa_full", true))
-        if (gpuPlan != null) admission = GpuAdmission.evaluate(admission, gpuPlan, entry.sha256, candidate)
+            candidate.optInt("prefix_cache_mib", 0), BuildConfig.EXACT_STATE_LAYOUT, candidate.optBoolean("swa_full", true),
+            upgradedEngine = BuildConfig.UPGRADED_ENGINE, cpuPlan = if (cpu) memoryPlan else null)
+        if (!cpu && memoryPlan != null) admission = GpuAdmission.evaluate(admission, memoryPlan, entry.sha256, candidate)
         val pressureThreshold = if ((applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0 && candidate.has("_test_load_pressure_threshold_bytes"))
             candidate.getLong("_test_load_pressure_threshold_bytes").also { require(it in maxOf(512L * 1024 * 1024, memory.threshold * 2)..memory.totalMem) }
             else maxOf(512L * 1024 * 1024, memory.threshold * 2,
@@ -736,7 +746,7 @@ class RuntimeService : Service() {
                     .put("verified_source_sha256",sourceSha).put("source_verify_us",verifyUs)
                 if (!watchState.compareAndSet(0, 1)) throw NativeRuntime.Failure("memory_admission", UiText.get(R.string.ui_memory_became_insufficient_during_loading))
                 result.put("model_location", opened.location).put("model_file_bytes", opened.bytes)
-                    .put("backend_initialize_us", backendInitializeUs + (gpuPlan?.optLong("first_backend_initialize_us") ?: 0))
+                    .put("backend_initialize_us", backendInitializeUs + (memoryPlan?.optLong("first_backend_initialize_us") ?: 0))
                     .put("service_load_wall_us", (SystemClock.elapsedRealtimeNanos() - commandStarted) / 1000)
                 // Runtime.load has now released the previous native mapping. An
                 // extra unload here would invalidate the already queued ticket.

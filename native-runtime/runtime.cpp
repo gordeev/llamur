@@ -6,8 +6,9 @@
 #include "sampling.h"
 #include "gguf.h"
 #include "llama-model.h" // Pinned model-buffer validation; contained in the native boundary.
+#include "llama-compat.h"
 // Pinned upstream staging API; contained here, never exposed over JNI.
-#include "../third_party/llama.cpp/src/llama-ext.h"
+#include "llama-ext.h"
 #include <algorithm>
 #include <chrono>
 #include <cmath>
@@ -263,6 +264,9 @@ int64_t Runtime::load(const std::string & path, const Config & config, Ticket op
            config.weight_buffers!=WeightBuffers::Native || config.context>8192 ||
            config.batch!=512 || config.micro_batch!=128 || config.threads>4 || config.threads_batch>4)
             throw std::invalid_argument("Prefix cache requires explicit bounded native CPU geometry");
+#if !MOTOAI_PREFIX_CACHE_QUALIFIED
+        throw std::invalid_argument("Prefix cache is not qualified for this engine revision; disable it in the model profile");
+#endif
         ggml_context * tensors=nullptr;
         auto input_file=open_model_file(path);
         std::unique_ptr<gguf_context,decltype(&gguf_free)> header(gguf_init_from_file_ptr(input_file.get(),{true,&tensors}),gguf_free);
@@ -556,7 +560,7 @@ ModelPlan Runtime::plan(const std::string & path, const Config & config, Ticket 
     std::unique_ptr<llama_model, decltype(&llama_model_free)> model(
         descriptor_file?llama_model_load_from_file_ptr(descriptor_file.get(),params):llama_model_load_from_file(path.c_str(), params), llama_model_free);
     check_cancelled();
-    if (!model || !model->hparams.no_alloc) throw std::runtime_error("Metadata-only model planning failed");
+    if (!model || !model_no_alloc(model.get(),0)) throw std::runtime_error("Metadata-only model planning failed");
     if (config.context > static_cast<uint32_t>(llama_model_n_ctx_train(model.get())))
         throw std::invalid_argument("Planned context exceeds model training context");
     auto cp = llama_context_default_params();

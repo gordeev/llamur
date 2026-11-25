@@ -33,7 +33,7 @@ if args.tests is not None:
     if hashlib.file_digest(test_target.open('rb'), 'sha256').hexdigest() != test_sha:
         raise RuntimeError('Archived test APK differs from build output')
 files = [ROOT / name for name in ['build.gradle.kts', 'settings.gradle.kts', 'gradle.properties', 'app/build.gradle.kts',
-         'upstream.lock.json', 'toolchain.lock.json', 'tool-archives.lock.json', 'native-dependencies.lock.json', 'bench/gpu-dependencies.lock.json', 'LICENSE']]
+         'upstream.lock.json', 'upstream-v0.9.0.lock.json', 'toolchain.lock.json', 'tool-archives.lock.json', 'native-dependencies.lock.json', 'bench/gpu-dependencies.lock.json', 'LICENSE']]
 for directory in ['app/src/main', 'app/src/androidTest', 'native-runtime', 'scripts', 'gradle', 'licenses', 'patches']:
     files += [path for path in (ROOT / directory).rglob('*') if path.is_file() and
               (path.suffix in ('.cpp', '.h', '.kt', '.xml', '.json', '.py', '.sh', '.cmake', '.jar', '.properties', '.txt', '.patch') or

@@ -8,23 +8,34 @@ keep sensitive conversations temporary, get replies while the app is minimized,
 and connect desktop tools to the model running on your phone. You can also use
 OpenRouter, OpenAI, Claude or your own compatible server from the same interface.
 
-**Built around a quality-first, patched llama.cpp runtime:** original GGUF weights,
-original quantization and F16 KV stay intact. The engine has model-specific numeric
-and memory corrections, cancellable inference, and optional bounded prefill packing.
+**Built around a patched llama.cpp runtime:** original GGUF weights, original
+quantization and F16 KV stay intact. The 0.7.0a nightly upgrades the engine to
+llama.cpp v0.9.0 and uses current CPU allocation plans for memory admission.
+Engine and model qualification is still in progress.
 
 Development preview · Android 9+ · ARM64 · English / Русский · Apache-2.0 application.
 F-Droid preparation is included; the app is not listed in F-Droid yet.
 
 ## Download and install
 
-[Download the ARM64 APK — 0.6.7 public preview](https://github.com/gordeev/llamur/releases/download/v0.6.7/llamur-0.6.7-arm64-v8a.apk) · [Release notes and checksums](https://github.com/gordeev/llamur/releases/tag/v0.6.7)
+[Download the ARM64 APK — 0.7.0a nightly](https://github.com/gordeev/llamur/releases/download/v0.7.0a/llamur-0.7.0a-arm64-v8a.apk) · [Release assets and checksums](https://github.com/gordeev/llamur/releases/tag/v0.7.0a) · [Release notes](docs/releases/0.7.0a.md)
 
-Requires Android 9+ with a 64-bit ARM64 OS. Open the downloaded APK to install;
-model weights are downloaded separately. This is an early public preview.
-Public GitHub builds use a dedicated release certificate. Earlier local test
-builds and future F-Droid builds may use different signers and cannot necessarily
-be updated in place. Keep an existing installation's data until you have chosen
-your update channel. [Signing and verification](docs/signing.md).
+Requires Android 9+ with a 64-bit ARM64 OS. Model weights are downloaded separately.
+
+**0.7.0a uses a new nightly signing certificate because the original release key
+was lost. It cannot update 0.6.x in place.** Save anything you need before
+uninstalling 0.6.x and installing the nightly APK. Uninstalling deletes local
+chats, settings, saved credentials and app-private model copies. Model files in
+shared Downloads remain. [Signing certificate and verification](docs/signing.md).
+
+Prefix caching and transient prefill packing are disabled for the upgraded engine
+pending requalification. Cross-engine numerical diagnostic gates failed; this
+nightly makes no completed model-quality or numerical-equivalence claim. LFM3
+standalone host/phone scored and functional checks pass. Actual Android-service
+CPU planning, model loading and a completed LFM3 chat reply also pass.
+Tiny-model Android-service cancellation, recovery, notification Stop and isolated-process reload checks also pass.
+Historical results below apply to the earlier engine. This nightly has no Linux
+reproducibility claim. [Current scope and limits](docs/releases/0.7.0a.md).
 
 
 ## A real Android app
@@ -67,9 +78,11 @@ Local chat never silently falls back to a cloud provider. API keys are not bundl
 HF tokens are optional for public repositories and required where the repository's
 access rules require them. See the [privacy policy](docs/privacy-policy.md).
 
-## What changes compared with stock llama.cpp?
+## Historical comparison with stock llama.cpp
 
-The comparison is against **the pinned upstream Android example**, commit
+These findings cover the engine used through 0.6.7, before the 0.7.0a upgrade.
+They do not qualify the nightly engine. The comparison is against
+**the pinned upstream Android example**, commit
 [`701fd25`](https://github.com/ggml-org/llama.cpp/tree/701fd25b3a55a90297dec0d925204b29084054c8/examples/llama.android),
 plus matched native-path experiments. It is not a claim about every llama.cpp
 frontend or later upstream revision.
@@ -91,8 +104,10 @@ quality or stability checks are excluded from the shipping profile. CPU4 remains
 the conservative default. [Compatibility findings](docs/compatibility.md) ·
 [Patch series](patches/cpu-numeric/series.json).
 
-## Measured performance
+## Historical performance measurements
 
+These measurements predate the 0.7.0a engine upgrade. They are retained as
+historical results and do not establish this nightly’s performance or quality.
 All phone measurements below are from **Motorola Edge 40 Pro, Snapdragon 8 Gen 2,
 12 GB RAM, Android 16**, using the original locked Q4_K_M files and F16 KV.
 
@@ -143,7 +158,7 @@ Ornith** and **76.4 minutes for Gemma**. Those are compatibility/quality control
 not an interactive experience or proof of arbitrary long-context quality.
 [Full results and limits](docs/performance.md).
 
-## Tested models
+## Model coverage before the engine upgrade
 
 | Exact GGUF | Architecture | File size | Verified scope |
 | --- | --- | ---: | --- |
@@ -182,7 +197,7 @@ free RAM, firmware and battery policy matter; brand or “flagship” alone is i
 ```sh
 git clone https://github.com/gordeev/llamur.git
 cd llamur
-bash scripts/fetch-upstream.sh
+bash scripts/fetch-upstream.sh upstream-v0.9.0.lock.json
 ```
 
 Use JDK 17, Android SDK/API 36, stable NDK r28c (`28.2.13676358`) and Android CMake

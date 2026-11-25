@@ -1,0 +1,1 @@
+Experimental 0.7.0a nightly: llama.cpp v0.9.0, LFM3 text support and current-engine CPU memory planning. New signing key: uninstall 0.6.x before installing; local app data is deleted. Shared Downloads remain. Prefix cache/transient packing disabled pending qualification. See release notes for failed cross-engine diagnostics and measured scope.

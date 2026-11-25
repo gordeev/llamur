@@ -4,53 +4,54 @@
   "components": [
     {
       "name": "llama.cpp / GGML (including its C++ Jinja engine)",
-      "version": "701fd25b3a55a90297dec0d925204b29084054c8",
+      "version": "cd959bae99ff4bed22bef2604f45241c09bbb8c8",
       "license": "MIT",
       "notice": "llama.cpp.MIT.txt",
-      "source": "third_party/llama.cpp; hash-locked local patches in patches/cpu-numeric/series.json"
+      "source": "third_party/llama.cpp-v0.9.0; hash-locked local patches in patches/cpu-numeric/series.json"
     },
     {
       "name": "nlohmann/json",
       "version": "3.12.0",
       "license": "MIT",
       "notice": "nlohmann-json.MIT.txt",
-      "source": "third_party/llama.cpp/vendor/nlohmann/json.hpp"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/nlohmann/json.hpp"
     },
     {
       "name": "cpp-httplib",
       "license": "MIT",
       "notice": "cpp-httplib.MIT.txt",
-      "source": "third_party/llama.cpp/vendor/cpp-httplib"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/cpp-httplib",
+      "version": "0.64.0"
     },
     {
       "name": "xxHash",
       "license": "BSD-2-Clause",
       "notice": "xxhash.BSD-2-Clause.txt",
-      "source": "third_party/llama.cpp/vendor/hash/xxhash"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/hash/xxhash"
     },
     {
       "name": "rotate-bits",
       "license": "MIT",
       "notice": "rotate-bits.MIT.txt",
-      "source": "third_party/llama.cpp/vendor/hash/rotate-bits"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/hash/rotate-bits"
     },
     {
       "name": "SHA-1 (Steve Reid)",
       "license": "LicenseRef-Public-Domain",
       "notice": "sha1.Public-Domain.txt",
-      "source": "third_party/llama.cpp/vendor/hash/sha1"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/hash/sha1"
     },
     {
       "name": "SHA-256 (Igor Pavlov)",
       "license": "LicenseRef-Public-Domain",
       "notice": "sha256.Public-Domain.txt",
-      "source": "third_party/llama.cpp/vendor/hash/sha256"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/hash/sha256"
     },
     {
       "name": "subprocess.h",
       "license": "Unlicense",
       "notice": "subprocess.Unlicense.txt",
-      "source": "third_party/llama.cpp/vendor/sheredom/subprocess.h"
+      "source": "third_party/llama.cpp-v0.9.0/vendor/sheredom/subprocess.h"
     },
     {
       "name": "LLVM C++ runtime / libc++abi / compiler runtime notices",

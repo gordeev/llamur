@@ -1,3 +1,6 @@
+import java.io.File
+import groovy.json.JsonSlurper
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -12,12 +15,12 @@ providers.gradleProperty("motoaiBuildDirectory").orNull?.let { relative ->
 val gpuBackend = providers.gradleProperty("motoaiGpuBackend").getOrElse("none")
 require(gpuBackend in listOf("none", "vulkan", "opencl", "both")) { "motoaiGpuBackend must be none, vulkan, opencl or both" }
 val cpuVariant = providers.gradleProperty("motoaiCpuVariant").getOrElse(
-    if (gpuBackend == "none") "f32-recurrent-long-attention-v2" else "f32-recurrent-selective-backends")
+    if (gpuBackend == "none") "llamur-v0.9.0" else "f32-recurrent-selective-backends")
 require(gpuBackend == "none" || cpuVariant in listOf("f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only")) { "GPU experiments require selective driver loading" }
 val kleidiAI = providers.gradleProperty("motoaiCpuKleidiAI").getOrElse("false").let {
     when (it) { "true" -> "ON"; "false" -> "OFF"; else -> error("motoaiCpuKleidiAI must be true or false") }
 }
-val cpuSources = mapOf("baseline" to "third_party/llama.cpp", "f32-attention-scalar-math" to ".tools/llama-cpu-f32-math-v2",
+val cpuSources = mapOf("llamur-v0.9.0" to ".tools/llamur-v0.9.0", "baseline" to "third_party/llama.cpp", "f32-attention-scalar-math" to ".tools/llama-cpu-f32-math-v2",
     "f32-recurrent-scalar-math" to ".tools/llama-cpu-f32-recurrent",
     "f32-recurrent-repack-stream" to ".tools/llama-cpu-repack-stream",
     "f32-recurrent-repack-order" to ".tools/llama-cpu-repack-order",
@@ -35,6 +38,16 @@ val cpuSources = mapOf("baseline" to "third_party/llama.cpp", "f32-attention-sca
     "f32-recurrent-state-layout-v2" to ".tools/llama-state-layout-v2",
     "f32-recurrent-long-attention-v2" to ".tools/llama-long-attention-v2")
 val llamaSource = rootProject.file(cpuSources[cpuVariant] ?: error("Unknown CPU patch variant"))
+val cpuSeries = JsonSlurper().parse(rootProject.file("patches/cpu-numeric/series.json")) as Map<*, *>
+val selectedVariant = (cpuSeries["variants"] as Map<*, *>)[cpuVariant] as? Map<*, *>
+val upstreamLockPath = selectedVariant?.get("upstream_lock") as? String ?: "upstream.lock.json"
+val upstreamLockFile = rootProject.file(upstreamLockPath).canonicalFile
+require(!File(upstreamLockPath).isAbsolute && ".." !in upstreamLockPath.split('/') &&
+    upstreamLockFile.toPath().startsWith(rootProject.projectDir.canonicalFile.toPath())) {
+    "Upstream lock must be a safe repository-relative path"
+}
+val upstreamCommit = (JsonSlurper().parse(upstreamLockFile) as Map<*, *>)["commit"] as String
+require(upstreamCommit.matches(Regex("[0-9a-f]{40}"))) { "Upstream commit must be a complete Git hash" }
 val gpuHost = when {
     System.getProperty("os.name").startsWith("Mac") -> "darwin-x86_64"
     System.getProperty("os.name").startsWith("Windows") -> "windows-x86_64"
@@ -52,18 +65,21 @@ android {
         applicationId = "org.llamur.app"
         minSdk = 28
         targetSdk = 36
-        versionCode = 15
-        versionName = "0.6.7"
-        buildConfigField("boolean", "EXACT_STATE_LAYOUT", (cpuVariant in listOf("f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2")).toString())
+        versionCode = 16
+        versionName = "0.7.0a"
+        buildConfigField("boolean", "UPGRADED_ENGINE", (upstreamCommit != cpuSeries["upstream_commit"]).toString())
+        buildConfigField("boolean", "NIGHTLY_SIGNING", "true")
+        buildConfigField("boolean", "EXACT_STATE_LAYOUT", (cpuVariant in listOf("f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2", "llamur-v0.9.0")).toString())
         buildConfigField("String", "GPU_BACKEND", "\"$gpuBackend\"")
-        buildConfigField("boolean", "TRANSIENT_REPACK", (cpuVariant in listOf("f32-recurrent-transient-model", "f32-recurrent-transient-threshold", "f32-recurrent-stable-attention-v2", "f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only", "f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2")).toString())
-        buildConfigField("int", "TRANSIENT_MIN_ROWS", if (cpuVariant in listOf("f32-recurrent-transient-threshold", "f32-recurrent-stable-attention-v2", "f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only", "f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2")) "24" else "4")
+        buildConfigField("boolean", "TRANSIENT_REPACK", (cpuVariant in listOf("f32-recurrent-transient-model", "f32-recurrent-transient-threshold", "f32-recurrent-stable-attention-v2", "f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only", "f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2", "llamur-v0.9.0")).toString())
+        buildConfigField("int", "TRANSIENT_MIN_ROWS", if (cpuVariant in listOf("f32-recurrent-transient-threshold", "f32-recurrent-stable-attention-v2", "f32-recurrent-selective-backends", "f32-recurrent-literal-chat", "f32-recurrent-opencl-matmul-only", "f32-recurrent-state-layout-v2", "f32-recurrent-long-attention-v2", "llamur-v0.9.0")) "24" else "4")
         buildConfigField("boolean", "STREAMED_REPACK_SOURCES",
             (cpuVariant in listOf("f32-recurrent-repack-stream", "f32-recurrent-repack-order", "f32-recurrent-repack-cache", "f32-recurrent-repack-selective", "f32-recurrent-native-demand", "f32-recurrent-repack-q4", "f32-recurrent-transient-pack")).toString())
         testInstrumentationRunner = "org.motoai.runtime.RuntimeInstrumentation"
         ndk { abiFilters += "arm64-v8a" }
         externalNativeBuild { cmake { arguments += listOf("-DCMAKE_BUILD_TYPE=Release",
             "-DMOTOAI_LLAMA_SOURCE=${llamaSource.absolutePath}", "-DMOTOAI_RUNTIME_VARIANT=$cpuVariant",
+            "-DMOTOAI_UPSTREAM_COMMIT=$upstreamCommit",
             "-DMOTOAI_CPU_KLEIDIAI=$kleidiAI", "-DMOTOAI_GPU_BACKEND=$gpuBackend",
             "-DGGML_OPENCL_MOTOAI_MATMUL_ONLY=${if (cpuVariant == "f32-recurrent-opencl-matmul-only") "ON" else "OFF"}")
             if (gpuBackend in listOf("vulkan", "both")) arguments += listOf(

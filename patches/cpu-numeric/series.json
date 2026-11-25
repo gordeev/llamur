@@ -878,6 +878,17 @@
         }
       ],
       "patched_tree": "258a8bbecd1af3bc84fd8806cf6fc6641c3e552d"
+    },
+    "llamur-v0.9.0": {
+      "directory": ".tools/llamur-v0.9.0",
+      "upstream_lock": "upstream-v0.9.0.lock.json",
+      "patches": [
+        {
+          "path": "patches/engine-v0.9.0/0001-preserve-llamur-runtime.patch",
+          "sha256": "0e9b209fadc514c433cdffdfbd63046981a1150d78c99807dd8dc6c2486c133e"
+        }
+      ],
+      "patched_tree": "c617e084dd80e82983459ac4c1185c882a910c03"
     }
   }
 }

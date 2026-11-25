@@ -596,6 +596,7 @@ class ChatActivity : Activity() {
         val url="https://github.com/gordeev/llamur"
         val box=panel();box.addView(text("llamur",26f));box.addView(text(BuildConfig.VERSION_NAME,14f))
         box.addView(text(UiText.get(R.string.ui_about_llamur_description),15f))
+        if(BuildConfig.NIGHTLY_SIGNING) box.addView(text(UiText.get(R.string.ui_nightly_signing_change),15f).apply {setTextIsSelectable(true)},LinearLayout.LayoutParams(-1,-2).apply {topMargin=dp(16);bottomMargin=dp(8)})
         box.addView(button(UiText.get(R.string.ui_source_code_on_github)){startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(url)))})
         box.addView(text(url,13f).apply {setTextIsSelectable(true);setTextColor(accent)})
         pages.open(UiText.get(R.string.ui_about_llamur),ScrollView(this).apply {addView(box)})
@@ -790,8 +791,9 @@ class ChatActivity : Activity() {
                 override fun onStartTrackingTouch(bar: SeekBar?) {}; override fun onStopTrackingTouch(bar: SeekBar?) {}
             }) })
         val output = field(UiText.get(R.string.ui_response_reserve_tokens),prefs.getInt("output:${entry.id}",2048).toString()).apply {inputType=2};box.addView(output)
-        val transient = CheckBox(this).apply { minimumHeight=dp(56); text = UiText.get(R.string.ui_experimental_prefill_acceleration_two_verified_models); isChecked = prefs.getBoolean("transient:${entry.id}", false) }; box.addView(transient)
-        val cache = CheckBox(this).apply { minimumHeight=dp(56); text = UiText.get(R.string.ui_chat_prefix_cache_in_ram_128_mib); isChecked = prefs.getBoolean("cache:${entry.id}", false) }; box.addView(cache)
+        val transient = CheckBox(this).apply { minimumHeight=dp(56); text = UiText.get(R.string.ui_experimental_prefill_acceleration_two_verified_models); isChecked = !BuildConfig.UPGRADED_ENGINE && prefs.getBoolean("transient:${entry.id}", false); isEnabled = !BuildConfig.UPGRADED_ENGINE }; box.addView(transient)
+        val cache = CheckBox(this).apply { minimumHeight=dp(56); text = UiText.get(R.string.ui_chat_prefix_cache_in_ram_128_mib); isChecked = !BuildConfig.UPGRADED_ENGINE && prefs.getBoolean("cache:${entry.id}", false); isEnabled = !BuildConfig.UPGRADED_ENGINE }; box.addView(cache)
+        if(BuildConfig.UPGRADED_ENGINE) box.addView(text(UiText.get(R.string.ui_engine_experiments_pending),14f),LinearLayout.LayoutParams(-1,-2).apply {topMargin=dp(8);bottomMargin=dp(12)})
         box.addView(button(UiText.get(R.string.ui_load)) {
             val reserve = output.text.toString().toInt(); require(reserve in 1 until points[selected]) { UiText.get(R.string.ui_response_reserve_must_be_smaller_than_context) }
             require(!cache.isChecked || points[selected] <= 8192) { UiText.get(R.string.ui_verified_cache_works_only_up_to_8k) }

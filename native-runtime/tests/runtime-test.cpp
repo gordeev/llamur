@@ -74,6 +74,40 @@ int main(int argc, char ** argv) {
         catch (const std::invalid_argument &) { marker_rejected = true; }
         if (!marker_rejected) throw std::runtime_error("Literal control marker was interpreted as template syntax");
 #endif
+#ifdef LLAMA_MOTOAI_KEEP_KV_LAYOUT
+        {
+            // Restoring an empty snapshot must replace live cells even when
+            // the caller has not cleared the destination context first.
+            auto state_params=llama_model_default_params();
+            state_params.n_gpu_layers=0;state_params.use_extra_bufts=false;
+            std::unique_ptr<llama_model,decltype(&llama_model_free)> state_model(
+                llama_model_load_from_file(argv[1],state_params),llama_model_free);
+            if(!state_model)throw std::runtime_error("Empty-state model load failed");
+            auto cp=llama_context_default_params();
+            cp.n_ctx=128;cp.n_batch=128;cp.n_ubatch=64;cp.n_threads=2;cp.n_threads_batch=2;
+            cp.type_k=GGML_TYPE_F16;cp.type_v=GGML_TYPE_F16;
+            std::unique_ptr<llama_context,decltype(&llama_free)> state_context(
+                llama_init_from_model(state_model.get(),cp),llama_free);
+            if(!state_context)throw std::runtime_error("Empty-state context allocation failed");
+            constexpr auto flags=LLAMA_STATE_SEQ_FLAGS_KEEP_KV_LAYOUT;
+            const auto size=llama_state_seq_get_size_ext(state_context.get(),0,flags);
+            std::vector<uint8_t> empty(size);
+            if(!size || llama_state_seq_get_data_ext(state_context.get(),empty.data(),size,0,flags)!=size)
+                throw std::runtime_error("Empty exact-layout capture failed");
+            common_batch batch(state_context.get());
+            batch.add(llama_vocab_bos(fixture_vocab),0,0,true);
+            if(llama_process(state_context.get(),LLAMA_PROCESS_TYPE_DECODE,batch.get())!=0 ||
+               llama_memory_seq_pos_max(llama_get_memory(state_context.get()),0)!=0)
+                throw std::runtime_error("Empty-state destination was not populated");
+            if(llama_state_seq_set_data_ext(state_context.get(),empty.data(),size,0,flags)!=size ||
+               llama_memory_seq_pos_min(llama_get_memory(state_context.get()),0)!=-1 ||
+               llama_memory_seq_pos_max(llama_get_memory(state_context.get()),0)!=-1)
+                throw std::runtime_error("Empty exact-layout restore retained live cells");
+            std::vector<uint8_t> again(llama_state_seq_get_size_ext(state_context.get(),0,flags));
+            if(llama_state_seq_get_data_ext(state_context.get(),again.data(),again.size(),0,flags)!=again.size() || again!=empty)
+                throw std::runtime_error("Empty exact-layout restore changed the saved layout");
+        }
+#endif
         const auto first = generate();
         if (!motoai::parse_config(motoai::Json::object()).swa_full) throw std::runtime_error("SWA default changed");
         auto compact_swa=config;compact_swa.swa_full=false;bool compact_rejected=false;
@@ -87,8 +121,16 @@ int main(int argc, char ** argv) {
         if(motoai::parse_config(motoai::Json::object()).prefix_cache_mib!=0)
             throw std::runtime_error("Prefix cache default changed");
         auto unsupported_cache=config;unsupported_cache.prefix_cache_mib=128;
+        // Reach architecture qualification with otherwise valid cache geometry.
+        unsupported_cache.context=4096;unsupported_cache.batch=512;unsupported_cache.micro_batch=128;
         bool cache_rejected=false;
-        try {runtime.load(argv[1],unsupported_cache,runtime.ticket());}catch(const std::invalid_argument &){cache_rejected=true;}
+        try {runtime.load(argv[1],unsupported_cache,runtime.ticket());}catch(const std::invalid_argument & error){
+#if MOTOAI_PREFIX_CACHE_QUALIFIED
+            cache_rejected=std::string(error.what())=="Prefix cache requires a qualified architecture and exact state layout API";
+#else
+            cache_rejected=std::string(error.what())=="Prefix cache is not qualified for this engine revision; disable it in the model profile";
+#endif
+        }
         if(!cache_rejected || generate()!=first)throw std::runtime_error("Unsupported prefix-cache model damaged active model");
         for (const auto & invalid : std::vector<motoai::Json>{
                 {{"backend", "cuda"}}, {{"gpu_layers", 1}}, {{"backend", "vulkan"}},

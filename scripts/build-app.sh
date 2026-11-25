@@ -10,6 +10,6 @@ python3 scripts/configure-android.py --sdk "$ANDROID_HOME" \
     --ndk "$ANDROID_NDK_ROOT" --cmake "$MOTOAI_CMAKE_DIR"
 export GRADLE_USER_HOME="${GRADLE_USER_HOME:-$PWD/.tools/gradle}"
 export CMAKE_BUILD_PARALLEL_LEVEL="${BUILD_JOBS:-4}"
-python3 scripts/prepare-cpu-variant.py "${MOTOAI_CPU_VARIANT:-f32-recurrent-long-attention-v2}"
-./gradlew -PmotoaiCpuVariant="${MOTOAI_CPU_VARIANT:-f32-recurrent-long-attention-v2}" --no-daemon --max-workers=4 :app:assembleDebug
+python3 scripts/prepare-cpu-variant.py "${MOTOAI_CPU_VARIANT:-llamur-v0.9.0}"
+./gradlew -PmotoaiCpuVariant="${MOTOAI_CPU_VARIANT:-llamur-v0.9.0}" --no-daemon --max-workers=4 :app:assembleDebug
 python3 scripts/archive-build.py

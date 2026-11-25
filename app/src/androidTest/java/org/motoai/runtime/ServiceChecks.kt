@@ -156,7 +156,7 @@ internal class ServiceChecks(private val test: Instrumentation) {
         test.waitForIdleSync()
         test.runOnMainSync {
             check(views(reused.window.decorView).filterIsInstance<android.widget.TextView>()
-                .any { it.text.toString().contains("Старый debug-запуск не повторяется") })
+                .any { it.text.toString().contains(UiText.get(R.string.ui_old_debug_run_will_not_be_repeated)) })
             reused.finish()
         }
         File(context.filesDir, "bench/started-$reusedId.marker").delete()
@@ -277,7 +277,24 @@ internal class ServiceChecks(private val test: Instrumentation) {
                 putString("model", "stories260K.gguf")
                 putString("config", JSONObject().put("context", 128).put("load_mode", "invalid-fixture-mode").toString())
             })
-            await { it.optString("state") == "unloaded" && it.optString("message").contains("Unknown load mode") }
+            val fixtureSha = ModelStore.entries(context).first { it.id == "stories260K.gguf" }.sha256
+            val plannerRejectsInvalidMode = LoadAdmission.needsCpuPlan(fixtureSha, BuildConfig.UPGRADED_ENGINE)
+            if (plannerRejectsInvalidMode) {
+                // Metadata validation precedes replacement of the live model.
+                val invalid = await { it.optString("state") == "ready" && it.optString("error_kind") == "runtime" &&
+                    it.optString("message").contains("Unknown load mode") }
+                check(invalid.getInt("pid") == afterPressure.getInt("pid"))
+                check(invalid.getString("model") == "stories260K.gguf" && invalid.getJSONObject("load").getInt("context") == 128)
+                check(invalid.getString("output_file") == afterPressure.getString("output_file"))
+                check(reference.contentEquals(File(context.filesDir, invalid.getString("output_file")).readBytes()))
+                generate()
+                val afterInvalid = await { it.optString("state") == "ready" && it.has("result") && !it.has("error_kind") }
+                check(afterInvalid.getInt("pid") == afterPressure.getInt("pid"))
+                check(reference.contentEquals(File(context.filesDir, afterInvalid.getString("output_file")).readBytes()))
+                send(RuntimeService.UNLOAD); state("unloaded")
+            } else {
+                await { it.optString("state") == "unloaded" && it.optString("message").contains("Unknown load mode") }
+            }
             load(); state("ready")
             val notifications = context.getSystemService(android.app.NotificationManager::class.java).activeNotifications
             val notification = notifications.firstOrNull { it.id == RuntimeService.NOTIFICATION } ?: error("No runtime notification")
@@ -303,7 +320,7 @@ internal class ServiceChecks(private val test: Instrumentation) {
                 check(pressure.getJSONObject("load_memory_watch").getBoolean("pressure_abort"))
                 pressureCancellation = "Gemma load cancelled with a stricter debug threshold; no artificial allocation or foreign-app change"
                 load(gemma.id, loadMode = "mmap"); state("loading"); send(RuntimeService.STOP)
-                await(45) { it.optString("state") == "unloaded" && it.optString("message").contains("отменена") }
+                await(45) { it.optString("state") == "unloaded" && it.optString("error_kind") == "cancelled" }
                 loadCancellation = "passed on Gemma"
                 load(gemma.id, 128, loadMode = "mmap"); val gemmaReady = state("ready")
                 val allocations = gemmaReady.getJSONObject("load").getJSONArray("buffer_allocations")
@@ -334,7 +351,7 @@ internal class ServiceChecks(private val test: Instrumentation) {
             while (!loadEnabled && SystemClock.elapsedRealtime() < uiDeadline) {
                 test.runOnMainSync {
                     loadEnabled = views(activity.window.decorView).filterIsInstance<android.widget.Button>()
-                        .first { it.text.toString() == "Загрузить в память" }.isEnabled
+                        .first { it.text.toString() == UiText.get(R.string.ui_load_into_memory) }.isEnabled
                 }
                 if (!loadEnabled) Thread.sleep(10)
             }
@@ -344,8 +361,8 @@ internal class ServiceChecks(private val test: Instrumentation) {
                 val spinner = all.filterIsInstance<android.widget.Spinner>().single()
                 val index = (0 until spinner.adapter.count).first { spinner.adapter.getItem(it).toString().contains("stories260K") }
                 spinner.setSelection(index)
-                all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.startsWith("Контекст:") == true }.setText("128")
-                all.filterIsInstance<android.widget.Button>().first { it.text.toString() == "Загрузить в память" }.also {
+                all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.toString() == UiText.get(R.string.ui_context_prompt_template_tokens_response_reserve) }.setText("128")
+                all.filterIsInstance<android.widget.Button>().first { it.text.toString() == UiText.get(R.string.ui_load_into_memory) }.also {
                     check(it.isEnabled && it.isShown) { "Recovery Load is not available to the user" }
                 }.performClick()
             }
@@ -364,15 +381,15 @@ internal class ServiceChecks(private val test: Instrumentation) {
                     val spinner = all.filterIsInstance<android.widget.Spinner>().single()
                     val index = (0 until spinner.adapter.count).first { spinner.adapter.getItem(it).toString().contains("MotoAI-stories260K") }
                     spinner.setSelection(index)
-                    all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.startsWith("Контекст:") == true }.setText("256")
-                    all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.startsWith("Резерв ответа") == true }.setText("16")
-                    all.filterIsInstance<android.widget.EditText>().first { it.hint.toString() == "Запрос" }.setText("Hello")
-                    all.filterIsInstance<android.widget.Button>().first { it.text.toString() == "Загрузить в память" }.performClick()
+                    all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.toString() == UiText.get(R.string.ui_context_prompt_template_tokens_response_reserve) }.setText("256")
+                    all.filterIsInstance<android.widget.EditText>().first { it.contentDescription?.toString() == UiText.get(R.string.ui_response_reserve_tokens_within_context) }.setText("16")
+                    all.filterIsInstance<android.widget.EditText>().first { it.hint.toString() == UiText.get(R.string.ui_prompt) }.setText("Hello")
+                    all.filterIsInstance<android.widget.Button>().first { it.text.toString() == UiText.get(R.string.ui_load_into_memory) }.performClick()
                 }
                 val uiLoaded = await { it.optString("state") == "ready" && it.optString("model") == imported }
                 check(uiLoaded.getJSONObject("load").getInt("context") == 256)
                 events.clear()
-                test.runOnMainSync { views(activity.window.decorView).filterIsInstance<android.widget.Button>().first { it.text.toString() == "Запустить" }.performClick() }
+                test.runOnMainSync { views(activity.window.decorView).filterIsInstance<android.widget.Button>().first { it.text.toString() == UiText.get(R.string.ui_run) }.performClick() }
                 await { it.optString("state") == "ready" && it.optJSONObject("result")?.optInt("generated_tokens", 0)?.let { n -> n > 0 } == true }
                 importUi = "SAF imported SHA-256 file loaded/generated through normal UI"
                 send(RuntimeService.UNLOAD); state("unloaded")
@@ -382,6 +399,7 @@ internal class ServiceChecks(private val test: Instrumentation) {
                 .put("debug_run_reuse", "Previously claimed benchmark intent opens normal UI without automatic inference")
                 .put("above_1024_budget", "1536 accepted; prompt+2048 correctly rejected in2048 context")
                 .put("memory_admission", "Typed refusal with reduced debug budget; existing model/PID/output preserved")
+                .put("invalid_load_mode", if (plannerRejectsInvalidMode) "Planner refused before replacement; model/PID/prior output and subsequent greedy output preserved" else "Legacy invalid mode unload contract preserved")
                 .put("q4_stability_refusal", if (ornith != null) "Passed before model load; existing model/PID/output preserved" else "Not run: Ornith fixture absent")
                 .put("load_pressure_cancellation", pressureCancellation)
                 .put("import_ui", importUi).put("notification_stop", "passed via notification PendingIntent").put("load_cancellation", loadCancellation).put("prefill_cancellation", prefillCancellation)

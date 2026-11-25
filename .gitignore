@@ -2,6 +2,7 @@
 build/
 models/
 third_party/llama.cpp/
+third_party/llama.cpp-v0.9.0/
 .gradle/
 local.properties
 __pycache__/
